@@ -34,19 +34,7 @@
                 </md-content>
             </md-sidenav>
             <md-content flex layout-padding>
-                <div layout="column" layout-fill layout-align="top center">
-                    <p>
-                        The left sidenav will 'lock open' on a medium (>=960px wide) device.
-                    </p>
-                    <p>
-                        The right sidenav will focus on a specific child element.
-                    </p>
-                    <div>
-                        <md-button ng-click="toggleLeft()"
-                                   class="md-primary" hide-gt-md>
-                            Toggle left
-                        </md-button>
-                    </div>
+                <div ng-view layout="column" layout-fill layout-align="top center">
                 </div>
                 <div flex></div>
             </md-content>

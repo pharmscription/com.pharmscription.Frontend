@@ -1,6 +1,6 @@
 ﻿export interface IScopeMainMenu extends ng.IScope {
     $mdMedia: angular.material.IMedia;
-    $toggleLeft: Function;
+    toggleLeft: Function;
 }
 export class MainMenuController {
 
@@ -11,7 +11,7 @@ export class MainMenuController {
         '$log'
     ];
 
-    constructor(private $scope: any, $timeout: ng.ITimeoutService, $mdSidenav: angular.material.ISidenavService, $log: ng.ILogService) {
+    constructor(private $scope: IScopeMainMenu, $timeout: ng.ITimeoutService, $mdSidenav: angular.material.ISidenavService, $log: ng.ILogService) {
         $scope.toggleLeft = () => {
             $mdSidenav('left')
                 .toggle()
