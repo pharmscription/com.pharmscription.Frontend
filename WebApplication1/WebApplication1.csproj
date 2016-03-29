@@ -94,6 +94,7 @@
     <TypeScriptCompile Include="ts\bootstrap.ts" />
     <TypeScriptCompile Include="ts\controller\MainMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\MainSideMenuController.ts" />
+    <TypeScriptCompile Include="ts\controller\UserRegisterController.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

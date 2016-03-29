@@ -1,5 +1,5 @@
 /*
- * SystemJS v0.19.24
+ * SystemJS v0.19.23
  */
 (function() {
 function bootstrap() {(function(__global) {
@@ -38,30 +38,11 @@ function bootstrap() {(function(__global) {
   })();
 
   function addToError(err, msg) {
-    // parse the stack removing loader code lines for simplification
-    if (!err.originalErr) {
-      var stack = (err.stack || err.message || err).split('\n');
-      var newStack = [];
-      for (var i = 0; i < stack.length; i++) {
-        if (typeof $__curScript == 'undefined' || stack[i].indexOf($__curScript.src) == -1)
-          newStack.push(stack[i]);
-      }
-    }
-
-    var newMsg = (newStack ? newStack.join('\n\t') : err.message) + '\n\t' + msg;
-
-    // Convert file:/// URLs to paths in Node
-    if (!isBrowser)
-      newMsg = newMsg.replace(isWindows ? /file:\/\/\//g : /file:\/\//g, '');
-
-    var newErr = new Error(newMsg, err.fileName, err.lineNumber);
+    var newErr = new Error((err.message || err) + '\n\t' + msg, err.fileName, err.lineNumber);
     
     // Node needs stack adjustment for throw to show message
     if (!isBrowser)
-      newErr.stack = newMsg;
-    // Clearing the stack stops unnecessary loader lines showing
-    else
-      newErr.stack = null;
+      newErr.stack = (err.stack || err.message || err) + '\n\t' + msg;
     
     // track the original error
     newErr.originalErr = err.originalErr || err;
@@ -1304,8 +1285,7 @@ function setProduction(isProduction) {
   this.set('@system-env', this.newModule({
     browser: isBrowser,
     node: !!this._nodeRequire,
-    production: isProduction,
-    'default': true
+    production: isProduction
   }));
 }
 
@@ -1326,7 +1306,6 @@ hookConstructor(function(constructor) {
     this.warnings = false;
     this.defaultJSExtensions = false;
     this.pluginFirst = false;
-    this.loaderErrorStack = false;
 
     // by default load ".json" files as json
     // leading * meta doesn't need normalization
@@ -1364,7 +1343,7 @@ var nodeCoreModules = ['assert', 'buffer', 'child_process', 'cluster', 'console'
  */
 
 function isPlain(name) {
-  return (name[0] != '.' || (!!name[1] && name[1] != '/' && name[1] != '.')) && name[0] != '/' && !name.match(absURLRegEx);
+ return name[0] != '.' && name[0] != '/' && !name.match(absURLRegEx);
 }
 
 function urlResolve(name, parent) {
@@ -1554,17 +1533,8 @@ hook('instantiate', function(instantiate) {
 */
 SystemJSLoader.prototype.env = 'development';
 
-var curCurScript;
 SystemJSLoader.prototype.config = function(cfg) {
   var loader = this;
-
-  if ('loaderErrorStack' in cfg) {
-    curCurScript = $__curScript;
-    if (cfg.loaderErrorStack)
-      $__curScript = undefined;
-    else
-      $__curScript = curCurScript;
-  }
 
   if ('warnings' in cfg)
     loader.warnings = cfg.warnings;
@@ -1675,7 +1645,10 @@ SystemJSLoader.prototype.config = function(cfg) {
       if (p.match(/^([^\/]+:)?\/\/$/))
         throw new TypeError('"' + p + '" is not a valid package name.');
 
+      var defaultJSExtension = loader.defaultJSExtensions && p.substr(p.length - 3, 3) != '.js';
       var prop = coreResolve.call(loader, p);
+      if (defaultJSExtension && prop.substr(prop.length - 3, 3) == '.js')
+        prop = prop.substr(0, prop.length - 3);
 
       // allow trailing slash in packages
       if (prop[prop.length - 1] == '/')
@@ -1683,34 +1656,25 @@ SystemJSLoader.prototype.config = function(cfg) {
 
       loader.packages[prop] = loader.packages[prop] || {};
 
-      var pkg = cfg.packages[p];
-
       // meta backwards compatibility
-      if (pkg.modules) {
+      if (cfg.packages[p].modules) {
         warn.call(loader, 'Package ' + p + ' is configured with "modules", which is deprecated as it has been renamed to "meta".');
-        pkg.meta = pkg.modules;
-        delete pkg.modules;
+        cfg.packages[p].meta = cfg.packages[p].modules;
+        delete cfg.packages[p].modules;
       }
 
-      if (typeof pkg.main == 'object') {
-        pkg.map = pkg.map || {};
-        pkg.map['./@main'] = pkg.main;
-        pkg.main['default'] = pkg.main['default'] || './';
-        pkg.main = '@main';
-      }
-
-      for (var q in pkg)
+      for (var q in cfg.packages[p])
         if (indexOf.call(packageProperties, q) == -1)
           warn.call(loader, '"' + q + '" is not a valid package configuration option in package ' + p);
 
-      extendMeta(loader.packages[prop], pkg);
+      extendMeta(loader.packages[prop], cfg.packages[p]);
     }
   }
 
   for (var c in cfg) {
     var v = cfg[c];
 
-    if (c == 'baseURL' || c == 'map' || c == 'packages' || c == 'bundles' || c == 'paths' || c == 'warnings' || c == 'packageConfigPaths' || c == 'loaderErrorStack')
+    if (c == 'baseURL' || c == 'map' || c == 'packages' || c == 'bundles' || c == 'paths' || c == 'warnings' || c == 'packageConfigPaths')
       continue;
 
     if (typeof v != 'object' || v instanceof Array) {
@@ -1725,11 +1689,8 @@ SystemJSLoader.prototype.config = function(cfg) {
           loader[c][p] = v[p];
         }
         else if (c == 'meta') {
-          // meta can go through global map, with defaultJSExtensions adding
-          var resolved = coreResolve.call(loader, p);
-          if (loader.defaultJSExtensions && resolved.substr(resolved.length - 3, 3) != '.js' && !isPlain(resolved))
-            resolved += '.js';
-          loader[c][resolved] = v[p];
+          // meta can go through global map
+          loader[c][coreResolve.call(loader, p)] = v[p];
         }
         else if (c == 'depCache') {
           var defaultJSExtension = loader.defaultJSExtensions && p.substr(p.length - 3, 3) != '.js';
@@ -1751,6 +1712,7 @@ SystemJSLoader.prototype.config = function(cfg) {
  *
  * SystemJS.packages = {
  *   jquery: {
+ *     basePath: 'lib', // optionally only use a subdirectory within the package
  *     main: 'index.js', // when not set, package name is requested directly
  *     format: 'amd',
  *     defaultExtension: 'ts', // defaults to 'js', can be set to false
@@ -1802,6 +1764,13 @@ SystemJSLoader.prototype.config = function(cfg) {
  * - condition module map is '@env' module in package or '@system-env' globally
  * - map targets support conditional interpolation ('./x': './x.#{|env}.js')
  * - internal package map targets cannot use boolean conditionals
+ *
+ * In addition, the following modules properties will be allowed to be package
+ * -relative as well in the package module config:
+ *
+ *   - loader
+ *   - alias
+ *
  *
  * Package Configuration Loading
  *
@@ -1858,7 +1827,19 @@ SystemJSLoader.prototype.config = function(cfg) {
     return curPkg;
   }
 
-  function addDefaultExtension(loader, pkg, pkgName, subPath, skipExtensions) {
+  function getBasePath(pkg) {
+    // sanitize basePath
+    var basePath = pkg.basePath && pkg.basePath != '.' ? pkg.basePath : '';
+    if (basePath) {
+      if (basePath.substr(0, 2) == './')
+        basePath = basePath.substr(2);
+      if (basePath[basePath.length - 1] != '/')
+        basePath += '/';
+    }
+    return basePath;
+  }
+
+  function addDefaultExtension(loader, pkg, pkgName, basePath, subPath, skipExtensions) {
     // don't apply extensions to folders or if defaultExtension = false
     if (!subPath || subPath[subPath.length - 1] == '/' || skipExtensions || pkg.defaultExtension === false)
       return subPath;
@@ -1879,7 +1860,7 @@ SystemJSLoader.prototype.config = function(cfg) {
 
     // exact global meta or meta with any content after the last wildcard skips extension
     if (!metaMatch && loader.meta)
-      getMetaMatches(loader.meta, pkgName + '/' + subPath, function(metaPattern, matchMeta, matchDepth) {
+      getMetaMatches(loader.meta, pkgName + '/' + basePath + subPath, function(metaPattern, matchMeta, matchDepth) {
         if (matchDepth == 0 || metaPattern.lastIndexOf('*') != metaPattern.length - 1)
           return metaMatch = true;
       });
@@ -1908,6 +1889,8 @@ SystemJSLoader.prototype.config = function(cfg) {
         return pkgName + (loader.defaultJSExtensions ? '.js' : '');
     }
 
+    var basePath = getBasePath(pkg);
+
     // map config checking without then with extensions
     if (pkg.map) {
       var mapPath = './' + subPath;
@@ -1916,37 +1899,24 @@ SystemJSLoader.prototype.config = function(cfg) {
 
       // we then check map with the default extension adding
       if (!mapMatch) {
-        mapPath = './' + addDefaultExtension(loader, pkg, pkgName, subPath, skipExtensions);
+        mapPath = './' + addDefaultExtension(loader, pkg, pkgName, basePath, subPath, skipExtensions);
         if (mapPath != './' + subPath)
           mapMatch = getMapMatch(pkg.map, mapPath);
       }
       if (mapMatch)
-        return doMapSync(loader, pkg, pkgName, mapMatch, mapPath, skipExtensions);
+        return doMapSync(loader, pkg, pkgName, basePath, mapMatch, mapPath, skipExtensions);
     }
 
     // normal package resolution
-    return pkgName + '/' + addDefaultExtension(loader, pkg, pkgName, subPath, skipExtensions);
+    return pkgName + '/' + basePath + addDefaultExtension(loader, pkg, pkgName, basePath, subPath, skipExtensions);
   }
 
-  function validateMapping(mapMatch, mapped, pkgName) {
-    // disallow internal to subpath maps
-    if (mapMatch == '.')
-      throw new Error('Package ' + pkgName + ' has a map entry for "." which is not permitted.');
-    // disallow internal ./x -> ./x/y recursive maps
-    else if (mapped.substr(0, mapMatch.length) == mapMatch && (mapMatch[mapMatch.length - 1] != '/' && mapped[mapMatch.length] == '/'))
-      throw new Error('Package ' + pkgName + ' has a recursive map for "' + mapMatch + '" which is not permitted.');
-  }
-
-  function doMapSync(loader, pkg, pkgName, mapMatch, path, skipExtensions) {
+  function doMapSync(loader, pkg, pkgName, basePath, mapMatch, path, skipExtensions) {
     var mapped = pkg.map[mapMatch];
-
-    validateMapping(mapMatch, mapped, pkgName);
 
     // ignore conditionals in sync
     if (typeof mapped != 'string')
       mapped = mapMatch = path;
-
-    validateMapping(mapMatch, mapped, pkgName);
 
     // package map to main / base-level
     if (mapped == '.')
@@ -1954,7 +1924,7 @@ SystemJSLoader.prototype.config = function(cfg) {
 
     // internal package map
     else if (mapped.substr(0, 2) == './')
-      return pkgName + '/' + addDefaultExtension(loader, pkg, pkgName, mapped.substr(2) + path.substr(mapMatch.length), skipExtensions);
+      return pkgName + '/' + basePath + addDefaultExtension(loader, pkg, pkgName, basePath, mapped.substr(2) + path.substr(mapMatch.length), skipExtensions);
     
     // external map reference
     return loader.normalizeSync(mapped + path.substr(mapMatch.length), pkgName + '/');
@@ -1972,6 +1942,8 @@ SystemJSLoader.prototype.config = function(cfg) {
         return Promise.resolve(pkgName + (loader.defaultJSExtensions ? '.js' : ''));
     }
 
+    var basePath = getBasePath(pkg);
+
     // map config checking without then with extensions
     var mapPath, mapMatch;
 
@@ -1981,23 +1953,23 @@ SystemJSLoader.prototype.config = function(cfg) {
 
       // we then check map with the default extension adding
       if (!mapMatch) {
-        mapPath = './' + addDefaultExtension(loader, pkg, pkgName, subPath, skipExtensions);
+        mapPath = './' + addDefaultExtension(loader, pkg, pkgName, basePath, subPath, skipExtensions);
         if (mapPath != './' + subPath)
           mapMatch = getMapMatch(pkg.map, mapPath);
       }
     }
 
-    return (mapMatch ? doMap(loader, pkg, pkgName, mapMatch, mapPath, skipExtensions) : Promise.resolve())
+    return (mapMatch ? doMap(loader, pkg, pkgName, basePath, mapMatch, mapPath, skipExtensions) : Promise.resolve())
     .then(function(mapped) {
       if (mapped)
         return Promise.resolve(mapped);
 
       // normal package resolution / fallback resolution for no conditional match
-      return Promise.resolve(pkgName + '/' + addDefaultExtension(loader, pkg, pkgName, subPath, skipExtensions));
+      return Promise.resolve(pkgName + '/' + basePath + addDefaultExtension(loader, pkg, pkgName, basePath, subPath, skipExtensions));
     });
   }
 
-  function doStringMap(loader, pkg, pkgName, mapMatch, mapped, path, skipExtensions) {
+  function doStringMap(loader, pkg, pkgName, basePath, mapMatch, mapped, path, skipExtensions) {
     // NB the interpolation cases should strictly skip subsequent interpolation
 
     // package map to main / base-level
@@ -2006,22 +1978,21 @@ SystemJSLoader.prototype.config = function(cfg) {
     
     // internal package map
     else if (mapped.substr(0, 2) == './')
-      return Promise.resolve(pkgName + '/' + addDefaultExtension(loader, pkg, pkgName, mapped.substr(2) + path.substr(mapMatch.length), skipExtensions))
+      return Promise.resolve(pkgName + '/' + basePath + addDefaultExtension(loader, pkg, pkgName, basePath, mapped.substr(2) + path.substr(mapMatch.length), skipExtensions))
       .then(function(name) {
         return interpolateConditional.call(loader, name, pkgName + '/');
       });
     
     // external map reference
+    // NB deprecate the use of the second argument here -> should be fully global reference
     return loader.normalize(mapped + path.substr(mapMatch.length), pkgName + '/');
   }
 
-  function doMap(loader, pkg, pkgName, mapMatch, path, skipExtensions) {
+  function doMap(loader, pkg, pkgName, basePath, mapMatch, path, skipExtensions) {
     var mapped = pkg.map[mapMatch];
 
-    if (typeof mapped == 'string') {
-      validateMapping(mapMatch, mapped, pkgName);
-      return doStringMap(loader, pkg, pkgName, mapMatch, mapped, path, skipExtensions);
-    }
+    if (typeof mapped == 'string')
+      return doStringMap(loader, pkg, pkgName, basePath, mapMatch, mapped, path, skipExtensions);
 
     // we use a special conditional syntax to allow the builder to handle conditional branch points further
     if (loader.builder)
@@ -2041,12 +2012,8 @@ SystemJSLoader.prototype.config = function(cfg) {
       }
     })
     .then(function(mapped) {
-      if (mapped) {
-        if (typeof mapped != 'string')
-          throw new Error('Unable to map a package conditional to a package conditional.');
-        validateMapping(mapMatch, mapped, pkgName);
-        return doStringMap(loader, pkg, pkgName, mapMatch, mapped, path, skipExtensions);
-      }
+      if (mapped)
+        return doStringMap(loader, pkg, pkgName, basePath, mapMatch, mapped, path, skipExtensions);
 
       // no environment match -> fallback to original subPath by returning undefined
     });
@@ -2103,13 +2070,20 @@ SystemJSLoader.prototype.config = function(cfg) {
 
       var parentPackage = parentPackageName && loader.packages[parentPackageName];
 
+      // remove any parent basePath from parentName
+      if (parentPackage) {
+        var parentBasePath = getBasePath(parentPackage);
+        if (parentBasePath && parentName.substr(parentPackageName.length + 1, parentBasePath.length) == parentBasePath)
+          parentName = parentPackageName + parentName.substr(parentPackageName.length + parentBasePath.length);
+      }
+
       // ignore . since internal maps handled by standard package resolution
       if (parentPackage && name[0] != '.') {
         var parentMap = parentPackage.map;
         var parentMapMatch = parentMap && getMapMatch(parentMap, name);
 
         if (parentMapMatch && typeof parentMap[parentMapMatch] == 'string')
-          return doMapSync(loader, parentPackage, parentPackageName, parentMapMatch, name, isPlugin);
+          return doMapSync(loader, parentPackage, parentPackageName, getBasePath(parentPackage), parentMapMatch, name, isPlugin);
       }
 
       var defaultJSExtension = loader.defaultJSExtensions && name.substr(name.length - 3, 3) != '.js';
@@ -2151,13 +2125,20 @@ SystemJSLoader.prototype.config = function(cfg) {
 
         var parentPackage = parentPackageName && loader.packages[parentPackageName];
 
+        // remove any parent basePath from parentName
+        if (parentPackage) {
+          var parentBasePath = getBasePath(parentPackage);
+          if (parentBasePath && parentName.substr(parentPackageName.length + 1, parentBasePath.length) == parentBasePath)
+            parentName = parentPackageName + parentName.substr(parentPackageName.length + parentBasePath.length);
+        }
+
         // ignore . since internal maps handled by standard package resolution
         if (parentPackage && name.substr(0, 2) != './') {
           var parentMap = parentPackage.map;
           var parentMapMatch = parentMap && getMapMatch(parentMap, name);
 
           if (parentMapMatch)
-            return doMap(loader, parentPackage, parentPackageName, parentMapMatch, name, isPlugin);
+            return doMap(loader, parentPackage, parentPackageName, parentBasePath, parentMapMatch, name, isPlugin);
         }
 
         return Promise.resolve();
@@ -2246,7 +2227,9 @@ SystemJSLoader.prototype.config = function(cfg) {
 
     return configLoader.load(pkgConfigPath)
     .then(function() {
-      var cfg = configLoader.get(pkgConfigPath)['default'];
+      pkgConfig = configLoader.get(pkgConfigPath);
+
+      var cfg = pkgConfig['default'];
 
       // support "systemjs" prefixing
       if (cfg.systemjs)
@@ -2269,25 +2252,18 @@ SystemJSLoader.prototype.config = function(cfg) {
       extendMeta(pkg, cfg, true);
 
       // support external depCache
+      var basePath = getBasePath(pkg);
       if (cfg.depCache) {
         for (var d in cfg.depCache) {
           var dNormalized;
 
           if (d.substr(0, 2) == './')
-            dNormalized = pkgName + '/' + d.substr(2);
+            dNormalized = pkgName + '/' + basePath + d.substr(2);
           else
             dNormalized = coreResolve.call(loader, d);
           loader.depCache[dNormalized] = (loader.depCache[dNormalized] || []).concat(cfg.depCache[d]);
         }
         delete cfg.depCache;
-      }
-
-      // main object becomes main map
-      if (typeof pkg.main == 'object') {
-        pkg.map = pkg.map || {};
-        pkg.map['./@main'] = pkg.main;
-        pkg.main['default'] = pkg.main['default'] || './';
-        pkg.main = '@main';
       }
 
       return pkg;
@@ -2329,7 +2305,8 @@ SystemJSLoader.prototype.config = function(cfg) {
         var pkgName = getPackage(loader, load.name);
         if (pkgName) {
           var pkg = loader.packages[pkgName];
-          var subPath = load.name.substr(pkgName.length + 1);
+          var basePath = getBasePath(pkg);
+          var subPath = load.name.substr(pkgName.length + basePath.length + 1);
 
           // format
           if (pkg.format)
@@ -2346,6 +2323,11 @@ SystemJSLoader.prototype.config = function(cfg) {
               extendMeta(meta, matchMeta, matchDepth && bestDepth > matchDepth);
             });
 
+            // allow alias and loader to be package-relative
+            if (meta.alias && meta.alias.substr(0, 2) == './')
+              meta.alias = pkgName + meta.alias.substr(1);
+            if (meta.loader && meta.loader.substr(0, 2) == './')
+              meta.loader = pkgName + meta.loader.substr(1);
             extendMeta(load.metadata, meta);
           }
         }
@@ -2469,10 +2451,7 @@ SystemJSLoader.prototype.config = function(cfg) {
         var s = document.createElement('script');
         
         s.async = true;
-
-        if (load.metadata.crossOrigin)
-          s.crossOrigin = load.metadata.crossOrigin;
-
+        
         if (load.metadata.integrity)
           s.setAttribute('integrity', load.metadata.integrity);
 
@@ -2796,8 +2775,8 @@ function createEntry() {
   }
 
   // module binding records
-  function ModuleRecord() {}
-  defineProperty(ModuleRecord, 'toString', {
+  function Module() {}
+  defineProperty(Module, 'toString', {
     value: function() {
       return 'Module';
     }
@@ -2807,7 +2786,7 @@ function createEntry() {
     return moduleRecords[name] || (moduleRecords[name] = {
       name: name,
       dependencies: [],
-      exports: new ModuleRecord(), // start from an empty module and extend
+      exports: new Module(), // start from an empty module and extend
       importers: []
     });
   }
@@ -2967,7 +2946,7 @@ function createEntry() {
     exports = module.exports;
 
     // __esModule flag treats as already-named
-    if (exports && (exports.__esModule || exports instanceof Module))
+    if (exports && exports.__esModule)
       entry.esModule = exports;
     // set module as 'default' export, then fake named exports by iterating properties
     else if (entry.esmExports && exports !== __global)
@@ -3142,28 +3121,6 @@ function createEntry() {
     };
   });
 })();
-
-
-function getGlobalValue(exports) {
-  if (typeof exports == 'string')
-    return readMemberExpression(exports, __global);
-
-  if (!(exports instanceof Array))
-    throw new Error('Global exports must be a string or array.');
-
-  var globalValue = {};
-  var first = true;
-  for (var i = 0; i < exports.length; i++) {
-    var val = readMemberExpression(exports[i], __global);
-    if (first) {
-      globalValue['default'] = val;
-      first = false;
-    }
-    globalValue[exports[i].split('.').pop()] = val;
-  }
-  return globalValue;
-}
-
 hook('reduceRegister_', function(reduceRegister) {
   return function(load, register) {
     if (register || !load.metadata.exports)
@@ -3172,7 +3129,7 @@ hook('reduceRegister_', function(reduceRegister) {
     load.metadata.format = 'global';
     var entry = load.metadata.entry = createEntry();
     entry.deps = load.metadata.deps;
-    var globalValue = getGlobalValue(load.metadata.exports);
+    var globalValue = readMemberExpression(load.metadata.exports, __global);
     entry.execute = function() {
       return globalValue;
     };
@@ -3186,7 +3143,7 @@ hookConstructor(function(constructor) {
 
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-    // bare minimum ignores
+    // bare minimum ignores for IE8
     var ignoredGlobalProps = ['_g', 'sessionStorage', 'localStorage', 'clipboardData', 'frames', 'frameElement', 'external', 
       'mozAnimationStartTime', 'webkitStorageInfo', 'webkitIndexedDB', 'mozInnerScreenY', 'mozInnerScreenX'];
 
@@ -3218,7 +3175,7 @@ hookConstructor(function(constructor) {
     }
 
     loader.set('@@global-helpers', loader.newModule({
-      prepareGlobal: function(moduleName, exports, globals) {
+      prepareGlobal: function(moduleName, exportName, globals) {
         // disable module detection
         var curDefine = __global.define;
         
@@ -3235,7 +3192,7 @@ hookConstructor(function(constructor) {
         }
 
         // store a complete copy of the global object in order to detect changes
-        if (!exports) {
+        if (!exportName) {
           globalSnapshot = {};
 
           forEachGlobalValue(function(name, value) {
@@ -3247,20 +3204,20 @@ hookConstructor(function(constructor) {
         return function() {
           var globalValue;
 
-          if (exports) {
-            globalValue = getGlobalValue(exports);
+          if (exportName) {
+            globalValue = readMemberExpression(exportName, __global);
           }
           else {
-            globalValue = {};
             var singleGlobal;
             var multipleExports;
+            var exports = {};
 
             forEachGlobalValue(function(name, value) {
               if (globalSnapshot[name] === value)
                 return;
               if (typeof value == 'undefined')
                 return;
-              globalValue[name] = value;
+              exports[name] = value;
 
               if (typeof singleGlobal != 'undefined') {
                 if (!multipleExports && singleGlobal !== value)
@@ -3270,7 +3227,7 @@ hookConstructor(function(constructor) {
                 singleGlobal = value;
               }
             });
-            globalValue = multipleExports ? globalValue : singleGlobal;
+            globalValue = multipleExports ? exports : singleGlobal;
           }
 
           // revert globals
@@ -3294,20 +3251,7 @@ hookConstructor(function(constructor) {
     if (typeof window != 'undefined' && typeof document != 'undefined' && window.location)
       var windowOrigin = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
 
-    function stripOrigin(path) {
-      if (path.substr(0, 8) == 'file:///')
-        return path.substr(7 + !!isWindows);
-      
-      if (windowOrigin && path.substr(0, windowOrigin.length) == windowOrigin)
-        return path.substr(windowOrigin.length);
-
-      return path;
-    }
-
     loader.set('@@cjs-helpers', loader.newModule({
-      requireResolve: function(request, parentId) {
-        return stripOrigin(loader.normalizeSync(request, parentId));
-      },
       getPathVars: function(moduleId) {
         // remove any plugin syntax
         var pluginIndex = moduleId.lastIndexOf('!');
@@ -3321,9 +3265,24 @@ hookConstructor(function(constructor) {
         dirname.pop();
         dirname = dirname.join('/');
 
+        if (filename.substr(0, 8) == 'file:///') {
+          filename = filename.substr(7);
+          dirname = dirname.substr(7);
+
+          // on windows remove leading '/'
+          if (isWindows) {
+            filename = filename.substr(1);
+            dirname = dirname.substr(1);
+          }
+        }
+        else if (windowOrigin && filename.substr(0, windowOrigin.length) === windowOrigin) {
+          filename = filename.substr(windowOrigin.length);
+          dirname = dirname.substr(windowOrigin.length);
+        }
+
         return {
-          filename: stripOrigin(filename),
-          dirname: stripOrigin(dirname)
+          filename: filename,
+          dirname: dirname
         };
       }
     }))
@@ -3409,7 +3368,7 @@ hookConstructor(function(constructor) {
           normalized = normalized.substr(0, normalized.length - 3);
         var module = loader.get(normalized);
         if (!module)
-          throw new Error('Module not already loaded loading "' + names + '" as ' + normalized + (referer ? ' from "' + referer + '".' : '.'));
+          throw new Error('Module not already loaded loading "' + names + '" from "' + referer + '".');
         return module.__useDefault ? module['default'] : module;
       }
 
@@ -3703,26 +3662,10 @@ hookConstructor(function(constructor) {
 
       return locate.call(loader, load)
       .then(function(address) {
-        if (pluginSyntaxIndex != -1 || !load.metadata.loader)
-          return address;
-
-        // normalize plugin relative to parent in locate here when
-        // using plugin via loader metadata
-        return loader.normalize(load.metadata.loader, load.name)
-        .then(function(loaderNormalized) {
-          load.metadata.loader = loaderNormalized;
-          return address;
-        });
-      })
-      .then(function(address) {
         var plugin = load.metadata.loader;
 
         if (!plugin)
           return address;
-
-        // don't allow a plugin to load itself
-        if (load.name == plugin)
-          throw new Error('Plugin ' + plugin + ' cannot load itself, make sure it is excluded from any wildcard meta configuration via a custom loader: false rule.');
 
         // only fetch the plugin itself if this name isn't defined
         if (loader.defined && loader.defined[name])
@@ -3803,18 +3746,9 @@ hookConstructor(function(constructor) {
   hook('instantiate', function(instantiate) {
     return function(load) {
       var loader = this;
-      var calledInstantiate = false;
 
       if (load.metadata.loaderModule && load.metadata.loaderModule.instantiate && !loader.builder && load.metadata.format != 'defined')
-        return Promise.resolve(load.metadata.loaderModule.instantiate.call(loader, load, function(load) {
-          if (calledInstantiate)
-            throw new Error('Instantiate must only be called once.');
-          calledInstantiate = true;
-          return instantiate.call(loader, load);
-        })).then(function(result) {
-          if (calledInstantiate)
-            return result;
-
+        return Promise.resolve(load.metadata.loaderModule.instantiate.call(loader, load)).then(function(result) {
           load.metadata.entry = createEntry();
           load.metadata.entry.execute = function() {
             return result;
@@ -4284,7 +4218,6 @@ hookConstructor(function(constructor) {
 hookConstructor(function(constructor) {
   return function() {
     constructor.apply(this, arguments);
-    __global.define = this.amdDefine;
   };
 });
 
@@ -4296,7 +4229,7 @@ hook('fetch', function(fetch) {
 });System = new SystemJSLoader();
 
 __global.SystemJS = System;
-System.version = '0.19.24 CSP';
+System.version = '0.19.23 CSP';
   // -- exporting --
 
   if (typeof exports === 'object')
@@ -4325,13 +4258,11 @@ try {
 }
 catch(e) {}
 
-var doPolyfill = typeof Promise === 'undefined' || !hasURL;
-
-// document.write
-if (typeof document !== 'undefined') {
-  var scripts = document.getElementsByTagName('script');
-  $__curScript = scripts[scripts.length - 1];
-  if (doPolyfill) {
+if (typeof Promise === 'undefined' || !hasURL) {
+  // document.write
+  if (typeof document !== 'undefined') {
+    var scripts = document.getElementsByTagName('script');
+    $__curScript = scripts[scripts.length - 1];
     var curPath = $__curScript.src;
     var basePath = curPath.substr(0, curPath.lastIndexOf('/') + 1);
     window.systemJSBootstrap = bootstrap;
@@ -4339,27 +4270,24 @@ if (typeof document !== 'undefined') {
       '<' + 'script type="text/javascript" src="' + basePath + 'system-polyfills.js">' + '<' + '/script>'
     );
   }
+  // importScripts
+  else if (typeof importScripts !== 'undefined') {
+    var basePath = '';
+    try {
+      throw new Error('_');
+    } catch (e) {
+      e.stack.replace(/(?:at|@).*(http.+):[\d]+:[\d]+/, function(m, url) {
+        basePath = url.replace(/\/[^\/]*$/, '/');
+      });
+    }
+    importScripts(basePath + 'system-polyfills.js');
+    bootstrap();
+  }
   else {
     bootstrap();
   }
 }
-// importScripts
-else if (typeof importScripts !== 'undefined') {
-  var basePath = '';
-  try {
-    throw new Error('_');
-  } catch (e) {
-    e.stack.replace(/(?:at|@).*(http.+):[\d]+:[\d]+/, function(m, url) {
-      $__curScript = { src: url };
-      basePath = url.replace(/\/[^\/]*$/, '/');
-    });
-  }
-  if (doPolyfill)
-    importScripts(basePath + 'system-polyfills.js');
-  bootstrap();
-}
 else {
-  $__curScript = typeof __filename != 'undefined' ? { src: __filename } : null;
   bootstrap();
 }
 
