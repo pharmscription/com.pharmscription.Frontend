@@ -69,10 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="img\icons\arrow-back.svg" />
+    <Content Include="img\icons\material-icons.css" />
+    <Content Include="img\icons\MaterialIcons-Regular.svg" />
     <Content Include="img\icons\menu.svg" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
+    <Content Include="style\style.css" />
     <Content Include="tools\typings.json" />
+    <Content Include="img\icons\MaterialIcons-Regular.eot" />
+    <Content Include="img\icons\MaterialIcons-Regular.ijmap" />
+    <Content Include="img\icons\MaterialIcons-Regular.ttf" />
+    <Content Include="img\icons\MaterialIcons-Regular.woff" />
+    <Content Include="img\icons\MaterialIcons-Regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
