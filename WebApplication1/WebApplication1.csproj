@@ -92,6 +92,7 @@
     <Content Include="config.js" />
     <Content Include="index.html" />
     <Content Include="views\user-register.html" />
+    <Content Include="views\user-search.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +104,7 @@
     <TypeScriptCompile Include="ts\controller\MainMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\MainSideMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\UserRegisterController.ts" />
+    <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
