@@ -3,11 +3,41 @@
 </md-toolbar>
 <md-input-container class="md-block">
     <!-- Use floating placeholder instead of label -->
-    <md-icon md-font-set="material-icons" class="email">email</md-icon>
-    <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+    <md-icon md-font-set="material-icons" class="person">person</md-icon>
+    <input ng-model="user.person" type="text" placeholder="Name (required)" ng-required="true">
 </md-input-container>
 <md-input-container class="md-block">
     <!-- Use floating placeholder instead of label -->
     <md-icon md-font-set="material-icons" class="email">email</md-icon>
     <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+</md-input-container>
+<md-input-container class="md-block">
+    <!-- Use floating placeholder instead of label -->
+    <md-icon md-font-set="material-icons" class="phone">phone</md-icon>
+    <input ng-model="user.phone" type="tel" placeholder="Phone (required)" ng-pattern="/^(\(?([0-9]{3})\)?)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/" ng-required="true">
+</md-input-container>
+<md-datepicker ng-model="myDate" md-placeholder="Geburtsdatum"></md-datepicker>
+<md-input-container class="md-block">
+    <!-- Use floating placeholder instead of label -->
+    <md-icon md-font-set="material-icons" class="location_city">location_city</md-icon>
+    <input ng-model="user.street" type="text" placeholder="Strasse und Hausnummer (required)" ng-required="true">   
+</md-input-container>
+<md-input-container class="md-block">
+    <!-- Use floating placeholder instead of label -->
+    <input ng-model="user.city" type="text" ng-required="true">
+</md-input-container>
+<md-input-container class="md-block">
+    <!-- Use floating placeholder instead of label -->
+    <input ng-model="user.plz" type="number" placeholder="PLZ (required)" ng-required="true">
+</md-input-container><md-input-container class="md-block">
+    <!-- Use floating placeholder instead of label -->
+    <input ng-model="user.city" type="text" placeholder="Stadt (required)" ng-required="true">
+</md-input-container>
+<md-input-container class="md-block" flex-gt-sm>
+    <label>State</label>
+    <md-select ng-model="kanton">
+        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+            {{state.abbrev}}
+        </md-option>
+    </md-select>
 </md-input-container>
