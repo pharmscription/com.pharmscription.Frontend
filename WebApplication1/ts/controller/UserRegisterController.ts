@@ -1,21 +1,25 @@
 ﻿export interface IUserRegisterScope extends angular.IScope{
-    hello: String,
-    states: Object,
-    kanton: String;
+    cantons: Object,
+    canton: String,
+    save: Function;
 }
 
 export class UserRegisterController {
 
     public static $inject = [
-        '$scope'
+        '$scope',
+        '$location'
     ];
 
-    constructor($scope: IUserRegisterScope) {
-        $scope.hello = 'salüü';
-        $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
-            'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
-            'WY').split(' ').map(function (state) {
-                return { abbrev: state };
-            })
+    constructor($scope: IUserRegisterScope, $location: angular.ILocationService) {
+        $scope.cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +
+            'SG SH SZ SO TG TI UR VD VS ZG ZH').split(' ').map(function (canton) {
+                return { abbrev: canton };
+            });
+
+        $scope.save = () => {
+            // TODO
+            $location.url('user/overview');
+        };
     }
 }
