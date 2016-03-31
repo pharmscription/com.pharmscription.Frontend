@@ -4,7 +4,11 @@ import HttpService = angular.IHttpService;
 import IQService = angular.IQService;
 import IPromise = angular.IPromise;
 
-export default class PatientRepository {
+export class PatientRepository {
+
+    private urls: any = {
+        add: '/api/patient'
+    }
 
     static $inject = [
         '$http',
@@ -14,5 +18,16 @@ export default class PatientRepository {
     constructor(private $http: angular.IHttpService, private $q: angular.IQService) {
     }
 
-    
+    addPatient(patient: Patient): IPromise<Patient> {
+        return this.$q((resolve) => {
+            resolve(this.$http.post(this.urls.add, patient));
+        });
+    }
+
+    getPatient(): IPromise<Patient> {
+        return this.$q((resolve) => {
+            resolve(this.$http.get(this.urls.add));
+        });
+    }
+
 }

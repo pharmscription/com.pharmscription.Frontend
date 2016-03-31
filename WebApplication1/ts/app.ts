@@ -6,6 +6,7 @@ import {MainMenuController} from './controller/MainMenuController';
 import {MainSideMenuController} from './controller/MainSideMenuController'
 import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
+import {PatientRepository} from './service/PatientRepository'
 
 export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
@@ -26,4 +27,5 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .controller('MainMenuController', MainMenuController)
     .controller('MainSideMenuController', MainSideMenuController)
     .controller('UserRegisterController', UserRegisterController)
-    .controller('UserSearchController', UserSearchController);
+    .controller('UserSearchController', UserSearchController)
+    .service('PatientRepository', PatientRepository);
