@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="gulpfile.js" />
     <Content Include="img\icons\arrow-back.svg" />
     <Content Include="img\icons\material-icons.css" />
     <Content Include="img\icons\MaterialIcons-Regular.svg" />
@@ -75,6 +76,7 @@
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="style\style.css" />
+    <Content Include="tests\model\patient.ts" />
     <Content Include="tools\typings.json" />
     <Content Include="img\icons\MaterialIcons-Regular.eot" />
     <Content Include="img\icons\MaterialIcons-Regular.ijmap" />
@@ -99,13 +101,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="models\patient.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\bootstrap.ts" />
     <TypeScriptCompile Include="ts\controller\MainMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\MainSideMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\UserRegisterController.ts" />
     <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />
+    <TypeScriptCompile Include="ts\model\address.ts" />
+    <TypeScriptCompile Include="ts\model\patient.ts" />
+    <TypeScriptCompile Include="ts\service\PatientRepository.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -117,11 +121,11 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>None</TypeScriptModuleKind>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
     <TypeScriptOutFile />
     <TypeScriptOutDir />

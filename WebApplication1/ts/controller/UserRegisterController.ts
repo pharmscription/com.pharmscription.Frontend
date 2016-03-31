@@ -1,25 +1,27 @@
-﻿export interface IUserRegisterScope extends angular.IScope{
+﻿import {PatientRepository} from "../service/PatientRepository";
+import Patient from '../model/patient';
+
+export interface IUserRegisterScope extends angular.IScope{
     cantons: Object,
     canton: String,
-    save: Function;
+    savePatient: Function;
 }
 
 export class UserRegisterController {
 
     public static $inject = [
         '$scope',
-        '$location'
+        'PatientRepository'
     ];
 
-    constructor($scope: IUserRegisterScope, $location: angular.ILocationService) {
+    constructor($scope: IUserRegisterScope, private patientRepository: PatientRepository) {
         $scope.cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +
             'SG SH SZ SO TG TI UR VD VS ZG ZH').split(' ').map(function (canton) {
                 return { abbrev: canton };
             });
+    }
 
-        $scope.save = () => {
-            // TODO
-            $location.url('user/overview');
-        };
+    savePatient(patient: Patient): void {
+        this.patientRepository.addPatient(patient);
     }
 }
