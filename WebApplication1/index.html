@@ -4,11 +4,11 @@
     <title></title>
     <meta charset="utf-8"/>
     <link href="jspm_packages/github/angular/bower-material@1.0.6/angular-material.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="img/icons/material-icons.css" rel="stylesheet"/>
     <link href="style/style.css" rel="stylesheet" />
 </head>
 <body>
-    <div ng-controller="MainMenuController" layout="column" ng-cloak>
+    <div ng-controller="MainMenuController" layout="column" layout-fill ng-cloak>
         <md-toolbar class="md-primary">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
@@ -57,10 +57,13 @@
 
 <script src="/jspm_packages/system.js"></script>
 <script src="config.js"></script>
+<script src="build.js"></script>
 <script>
     System.import('./ts/bootstrap.ts')
         .catch(console.error.bind(console));
 </script>
+
+<!--<script src="js/main.js"></script>-->
 </body>
 
 
