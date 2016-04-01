@@ -9,12 +9,15 @@
     },
     "devDependencies": {
       "angular-mocks": "github:angular/bower-angular-mocks@^1.5.3",
+      "clean-css": "npm:clean-css@^3.4.10",
       "typescript": "npm:typescript@^1.6.2"
     }
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.3.0",
+    "gulp-jspm": "^0.5.8",
+    "gulp-rename": "^1.2.2",
     "gulp-typescript": "^2.12.1"
   }
 }
