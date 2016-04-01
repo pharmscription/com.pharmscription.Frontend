@@ -10,7 +10,7 @@ var tsc = require('gulp-typescript');
 // Test JS
 gulp.task('jasmine-tests', function () {
     return gulp.src('tests/**/*.js')
-        .pipe(jasmine({ verbose: true}));
+        .pipe(jasmine({ verbose: true, includeStackTrace: true}));
 });
 
 gulp.task('compile-tests', function() {

@@ -8,7 +8,7 @@
     <link href="style/style.css" rel="stylesheet" />
 </head>
 <body>
-    <div ng-controller="MainMenuController" layout="column" ng-cloak>
+    <div ng-controller="MainMenuController" layout="column" layout-fill ng-cloak>
         <md-toolbar class="md-primary">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
@@ -50,7 +50,6 @@
             <md-content flex>
                 <div ng-view layout="column" layout-fill layout-align="top center">
                 </div>
-                <div flex></div>
             </md-content>
         </section>
     </div>
