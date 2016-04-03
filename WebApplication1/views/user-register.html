@@ -8,46 +8,46 @@
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <md-icon md-font-set="material-icons" class="person">person</md-icon>
-                    <input ng-model="patient.name" type="text" placeholder="Name" ng-required="true">
+                    <input ng-model="UserRegister.UserRegister.patient.name" type="text" placeholder="Name" ng-required="true">
                 </md-input-container>
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
-                    <input ng-model="patient.surname" type="text" placeholder="Nachname" ng-required="true">
+                    <input ng-model="UserRegister.patient.surname" type="text" placeholder="Nachname" ng-required="true">
                     <md-icon></md-icon>
                 </md-input-container>
             </div>
 
             <div class="date-picker">
-                <md-datepicker flex ng-model="patient.birthday" md-placeholder="Geburtsdatum"></md-datepicker>
+                <md-datepicker flex ng-model="UserRegister.patient.birthday" md-placeholder="Geburtsdatum"></md-datepicker>
             </div>
 
             <div class="address" layout="column" flex>
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
-                    <input ng-model="patient.street" type="text" placeholder="Strasse und Hausnummer" ng-required="true">
+                    <input ng-model="UserRegister.patient.street" type="text" placeholder="Strasse und Hausnummer" ng-required="true">
                     <md-icon md-font-set="material-icons" class="location_city">location_city</md-icon>
                 </md-input-container>
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
-                    <input ng-model="patient.additionalAddress" type="text" placeholder="Addresszusatz">
+                    <input ng-model="UserRegister.patient.additionalAddress" type="text" placeholder="Addresszusatz">
                     <md-icon></md-icon>
                 </md-input-container>
                 <div layout="row">
                     <md-input-container flex="30" class="md-block">
                         <!-- Use floating placeholder instead of label -->
-                        <input ng-model="patient.zipcode" type="number" placeholder="PLZ" ng-pattern="/[0-9]{4}$/" ng-required="true">
+                        <input ng-model="UserRegister.patient.zipcode" type="number" placeholder="PLZ" ng-pattern="/[0-9]{4}$/" ng-required="true">
                         <md-icon></md-icon>
                     </md-input-container>
                     <md-input-container flex class="md-block">
                         <!-- Use floating placeholder instead of label -->
-                        <input ng-model="patient.city" type="text" placeholder="Stadt" ng-required="true">
+                        <input ng-model="UserRegister.patient.city" type="text" placeholder="Stadt" ng-required="true">
                         <md-icon></md-icon>
                     </md-input-container>
                 </div>
                 <md-input-container flex class="md-block" flex-gt-sm>
                     <label>Kanton</label>
-                    <md-select ng-model="patient.canton">
-                        <md-option ng-repeat="canton in cantons" value="{{canton.abbrev}}">
+                    <md-select ng-model="UserRegister.patient.canton">
+                        <md-option ng-repeat="canton in UserRegister.cantons" value="{{canton.abbrev}}">
                             {{canton.abbrev}}
                         </md-option>
                     </md-select>
@@ -58,23 +58,23 @@
             <md-input-container flex class="md-block">
                 <!-- Use floating placeholder instead of label -->
                 <md-icon md-font-set="material-icons" class="phone">phone</md-icon>
-                <input ng-model="patient.phone" type="tel" placeholder="Telefon" ng-pattern="/^(\(?([0-9]{3})\)?)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/" ng-required="true">
+                <input ng-model="UserRegister.patient.phone" type="tel" placeholder="Telefon" ng-pattern="/^(\(?([0-9]{3})\)?)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/" ng-required="true">
             </md-input-container>
 
             <md-input-container flex class="md-block">
                 <!-- Use floating placeholder instead of label -->
                 <md-icon md-font-set="material-icons" class="email">email</md-icon>
-                <input ng-model="patient.email" type="email" placeholder="Email" ng-required="true">
+                <input ng-model="UserRegister.patient.email" type="email" placeholder="Email" ng-required="true">
             </md-input-container>
 
             <md-input-container flex class="md-block">
                 <!-- Use floating placeholder instead of label -->
                 <md-icon md-font-set="material-icons" class="local_hospital">local_hospital</md-icon>
-                <input ng-model="patient.insuranceNumber" type="number" placeholder="Versichertennummer" ng-required="true">
+                <input ng-model="UserRegister.patient.insuranceNumber" type="number" placeholder="Versichertennummer" ng-required="true">
             </md-input-container>
         </div>
     </div>
-    <md-button class="md-raised" ng-click="savePatient()">SPEICHERN</md-button>
+    <md-button class="md-raised" ng-click="UserRegister.savePatient(UserRegister.patient)">SPEICHERN</md-button>
 </md-whiteframe>
     
 

@@ -15,11 +15,13 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($routeProvider: angular.route.IRouteProvider) => {
         $routeProvider.when('/', {
             templateUrl: 'views/user-search.html',
-            controller: 'UserSearchController'
+            controller: 'UserSearchController',
+            controllerAs: 'UserSearch'
             })
             .when('/user/register', {
             templateUrl: 'views/user-register.html',
-            controller: 'UserRegisterController'
+            controller: 'UserRegisterController',
+            controllerAs: 'UserRegister'
         }).otherwise({
             redirectTo: '/'
         });

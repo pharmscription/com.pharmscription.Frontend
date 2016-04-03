@@ -1,7 +1,5 @@
 ﻿import Patient from '../model/patient'
 
-import HttpService = angular.IHttpService;
-import IQService = angular.IQService;
 import IPromise = angular.IPromise;
 
 export class PatientRepository {

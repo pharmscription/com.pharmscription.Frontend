@@ -1,29 +1,25 @@
-﻿export interface IUserSearchScope extends angular.IScope {
-    social: String,
-    search: Function;
-}
+﻿export class UserSearchController {
+    social: String;
 
-export class UserSearchController {
-
-    public static $inject = [
-        '$scope',
+    static $inject = [
         '$mdDialog',
         '$location'
     ];
 
-    constructor($scope: IUserSearchScope, $mdDialog: angular.material.IDialogService, $location: angular.ILocationService) {
-        $scope.social = null;
-        $scope.search = (socialNumber: String, event: MouseEvent) => {
-            var confirm: angular.material.IConfirmDialog = $mdDialog.confirm()
-                .title('Patient nicht gefunden')
-                .textContent('Möchten Sie den Patienten mit der AHV-Nummer ' + socialNumber + ' Registrieren?')
-                .ariaLabel('Patient Registrieren')
-                .targetEvent(event)
-                .ok('Registrieren')
-                .cancel('Abbrechen');
-            $mdDialog.show(confirm).then(() => {
-                $location.url('user/register');
-            });
-        };
+    constructor(private $mdDialog: angular.material.IDialogService, private $location: angular.ILocationService) {
+        this.social = null;
     }
+
+    search(socialNumber: String, event: MouseEvent): void {
+        let confirm: angular.material.IConfirmDialog = this.$mdDialog.confirm()
+            .title('Patient nicht gefunden')
+            .textContent('Möchten Sie den Patienten mit der AHV-Nummer ' + socialNumber + ' Registrieren?')
+            .ariaLabel('Patient Registrieren')
+            .targetEvent(event)
+            .ok('Registrieren')
+            .cancel('Abbrechen');
+        this.$mdDialog.show(confirm).then(() => {
+            this.$location.url('user/register');
+        });
+    };
 }
