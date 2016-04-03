@@ -6,6 +6,7 @@ export default class Patient {
     address: Address;
     birthdate: Date;
     phoneNumber: String;
+    emailAddress: String;
     insuranceNumber: String;
     insurance: String;
 
