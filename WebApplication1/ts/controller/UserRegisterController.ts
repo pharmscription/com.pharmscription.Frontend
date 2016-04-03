@@ -4,6 +4,7 @@ import Patient from '../model/patient';
 export class UserRegisterController {
 
     cantons: Object;
+    patient: Patient;
 
     static $inject = [
         'PatientRepository'
