@@ -6,6 +6,7 @@ import {MainMenuController} from './controller/MainMenuController';
 import {MainSideMenuController} from './controller/MainSideMenuController'
 import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
+import {DrugSearchController} from './controller/DrugSearchController'
 import {PatientRepository} from './service/PatientRepository'
 import {AHVNumberService} from './service/AHVNumberService'
 import SocialNumber from './directives/socialnumber'
@@ -19,11 +20,14 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
             templateUrl: 'views/user-search.html',
             controller: 'UserSearchController',
             controllerAs: 'UserSearch'
-            })
-            .when('/user/register', {
+        }).when('/user/register', {
             templateUrl: 'views/user-register.html',
             controller: 'UserRegisterController',
             controllerAs: 'UserRegister'
+        }).when('/drug/search', {
+            templateUrl: 'views/drug-search.html',
+            controller: 'DrugSearchController',
+            controllerAs: 'DrugSearch'
         }).otherwise({
             redirectTo: '/'
         });
@@ -32,6 +36,7 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .controller('MainSideMenuController', MainSideMenuController)
     .controller('UserRegisterController', UserRegisterController)
     .controller('UserSearchController', UserSearchController)
+    .controller('DrugSearchController', DrugSearchController)
     .service('PatientRepository', PatientRepository)
     .service('AHVNumberService', AHVNumberService)
     .directive('ngSocialnumber', SocialNumber.factory());
