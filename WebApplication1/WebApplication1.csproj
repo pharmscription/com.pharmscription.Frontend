@@ -110,6 +110,7 @@
     <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />
     <TypeScriptCompile Include="ts\model\address.ts" />
     <TypeScriptCompile Include="ts\model\patient.ts" />
+    <TypeScriptCompile Include="ts\service\AHVNumberService.ts" />
     <TypeScriptCompile Include="ts\service\PatientRepository.ts" />
   </ItemGroup>
   <ItemGroup>

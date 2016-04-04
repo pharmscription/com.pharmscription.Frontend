@@ -1,4 +1,5 @@
 ﻿import {PatientRepository} from "../service/PatientRepository";
+import {AHVNumberService} from "../service/AHVNumberService";
 import Patient from '../model/patient';
 
 export interface IUserRegisterScope extends angular.IScope{
@@ -12,11 +13,12 @@ export class UserRegisterController {
 
     public static $inject = [
         '$scope',
-        'PatientRepository'
+        'PatientRepository',
+        'AHVNumberService'
     ];
 
-    constructor($scope: IUserRegisterScope, private patientRepository: PatientRepository) {
-        $scope.patient = new Patient("123");
+    constructor($scope: IUserRegisterScope, private patientRepository: PatientRepository, private ahvNumberService: AHVNumberService) {
+        $scope.patient = new Patient(this.ahvNumberService.getAHVNumber());
         $scope.cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +
             'SG SH SZ SO TG TI UR VD VS ZG ZH').split(' ').map(function (canton) {
                 return { abbrev: canton };

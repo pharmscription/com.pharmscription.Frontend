@@ -7,6 +7,7 @@ import {MainSideMenuController} from './controller/MainSideMenuController'
 import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
 import {PatientRepository} from './service/PatientRepository'
+import {AHVNumberService} from './service/AHVNumberService'
 
 export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
@@ -28,4 +29,5 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .controller('MainSideMenuController', MainSideMenuController)
     .controller('UserRegisterController', UserRegisterController)
     .controller('UserSearchController', UserSearchController)
-    .service('PatientRepository', PatientRepository);
+    .service('PatientRepository', PatientRepository)
+    .service('AHVNumberService', AHVNumberService);
