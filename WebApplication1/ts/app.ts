@@ -14,6 +14,9 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
         $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('orange');
     })
+    .config(function ($httpProvider: angular.IHttpProvider) {
+        $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+    })
     .config(($routeProvider: angular.route.IRouteProvider) => {
         $routeProvider.when('/', {
             templateUrl: 'views/user-search.html',

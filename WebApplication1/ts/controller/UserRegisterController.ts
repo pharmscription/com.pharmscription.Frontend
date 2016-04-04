@@ -21,7 +21,6 @@ export class UserRegisterController {
     }
 
     savePatient(patient: Patient): void {
-        console.log(patient.firstName);
         this.patientRepository.addPatient(patient);
     }
 }
