@@ -6,28 +6,29 @@ export interface IUserSearchScope extends angular.IScope {
 }
 
 export class UserSearchController {
+    social: String;
 
-    public static $inject = [
-        '$scope',
+    static $inject = [
         '$mdDialog',
         '$location',
         'AHVNumberService'
     ];
 
-    constructor($scope: IUserSearchScope, $mdDialog: angular.material.IDialogService, $location: angular.ILocationService, private ahvNumberService: AHVNumberService) {
-        $scope.social = null;
-        $scope.search = (socialNumber: String, event: MouseEvent) => {
-            var confirm: angular.material.IConfirmDialog = $mdDialog.confirm()
+    constructor(private $mdDialog: angular.material.IDialogService, private $location: angular.ILocationService, private ahvNumberService: AHVNumberService) {
+        this.social = '';
+    }
+
+    search(socialNumber: String, event: MouseEvent): void {
+        let confirm: angular.material.IConfirmDialog = this.$mdDialog.confirm()
                 .title('Patient nicht gefunden')
-                .textContent('Möchten Sie den Patienten mit der AHV-Nummer ' + socialNumber + ' Registrieren?')
+            .textContent('Möchten Sie den Patienten mit der AHV-Nummer ' + this.social + ' Registrieren?')
                 .ariaLabel('Patient Registrieren')
                 .targetEvent(event)
                 .ok('Registrieren')
                 .cancel('Abbrechen');
-            $mdDialog.show(confirm).then(() => {
-                this.ahvNumberService.setAHVNumber(socialNumber);
-                $location.url('user/register');
+            this.$mdDialog.show(confirm).then(() => {
+                this.ahvNumberService.setAHVNumber(this.social);
+                this.$location.url('user/register');
             });
         };
     }
-}

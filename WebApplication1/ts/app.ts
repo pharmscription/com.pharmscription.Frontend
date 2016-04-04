@@ -8,6 +8,7 @@ import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
 import {PatientRepository} from './service/PatientRepository'
 import {AHVNumberService} from './service/AHVNumberService'
+import SocialNumber from './directives/socialnumber'
 
 export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
@@ -16,11 +17,13 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($routeProvider: angular.route.IRouteProvider) => {
         $routeProvider.when('/', {
             templateUrl: 'views/user-search.html',
-            controller: 'UserSearchController'
+            controller: 'UserSearchController',
+            controllerAs: 'UserSearch'
             })
             .when('/user/register', {
             templateUrl: 'views/user-register.html',
-            controller: 'UserRegisterController'
+            controller: 'UserRegisterController',
+            controllerAs: 'UserRegister'
         }).otherwise({
             redirectTo: '/'
         });
@@ -30,4 +33,5 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .controller('UserRegisterController', UserRegisterController)
     .controller('UserSearchController', UserSearchController)
     .service('PatientRepository', PatientRepository)
-    .service('AHVNumberService', AHVNumberService);
+    .service('AHVNumberService', AHVNumberService)
+    .directive('ngSocialnumber', SocialNumber.factory());
