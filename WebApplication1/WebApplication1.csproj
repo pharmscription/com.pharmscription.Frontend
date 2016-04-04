@@ -108,8 +108,10 @@
     <TypeScriptCompile Include="ts\controller\MainSideMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\UserRegisterController.ts" />
     <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />
+    <TypeScriptCompile Include="ts\directives\socialnumber.ts" />
     <TypeScriptCompile Include="ts\model\address.ts" />
     <TypeScriptCompile Include="ts\model\patient.ts" />
+    <TypeScriptCompile Include="ts\service\SocialNumberChecker.ts" />
     <TypeScriptCompile Include="ts\service\PatientRepository.ts" />
   </ItemGroup>
   <ItemGroup>

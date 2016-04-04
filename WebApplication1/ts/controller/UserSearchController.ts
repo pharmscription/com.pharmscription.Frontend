@@ -7,7 +7,7 @@
     ];
 
     constructor(private $mdDialog: angular.material.IDialogService, private $location: angular.ILocationService) {
-        this.social = null;
+        this.social = '';
     }
 
     search(socialNumber: String, event: MouseEvent): void {

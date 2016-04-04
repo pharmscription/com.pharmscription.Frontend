@@ -5,9 +5,13 @@
     <form name="searchForm">
         <md-input-container class="md-block" flex-gt-sm>
             <label>AHV-Nummer</label>
-            <input name="social" ng-model="UserSearch.social" ng-pattern="/^[0-9]{3}.[0-9]{4}.[0-9]{4}.[0-9]{2}$/" required />
+            <input name="social" ng-model="UserSearch.social" ng-socialnumber ng-minlength="13" required />
             <div ng-messages="searchForm.social.$error">
-                <div ng-message="pattern">Bitte gültige AHV-Nummer eingeben.</div>
+                <!--<div ng-message="pattern">Bitte gültige AHV-Nummer eingeben.</div>-->
+                <div ng-message="socialnumber">AHV nicht gültig</div>
+                <div ng-message="required">Muss einen Wert haben</div>
+                <div ng-message="minlength">Die AHV-Nummer ist zu kurz</div>
+
             </div>
         </md-input-container>
     </form>

@@ -7,6 +7,8 @@ import {MainSideMenuController} from './controller/MainSideMenuController'
 import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
 import {PatientRepository} from './service/PatientRepository'
+//import SocialNumberChecker from './service/SocialNumberChecker'
+import SocialNumber from './directives/socialnumber'
 
 export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
@@ -30,4 +32,5 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .controller('MainSideMenuController', MainSideMenuController)
     .controller('UserRegisterController', UserRegisterController)
     .controller('UserSearchController', UserSearchController)
-    .service('PatientRepository', PatientRepository);
+    .service('PatientRepository', PatientRepository)
+    .directive('ngSocialnumber', SocialNumber.factory());
