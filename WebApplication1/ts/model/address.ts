@@ -1,9 +1,9 @@
 ﻿export default class Address {
-    street: String;
-    number: number;
-    additionalAddress: String;
-    canton: String;
-    city: String;
-    cityCode: number;
+    Street: String;
+    Number: number;
+    StreetExtension: String;
+    State: String;
+    City: String;
+    CityCode: number;
 
 }

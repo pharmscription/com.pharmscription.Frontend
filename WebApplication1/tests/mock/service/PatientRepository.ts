@@ -1,5 +1,4 @@
-﻿import Patient from '../model/patient'
-
+﻿import Patient from '../../../ts/model/patient'
 import IPromise = angular.IPromise;
 
 export class PatientRepository {
@@ -8,33 +7,35 @@ export class PatientRepository {
         add: 'http://localhost:7642/RestService.svc/patients'
     }
 
+    private patients: Array<Patient>;
+
     static $inject = [
         '$http',
         '$q'
     ];
 
     constructor(private $http: angular.IHttpService, private $q: angular.IQService) {
+        this.patients = [];
     }
 
     addPatient(patient: Patient): IPromise<Patient> {
-        let data = JSON.stringify(patient);
-        return this.$q((resolve) => {
-            resolve(this.$http.put(this.urls.add, data));
-        });
-
+        this.patients.push(patient);
+        return new 
     }
+
     addwithreturnPatient(patient: Patient): IPromise<Patient> {
+        //let config = { headers: { 'Content-Type': 'application/json'} };
+
         console.log(patient);
         return this.$q((resolve) => {
             resolve(this.$http.post(this.urls.add, patient));
         });
     }
 
-    getPatient(): IPromise<Patient> {
+    getPatient(ahvNumber: String): IPromise<Patient> {
         return this.$q((resolve) => {
             resolve(this.$http.get(this.urls.add));
         });
     }
 
 }
-

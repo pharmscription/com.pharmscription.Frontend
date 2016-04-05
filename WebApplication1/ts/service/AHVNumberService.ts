@@ -7,7 +7,6 @@ export class AHVNumberService {
     }
 
     setAHVNumber(social: String) {
-        console.log(social);
         this.social = social;
     }
 

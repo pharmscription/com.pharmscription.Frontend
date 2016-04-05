@@ -14,7 +14,7 @@ import SocialNumber from './directives/socialnumber'
 
 export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
-        $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('orange');
+        $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
     })
     .config(($httpProvider: angular.IHttpProvider) => {
         $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';

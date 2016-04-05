@@ -21,7 +21,7 @@ export class UserSearchController {
     search(socialNumber: String, event: MouseEvent): void {
         let confirm: angular.material.IConfirmDialog = this.$mdDialog.confirm()
                 .title('Patient nicht gefunden')
-            .textContent('Möchten Sie den Patienten mit der AHV-Nummer ' + this.social + ' Registrieren?')
+                .textContent('Möchten Sie den Patienten mit der AHV-Nummer ' + this.social + ' Registrieren?')
                 .ariaLabel('Patient Registrieren')
                 .targetEvent(event)
                 .ok('Registrieren')
