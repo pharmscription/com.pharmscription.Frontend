@@ -18,6 +18,7 @@ export class PatientRepository {
 
     addPatient(patient: Patient): IPromise<Patient> {
         let data = JSON.stringify(patient);
+        console.log(data);
         return this.$q((resolve) => {
             resolve(this.$http.put(this.urls.add, data));
         });

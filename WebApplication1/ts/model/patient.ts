@@ -5,7 +5,7 @@ export default class Patient {
     LastName: String;
     AhvNumber: String;
     Address: Address;
-    BirthDate: Date;
+    BirthDateStr: Date;
     PhoneNumber: String;
     EMailAddress: String;
     InsuranceNumber: String;
@@ -16,7 +16,7 @@ export default class Patient {
     }
 
     birth() {
-        this.BirthDate = new Date();
+        this.BirthDateStr = new Date();
     }
 
 }

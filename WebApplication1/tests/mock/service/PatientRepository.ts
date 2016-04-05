@@ -3,10 +3,6 @@ import IPromise = angular.IPromise;
 
 export class PatientRepository {
 
-    private urls: any = {
-        add: 'http://localhost:7642/RestService.svc/patients'
-    }
-
     private patients: Array<Patient>;
 
     static $inject = [
@@ -20,15 +16,8 @@ export class PatientRepository {
 
     addPatient(patient: Patient): IPromise<Patient> {
         this.patients.push(patient);
-        return new 
-    }
-
-    addwithreturnPatient(patient: Patient): IPromise<Patient> {
-        //let config = { headers: { 'Content-Type': 'application/json'} };
-
-        console.log(patient);
         return this.$q((resolve) => {
-            resolve(this.$http.post(this.urls.add, patient));
+            resolve(this.patients[this.patients.length - 1]);
         });
     }
 
