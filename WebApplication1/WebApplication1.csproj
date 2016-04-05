@@ -102,7 +102,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="tests\controller\PatientRegisterController.ts" />
+    <TypeScriptCompile Include="tests\controller\UserRegisterController.ts" />
     <TypeScriptCompile Include="tests\mock\service\PatientRepository.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\bootstrap.ts" />

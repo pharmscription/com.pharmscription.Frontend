@@ -27,7 +27,7 @@ export class UserRegisterController {
 
     savePatient(patient: Patient): void {
         this.patientRepository.addPatient(patient).then((patientReturned) => {
-            this.showToast(patientReturned.FirstName + " " + patientReturned.LastName + " gespeichert!");
+            this.showToast(patientReturned.data.FirstName + " " + patientReturned.data.LastName + " gespeichert!");
         }, (error) => {
             this.showToast("Patient konnte nicht registriert werden!");
         });

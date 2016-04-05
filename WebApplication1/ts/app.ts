@@ -19,6 +19,11 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .config(($httpProvider: angular.IHttpProvider) => {
         $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     })
+    .config(($mdDateLocaleProvider: angular.material.IDateLocaleProvider) => {
+        $mdDateLocaleProvider.parseDate = (dateString) => {
+            return new Date(dateString);
+        }
+    })
     .config(($routeProvider: angular.route.IRouteProvider) => {
         $routeProvider.when('/', {
             templateUrl: 'views/user-search.html',

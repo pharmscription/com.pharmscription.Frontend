@@ -21,10 +21,10 @@ export class PatientRepository {
         });
     }
 
-    getPatient(ahvNumber: String): IPromise<Patient> {
-        return this.$q((resolve) => {
-            resolve(this.$http.get(this.urls.add));
-        });
-    }
+    //getPatient(ahvNumber: String): IPromise<Patient> {
+    //    return this.$q((resolve) => {
+    //        resolve(this.$http.get(this.urls.add));
+    //    });
+    //}
 
 }
