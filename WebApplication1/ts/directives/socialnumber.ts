@@ -10,9 +10,7 @@
         if (socialArray.length !== 13)
             return false;
         let checksum = socialArray[socialArray.length - 1];
-        console.log('checksum: ' + checksum);
         let calculatedChecksum = this.calcChecksum(socialArray);
-        console.log(calculatedChecksum);
         if (checksum === calculatedChecksum)
             return true;
         return false;

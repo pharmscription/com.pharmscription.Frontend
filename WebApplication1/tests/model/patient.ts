@@ -8,7 +8,7 @@ describe("Patient Test", () => {
         expect(patient.birthdate).toBeUndefined();
     });
     it("Patient should have specified AHV-Number", () => {
-        expect(patient.insuranceNumber == null);
+        expect(patient.insuranceNumber).toBe('123');
     });
     it("After birth it should have ad birthdate", () => {
         patient.birth();
