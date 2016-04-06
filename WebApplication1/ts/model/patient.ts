@@ -13,7 +13,7 @@ export default class Patient {
     Insurance: String;
 
     constructor(AhvNumber: String) {
-        Date.prototype.toJSON = function () { return moment.utc(this).format("L"); }
+        Date.prototype.toJSON = function () { return moment(this).format("L"); }
         this.AhvNumber = AhvNumber;
     }
 

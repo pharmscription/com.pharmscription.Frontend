@@ -29,7 +29,7 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
             return m.isValid() ? m.utc().toDate() : new Date(NaN);
         };
         $mdDateLocaleProvider.formatDate = (date: Date) => {
-            return moment(date).utc().format('DD.MM.YYYY');
+            return moment(date).format('DD.MM.YYYY');
         };
         $mdDateLocaleProvider.months = moment.months();
         $mdDateLocaleProvider.shortMonths = moment.monthsShort();
