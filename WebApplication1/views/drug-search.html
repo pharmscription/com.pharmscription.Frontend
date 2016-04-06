@@ -1,0 +1,15 @@
+﻿<md-toolbar class="md-primary md-hue-1">
+    <div class="md-toolbar-tools">Medikament suchen</div>
+</md-toolbar>
+<div layout="row" layout-align="center center">
+    <form name="searchForm">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Medikament</label>
+            <input name="drug" required />
+        </md-input-container>
+    </form>
+    <md-button ng-click="" ng-disabled="searchForm.$invalid">
+        <md-icon md-font-set="material-icons">search</md-icon>
+        Suchen
+    </md-button>
+</div>
