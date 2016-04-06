@@ -1,4 +1,5 @@
 ﻿import Address from "./address";
+import moment from 'moment'
 
 export default class Patient {
     FirstName: String;
@@ -12,6 +13,7 @@ export default class Patient {
     Insurance: String;
 
     constructor(AhvNumber: String) {
+        Date.prototype.toJSON = function () { return moment.utc(this).format("L"); }
         this.AhvNumber = AhvNumber;
     }
 

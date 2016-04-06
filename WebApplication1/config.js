@@ -22,6 +22,7 @@ System.config({
     "angular-route": "github:angular/bower-angular-route@1.5.3",
     "clean-css": "npm:clean-css@3.4.10",
     "jquery": "npm:jquery@2.2.2",
+    "moment": "npm:moment@2.12.0",
     "typescript": "npm:typescript@1.8.9",
     "github:angular/bower-angular-animate@1.5.3": {
       "angular": "github:angular/bower-angular@1.5.3"
@@ -134,6 +135,9 @@ System.config({
     },
     "npm:isarray@1.0.0": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:moment@2.12.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"

@@ -1,6 +1,10 @@
 ﻿import 'angular-material'
 import 'angular-route'
 import 'angular-messages'
+import moment from 'moment'
+import 'moment/locale/de'
+
+moment.locale('de');
 
 import {MainMenuController} from './controller/MainMenuController';
 import {MainSideMenuController} from './controller/MainSideMenuController'
@@ -20,9 +24,17 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
         $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     })
     .config(($mdDateLocaleProvider: angular.material.IDateLocaleProvider) => {
-        $mdDateLocaleProvider.parseDate = (dateString) => {
-            return new Date(dateString);
-        }
+        $mdDateLocaleProvider.parseDate = (dateString: string) => {
+            let m = moment(dateString, 'DD.MM.YYYY', true);
+            return m.isValid() ? m.utc().toDate() : new Date(NaN);
+        };
+        $mdDateLocaleProvider.formatDate = (date: Date) => {
+            return moment(date).utc().format('DD.MM.YYYY');
+        };
+        $mdDateLocaleProvider.months = moment.months();
+        $mdDateLocaleProvider.shortMonths = moment.monthsShort();
+        $mdDateLocaleProvider.days = moment.weekdays();
+        $mdDateLocaleProvider.shortDays = moment.weekdaysShort();
     })
     .config(($routeProvider: angular.route.IRouteProvider) => {
         $routeProvider.when('/', {
