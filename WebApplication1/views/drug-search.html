@@ -13,3 +13,12 @@
         Suchen
     </md-button>
 </div>
+
+<md-list flex layout-fill>
+    <md-subheader class="md-no-sticky">Suchresultate gefunden</md-subheader>
+    <md-list-item  class="secondary-button-padding" ng-repeat="drug in DrugSearch.drugs" ng-click="doPrimaryAction($event)">
+        <p>{{ drug.drugDescription }}</p>
+        <md-button class="md-secondary" ng-click="doSecondaryAction($event)">More Info</md-button>
+    </md-list-item>
+</md-list>
+          
