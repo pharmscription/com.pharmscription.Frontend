@@ -3,18 +3,22 @@ import DrugRepository from '../service/DrugRepository'
 
 export class DrugSearchController {
     drugs: Array<Drug>;
+    searchedDrug: String;
+    searchResults: Number;
 
     static $inject = [
-        'DrugRepository'
+        'DrugRepository',
+        '$mdDialog'
     ];
 
-    constructor(private drugRepository: DrugRepository) {
+    constructor(private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService) {
         this.drugs = new Array<Drug>();
         for (var i = 0; i < 100; i++){
             this.drugs[i] = new Drug();
             this.drugs[i].composition = "composition";
             this.drugs[i].drugDescription = "description" + i;
         }
+        this.searchResults = this.drugs.length;
         //this.drugs = [];
     }
 
@@ -27,14 +31,16 @@ export class DrugSearchController {
         });
     }
 
-    this.doSecondaryAction = function (event) {
-        $mdDialog.show(
-            $mdDialog.alert()
-                .title('Secondary Action')
-                .textContent('Secondary actions can be used for one click actions')
-                .ariaLabel('Secondary click demo')
-                .ok('Neat!')
-                .targetEvent(event)
+    searchDrug(searchedDrug: String): void {
+        this.searchedDrug = '';
+    }
+
+    showDrugDetails(drug: Drug): void {
+        this.$mdDialog.show(
+            this.$mdDialog.alert()
+                .title('Medikamenten Details')
+                .textContent("TODO: String nicht zu string kompatibel")
+                .ok('OK')
         );
     };
 }
