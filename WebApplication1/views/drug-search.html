@@ -5,11 +5,21 @@
     <form name="searchForm">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Medikament</label>
-            <input name="drug" required />
+            <input name="drug" ng-model="DrugSearch.searchedDrug" />
         </md-input-container>
     </form>
-    <md-button ng-click="" ng-disabled="searchForm.$invalid">
+    <md-button ng-click="DrugSearch.searchDrug(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
         <md-icon md-font-set="material-icons">search</md-icon>
         Suchen
     </md-button>
 </div>
+
+<md-list flex layout-fill>
+    <md-subheader class="md-no-sticky">{{ DrugSearch.searchResults}} Suchresultate gefunden</md-subheader>
+    <md-list-item  class="secondary-button-padding" ng-repeat="drug in DrugSearch.drugs" ng-click="click">
+        <md-icon md-font-set="material-icons">healing</md-icon>
+        <p>{{ drug.drugDescription }}</p>
+        <md-button class="md-secondary" ng-click="DrugSearch.showDrugDetails(drug)">DETAILS</md-button>
+    </md-list-item>
+</md-list>
+          
