@@ -4,7 +4,7 @@ import DrugRepository from '../service/DrugRepository'
 export class DrugSearchController {
     drugs: Array<Drug>;
 
-    static inject = [
+    static $inject = [
         'DrugRepository'
     ];
 

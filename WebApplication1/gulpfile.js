@@ -11,7 +11,7 @@ var jspm = require('gulp-jspm');
 var rename = require('gulp-rename');
 
 // Test JS
-gulp.task('jasmine-tests', function () {
+gulp.task('jasmine-tests', ['compile-tests', 'compile-ts'], function () {
     return gulp.src('tests/**/*.js')
         .pipe(jasmine({ verbose: true, includeStackTrace: true}));
 });
@@ -58,8 +58,10 @@ gulp.task('production-bundle-app', ['jspm-bundlesfx'], function () {
 });
 
 // Default Task
-gulp.task('default', function () {
-    // place code for your default task here
-});
+//gulp.task('default', function () {
+//    // place code for your default task here
+//});
 
-gulp.task('default', ['compile-Tests', 'compile-ts', 'jasmine-tests']);
+gulp.task('default', ['compile-Tests', 'compile-ts', 'jasmine-tests'], function() {
+    
+});
