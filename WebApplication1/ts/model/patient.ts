@@ -2,17 +2,17 @@
 import moment from 'moment'
 
 export default class Patient {
-    FirstName: String;
-    LastName: String;
-    AhvNumber: String;
+    FirstName: string;
+    LastName: string;
+    AhvNumber: string;
     Address: Address;
     BirthDateStr: Date;
-    PhoneNumber: String;
-    EMailAddress: String;
-    InsuranceNumber: String;
-    Insurance: String;
+    PhoneNumber: string;
+    EMailAddress: string;
+    InsuranceNumber: string;
+    Insurance: string;
 
-    constructor(AhvNumber: String) {
+    constructor(AhvNumber: string) {
         Date.prototype.toJSON = function () { return moment(this).format("L"); }
         this.AhvNumber = AhvNumber;
     }

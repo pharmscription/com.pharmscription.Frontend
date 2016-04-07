@@ -3,7 +3,7 @@ import DrugRepository from '../service/DrugRepository'
 
 export class DrugSearchController {
     drugs: Array<Drug>;
-    searchedDrug: String;
+    searchedDrug: string;
     searchResults: Number;
 
     static $inject = [
@@ -22,7 +22,7 @@ export class DrugSearchController {
         //this.drugs = [];
     }
 
-    getDrugs(drugs: String): void {
+    getDrugs(drugs: string): void {
         this.drugRepository.getDrugs(drugs).then((foundDrugs) => {
             this.drugs = foundDrugs;
         }, (errorReason) => {
@@ -31,7 +31,7 @@ export class DrugSearchController {
         });
     }
 
-    searchDrug(searchedDrug: String): void {
+    searchDrug(searchedDrug: string): void {
         this.searchedDrug = '';
     }
 
@@ -39,7 +39,7 @@ export class DrugSearchController {
         this.$mdDialog.show(
             this.$mdDialog.alert()
                 .title('Medikamenten Details')
-                .textContent("TODO: String nicht zu string kompatibel")
+                .textContent("TODO: string nicht zu string kompatibel")
                 .ok('OK')
         );
     };

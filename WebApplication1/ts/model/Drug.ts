@@ -1,10 +1,10 @@
 ﻿export default class Drug {
 
-    drugDescription: String;
+    drugDescription: string;
     packageSize: number;
-    unit: String;
-    composition: String;
-    narcoticCategory: String;
+    unit: string;
+    composition: string;
+    narcoticCategory: string;
     isValid: boolean;
 
 }

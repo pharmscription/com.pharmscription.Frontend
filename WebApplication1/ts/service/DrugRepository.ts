@@ -15,7 +15,7 @@ export default class DrugRepository {
     constructor(private $http: angular.IHttpService, private $q: angular.IQService) {
     }
 
-    getDrugs(searchTerm: String): IPromise<Array<Drug>> {
+    getDrugs(searchTerm: string): IPromise<Array<Drug>> {
         return this.$q((resolve) => {
             resolve(this.$http.get(this.urls.get));
         });

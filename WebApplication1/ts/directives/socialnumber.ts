@@ -4,7 +4,7 @@
     public restrict = 'A';
     public require = 'ngModel';
 
-    checkSocialNumber(socialNumber: String): boolean {
+    checkSocialNumber(socialNumber: string): boolean {
         let input = socialNumber;
         let socialArray = this.stringToIntArray(input);
         if (socialArray.length !== 13)
@@ -17,7 +17,7 @@
 
     }
 
-    stringToIntArray(string: String): Array<number> {
+    stringToIntArray(string: string): Array<number> {
         let stringArray = string.split("");
         return stringArray.map((s) => {
             return parseInt(s);

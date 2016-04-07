@@ -5,7 +5,8 @@ import IPromise = angular.IPromise;
 export class PatientRepository {
 
     private urls: any = {
-        add: 'http://localhost:7642/RestService.svc/patients'
+        add: 'http://localhost:7642/RestService.svc/patients',
+        get: 'http://localhost:7642/RestService.svc/patients/lookup/:ahvNumber'
     }
 
     static $inject = [
@@ -31,9 +32,9 @@ export class PatientRepository {
         });
     }
 
-    getPatient(): IPromise<Patient> {
+    getPatient(ahvNumber: string): IPromise<Patient> {
         return this.$q((resolve) => {
-            resolve(this.$http.get(this.urls.add));
+            resolve(this.$http.get(this.urls.get.replace(':ahvNumber', ahvNumber)));
         });
     }
 
