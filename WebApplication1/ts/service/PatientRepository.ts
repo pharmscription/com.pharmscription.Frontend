@@ -34,7 +34,9 @@ export class PatientRepository {
 
     getPatient(ahvNumber: string): IPromise<Patient> {
         return this.$q((resolve) => {
-            resolve(this.$http.get(this.urls.get.replace(':ahvNumber', ahvNumber)));
+            let getUrl = this.urls.get.replace(':ahvNumber', ahvNumber);
+            console.log(getUrl);
+            resolve(this.$http.get(getUrl));
         });
     }
 
