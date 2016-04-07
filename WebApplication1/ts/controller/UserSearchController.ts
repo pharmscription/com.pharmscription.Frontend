@@ -48,7 +48,7 @@ export class UserSearchController {
 
     search(event: MouseEvent): void {
         this.patientRepository.getPatient(this.social).then((foundPatient: Patient) => {
-            if (foundPatient.FirstName === undefined) {
+            if (foundPatient.FirstName === null) {
                 this.showPatientNotFoundDialog(event);
             } else {
                 this.showPatientFoundDialog(foundPatient.FirstName, foundPatient.LastName, event);
