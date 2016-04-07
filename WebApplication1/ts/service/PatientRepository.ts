@@ -6,7 +6,8 @@ export class PatientRepository {
 
     private urls: any = {
         add: 'http://localhost:7642/RestService.svc/patients',
-        get: 'http://localhost:7642/RestService.svc/patients/lookup/:ahvNumber'
+        insuranceLookup: 'http://localhost:7642/RestService.svc/patients/lookup/:ahvNumber',
+        getPatient: 'http://localhost:7642/RestService.svc/patients/ahv-number/:ahvNumber'
     }
 
     static $inject = [
@@ -34,9 +35,7 @@ export class PatientRepository {
 
     getPatient(ahvNumber: string): IPromise<Patient> {
         return this.$q((resolve) => {
-            let getUrl = this.urls.get.replace(':ahvNumber', ahvNumber);
-            console.log(getUrl);
-            resolve(this.$http.get(getUrl));
+            resolve(this.$http.get(this.urls.getPatient.replace(':ahvNumber', ahvNumber)));
         });
     }
 
