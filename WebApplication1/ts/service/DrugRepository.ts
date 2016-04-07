@@ -4,7 +4,7 @@ import IPromise = angular.IPromise
 export default class DrugRepository {
 
     private urls: any = {
-        get: 'http://localhost:7642/RestService.svc/drugs'
+        get: 'http://localhost:7642/RestService.svc/drugs/search/:searchTerm'
     }
 
     static $inject = [
@@ -17,7 +17,7 @@ export default class DrugRepository {
 
     getDrugs(searchTerm: string): IPromise<Array<Drug>> {
         return this.$q((resolve) => {
-            resolve(this.$http.get(this.urls.get));
+            resolve(this.$http.get(this.urls.get.replace(":searchTerm", searchTerm)));
         });
     }
 }

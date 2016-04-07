@@ -13,33 +13,26 @@ export class DrugSearchController {
 
     constructor(private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService) {
         this.drugs = new Array<Drug>();
-        for (var i = 0; i < 100; i++){
-            this.drugs[i] = new Drug();
-            this.drugs[i].composition = "composition";
-            this.drugs[i].drugDescription = "description" + i;
-        }
-        this.searchResults = this.drugs.length;
-        //this.drugs = [];
+        this.drugs = [];
     }
 
     getDrugs(drugs: string): void {
+        this.searchedDrug = '';
         this.drugRepository.getDrugs(drugs).then((foundDrugs) => {
-            this.drugs = foundDrugs;
+            this.drugs = foundDrugs.data;
+            console.log("got drugs");
+            console.log(this.drugs);
         }, (errorReason) => {
             console.log(errorReason);
             this.drugs = [];
         });
     }
 
-    searchDrug(searchedDrug: string): void {
-        this.searchedDrug = '';
-    }
-
     showDrugDetails(drug: Drug): void {
         this.$mdDialog.show(
             this.$mdDialog.alert()
                 .title('Medikamenten Details')
-                .textContent("TODO: string nicht zu string kompatibel")
+                .textContent(drug.DrugDescription)
                 .ok('OK')
         );
     };
