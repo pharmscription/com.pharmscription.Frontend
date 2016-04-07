@@ -18,7 +18,7 @@ export default class DrugRepository {
 
     getDrugs(searchTerm: string): IPromise<Array<Drug>> {
         return this.$http.get(this.urls.get.replace(":searchTerm", searchTerm)).then((response) => {
-            if (response.data === 'object') {
+            if (typeof response.data === 'object') {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);

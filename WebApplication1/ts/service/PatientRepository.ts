@@ -23,7 +23,7 @@ export class PatientRepository {
         let data = JSON.stringify(patient);
         this.$log.debug(data);
         return this.$http.put(this.urls.add, data).then((response) => {
-            if (response.data === Object) {
+            if (typeof response.data === 'object') {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -38,7 +38,7 @@ export class PatientRepository {
     getPatient(ahvNumber: string): IPromise<Patient> {
         this.$log.debug(ahvNumber);
         return this.$http.get(this.urls.getPatient.replace(':ahvNumber', ahvNumber)).then((response) => {
-                if (response.data === 'object') {
+                if (typeof response.data === 'object') {
                     return response.data;
                 } else {
                     return this.$q.reject(response.data);
