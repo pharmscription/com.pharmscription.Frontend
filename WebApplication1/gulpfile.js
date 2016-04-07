@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='dev-bundle' />
+/// <binding BeforeBuild='devMock-bundle' />
 "use strict";
 
 // Include gulp
@@ -40,6 +40,13 @@ gulp.task('compile-ts', function () {
 
 gulp.task('dev-bundle', function () {
     return gulp.src('ts/bootstrap.ts')
+        .pipe(jspm({ minify: false })) // `jspm bundle main`
+    .pipe(rename('build.js'))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('devMock-bundle', function () {
+    return gulp.src('ts/bootstrapDev.ts')
         .pipe(jspm({ minify: false })) // `jspm bundle main`
     .pipe(rename('build.js'))
     .pipe(gulp.dest('./'));
