@@ -8,7 +8,7 @@
             <input name="drug" ng-model="DrugSearch.searchedDrug" />
         </md-input-container>
     </form>
-    <md-button ng-click="DrugSearch.searchDrug(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
+    <md-button ng-click="DrugSearch.getDrugs(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
         <md-icon md-font-set="material-icons">search</md-icon>
         Suchen
     </md-button>

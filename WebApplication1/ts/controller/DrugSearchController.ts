@@ -23,6 +23,7 @@ export class DrugSearchController {
     }
 
     getDrugs(drugs: String): void {
+        this.searchedDrug = '';
         this.drugRepository.getDrugs(drugs).then((foundDrugs) => {
             this.drugs = foundDrugs;
         }, (errorReason) => {
@@ -31,15 +32,11 @@ export class DrugSearchController {
         });
     }
 
-    searchDrug(searchedDrug: String): void {
-        this.searchedDrug = '';
-    }
-
     showDrugDetails(drug: Drug): void {
         this.$mdDialog.show(
             this.$mdDialog.alert()
                 .title('Medikamenten Details')
-                .textContent("TODO: String nicht zu string kompatibel")
+                .textContent(drug.drugDescription)
                 .ok('OK')
         );
     };
