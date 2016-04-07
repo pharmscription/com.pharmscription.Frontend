@@ -1,16 +1,16 @@
 ﻿
 export class AHVNumberService {
-    private social: String;
+    private social: string;
 
     constructor() {
         this.social = '';
     }
 
-    setAHVNumber(social: String) {
+    setAHVNumber(social: string) {
         this.social = social;
     }
 
-    getAHVNumber(): String {
+    getAHVNumber(): string {
         return this.social;
     }
 

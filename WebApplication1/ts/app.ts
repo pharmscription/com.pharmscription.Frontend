@@ -35,6 +35,7 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
         $mdDateLocaleProvider.shortMonths = moment.monthsShort();
         $mdDateLocaleProvider.days = moment.weekdays();
         $mdDateLocaleProvider.shortDays = moment.weekdaysShort();
+        $mdDateLocaleProvider.firstDayOfWeek = 1;
     })
     .config(($routeProvider: angular.route.IRouteProvider) => {
         $routeProvider.when('/', {

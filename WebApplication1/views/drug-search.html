@@ -18,7 +18,7 @@
     <md-subheader class="md-no-sticky">{{ DrugSearch.searchResults}} Suchresultate gefunden</md-subheader>
     <md-list-item  class="secondary-button-padding" ng-repeat="drug in DrugSearch.drugs" ng-click="click">
         <md-icon md-font-set="material-icons">healing</md-icon>
-        <p>{{ drug.drugDescription }}</p>
+        <p>{{ drug.DrugDescription }}</p>
         <md-button class="md-secondary" ng-click="DrugSearch.showDrugDetails(drug)">DETAILS</md-button>
     </md-list-item>
 </md-list>

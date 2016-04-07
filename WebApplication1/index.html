@@ -37,14 +37,17 @@
                         <span>Menu</span>
                     </div>
                 </md-toolbar>
-                <md-content layout-padding ng-controller="MainSideMenuController">
-                    <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                        Close Sidenav Left
-                    </md-button>
-                    <p hide-md show-gt-md>
-                        This sidenav is locked open on your device. To go back to the default behavior,
-                        narrow your display.
-                    </p>
+                <md-content ng-controller="MainSideMenuController as SideMenu">
+                    <md-list>
+                        <md-list-item ng-click="SideMenu.goTo('#')">
+                            <md-icon class="md-avatar-icon">search</md-icon>
+                            <p class="md-exclude">Patient suchen</p>
+                        </md-list-item>
+                        <md-list-item ng-click="SideMenu.goTo('/drug/search')">
+                            <md-icon class="md-avatar-icon">healing</md-icon>
+                            <p class="md-exclude">Medikament suchen</p>
+                        </md-list-item>
+                    </md-list>
                 </md-content>
             </md-sidenav>
             <md-content flex>
