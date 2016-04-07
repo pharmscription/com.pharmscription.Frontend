@@ -8,10 +8,11 @@ export class DrugSearchController {
 
     static $inject = [
         'DrugRepository',
-        '$mdDialog'
+        '$mdDialog',
+        '$log'
     ];
 
-    constructor(private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService) {
+    constructor(private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService) {
         this.drugs = new Array<Drug>();
         this.drugs = [];
     }
@@ -19,11 +20,11 @@ export class DrugSearchController {
     getDrugs(drugs: string): void {
         this.searchedDrug = '';
         this.drugRepository.getDrugs(drugs).then((foundDrugs) => {
-            this.drugs = foundDrugs.data;
-            console.log("got drugs");
-            console.log(this.drugs);
+            this.drugs = foundDrugs;
+            this.$log.debug('got drugs');
+            this.$log.debug(this.drugs);
         }, (errorReason) => {
-            console.log(errorReason);
+            this.$log.error(errorReason);
             this.drugs = [];
         });
     }
