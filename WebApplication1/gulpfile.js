@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='devMock-bundle' />
+/// <binding />
 "use strict";
 
 // Include gulp
@@ -6,11 +6,17 @@ var gulp = require('gulp');
 
 // Include plugins
 var jasmine = require('gulp-jasmine');
+var reporters = require('jasmine-reporters');
 var tsc = require('gulp-typescript');
 var jspm = require('gulp-jspm');
 var rename = require('gulp-rename');
 
 // Test JS
+gulp.task('jasmine-tests-bamboo', ['compile-tests', 'compile-ts'], function () {
+    return gulp.src('tests/**/*.js')
+        .pipe(jasmine({ reporter: new reporters.JUnitXmlReporter() }));
+});
+
 gulp.task('jasmine-tests', ['compile-tests', 'compile-ts'], function () {
     return gulp.src('tests/**/*.js')
         .pipe(jasmine({ verbose: true, includeStackTrace: true}));

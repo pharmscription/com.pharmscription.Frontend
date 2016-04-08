@@ -20,6 +20,7 @@
     "gulp-jspm": "^0.5.8",
     "gulp-rename": "^1.2.2",
     "gulp-typescript": "^2.12.1",
+    "jasmine-reporters": "^2.1.1",
     "moment": "^2.12.0"
   }
 }
