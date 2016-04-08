@@ -14,7 +14,7 @@ var rename = require('gulp-rename');
 // Test JS
 gulp.task('jasmine-tests-bamboo', ['compile-tests', 'compile-ts'], function () {
     return gulp.src('tests/**/*.js')
-        .pipe(jasmine({ reporter: new reporters.JUnitXmlReporter() }));
+        .pipe(jasmine({ reporter: new reporters.JUnitXmlReporter({ savePath: 'test-reports' }) }));
 });
 
 gulp.task('jasmine-tests', ['compile-tests', 'compile-ts'], function () {
