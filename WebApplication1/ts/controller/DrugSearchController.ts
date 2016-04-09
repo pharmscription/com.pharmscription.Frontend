@@ -4,6 +4,7 @@ import DrugRepository from '../service/DrugRepository'
 export class DrugSearchController {
     drugs: Array<Drug>;
     searchedDrug: string;
+    searchedWord: string;
     searchResultAmount: Number;
     progressFlag: boolean;
 
@@ -11,10 +12,11 @@ export class DrugSearchController {
     static $inject = [
         'DrugRepository',
         '$mdDialog',
-        '$log'
+        '$log',
+        '$mdToast'
     ];
 
-    constructor(private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService) {
+    constructor(private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService) {
         this.setProgressCircle(false);
         this.drugs = new Array<Drug>();
         this.drugs = [];
@@ -26,20 +28,27 @@ export class DrugSearchController {
 
     getDrugs(drugs: string): void {
         this.setProgressCircle(true);
-        console.log("hallo");
+        this.searchedWord = drugs;
         this.searchedDrug = '';
         this.drugRepository.getDrugs(drugs).then((foundDrugs) => {
             this.setProgressCircle(false);
             this.drugs = foundDrugs;
             this.searchResultAmount = this.drugs.length;
-            this.$log.debug('got drugs');
+            if (this.searchResultAmount == 0) {
+                this.showToast('Keine Suchtreffer gefunden');
+            }
             this.$log.debug(this.drugs);
         }, (errorReason) => {
             this.setProgressCircle(false);
             this.searchResultAmount = 0;
             this.$log.error(errorReason);
             this.drugs = [];
+            this.showToast('Keine Suchtreffer gefunden.');
         });
+    }
+
+    showToast(message: string) {
+        this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 
     showDrugDetails(drug: Drug): void {
