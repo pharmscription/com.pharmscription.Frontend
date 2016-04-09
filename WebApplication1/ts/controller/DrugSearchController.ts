@@ -43,7 +43,7 @@ export class DrugSearchController {
             this.searchResultAmount = 0;
             this.$log.error(errorReason);
             this.drugs = [];
-            this.showToast('Keine Suchtreffer gefunden.');
+            this.showToast('Fehler bei der Suche');
         });
     }
 

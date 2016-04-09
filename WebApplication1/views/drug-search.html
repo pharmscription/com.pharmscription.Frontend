@@ -5,7 +5,7 @@
     <form name="searchForm">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Medikament</label>
-            <input name="drug" ng-model="DrugSearch.searchedDrug" />
+            <input name="drug" ng-model="DrugSearch.searchedDrug" required/>
         </md-input-container>
     </form>
     <md-button ng-click="DrugSearch.getDrugs(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
