@@ -102,6 +102,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="tests\controller\UserSearchController.ts" />
     <TypeScriptCompile Include="tests\mock\service\PatientRepository.ts" />
     <TypeScriptCompile Include="tests\service\AHVNumberService.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
@@ -125,7 +126,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="tests\controller\" />
     <Folder Include="tools\typings\" />
   </ItemGroup>
   <PropertyGroup>
