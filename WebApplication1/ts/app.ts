@@ -28,11 +28,11 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
             let m = moment(dateString, 'DD.MM.YYYY', true);
             return m.isValid() ? m.utc().toDate() : new Date(NaN);
         };
-        //$mdDateLocaleProvider.formatDate = (date: Date) => {
-        //    if (date === null)
-        //        return null;
-        //    return moment(date).format('DD.MM.YYYY');
-        //};
+        $mdDateLocaleProvider.formatDate = (date: Date) => {
+            if (date === null)
+                return null;
+            return moment(date).format('DD.MM.YYYY');
+        };
         $mdDateLocaleProvider.months = moment.months();
         $mdDateLocaleProvider.shortMonths = moment.monthsShort();
         $mdDateLocaleProvider.days = moment.weekdays();

@@ -4,19 +4,20 @@ import DrugRepository from '../service/DrugRepository'
 export class DrugSearchController {
     drugs: Array<Drug>;
     searchedDrug: string;
-    searchedWord: string;
+    lastSearchTerm: string;
     searchResultAmount: Number;
     progressFlag: boolean;
 
 
     static $inject = [
+        '$scope',
         'DrugRepository',
         '$mdDialog',
         '$log',
         '$mdToast'
     ];
 
-    constructor(private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService) {
+    constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService) {
         this.setProgressCircle(false);
         this.drugs = new Array<Drug>();
         this.drugs = [];
@@ -26,17 +27,15 @@ export class DrugSearchController {
         this.progressFlag = status;
     }
 
-    getDrugs(drugs: string): void {
+    getDrugs(searchTerm: string): void {
         this.setProgressCircle(true);
-        this.searchedWord = drugs;
+        this.lastSearchTerm = searchTerm;
+        this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';
-        this.drugRepository.getDrugs(drugs).then((foundDrugs) => {
+        this.drugRepository.getDrugs(searchTerm).then((foundDrugs) => {
             this.setProgressCircle(false);
             this.drugs = foundDrugs;
             this.searchResultAmount = this.drugs.length;
-            if (this.searchResultAmount == 0) {
-                this.showToast('Keine Suchtreffer gefunden');
-            }
             this.$log.debug(this.drugs);
         }, (errorReason) => {
             this.setProgressCircle(false);
@@ -55,7 +54,7 @@ export class DrugSearchController {
         this.$mdDialog.show(
             this.$mdDialog.alert()
                 .title('Medikamenten Details')
-                .textContent(drug.DrugDescription)
+                .textContent("Betäubungsmittel-Kategorie: " + drug.NarcoticCategory)
                 .ok('OK')
         );
     };
