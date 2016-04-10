@@ -5,6 +5,7 @@
 var gulp = require('gulp');
 
 // Include plugins
+var karma = require('karma').Server;
 var jasmine = require('gulp-jasmine');
 var reporters = require('jasmine-reporters');
 var tsc = require('gulp-typescript');
@@ -20,6 +21,13 @@ gulp.task('jasmine-tests-bamboo', ['compile-tests', 'compile-ts'], function () {
 gulp.task('jasmine-tests', ['compile-tests', 'compile-ts'], function () {
     return gulp.src('tests/**/*.js')
         .pipe(jasmine({ verbose: true, includeStackTrace: true}));
+});
+
+gulp.task('karma-driven-tests', function(done) {
+    new karma({
+        configFile: './karma.conf.js',
+        singleRun: true
+    }, done).start();
 });
 
 gulp.task('compile-tests', function() {
@@ -64,7 +72,7 @@ gulp.task('production-jspm-bundlesfx', function () {
         .pipe(gulp.dest('js/'));
 });
 
-gulp.task('production-bundle-app', ['jspm-bundlesfx'], function () {
+gulp.task('production-bundle-app', ['production-jspm-bundlesfx'], function () {
     return gulp.src('./js/bootstrap.bundle.ts')
         .pipe(rename('main.js'))
         .pipe(gulp.dest('./js'));

@@ -1,5 +1,5 @@
 ﻿///<reference path="../../tools/typings/main.d.ts"/>
-import {AHVNumberService} from "../../ts/service/AHVNumberService"
+import {AHVNumberService} from "ts/service/AHVNumberService"
 
 describe("AHVNumberService Test", () => {
     var ahvNumberService:AHVNumberService = new AHVNumberService;
