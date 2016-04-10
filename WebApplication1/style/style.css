@@ -29,3 +29,15 @@
 .date-picker {
         margin-bottom: 18px;
 }
+
+#vertical-container {
+  height: 100%;
+  width: 100%;
+}
+
+.repeated-item {
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 40px;
+  padding-top: 10px;
+}
