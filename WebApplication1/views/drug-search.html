@@ -5,7 +5,7 @@
     <form name="searchForm">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Medikament</label>
-            <input name="drug" ng-model="DrugSearch.searchedDrug" />
+            <input name="drug" ng-model="DrugSearch.searchedDrug" required/>
         </md-input-container>
     </form>
     <md-button ng-click="DrugSearch.getDrugs(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
@@ -14,8 +14,12 @@
     </md-button>
 </div>
 
+<div layout="row" layout-sm="column" ng-show="DrugSearch.progressFlag" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
 <md-list flex layout-fill>
-    <md-subheader class="md-no-sticky">{{ DrugSearch.searchResults}} Suchresultate gefunden</md-subheader>
+    <md-subheader class="md-no-sticky" ng-show="DrugSearch.searchResultAmount">{{DrugSearch.searchResultAmount}} Suchresultate für <b>{{DrugSearch.searchedWord}}</b> gefunden</md-subheader>
     <md-list-item  class="secondary-button-padding" ng-repeat="drug in DrugSearch.drugs" ng-click="click">
         <md-icon md-font-set="material-icons">healing</md-icon>
         <p>{{ drug.DrugDescription }}</p>
