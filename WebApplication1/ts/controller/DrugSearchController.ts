@@ -10,7 +10,6 @@ export class DrugSearchController {
     progressFlag: boolean;
     drugSearchResults: DrugSearchItems;
 
-
     static $inject = [
         '$scope',
         'DrugRepository',
@@ -34,19 +33,20 @@ export class DrugSearchController {
         this.lastSearchTerm = searchTerm;
         this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';
-        this.drugRepository.getDrugs(searchTerm).then((foundDrugs) => {
-            //this.drugSearchResults = new DrugSearchItems(this.drugRepository, searchTerm);
-            this.setProgressCircle(false);
-            this.drugs = foundDrugs;
-            this.searchResultAmount = this.drugs.length;
-            this.$log.debug(this.drugs);
-        }, (errorReason) => {
-            this.setProgressCircle(false);
-            this.searchResultAmount = 0;
-            this.$log.error(errorReason);
-            this.drugs = [];
-            this.showToast('Fehler bei der Suche');
-        });
+        this.drugSearchResults = new DrugSearchItems(this.drugRepository, searchTerm);
+
+        //this.drugRepository.getDrugs(searchTerm).then((foundDrugs) => {
+        //    this.setProgressCircle(false);
+        //    this.drugs = foundDrugs;
+        //    this.searchResultAmount = this.drugs.length;
+        //    this.$log.debug(this.drugs);
+        //}, (errorReason) => {
+        //    this.setProgressCircle(false);
+        //    this.searchResultAmount = 0;
+        //    this.$log.error(errorReason);
+        //    this.drugs = [];
+        //    this.showToast('Fehler bei der Suche');
+        //});
     }
 
     showToast(message: string) {

@@ -6,7 +6,7 @@ export default class DrugSearchItems {
     loadedPages: any;
     numItems: number;
 
-    constructor(private drugRepository: DrugRepository, searchTerm: string) {
+    constructor(private drugRepository: DrugRepository, private searchTerm: string) {
         this.PAGE_SIZE = 50;
         this.numItems = 0;
         this.loadedPages = {};
@@ -15,11 +15,11 @@ export default class DrugSearchItems {
 
     getItemAtIndex(index: number): Object {
         var pageNumber = Math.floor(index / this.PAGE_SIZE);
-        var page = this.loadedPages[this.pageNumber];
+        var page = this.loadedPages[pageNumber];
         if (page) {
             return page[index % this.PAGE_SIZE];
         } else if (page !== null) {
-            this.fetchPage(this.pageNumber);
+            this.fetchPage(pageNumber);
         }
     }
 
@@ -29,17 +29,20 @@ export default class DrugSearchItems {
 
     fetchPage(pageNumber: number): void {
         this.loadedPages[pageNumber] = null;
-
-        //drugRepository.fetchPage(searchTerm, numItems, page);
-
-        this.loadedPages[pageNumber] = [];
-        var pageOffset = pageNumber * this.PAGE_SIZE;
-        for (var i = pageOffset; i < pageOffset + this.PAGE_SIZE; i++) {
-            this.loadedPages[pageNumber].push(i);
-        }
+        console.log('fetchpage :' + this.searchTerm + " " + this.numItems + " " + pageNumber);
+        this.drugRepository.fetchPage(this.searchTerm, this.numItems, pageNumber).then((drugPage) => {
+            this.loadedPages[pageNumber].push(drugPage);
+        }, (error) => {
+            console.log("error in fetchPage");
+        });
     }
 
     fetchNumItems(): void {
-        //this.numItems = drugRepository.getNumItems(searchTerm);
+        this.drugRepository.getNumItems(this.searchTerm).then((numItems) => {
+            console.log('numItems:' + numItems);
+            this.numItems = numItems;
+        }, (error) => {
+            console.log("error fetchNumItems");
+        });       
     }
 }

@@ -21,9 +21,7 @@ export class AppDev {
             header: true,
             encoding: "UTF-8",
             complete: function(result) {
-                console.log('parsed');
-                drugs = result.data;
-                console.log(drugs[0]);
+               drugs = result.data;
             }
         });
         
@@ -51,12 +49,13 @@ export class AppDev {
             }
         });
 
-        $httpBackend.whenGET(/\/drugs\/search\/numitems\/(.+)/, undefined, ['searchTerm']).respond((method, url, data, headers, params) => {
+        $httpBackend.whenGET(/\/drugs\/numitems\/(.+)/, undefined, ['searchTerm']).respond((method, url, data, headers, params) => {
             let found = drugs.filter((drug: Drug) => {
                 if (drug.DrugDescription === undefined || drug.DrugDescription === null)
                     return false;
                 return drug.DrugDescription.indexOf(params.searchTerm) !== -1;
             });
+            let foundLength = found.length;
             if (found === undefined || found === null) {
                 return [200, 0, {}];
             } else {
@@ -64,7 +63,7 @@ export class AppDev {
             }
         });
 
-        $httpBackend.whenGET(/\/drugs\/search\/(.+)\/(.+)-(.+)/, undefined, ['searchTerm', 'numItems', 'page']).respond((method, url, data, headers, params) => {
+        $httpBackend.whenGET(/\/drugs\/fetchpage\/(.+)\/(.+)\/(.+)/, undefined, ['searchTerm', 'numItems', 'page']).respond((method, url, data, headers, params) => {
             let found = drugs.filter((drug: Drug) => {
                 if (drug.DrugDescription === undefined || drug.DrugDescription === null)
                     return false;
