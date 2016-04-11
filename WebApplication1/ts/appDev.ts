@@ -51,6 +51,34 @@ export class AppDev {
             }
         });
 
+        $httpBackend.whenGET(/\/drugs\/search\/numitems\/(.+)/, undefined, ['searchTerm']).respond((method, url, data, headers, params) => {
+            let found = drugs.filter((drug: Drug) => {
+                if (drug.DrugDescription === undefined || drug.DrugDescription === null)
+                    return false;
+                return drug.DrugDescription.indexOf(params.searchTerm) !== -1;
+            });
+            if (found === undefined || found === null) {
+                return [200, 0, {}];
+            } else {
+                return [200, found.length, {}];
+            }
+        });
+
+        $httpBackend.whenGET(/\/drugs\/search\/(.+)\/(.+)-(.+)/, undefined, ['searchTerm', 'numItems', 'page']).respond((method, url, data, headers, params) => {
+            let found = drugs.filter((drug: Drug) => {
+                if (drug.DrugDescription === undefined || drug.DrugDescription === null)
+                    return false;
+                return drug.DrugDescription.indexOf(params.searchTerm) !== -1;
+            });
+            let drugPage = found.slice((params.numItems * (params.page - 1) - 1), (params.numItems * (params.page) - 1));
+
+            if (drugPage === undefined || drugPage === null) {
+                return [200, new Drug(), {}];
+            } else {
+                return [200, drugPage, {}];
+            }
+        });
+
         $httpBackend.whenPUT(backendUrl + '/patients').respond((method:string, url:string, data: string) => {
             let patient: Patient = angular.fromJson(data);
             console.log(patient);
