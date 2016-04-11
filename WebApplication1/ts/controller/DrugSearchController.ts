@@ -1,5 +1,6 @@
 ﻿import Drug from '../model/drug'
 import DrugRepository from '../service/DrugRepository'
+import DrugSearchItems from '../model/drugSearchItems'
 
 export class DrugSearchController {
     drugs: Array<Drug>;
@@ -7,6 +8,7 @@ export class DrugSearchController {
     lastSearchTerm: string;
     searchResultAmount: Number;
     progressFlag: boolean;
+    drugSearchResults: DrugSearchItems;
 
 
     static $inject = [
@@ -33,6 +35,7 @@ export class DrugSearchController {
         this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';
         this.drugRepository.getDrugs(searchTerm).then((foundDrugs) => {
+            //this.drugSearchResults = new DrugSearchItems(this.drugRepository, searchTerm);
             this.setProgressCircle(false);
             this.drugs = foundDrugs;
             this.searchResultAmount = this.drugs.length;

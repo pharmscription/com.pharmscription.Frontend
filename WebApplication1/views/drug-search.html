@@ -26,7 +26,7 @@
     <md-subheader ng-hide="DrugSearch.searchResultAmount">Keine Suchtreffer gefunden</md-subheader>
     <md-subheader class="md-no-sticky" ng-show="DrugSearch.searchResultAmount">{{DrugSearch.searchResultAmount}} Suchresultate für <b>{{DrugSearch.lastSearchedTerm}}</b> gefunden</md-subheader>
     <md-virtual-repeat-container flex="grow" id="vertical-container">
-        <md-list-item class="secondary-button-padding" ng-click="click" md-virtual-repeat="drug in DrugSearch.drugs" md-item-size="20" flex>
+        <md-list-item class="secondary-button-padding" ng-click="click" md-virtual-repeat="drug in DrugSearch.drugs" md-item-size="20" flex md-on-demand>
             <md-icon md-font-set="material-icons">healing</md-icon>
             <p>{{ drug.DrugDescription }}</p>
             <md-button class="md-secondary" ng-click="DrugSearch.showDrugDetails(drug)">DETAILS</md-button>

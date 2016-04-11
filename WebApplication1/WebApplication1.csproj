@@ -117,6 +117,7 @@
     <TypeScriptCompile Include="ts\directives\socialnumber.ts" />
     <TypeScriptCompile Include="ts\model\address.ts" />
     <TypeScriptCompile Include="ts\model\drug.ts" />
+    <TypeScriptCompile Include="ts\model\drugSearchItems.ts" />
     <TypeScriptCompile Include="ts\model\patient.ts" />
     <TypeScriptCompile Include="ts\service\AHVNumberService.ts" />
     <TypeScriptCompile Include="ts\service\DrugRepository.ts" />
