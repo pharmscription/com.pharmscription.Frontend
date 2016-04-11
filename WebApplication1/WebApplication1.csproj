@@ -84,6 +84,7 @@
     <Content Include="img\icons\MaterialIcons-Regular.ttf" />
     <Content Include="img\icons\MaterialIcons-Regular.woff" />
     <Content Include="img\icons\MaterialIcons-Regular.woff2" />
+    <Content Include="mock\Drugs.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

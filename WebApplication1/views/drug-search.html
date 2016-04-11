@@ -29,8 +29,8 @@
 
 
 <md-list flex layout-fill>
-    <md-virtual-repeat-container flex id="vertical-container">
-        <md-list-item md-virtual-repeat="drug in DrugSearch.drugs" md-item-size="20" flex class="repeated-item">
+    <md-virtual-repeat-container flex="grow" id="vertical-container">
+        <md-list-item ng-click="m" md-virtual-repeat="drug in DrugSearch.drugs" md-item-size="20" flex class="repeated-item">
             <p>Item {{drug.DrugDescription}}</p>
         </md-list-item>
     </md-virtual-repeat-container>

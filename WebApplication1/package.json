@@ -11,6 +11,7 @@
     "devDependencies": {
       "angular-mocks": "github:angular/bower-angular-mocks@^1.5.3",
       "clean-css": "npm:clean-css@^3.4.10",
+      "papaparse": "npm:papaparse@^4.1.2",
       "typescript": "npm:typescript@^1.6.2"
     }
   },
