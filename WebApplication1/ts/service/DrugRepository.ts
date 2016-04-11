@@ -4,7 +4,9 @@ import IPromise = angular.IPromise
 export default class DrugRepository {
 
     private urls: any = {
-        get: 'http://localhost:7642/RestService.svc/drugs/search/:searchTerm'
+        get: 'http://localhost:7642/RestService.svc/drugs/search/:searchTerm',
+        getNumItems: 'http://localhost:7642/RestService.svc/drugs/search/numitems/:searchTerm',
+        getPage: 'http://localhost:7642/RestService.svc/drugs/search/numitems/:searchTerm/:numItems-:page'
     }
 
     static $inject = [
@@ -28,5 +30,31 @@ export default class DrugRepository {
             return this.$q.reject(error);
         });
         
+    }
+
+    getNumItems(searchTerm: string): IPromise<number> {
+        return this.$http.get(this.urls.getNumItems.replace(":searchTerm", searchTerm)).then((response) => {
+            if (typeof response.data === 'object') {
+                return response.data;
+            } else {
+                return this.$q.reject(response.data);
+            }
+        }, (error) => {
+            this.$log.error(error);
+            return this.$q.reject(error);
+        });
+    }
+
+    fetchPage(searchTerm: string, numItems: number, page: number): IPromise<Array<Drug>> {
+        return this.$http.get(this.urls.fetchPage.replace(":searchTerm", searchTerm).replace(":numItems", numItems).replace(":page", page)).then((response) => {
+            if (typeof response.data === 'object') {
+                return response.data;
+            } else {
+                return this.$q.reject(response.data);
+            }
+        }, (error) => {
+            this.$log.error(error);
+            return this.$q.reject(error);
+        });
     }
 }

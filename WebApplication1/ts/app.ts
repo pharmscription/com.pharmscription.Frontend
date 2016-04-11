@@ -29,7 +29,7 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
             return m.isValid() ? m.utc().toDate() : new Date(NaN);
         };
         $mdDateLocaleProvider.formatDate = (date: Date) => {
-            if (date === null)
+            if (date === undefined || date ===  null)
                 return null;
             return moment(date).format('DD.MM.YYYY');
         };
