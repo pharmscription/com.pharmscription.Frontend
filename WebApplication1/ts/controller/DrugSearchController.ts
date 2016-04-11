@@ -1,9 +1,8 @@
-﻿import Drug from '../model/drug'
-import DrugRepository from '../service/DrugRepository'
-import DrugSearchItems from '../model/drugSearchItems'
+﻿import Drug from 'ts/model/drug'
+import DrugRepository from 'ts/service/DrugRepository'
+import DrugSearchItems from 'ts/model/drugSearchItems'
 
 export class DrugSearchController {
-    drugs: Array<Drug>;
     searchedDrug: string;
     lastSearchTerm: string;
     searchResultAmount: Number;
@@ -21,8 +20,6 @@ export class DrugSearchController {
 
     constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService) {
         this.setProgressCircle(false);
-        this.drugs = new Array<Drug>();
-        this.drugs = [];
     }
 
     setProgressCircle(status: boolean): void {
@@ -30,24 +27,12 @@ export class DrugSearchController {
     }
 
     getDrugs(searchTerm: string): void {
-        this.setProgressCircle(true);
+        //this.setProgressCircle(true);
         this.lastSearchTerm = searchTerm;
         this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';
-        this.drugRepository.getDrugs(searchTerm).then((foundDrugs) => {
-            //this.drugSearchResults = new DrugSearchItems(this.drugRepository, searchTerm);
-            this.setProgressCircle(false);
-            this.drugs = foundDrugs;
-            this.searchResultAmount = this.drugs.length;
-            this.$log.debug(this.drugs);
-        }, (errorReason) => {
-            this.setProgressCircle(false);
-            this.searchResultAmount = 0;
-            this.$log.error(errorReason);
-            this.drugs = [];
-            this.showToast('Fehler bei der Suche');
-        });
-    }
+        this.drugSearchResults = new DrugSearchItems(this.$scope, this.drugRepository, searchTerm);
+        }
 
     showToast(message: string) {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));

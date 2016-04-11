@@ -6,20 +6,22 @@ export default class DrugSearchItems {
     loadedPages: any;
     numItems: number;
 
-    constructor(private drugRepository: DrugRepository, searchTerm: string) {
+    constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private searchTerm: string) {
         this.PAGE_SIZE = 50;
-        this.numItems = 0;
         this.loadedPages = {};
+        this.numItems = 0;
         this.fetchNumItems();
+        
     }
 
     getItemAtIndex(index: number): Object {
-        var pageNumber = Math.floor(index / this.PAGE_SIZE);
-        var page = this.loadedPages[this.pageNumber];
+        let pageNumber = Math.floor(index / this.PAGE_SIZE);
+        let page = this.loadedPages[pageNumber];
         if (page) {
-            return page[index % this.PAGE_SIZE];
+            let pageIndex = index % this.PAGE_SIZE;
+            return page[pageIndex];
         } else if (page !== null) {
-            this.fetchPage(this.pageNumber);
+            this.fetchPage(pageNumber);
         }
     }
 
@@ -29,17 +31,21 @@ export default class DrugSearchItems {
 
     fetchPage(pageNumber: number): void {
         this.loadedPages[pageNumber] = null;
-
-        //drugRepository.fetchPage(searchTerm, numItems, page);
-
-        this.loadedPages[pageNumber] = [];
-        var pageOffset = pageNumber * this.PAGE_SIZE;
-        for (var i = pageOffset; i < pageOffset + this.PAGE_SIZE; i++) {
-            this.loadedPages[pageNumber].push(i);
-        }
+        console.debug("SearchTerm: " + this.searchTerm + " PageSize: " + this.PAGE_SIZE + " Page: " + pageNumber);
+        this.drugRepository.fetchPage(this.searchTerm, this.PAGE_SIZE, pageNumber).then((drugPageResult) => {
+            this.loadedPages[pageNumber] = [];
+            this.loadedPages[pageNumber] = drugPageResult;
+                }, (error) => {
+                console.error(error);
+            }
+        );
     }
 
     fetchNumItems(): void {
-        //this.numItems = drugRepository.getNumItems(searchTerm);
+        this.drugRepository.getNumItems(this.searchTerm).then((numItem) => {
+            this.numItems = numItem;
+        }, (error) => {
+            console.error(error);
+        });
     }
 }

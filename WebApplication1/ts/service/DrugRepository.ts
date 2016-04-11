@@ -5,8 +5,8 @@ export default class DrugRepository {
 
     private urls: any = {
         get: 'http://localhost:7642/RestService.svc/drugs/search/:searchTerm',
-        getNumItems: 'http://localhost:7642/RestService.svc/drugs/search/numitems/:searchTerm',
-        getPage: 'http://localhost:7642/RestService.svc/drugs/search/numitems/:searchTerm/:numItems-:page'
+        getNumItems: 'http://localhost:7642/RestService.svc/drugs/numitems/:searchTerm',
+        getPage: 'http://localhost:7642/RestService.svc/drugs/fetchpage/:searchTerm/:numItems/:page'
     }
 
     static $inject = [
@@ -34,7 +34,7 @@ export default class DrugRepository {
 
     getNumItems(searchTerm: string): IPromise<number> {
         return this.$http.get(this.urls.getNumItems.replace(":searchTerm", searchTerm)).then((response) => {
-            if (typeof response.data === 'object') {
+            if (typeof response.data === 'number') {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -46,7 +46,7 @@ export default class DrugRepository {
     }
 
     fetchPage(searchTerm: string, numItems: number, page: number): IPromise<Array<Drug>> {
-        return this.$http.get(this.urls.fetchPage.replace(":searchTerm", searchTerm).replace(":numItems", numItems).replace(":page", page)).then((response) => {
+        return this.$http.get(this.urls.getPage.replace(":searchTerm", searchTerm).replace(":numItems", numItems).replace(":page", page)).then((response) => {
             if (typeof response.data === 'object') {
                 return response.data;
             } else {

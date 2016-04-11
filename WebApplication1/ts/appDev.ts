@@ -6,7 +6,7 @@ import Drug from "ts/model/drug";
 
 export class AppDev {
     app: ng.IModule;
-
+    
     constructor(name: string, modules: Array<string>) {
         this.app = angular.module(name, modules);
         this.app.run(this.init);
@@ -21,9 +21,7 @@ export class AppDev {
             header: true,
             encoding: "UTF-8",
             complete: function(result) {
-                console.log('parsed');
                 drugs = result.data;
-                console.log(drugs[0]);
             }
         });
         
@@ -51,27 +49,30 @@ export class AppDev {
             }
         });
 
-        $httpBackend.whenGET(/\/drugs\/search\/numitems\/(.+)/, undefined, ['searchTerm']).respond((method, url, data, headers, params) => {
+        $httpBackend.whenGET(/\/drugs\/numitems\/(.+)/, undefined, ['searchTerm']).respond((method, url, data, headers, params) => {
             let found = drugs.filter((drug: Drug) => {
                 if (drug.DrugDescription === undefined || drug.DrugDescription === null)
                     return false;
                 return drug.DrugDescription.indexOf(params.searchTerm) !== -1;
             });
-            if (found === undefined || found === null) {
+            let foundLength = found.length;
+            if (foundLength === undefined) {
                 return [200, 0, {}];
             } else {
-                return [200, found.length, {}];
+                return [200, foundLength, {}];
             }
         });
 
-        $httpBackend.whenGET(/\/drugs\/search\/(.+)\/(.+)-(.+)/, undefined, ['searchTerm', 'numItems', 'page']).respond((method, url, data, headers, params) => {
+        $httpBackend.whenGET(/\/drugs\/fetchpage\/(.+)\/(.+)\/(.+)/, undefined, ['searchTerm', 'pageSize', 'page']).respond((method, url, data, headers, params) => {
             let found = drugs.filter((drug: Drug) => {
                 if (drug.DrugDescription === undefined || drug.DrugDescription === null)
                     return false;
                 return drug.DrugDescription.indexOf(params.searchTerm) !== -1;
             });
-            let drugPage = found.slice((params.numItems * (params.page - 1) - 1), (params.numItems * (params.page) - 1));
-
+            let pageOffset = params.pageSize * params.page;
+            let pageOffsetEnd = pageOffset + parseInt(params.pageSize);
+            console.debug("Slice from: " + pageOffset + " to: " + pageOffsetEnd);
+            let drugPage = found.slice(pageOffset, pageOffsetEnd);
             if (drugPage === undefined || drugPage === null) {
                 return [200, new Drug(), {}];
             } else {
@@ -81,7 +82,6 @@ export class AppDev {
 
         $httpBackend.whenPUT(backendUrl + '/patients').respond((method:string, url:string, data: string) => {
             let patient: Patient = angular.fromJson(data);
-            console.log(patient);
             patients.push(patient);
             return [200, data, {}];
         });
