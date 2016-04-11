@@ -31,12 +31,5 @@
 }
 
 #vertical-container {
-  height: 80vh;
-}
-
-.repeated-item {
-  border-bottom: 1px solid #ddd;
-  box-sizing: border-box;
-  height: 40px;
-  padding-top: 10px;
+  height: 70vh;
 }

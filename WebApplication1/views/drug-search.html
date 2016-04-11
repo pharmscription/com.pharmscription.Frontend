@@ -6,6 +6,9 @@
         <md-input-container class="md-block" flex-gt-sm>
             <label>Medikament</label>
             <input name="drug" ng-model="DrugSearch.searchedDrug" required/>
+            <div ng-messages="searchForm.$error">
+                <div ng-message="required">Kein Suchbegriff</div>
+            </div>
         </md-input-container>
     </form>
     <md-button ng-click="DrugSearch.getDrugs(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
@@ -18,20 +21,15 @@
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 
-<!--<md-list flex layout-fill>
-    <md-subheader class="md-no-sticky" ng-show="DrugSearch.searchResultAmount">{{DrugSearch.searchResultAmount}} Suchresultate für <b>{{DrugSearch.searchedWord}}</b> gefunden</md-subheader>
-    <md-list-item  class="secondary-button-padding" ng-repeat="drug in DrugSearch.drugs" ng-click="click">
-        <md-icon md-font-set="material-icons">healing</md-icon>
-        <p>{{ drug.DrugDescription }}</p>
-        <md-button class="md-secondary" ng-click="DrugSearch.showDrugDetails(drug)">DETAILS</md-button>
-    </md-list-item>
-</md-list>-->
 
-
-<md-list flex layout-fill>
+<md-list flex layout-fill >
+    <md-subheader ng-hide="DrugSearch.searchResultAmount">Keine Suchtreffer gefunden</md-subheader>
+    <md-subheader class="md-no-sticky" ng-show="DrugSearch.searchResultAmount">{{DrugSearch.searchResultAmount}} Suchresultate für <b>{{DrugSearch.lastSearchedTerm}}</b> gefunden</md-subheader>
     <md-virtual-repeat-container flex="grow" id="vertical-container">
-        <md-list-item ng-click="m" md-virtual-repeat="drug in DrugSearch.drugs" md-item-size="20" flex class="repeated-item">
-            <p>Item {{drug.DrugDescription}}</p>
+        <md-list-item class="secondary-button-padding" ng-click="click" md-virtual-repeat="drug in DrugSearch.drugs" md-item-size="20" flex>
+            <md-icon md-font-set="material-icons">healing</md-icon>
+            <p>{{ drug.DrugDescription }}</p>
+            <md-button class="md-secondary" ng-click="DrugSearch.showDrugDetails(drug)">DETAILS</md-button>
         </md-list-item>
     </md-virtual-repeat-container>
 </md-list>
