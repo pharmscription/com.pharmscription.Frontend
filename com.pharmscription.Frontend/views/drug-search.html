@@ -1,0 +1,36 @@
+﻿<md-toolbar class="md-primary md-hue-1">
+    <div class="md-toolbar-tools">Medikament suchen</div>
+</md-toolbar>
+<div layout="row" layout-align="center center">
+    <form name="searchForm">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Medikament</label>
+            <input name="drug" ng-model="DrugSearch.searchedDrug" required/>
+            <div ng-messages="searchForm.$error">
+                <div ng-message="required">Kein Suchbegriff</div>
+            </div>
+        </md-input-container>
+    </form>
+    <md-button ng-click="DrugSearch.getDrugs(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
+        <md-icon md-font-set="material-icons">search</md-icon>
+        Suchen
+    </md-button>
+</div>
+
+<div layout="row" layout-sm="column" ng-show="DrugSearch.progressFlag" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+
+<md-list flex layout-fill >
+    <md-subheader ng-hide="DrugSearch.drugSearchResults.numItems">Keine Suchtreffer gefunden</md-subheader>
+    <md-subheader class="md-no-sticky" ng-show="DrugSearch.drugSearchResults.numItems">{{DrugSearch.drugSearchResults.numItems}} Suchresultate für <b>{{DrugSearch.drugSearchResults.searchTerm}}</b> gefunden</md-subheader>
+    <md-virtual-repeat-container flex="grow" id="vertical-container">
+        <md-list-item class="secondary-button-padding" ng-click="click" md-virtual-repeat="drug in DrugSearch.drugSearchResults" md-item-size="20" flex md-on-demand>
+            <md-icon md-font-set="material-icons">healing</md-icon>
+            <p>{{ drug.DrugDescription }}</p>
+            <md-button class="md-secondary" ng-click="DrugSearch.showDrugDetails(drug)">DETAILS</md-button>
+        </md-list-item>
+    </md-virtual-repeat-container>
+</md-list>
+
