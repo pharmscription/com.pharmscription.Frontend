@@ -11,7 +11,7 @@ export default class Prescription {
     EditDate: Date;
     SignDate: Date;
     IsValid: boolean;
-    CounterProposal[]: CounterProposalDTO
+    CounterProposals: Array<any>;//Array<CounterProposal>;
     Doctor: Doctor;
     Dispenses: Array<Dispense>;
     Drugs: Array<DrugItem>;
