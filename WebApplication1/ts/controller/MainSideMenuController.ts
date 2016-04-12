@@ -1,21 +1,21 @@
-﻿export interface IScopeMainSideMenu extends ng.IScope {
-    close: Function;
-}
-
-export class MainSideMenuController {
+﻿export class MainSideMenuController {
 
     public static $inject = [
-        '$scope',
         '$timeout',
         '$mdSidenav',
+        '$location',
         '$log'
     ];
-    constructor(private $scope: any, $timeout: ng.ITimeoutService, $mdSidenav: angular.material.ISidenavService, $log: ng.ILogService) {
-        $scope.close = () => {
-            $mdSidenav('left').close()
-                .then(() => {
-                    $log.debug("close LEFT is done");
-                });
-        };
+    constructor(private $timeout: ng.ITimeoutService,private $mdSidenav: angular.material.ISidenavService, private $location: angular.ILocationService, private $log: ng.ILogService) {
+
+    }
+
+    close() {
+        this.$mdSidenav('left').close();
+    }
+
+    goTo(relativeUrl: string) {
+        this.$location.path(relativeUrl);
+        this.close();
     }
 }

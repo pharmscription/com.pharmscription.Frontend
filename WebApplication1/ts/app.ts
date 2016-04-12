@@ -29,12 +29,15 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
             return m.isValid() ? m.utc().toDate() : new Date(NaN);
         };
         $mdDateLocaleProvider.formatDate = (date: Date) => {
+            if (date === undefined || date ===  null)
+                return null;
             return moment(date).format('DD.MM.YYYY');
         };
         $mdDateLocaleProvider.months = moment.months();
         $mdDateLocaleProvider.shortMonths = moment.monthsShort();
         $mdDateLocaleProvider.days = moment.weekdays();
         $mdDateLocaleProvider.shortDays = moment.weekdaysShort();
+        $mdDateLocaleProvider.firstDayOfWeek = 1;
     })
     .config(($routeProvider: angular.route.IRouteProvider) => {
         $routeProvider.when('/', {

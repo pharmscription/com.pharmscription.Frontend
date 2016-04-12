@@ -1,10 +1,11 @@
 System.config({
-  baseURL: "/",
+  baseURL: "",
   defaultJSExtensions: true,
   transpiler: "typescript",
   paths: {
     "npm:*": "jspm_packages/npm/*",
-    "github:*": "jspm_packages/github/*"
+    "github:*": "jspm_packages/github/*",
+    "ts*": "ts*"
   },
 
   packages: {
@@ -23,6 +24,7 @@ System.config({
     "clean-css": "npm:clean-css@3.4.10",
     "jquery": "npm:jquery@2.2.2",
     "moment": "npm:moment@2.12.0",
+    "papaparse": "npm:papaparse@4.1.2",
     "typescript": "npm:typescript@1.8.9",
     "github:angular/bower-angular-animate@1.5.3": {
       "angular": "github:angular/bower-angular@1.5.3"
@@ -141,6 +143,9 @@ System.config({
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"
+    },
+    "npm:papaparse@4.1.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"

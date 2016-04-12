@@ -1,19 +1,33 @@
-/// <binding BeforeBuild='dev-bundle' />
+/// <binding />
 "use strict";
 
 // Include gulp
 var gulp = require('gulp');
 
 // Include plugins
+var karma = require('karma').Server;
 var jasmine = require('gulp-jasmine');
+var reporters = require('jasmine-reporters');
 var tsc = require('gulp-typescript');
 var jspm = require('gulp-jspm');
 var rename = require('gulp-rename');
 
 // Test JS
-gulp.task('jasmine-tests', function () {
+gulp.task('jasmine-tests-bamboo', ['compile-tests', 'compile-ts'], function () {
+    return gulp.src('tests/**/*.js')
+        .pipe(jasmine({ reporter: new reporters.JUnitXmlReporter({ savePath: 'test-reports' }) }));
+});
+
+gulp.task('jasmine-tests', ['compile-tests', 'compile-ts'], function () {
     return gulp.src('tests/**/*.js')
         .pipe(jasmine({ verbose: true, includeStackTrace: true}));
+});
+
+gulp.task('karma-driven-tests', function(done) {
+    new karma({
+        configFile: './karma.conf.js',
+        singleRun: true
+    }, done).start();
 });
 
 gulp.task('compile-tests', function() {
@@ -45,21 +59,30 @@ gulp.task('dev-bundle', function () {
     .pipe(gulp.dest('./'));
 });
 
+gulp.task('devMock-bundle', function () {
+    return gulp.src('ts/bootstrapDev.ts')
+        .pipe(jspm({ minify: false })) // `jspm bundle main`
+    .pipe(rename('build.js'))
+    .pipe(gulp.dest('./'));
+});
+
 gulp.task('production-jspm-bundlesfx', function () {
     return gulp.src('ts/bootstrap.ts')
         .pipe(jspm({ selfExecutingBundle: true, minify: false })) // `jspm bundle-sfx main` 
         .pipe(gulp.dest('js/'));
 });
 
-gulp.task('production-bundle-app', ['jspm-bundlesfx'], function () {
+gulp.task('production-bundle-app', ['production-jspm-bundlesfx'], function () {
     return gulp.src('./js/bootstrap.bundle.ts')
         .pipe(rename('main.js'))
         .pipe(gulp.dest('./js'));
 });
 
 // Default Task
-gulp.task('default', function () {
-    // place code for your default task here
-});
+//gulp.task('default', function () {
+//    // place code for your default task here
+//});
 
-gulp.task('default', ['compile-Tests', 'compile-ts', 'jasmine-tests']);
+gulp.task('default', ['compile-Tests', 'compile-ts', 'jasmine-tests'], function() {
+    
+});

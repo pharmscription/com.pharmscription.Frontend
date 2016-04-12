@@ -14,10 +14,7 @@ export class MainMenuController {
     constructor(private $scope: IScopeMainMenu, $timeout: ng.ITimeoutService, $mdSidenav: angular.material.ISidenavService, $log: ng.ILogService) {
         $scope.toggleLeft = () => {
             $mdSidenav('left')
-                .toggle()
-                .then(() => {
-                    $log.debug("toggle " + 'left' + " is done");
-                });
+                .toggle();
         };
     }
 }
