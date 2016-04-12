@@ -10,6 +10,7 @@ import {MainMenuController} from './controller/MainMenuController';
 import {MainSideMenuController} from './controller/MainSideMenuController'
 import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
+import UserOverviewController from 'controller/UserOverviewController'
 import {DrugSearchController} from './controller/DrugSearchController'
 import {PatientRepository} from './service/PatientRepository'
 import DrugRepository from './service/DrugRepository'
@@ -48,6 +49,10 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
             templateUrl: 'views/user-register.html',
             controller: 'UserRegisterController',
             controllerAs: 'UserRegister'
+        }).when('/user/overview', {
+            templateUrl: 'views/user-overview.html',
+            controller: 'UserOverviewController',
+            controllerAs: 'UserOverview'
         }).when('/drug/search', {
             templateUrl: 'views/drug-search.html',
             controller: 'DrugSearchController',
@@ -60,6 +65,7 @@ export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
     .controller('MainSideMenuController', MainSideMenuController)
     .controller('UserRegisterController', UserRegisterController)
     .controller('UserSearchController', UserSearchController)
+    .controller('UserOverviewController', UserOverviewController)
     .controller('DrugSearchController', DrugSearchController)
     .service('PatientRepository', PatientRepository)
     .service('DrugRepository', DrugRepository)
