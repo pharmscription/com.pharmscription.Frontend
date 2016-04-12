@@ -1,5 +1,5 @@
 ///<reference path="../../tools/typings/main.d.ts"/>
-import Patient from "ts/model/patient"
+import Patient from "../../ts/model/patient"
 
 describe("Patient Test", () => {
     var patient = new Patient('123');
