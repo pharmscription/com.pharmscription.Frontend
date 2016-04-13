@@ -14,6 +14,7 @@ import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
 import UserOverviewController from 'ts/controller/UserOverviewController'
 import {DrugSearchController} from './controller/DrugSearchController'
+import PrescriptionCreatorController from 'ts/controller/PrescriptionCreatorController'
 import {PatientRepository} from './service/PatientRepository'
 import DrugRepository from './service/DrugRepository'
 import {AHVNumberService} from './service/AHVNumberService'
@@ -59,6 +60,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
             templateUrl: 'views/drug-search.html',
             controller: 'DrugSearchController',
             controllerAs: 'DrugSearch'
+        }).when('/prescription/create', {
+            templateUrl: 'views/prescription-creator.html',
+            controller: 'PrescriptionCreatorController',
+            controllerAs: 'PrescriptionCreator'
         }).otherwise({
             redirectTo: '/'
         });
@@ -69,6 +74,7 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     .controller('UserSearchController', UserSearchController)
     .controller('UserOverviewController', UserOverviewController)
     .controller('DrugSearchController', DrugSearchController)
+    .controller('PrescriptionCreatorController', PrescriptionCreatorController)
     .service('PatientRepository', PatientRepository)
     .service('DrugRepository', DrugRepository)
     .service('AHVNumberService', AHVNumberService)
