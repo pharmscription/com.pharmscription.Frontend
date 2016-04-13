@@ -4,6 +4,8 @@ import 'angular-messages'
 import moment from 'moment'
 import 'moment/locale/de'
 
+import 'ng-slide-down'
+
 moment.locale('de');
 
 import {MainMenuController} from './controller/MainMenuController';
@@ -17,7 +19,7 @@ import DrugRepository from './service/DrugRepository'
 import {AHVNumberService} from './service/AHVNumberService'
 import SocialNumber from './directives/socialnumber'
 
-export default angular.module('app', ['ngMaterial','ngMessages', 'ngRoute'])
+export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng-slide-down'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
         $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
     })

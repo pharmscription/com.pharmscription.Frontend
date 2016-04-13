@@ -33,3 +33,7 @@
 #vertical-container {
   height: 70vh;
 }
+
+#drug-icon {
+    margin: 20px;
+}

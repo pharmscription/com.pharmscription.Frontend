@@ -6,7 +6,8 @@
       "angular-messages": "github:angular/bower-angular-messages@^1.5.3",
       "angular-route": "github:angular/bower-angular-route@^1.5.3",
       "jquery": "npm:jquery@^2.2.2",
-      "moment": "npm:moment@^2.12.0"
+      "moment": "npm:moment@^2.12.0",
+      "ng-slide-down": "npm:ng-slide-down@^0.4.2"
     },
     "devDependencies": {
       "angular-mocks": "github:angular/bower-angular-mocks@^1.5.3",
