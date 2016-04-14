@@ -1,6 +1,7 @@
-﻿import {PatientRepository} from "../service/PatientRepository";
-import {AHVNumberService} from "../service/AHVNumberService";
-import Patient from '../model/patient';
+﻿import PatientRepository from "../service/PatientRepository"
+import AHVNumberService from "../service/AHVNumberService"
+import PatientService from 'ts/service/PatientService'
+import Patient from '../model/patient'
 
 export class UserRegisterController {
 
@@ -10,11 +11,12 @@ export class UserRegisterController {
     static $inject = [
         'PatientRepository',
         'AHVNumberService',
+        'PatientService',
         '$mdToast',
         '$log'
     ];
 
-    constructor(private patientRepository: PatientRepository, private ahvNumberService: AHVNumberService, private $mdToast: angular.material.IToastService, private $log: angular.ILogService) {
+    constructor(private patientRepository: PatientRepository, private ahvNumberService: AHVNumberService, private PatientService: PatientService, private $mdToast: angular.material.IToastService, private $log: angular.ILogService) {
         this.patient = new Patient(this.ahvNumberService.getAHVNumber());
         this.cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +
             'SG SH SZ SO TG TI UR VD VS ZG ZH').split(' ').map(canton => {
@@ -28,8 +30,9 @@ export class UserRegisterController {
 
     savePatient(patient: Patient): void {
         this.patientRepository.addPatient(patient).then((patientReturned) => {
+            this.PatientService.setPatient(patientReturned);
             this.showToast(patientReturned.FirstName + " " + patientReturned.LastName + " gespeichert!");
-        }, (error) => {
+            }, (error) => {
             this.$log.error(error);
             this.showToast("Patient konnte nicht registriert werden!");
         });

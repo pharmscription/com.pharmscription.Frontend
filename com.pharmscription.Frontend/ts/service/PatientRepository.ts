@@ -2,7 +2,7 @@
 
 import IPromise = angular.IPromise;
 
-export class PatientRepository {
+export default class PatientRepository {
 
     private urls: any = {
         add: 'http://localhost:7642/RestService.svc/patients',

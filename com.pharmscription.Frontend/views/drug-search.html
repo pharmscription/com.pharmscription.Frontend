@@ -34,7 +34,7 @@
                     <md-icon id="drug-icon" md-font-set="material-icons">healing</md-icon>
                     {{ drug.DrugDescription }}
                 </div>
-                <div flex layout="column" ng-slide-down="widgetExpanded">
+                <div flex layout="column" ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
                     <p>Einheiten: <b>{{drug.Unit}}</b></p>
                     <p>Komposition: <b>{{drug.Composition}}</b></p>
                     <p>Betäubungsmittel-Kategorie: <b>{{drug.NarcoticCategory}}</b></p>
