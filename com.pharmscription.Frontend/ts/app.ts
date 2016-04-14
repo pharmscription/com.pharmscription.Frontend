@@ -15,9 +15,13 @@ import {UserSearchController} from './controller/UserSearchController'
 import UserOverviewController from 'ts/controller/UserOverviewController'
 import {DrugSearchController} from './controller/DrugSearchController'
 import PrescriptionCreatorController from 'ts/controller/PrescriptionCreatorController'
-import {PatientRepository} from './service/PatientRepository'
+
+import PatientRepository from './service/PatientRepository'
 import DrugRepository from './service/DrugRepository'
-import {AHVNumberService} from './service/AHVNumberService'
+import PrescriptionRepository from 'ts/service/PrescriptionRepository'
+
+import AHVNumberService from './service/AHVNumberService'
+import PatientService from 'ts/service/PatientService'
 import SocialNumber from './directives/socialnumber'
 
 export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng-slide-down'])
@@ -77,5 +81,7 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     .controller('PrescriptionCreatorController', PrescriptionCreatorController)
     .service('PatientRepository', PatientRepository)
     .service('DrugRepository', DrugRepository)
+    .service('PrescriptionRepository', PrescriptionRepository)
     .service('AHVNumberService', AHVNumberService)
+    .service('PatientService', PatientService)
     .directive('ngSocialnumber', SocialNumber.factory());

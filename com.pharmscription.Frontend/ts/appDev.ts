@@ -3,6 +3,7 @@ import app from './app'
 import Papa = require('papaparse');
 import Patient from 'ts/model/patient';
 import Drug from "ts/model/drug";
+import Address from 'ts/model/address'
 
 export class AppDev {
     app: ng.IModule;
@@ -14,6 +15,17 @@ export class AppDev {
 
     init($httpBackend: angular.IHttpBackendService) {
         let patients: Array<Patient> = [];
+        patients.push(new Patient(
+            '756.1390.2077.81',
+            'Max',
+            'Muster',
+            new Address('Bahnhostrasse', 666, 'ZH', 'Zürich', 8888),
+            new Date(),
+            '0980980980', 'max@muster.com',
+            'xx-xx-xx',
+            'Sanitas',
+            '666'));
+
         let drugs: Array<Drug> = [];
 
         Papa.parse('http://localhost:3474/mock/Drugs.csv', {

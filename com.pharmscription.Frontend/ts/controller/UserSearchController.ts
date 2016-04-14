@@ -1,5 +1,6 @@
-﻿import {AHVNumberService} from "../service/AHVNumberService"
-import {PatientRepository} from '../service/PatientRepository'
+﻿import AHVNumberService from "../service/AHVNumberService"
+import PatientRepository from '../service/PatientRepository'
+import PatientService from 'ts/service/PatientService';
 import Patient from '../model/patient'
 
 export class UserSearchController {
@@ -11,10 +12,19 @@ export class UserSearchController {
         '$location',
         'AHVNumberService',
         'PatientRepository',
+        'PatientService',
         '$log'
     ];
 
-    constructor(private $mdDialog: angular.material.IDialogService, private $mdToast: angular.material.IToastService, private $location: angular.ILocationService, private ahvNumberService: AHVNumberService, private patientRepository: PatientRepository, private $log: angular.ILogService) {
+    constructor(
+        private $mdDialog: angular.material.IDialogService,
+        private $mdToast: angular.material.IToastService,
+        private $location: angular.ILocationService,
+        private ahvNumberService: AHVNumberService,
+        private patientRepository: PatientRepository,
+        private patientService: PatientService,
+        private $log: angular.ILogService
+        ) {
         this.social = '';
     }
 
@@ -51,7 +61,9 @@ export class UserSearchController {
             if (foundPatient.FirstName === null || foundPatient.FirstName === undefined) {
                 this.showPatientNotFoundDialog(event);
             } else {
-                this.showPatientFoundDialog(foundPatient.FirstName, foundPatient.LastName, event);
+                //this.showPatientFoundDialog(foundPatient.FirstName, foundPatient.LastName, event);
+                this.patientService.setPatient(foundPatient);
+                this.$location.url('user/overview');
             }
         }, (errorReason) => {
             this.$log.error(errorReason);

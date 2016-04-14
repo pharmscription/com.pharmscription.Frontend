@@ -1,5 +1,4 @@
-﻿
-export class AHVNumberService {
+﻿export default class AHVNumberService {
     private social: string;
 
     constructor() {

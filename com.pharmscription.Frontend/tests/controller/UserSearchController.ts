@@ -1,34 +1,38 @@
-﻿import * as angular from 'angular'
-import 'angular-mocks'
-import {UserSearchController} from 'ts/controller/UserSearchController'
+﻿//import * as angular from 'angular'
+//import 'angular-material'
+//import 'angular-mocks'
+//import app from 'ts/app'
+//import {UserSearchController} from 'ts/controller/UserSearchController'
 
-angular.module('app', ['ngMock']).controller('UserSearchController', UserSearchController);
+//describe("UserSearchController", () => {
+//    let $injector: angular.auto.IInjectorService;
 
-describe("UserSearchController", () => {
-    let $controller: angular.IControllerService;
-    let $httpBackend: angular.IControllerService;
-    let $rootScope: angular.IRootScopeService;
+//    let $controller: angular.IControllerService;
+//    let $httpBackend: angular.IControllerService;
+//    let $rootScope: angular.IRootScopeService;
 
-    let controller: UserSearchController;
+//    let controller: UserSearchController;
 
-    beforeEach(() => {
-        angular.module('app');
-    });
+//    beforeEach(() => {
+//        angular.module(app.name);
+//    });
+
     
-    beforeEach(() => {
-        angular.mock.inject(($injector: angular.auto.IInjectorService) => {
+//    beforeEach(() => {
+//        angular.mock.inject(($injector: angular.auto.IInjectorService) => {
 
-            $controller = <angular.IControllerService>$injector.get('$controller');
-            $httpBackend = <angular.IControllerService>$injector.get('$httpBackend');
-            $rootScope = <angular.IRootScopeService>$injector.get('$rootScope');
-        });
-    });
+//            $controller = <angular.IControllerService>$injector.get('$controller');
+//            $httpBackend = <angular.IControllerService>$injector.get('$httpBackend');
+//            $rootScope = <angular.IRootScopeService>$injector.get('$rootScope');
+//        });
+//        let $scope = $rootScope.$new();
+//    });
 
-    beforeEach(() => {
-        controller = <UserSearchController>$controller('UserSearchController', UserSearchController);
-    });
+//    it("Check Controller init", () => {
+//        let scope = {};
 
-    describe("Check Controller init", () => {
-        expect(controller.social).toBe('');
-    });
-});
+//        let controller = $controller(UserSearchController, { $scope: scope });
+
+//        expect(scope.social).toBe('');
+//    });
+//});

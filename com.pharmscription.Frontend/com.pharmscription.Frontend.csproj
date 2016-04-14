@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="tests\controller\UserSearchController.ts" />
+    <TypeScriptCompile Include="tests\service\PatientService.ts" />
     <TypeScriptCompile Include="tests\service\AHVNumberService.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\appDev.ts" />
@@ -134,6 +135,8 @@
     <TypeScriptCompile Include="ts\service\AHVNumberService.ts" />
     <TypeScriptCompile Include="ts\service\DrugRepository.ts" />
     <TypeScriptCompile Include="ts\service\PatientRepository.ts" />
+    <TypeScriptCompile Include="ts\service\PatientService.ts" />
+    <TypeScriptCompile Include="ts\service\PrescriptionRepository.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
