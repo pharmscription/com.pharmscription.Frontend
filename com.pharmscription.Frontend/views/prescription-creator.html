@@ -2,13 +2,39 @@
     <div class="md-toolbar-tools">Rezept erstellen</div>
 </md-toolbar>
 
-<md-list layout-fill>
-    <md-list-item ng-repeat="drug in PrescriptionCreator.drugs">
-        {{ drug.DrugDescription }}
-    </md-list-item>
+<md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
+    <md-list layout-fill>
+        <md-list-item ng-repeat="drug in PrescriptionCreator.drugs" flex layout="column" layout-margin>
+            <div><b>{{ drug.DrugDescription }}</b></div> 
 
+            <div layout="row" flex>
+                <md-input-container flex="30" class="md-block">
+                    <md-icon>exposure</md-icon>
+                    <input type="number" placeholder="Menge">
+                </md-input-container>
+                <md-input-container flex="60" class="md-block">
+                    <md-icon>access_time</md-icon>
+                    <input type="text" placeholder="Dosierung">
+                </md-input-container>
+                <md-button class="md-icon-button" flex="10" ng-click="PrescriptionCreator.removeDrug($index)">
+                    <md-icon>remove_circle</md-icon>
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+</md-whiteframe>
+<div layout="row">
+    <md-button class="md-raised">SPEICHERN</md-button>
     <md-button class="md-fab" ng-click="PrescriptionCreator.addDrug()">
         <md-icon>add</md-icon>
     </md-button>
-</md-list>
+</div>
+
+
+    
+
+
+
+
 

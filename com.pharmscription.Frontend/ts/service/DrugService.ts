@@ -15,4 +15,8 @@ export default class DrugService {
         return this.drugs;
     }
 
+    removeDrug(index: number): void {
+        this.drugs.splice(index, 1);
+    }
+
 }

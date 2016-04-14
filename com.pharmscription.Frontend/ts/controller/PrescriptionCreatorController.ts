@@ -20,4 +20,9 @@ export default class PrescriptionCreatorController {
     addDrug(): void {
         this.$location.url('prescription/drug/search');
     }
+
+    removeDrug(index: Number): void {
+        this.drugService.removeDrug(index);
+        this.drugs = this.drugService.getDrugs();
+    }
 }
