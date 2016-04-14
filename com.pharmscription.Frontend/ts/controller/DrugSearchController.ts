@@ -1,6 +1,7 @@
 ﻿import Drug from 'ts/model/drug'
 import DrugRepository from 'ts/service/DrugRepository'
 import DrugSearchItems from 'ts/model/drugSearchItems'
+import DrugService from 'ts/service/DrugService'
 
 export class DrugSearchController {
     searchedDrug: string;
@@ -14,10 +15,12 @@ export class DrugSearchController {
         'DrugRepository',
         '$mdDialog',
         '$log',
-        '$mdToast'
+        '$mdToast',
+        '$location',
+        'DrugService'
     ];
 
-    constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService) {
+    constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService, private $location: angular.ILocationService, private drugService: DrugService) {
         this.setProgressCircle(false);
     }
 
@@ -37,12 +40,9 @@ export class DrugSearchController {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 
-    showDrugDetails(drug: Drug): void {
-        this.$mdDialog.show(
-            this.$mdDialog.alert()
-                .title('Medikamenten Details')
-                .textContent("Betäubungsmittel-Kategorie: " + drug.NarcoticCategory)
-                .ok('OK')
-        );
+    addDrug(drug: Drug): void {
+        this.$log.debug(drug);
+        this.drugService.setDrug(drug);
+        this.$location.url('prescription/create');
     };
 }

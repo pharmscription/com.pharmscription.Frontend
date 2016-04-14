@@ -17,6 +17,7 @@ import {DrugSearchController} from './controller/DrugSearchController'
 import PrescriptionCreatorController from 'ts/controller/PrescriptionCreatorController'
 import {PatientRepository} from './service/PatientRepository'
 import DrugRepository from './service/DrugRepository'
+import DrugService from './service/DrugService'
 import {AHVNumberService} from './service/AHVNumberService'
 import SocialNumber from './directives/socialnumber'
 
@@ -64,6 +65,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
             templateUrl: 'views/prescription-creator.html',
             controller: 'PrescriptionCreatorController',
             controllerAs: 'PrescriptionCreator'
+        }).when('/prescription/drug/search', {
+            templateUrl: 'views/drug-search.html',
+            controller: 'DrugSearchController',
+            controllerAs: 'DrugSearch'
         }).otherwise({
             redirectTo: '/'
         });
@@ -77,5 +82,6 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     .controller('PrescriptionCreatorController', PrescriptionCreatorController)
     .service('PatientRepository', PatientRepository)
     .service('DrugRepository', DrugRepository)
+    .service('DrugService', DrugService)
     .service('AHVNumberService', AHVNumberService)
     .directive('ngSocialnumber', SocialNumber.factory());

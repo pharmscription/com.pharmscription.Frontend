@@ -3,6 +3,12 @@
 </md-toolbar>
 
 <md-list layout-fill>
-        <md-list-item ng-repeat="drug in PrescriptionCreator.drugs">
+    <md-list-item ng-repeat="drug in PrescriptionCreator.drugs">
+        {{ drug.DrugDescription }}
+    </md-list-item>
 
+    <md-button class="md-fab" ng-click="PrescriptionCreator.addDrug()">
+        <md-icon>add</md-icon>
+    </md-button>
 </md-list>
+
