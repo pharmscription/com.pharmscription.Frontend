@@ -12,13 +12,13 @@
                 <div layout="row" flex>
                     <md-input-container flex="30" class="md-block">
                         <md-icon>exposure</md-icon>
-                        <input type="number" placeholder="Menge" required>
+                        <input type="number" min="1" placeholder="Menge" required>
                     </md-input-container>
                     <md-input-container flex="60" class="md-block">
                         <md-icon>access_time</md-icon>
                         <input type="text" placeholder="Dosierung" required>
                     </md-input-container>
-                    <md-button class="md-icon-button" flex="10" ng-click="PrescriptionCreator.removeDrug($index)">
+                    <md-button class="md-icon-button" ng-click="PrescriptionCreator.removeDrug($index)">
                         <md-icon>remove_circle</md-icon>
                     </md-button>
                 </div>
@@ -34,7 +34,7 @@
             </md-button>
         </div>
     </form>
-        <md-button flex class="md-raised" ng-disabled="prescriptionForm.$invalid">SPEICHERN</md-button>
+        <md-button class="md-raised" ng-disabled="prescriptionForm.$invalid" ng-click="PrescriptionCreator.savePrescription(PrescriptionCreator.prescription)">SPEICHERN</md-button>
 </md-whiteframe>
 
 

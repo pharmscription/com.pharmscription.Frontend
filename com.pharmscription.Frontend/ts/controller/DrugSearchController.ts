@@ -9,6 +9,9 @@ export class DrugSearchController {
     searchResultAmount: Number;
     progressFlag: boolean;
     drugSearchResults: DrugSearchItems;
+    originUrl: string;
+    addMode: boolean;
+
 
     static $inject = [
         '$scope',
@@ -22,6 +25,16 @@ export class DrugSearchController {
 
     constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService, private $location: angular.ILocationService, private drugService: DrugService) {
         this.setProgressCircle(false);
+        this.chooseViewMode();
+    }
+
+    chooseViewMode(): void {
+        this.originUrl = this.$location.url();
+        if (this.originUrl == "/prescription/drug/search") {
+            this.addMode = true;
+        } else {
+            this.addMode = false;
+        }
     }
 
     setProgressCircle(status: boolean): void {
