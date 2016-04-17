@@ -7,6 +7,7 @@ export default class PrescriptionCreatorController {
     patient: Patient;
     prescription: Prescription;
     drugs: Array<Drug>;
+    prescriptionValidity: Date;
 
     static $inject = [
         '$location',
@@ -21,7 +22,7 @@ export default class PrescriptionCreatorController {
         this.$location.url('prescription/drug/search');
     }
 
-    removeDrug(index: Number): void {
+    removeDrug(index: number): void {
         this.drugService.removeDrug(index);
         this.drugs = this.drugService.getDrugs();
     }

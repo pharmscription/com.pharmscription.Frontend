@@ -19,7 +19,7 @@
 }
 
 .whiteframe {
-        background: #f7f7f7;
+    background: #f7f7f7;
 }
 
 .date-picker md-datepicker {
@@ -27,11 +27,11 @@
 }
 
 .date-picker {
-        margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
 #vertical-container {
-  height: 70vh;
+    height: 70vh;
 }
 
 #drug-icon {
