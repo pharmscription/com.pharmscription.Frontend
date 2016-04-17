@@ -1,4 +1,4 @@
-/// <binding />
+/// <binding BeforeBuild='devMock-bundle' />
 "use strict";
 
 // Include gulp

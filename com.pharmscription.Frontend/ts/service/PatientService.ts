@@ -8,6 +8,9 @@ export default class PatientService {
     }
 
     getPatient(): Patient {
+        if (this.patient === undefined) {
+            return null;
+        }
         return this.patient;
     }
 

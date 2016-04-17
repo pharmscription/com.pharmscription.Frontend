@@ -5,15 +5,31 @@ import PrescriptionRepository from 'ts/service/PrescriptionRepository'
 
 export default class UserOverviewController {
     patient: Patient;
-    prescriptions: Array<Prescription>;
+    prescriptions: Array<Prescription> = [];
 
     public static $inject = [
+        '$mdToast',
         'PatientService',
         'PrescriptionRepository'
     ];
     
-    constructor(private patientService: PatientService, private prescriptionRepository: PrescriptionRepository) {
+    constructor(
+        private $mdToast: angular.material.IToastService,
+        private patientService: PatientService,
+        private prescriptionRepository: PrescriptionRepository) {
         this.patient = this.patientService.getPatient();
-        //this.prescriptions = this.
+        if (this.patient === null) {
+            this.showToast('Patient konnte nicht geladen werden!');
+        } else {
+            this.prescriptionRepository.getPrescriptions(this.patient.Id).then((foundPrescriptions) => {
+                this.prescriptions = foundPrescriptions;
+            }, (error) => {
+                this.showToast('Rezepte konnten nicht geladen werden!');
+            });
+        }
+    }
+
+    showToast(message: string) {
+        this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 }

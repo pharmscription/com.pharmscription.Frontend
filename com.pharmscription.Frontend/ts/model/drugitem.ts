@@ -3,10 +3,11 @@ import Dispense from 'ts/model/dispense'
 import Prescription from 'ts/model/prescription'
 
 export default class DrugItem {
-
-    Drug: Drug;
-    Dispense: Dispense;
-    Prescription: Prescription;
-    DosageDescription: string;
+    constructor(
+        private Drug: Drug,
+        private Dispense: Dispense,
+        private Prescription: Prescription,
+        private DosageDescription: string
+    ) { }
 
 }

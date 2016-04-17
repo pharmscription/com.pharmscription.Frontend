@@ -2,12 +2,14 @@
 
 export default class Doctor {
 
-    AHVNumber: string;
-    FirstName: string;
-    LastName: string;
-    Address: Address;
-    ZSRNumber: string;
-    PhoneNumber: string;
-    FaxNumber: string;
+    constructor(
+        public AHVNumber: string,
+        public FirstName: string,
+        public LastName: string,
+        public Address: Address,
+        public ZSRNumber: string,
+        public PhoneNumber: string,
+        public FaxNumber: string
+    ) {}
 
 }

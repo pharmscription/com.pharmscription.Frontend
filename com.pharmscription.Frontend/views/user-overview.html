@@ -84,14 +84,15 @@
 <md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
     <div>Rezepte</div>
     <md-list flex>
-        <md-list-item class="md-3-line" ng-show="!UserOverview.receipts.length" flex>
+        <md-list-item class="md-3-line" ng-show="!UserOverview.prescriptions.length" flex>
             <md-icon class="material-icons md-48">insert_drive_file</md-icon>
             <span>keine Rezepte</span>
             <md-button>Anzeigen</md-button>
         </md-list-item>
         <md-list-item class="md-3-line" ng-repeat="prescription in UserOverview.prescriptions">
             <md-icon class="md-36" md-font-set="material-icons">insert_drive_file</md-icon>
-            <span>{{prescription.drugs}}</span>
+            <p>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</p>
+            <p>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</p>
             <md-button>Anzeigen</md-button>
         </md-list-item>
     </md-list>

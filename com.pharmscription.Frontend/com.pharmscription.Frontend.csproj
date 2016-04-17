@@ -97,6 +97,7 @@
     <Content Include="index.html" />
     <Content Include="views\drug-search.html" />
     <Content Include="views\prescription-creator.html" />
+    <Content Include="views\prescription-view.html" />
     <Content Include="views\user-overview.html" />
     <Content Include="views\user-register.html" />
     <Content Include="views\user-search.html" />
@@ -117,6 +118,7 @@
     <TypeScriptCompile Include="ts\controller\MainMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\MainSideMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\PrescriptionCreatorController.ts" />
+    <TypeScriptCompile Include="ts\controller\PrescriptionViewController.ts" />
     <TypeScriptCompile Include="ts\controller\UserOverviewController.ts" />
     <TypeScriptCompile Include="ts\controller\UserRegisterController.ts" />
     <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />

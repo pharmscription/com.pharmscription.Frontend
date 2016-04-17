@@ -1,21 +1,23 @@
 ﻿import Patient from "ts/model/patient"
 import Doctor from "ts/model/doctor"
 import Dispense from 'ts/model/dispense'
-import DrugItem from 'ts/model/drugitem'
+import Drug from 'ts/model/drug'
 
 export default class Prescription {
 
-    Type: string; //S=Standing, N=Normal
-    Patient: Patient;
-    IssueDate: Date;
-    EditDate: Date;
-    SignDate: Date;
-    IsValid: boolean;
-    CounterProposals: Array<any>;//Array<CounterProposal>;
-    Doctor: Doctor;
-    Dispenses: Array<Dispense>;
-    Drugs: Array<DrugItem>;
-    ValidUntill: Date;
-    PrescriptionHistory: Array<Prescription>;
+    constructor(
+        public Type: string, //S=Standing, N=Normal
+        public Patient: Patient,
+        public IssueDate: Date,
+        public EditDate: Date,
+        public IsValid: boolean,
+        public CounterProposals: Array<any>, //Array<CounterProposal>;
+        public Doctor: Doctor,
+        public ValidUntill: Date,
+        public PrescriptionHistory: Array<Prescription>,
+        public Drugs: Array<Drug>,
+        public Dispenses?: Array<Dispense>,
+        public SignDate?: Date
+    ) { }
 
 }

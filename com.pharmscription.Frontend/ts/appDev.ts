@@ -1,9 +1,12 @@
 ﻿import 'angular-mocks'
 import app from './app'
 import Papa = require('papaparse');
-import Patient from 'ts/model/patient';
-import Drug from "ts/model/drug";
+import Patient from 'ts/model/patient'
+import Drug from 'ts/model/drug'
 import Address from 'ts/model/address'
+import Prescription from 'ts/model/prescription'
+import Doctor from 'ts/model/doctor'
+import Dispense from 'ts/model/dispense'
 
 export class AppDev {
     app: ng.IModule;
@@ -36,6 +39,36 @@ export class AppDev {
                 drugs = result.data;
             }
         });
+
+        let doctors: Array<Doctor> = [];
+        doctors.push(new Doctor(
+            '1234.123.123.12',
+            'Hippo',
+            'Krates',
+            new Address(
+                'Greekstr.',
+                99,
+                'AT',
+                'Athen',
+                4253
+            ), '643.234.534',
+            '0980980980',
+            '1231231231'
+        ));
+
+        let prescriptions: Array<Prescription> = [];
+        prescriptions.push(new Prescription(
+            "N",
+            patients[0],
+            new Date(),
+            new Date(),
+            true,
+            [],
+            doctors[0],
+            new Date(2016, 7, 15),
+            [],
+            [drugs[5]]
+        ));
         
         let backendUrl = 'http://localhost:7642/RestService.svc';
 
@@ -96,6 +129,26 @@ export class AppDev {
             let patient: Patient = angular.fromJson(data);
             patients.push(patient);
             return [200, data, {}];
+        });
+
+        $httpBackend.when(/\/patients\/(.+)\/prescriptions/, undefined, ['patientId']).respond((method, url, data, headers, params) => {
+            let foundPrescriptions = prescriptions.filter((prescription: Prescription) => {
+                return prescription.Patient.Id === params.patientId;
+            });
+            if (foundPrescriptions === undefined) {
+                return [204, {}];
+            }
+            return [200, foundPrescriptions, {}];
+        });
+
+        $httpBackend.whenGET(/\/patients\/(.+)\/prescriptions/, undefined, ['patientId']).respond((method, url, data, headers, params) => {
+            let foundPrescriptions = prescriptions.filter((prescription: Prescription) => {
+                return prescription.Patient.Id === params.patientId;
+            });
+            if (foundPrescriptions === undefined) {
+                return [204, {}];
+            }
+            return [200, foundPrescriptions, {}];
         });
 
         $httpBackend.whenGET(/.html/).passThrough();

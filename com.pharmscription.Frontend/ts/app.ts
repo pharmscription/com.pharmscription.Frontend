@@ -8,7 +8,7 @@ import 'ng-slide-down'
 
 moment.locale('de');
 
-import {MainMenuController} from './controller/MainMenuController';
+import {MainMenuController} from './controller/MainMenuController'
 import {MainSideMenuController} from './controller/MainSideMenuController'
 import {UserRegisterController} from './controller/UserRegisterController'
 import {UserSearchController} from './controller/UserSearchController'
