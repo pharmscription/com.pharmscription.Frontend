@@ -8,12 +8,12 @@ import 'ng-slide-down'
 
 moment.locale('de');
 
-import {MainMenuController} from './controller/MainMenuController'
-import {MainSideMenuController} from './controller/MainSideMenuController'
-import {UserRegisterController} from './controller/UserRegisterController'
-import {UserSearchController} from './controller/UserSearchController'
+import MainMenuController from './controller/MainMenuController'
+import MainSideMenuController from './controller/MainSideMenuController'
+import UserRegisterController from './controller/UserRegisterController'
+import UserSearchController from './controller/UserSearchController'
 import UserOverviewController from 'ts/controller/UserOverviewController'
-import {DrugSearchController} from './controller/DrugSearchController'
+import DrugSearchController from './controller/DrugSearchController'
 import PrescriptionCreatorController from 'ts/controller/PrescriptionCreatorController'
 
 import PatientRepository from './service/PatientRepository'

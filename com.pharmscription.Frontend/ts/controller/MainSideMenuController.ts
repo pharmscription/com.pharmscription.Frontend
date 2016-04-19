@@ -1,4 +1,4 @@
-﻿export class MainSideMenuController {
+﻿export default class MainSideMenuController {
 
     public static $inject = [
         '$timeout',

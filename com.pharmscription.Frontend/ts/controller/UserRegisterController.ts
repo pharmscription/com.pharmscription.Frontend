@@ -8,7 +8,7 @@ enum Mode {
     Edit
 }
 
-export class UserRegisterController {
+export default class UserRegisterController {
     
     controllerMode: Mode;
     cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +

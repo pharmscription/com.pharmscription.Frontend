@@ -3,7 +3,11 @@ import DrugRepository from 'ts/service/DrugRepository'
 import DrugSearchItems from 'ts/model/drugSearchItems'
 import DrugService from 'ts/service/DrugService'
 
-export class DrugSearchController {
+export interface IDrugSearchScope extends angular.IScope {
+    searchForm: any;
+}
+
+export default class DrugSearchController {
     searchedDrug: string;
     lastSearchTerm: string;
     searchResultAmount: Number;
@@ -23,7 +27,7 @@ export class DrugSearchController {
         'DrugService'
     ];
 
-    constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService, private $location: angular.ILocationService, private drugService: DrugService) {
+    constructor(private $scope: IDrugSearchScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService, private $location: angular.ILocationService, private drugService: DrugService) {
         this.setProgressCircle(false);
         this.chooseViewMode();
     }
