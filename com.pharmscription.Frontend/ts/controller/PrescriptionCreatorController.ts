@@ -2,6 +2,7 @@
 import Drug from 'ts/model/drug'
 import Prescription from 'ts/model/prescription'
 import DrugService from 'ts/service/DrugService'
+import PatientService from 'ts/service/PatientService'
 
 export default class PrescriptionCreatorController {
     patient: Patient;
@@ -11,11 +12,13 @@ export default class PrescriptionCreatorController {
 
     static $inject = [
         '$location',
-        'DrugService'
+        'DrugService',
+        'PatientService'
     ];
 
-    constructor(private $location: angular.ILocationService, private drugService: DrugService) {
+    constructor(private $location: angular.ILocationService, private drugService: DrugService, private patientService: PatientService) {
         this.drugs = this.drugService.getDrugs();
+        this.patient = patientService.getPatient();
     }
 
     addDrug(): void {
@@ -25,5 +28,9 @@ export default class PrescriptionCreatorController {
     removeDrug(index: number): void {
         this.drugService.removeDrug(index);
         this.drugs = this.drugService.getDrugs();
+    }
+
+    savePrescription(prescription: Prescription): void {
+        prescription.Patient = this.patient;
     }
 }
