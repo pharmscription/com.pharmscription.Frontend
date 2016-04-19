@@ -58,13 +58,13 @@ export class AppDev {
 
         let prescriptions: Array<Prescription> = [];
         prescriptions.push(new Prescription(
-            "N",
             patients[0],
+            doctors[0],
+            "N",
             new Date(),
             new Date(),
             true,
             [],
-            doctors[0],
             new Date(2016, 7, 15),
             [],
             [drugs[5]]

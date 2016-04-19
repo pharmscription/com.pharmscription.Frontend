@@ -3,20 +3,20 @@
 </md-toolbar>
 
 <md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
-    <p>Rezept für Patient<i> {{ PrescriptionCreator.patient.AhvNumber }} </i>erstellen</p>
+    <p>Rezept für Patient mit der AHV-Nummer <i> {{ PrescriptionCreator.patient.AhvNumber }} </i>erstellen</p>
     <md-divider></md-divider>
     <form name="prescriptionForm">
         <md-list layout-fill>
-            <md-list-item ng-repeat="drug in PrescriptionCreator.drugs" flex layout="column" layout-margin>
-                <div><b>{{ drug.DrugDescription }}</b></div>
+            <md-list-item ng-repeat="drugItem in PrescriptionCreator.drugItems" flex layout="column" layout-margin>
+                <div><b>{{ drugItem.Drug.DrugDescription }}</b></div>
                 <div layout="row" flex>
                     <md-input-container flex="30" class="md-block">
                         <md-icon>exposure</md-icon>
-                        <input type="number" min="1" placeholder="Menge" required>
+                        <input type="number" min="1" placeholder="Menge" ng-model="drugItem.Quantity" required>
                     </md-input-container>
                     <md-input-container flex="60" class="md-block">
                         <md-icon>access_time</md-icon>
-                        <input type="text" placeholder="Dosierung" required>
+                        <input type="text" placeholder="Dosierung" ng-model="drugItem.DosageDescription" required>
                     </md-input-container>
                     <md-button class="md-icon-button" ng-click="PrescriptionCreator.removeDrug($index)">
                         <md-icon>remove_circle</md-icon>
@@ -27,9 +27,15 @@
         </md-list>
         <div layout="row" layout-align="space-between center">
             <div class="date-picker">
-                <md-datepicker ng-model="PrescriptionCreator.prescriptionValidity" md-placeholder="Gültig bis"></md-datepicker>
+                <md-datepicker ng-model="PrescriptionCreator.prescription.ValidUntil" md-placeholder="Gültig bis"></md-datepicker>
             </div>
+            <md-switch ng-model="PrescriptionCreator.prescription.Type">
+                Dauerrezept: {{ PrescriptionCreator.prescripton.Type }}
+            </md-switch>
             <md-button id="prescription-add-button" class="md-fab" ng-click="PrescriptionCreator.addDrug()">
+                <md-tooltip>
+                    Medikament hinzufügen
+                </md-tooltip>
                 <md-icon>add</md-icon>
             </md-button>
         </div>
