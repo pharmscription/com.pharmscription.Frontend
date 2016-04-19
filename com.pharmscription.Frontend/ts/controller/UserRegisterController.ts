@@ -3,25 +3,43 @@ import AHVNumberService from "../service/AHVNumberService"
 import PatientService from 'ts/service/PatientService'
 import Patient from '../model/patient'
 
-export class UserRegisterController {
+enum Mode {
+    Register,
+    Edit
+}
 
-    cantons: Object;
+export class UserRegisterController {
+    
+    controllerMode: Mode;
+    cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +
+    'SG SH SZ SO TG TI UR VD VS ZG ZH').split(' ').map(canton => {
+        return { abbrev: canton };
+    });
     patient: Patient;
 
     static $inject = [
         'PatientRepository',
         'AHVNumberService',
         'PatientService',
+        '$location',
         '$mdToast',
         '$log'
     ];
 
-    constructor(private patientRepository: PatientRepository, private ahvNumberService: AHVNumberService, private PatientService: PatientService, private $mdToast: angular.material.IToastService, private $log: angular.ILogService) {
-        this.patient = new Patient(this.ahvNumberService.getAHVNumber());
-        this.cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +
-            'SG SH SZ SO TG TI UR VD VS ZG ZH').split(' ').map(canton => {
-                return { abbrev: canton };
-            });
+    constructor(
+        private patientRepository: PatientRepository,
+        private ahvNumberService: AHVNumberService,
+        private PatientService: PatientService,
+        private $location: angular.ILocationService,
+        private $mdToast: angular.material.IToastService,
+        private $log: angular.ILogService) {
+        this.setControllerMode();
+        if (this.controllerMode === Mode.Register) {
+            this.patient = new Patient(this.ahvNumberService.getAHVNumber());
+        } else {
+            this.patient = this.PatientService.getPatient();
+        }
+
     }
 
     showToast(message: string) {
@@ -29,13 +47,31 @@ export class UserRegisterController {
     }
 
     savePatient(patient: Patient): void {
-        this.patientRepository.addPatient(patient).then((patientReturned) => {
-            this.PatientService.setPatient(patientReturned);
-            this.showToast(patientReturned.FirstName + " " + patientReturned.LastName + " gespeichert!");
+        if (this.controllerMode === Mode.Register) {
+            this.patientRepository.addPatient(patient).then((addedPatient) => {
+                this.PatientService.setPatient(addedPatient);
+                this.showToast(addedPatient.FirstName + " " + addedPatient.LastName + " gespeichert!");
             }, (error) => {
-            this.$log.error(error);
-            this.showToast("Patient konnte nicht registriert werden!");
-        });
-        
+                this.$log.error(error);
+                this.showToast("Patient konnte nicht registriert werden!");
+            });
+        } else {
+            this.patientRepository.editPatient(patient).then((editedPatient) => {
+                this.PatientService.setPatient(editedPatient);
+                this.showToast("Änderungen an " + editedPatient.FirstName + " " + editedPatient.LastName + " gespeichert!");
+            }, (error) => {
+                this.$log.error(error);
+                this.showToast("Änderungen konnten nicht gepseichert werden!");
+            });
+        }
+
+    }
+
+    setControllerMode() {
+        if (this.$location.url() === '/user/register') {
+            this.controllerMode = Mode.Register;
+        } else {
+            this.controllerMode = Mode.Edit;
+        }
     }
 }

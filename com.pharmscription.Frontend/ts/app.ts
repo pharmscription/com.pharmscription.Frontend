@@ -56,6 +56,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
             templateUrl: 'views/user-register.html',
             controller: 'UserRegisterController',
             controllerAs: 'UserRegister'
+        }).when('/user/edit', {
+            templateUrl: 'views/user-register.html',
+            controller: 'UserRegisterController',
+            controllerAs: 'UserRegister'
         }).when('/user/overview', {
             templateUrl: 'views/user-overview.html',
             controller: 'UserOverviewController',

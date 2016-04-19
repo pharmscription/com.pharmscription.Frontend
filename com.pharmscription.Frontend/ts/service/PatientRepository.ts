@@ -7,7 +7,8 @@ export default class PatientRepository {
     private urls: any = {
         add: 'http://localhost:7642/RestService.svc/patients',
         insuranceLookup: 'http://localhost:7642/RestService.svc/patients/lookup/:ahvNumber',
-        getPatient: 'http://localhost:7642/RestService.svc/patients/ahv-number/:ahvNumber'
+        get: 'http://localhost:7642/RestService.svc/patients/ahv-number/:ahvNumber',
+        edit: 'http://localhost:7642/RestService.svc/patients/{id}'
     }
 
     static $inject = [
@@ -37,7 +38,7 @@ export default class PatientRepository {
 
     getPatient(ahvNumber: string): IPromise<Patient> {
         this.$log.debug(ahvNumber);
-        return this.$http.get(this.urls.getPatient.replace(':ahvNumber', ahvNumber)).then((response) => {
+        return this.$http.get(this.urls.get.replace(':ahvNumber', ahvNumber)).then((response) => {
                 if (typeof response.data === 'object') {
                     return response.data;
                 } else {
@@ -46,6 +47,25 @@ export default class PatientRepository {
         }, (error) => {
                 this.$log.error(error);
                 return this.$q.reject(error);
+            }
+        );
+    }
+
+    editPatient(patient: Patient): IPromise<Patient> {
+        this.$log.debug(patient.Id);
+        if (patient.Id === null || patient.Id === undefined) {
+            return this.$q.reject('Patient hat keine ID');
+        }
+        let data = JSON.stringify(patient);
+        return this.$http.post(this.urls.edit.replace('{id}', patient.Id), data).then((response) => {
+            if (typeof response.data === 'object') {
+                return response.data;
+            } else {
+                return this.$q.reject(response.data);
+            }
+        }, (error) => {
+            this.$log.error(error);
+            return this.$q.reject(error);
             }
         );
     }

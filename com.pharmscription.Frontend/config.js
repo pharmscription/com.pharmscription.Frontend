@@ -27,7 +27,7 @@ System.config({
     "moment": "npm:moment@2.12.0",
     "ng-slide-down": "npm:ng-slide-down@0.4.2",
     "papaparse": "npm:papaparse@4.1.2",
-    "typescript": "npm:typescript@1.8.9",
+    "typescript": "npm:typescript@1.8.10",
     "github:angular/bower-angular-animate@1.5.3": {
       "angular": "github:angular/bower-angular@1.5.3"
     },
@@ -1492,7 +1492,7 @@ System.config({
       "media-typer": "npm:media-typer@0.3.0",
       "mime-types": "npm:mime-types@2.1.10"
     },
-    "npm:typescript@1.8.9": {
+    "npm:typescript@1.8.10": {
       "os": "github:jspm/nodelibs-os@0.1.0"
     },
     "npm:uid-number@0.0.6": {
