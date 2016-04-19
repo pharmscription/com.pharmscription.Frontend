@@ -8,12 +8,14 @@ export default class UserOverviewController {
     prescriptions: Array<Prescription> = [];
 
     public static $inject = [
+        '$location',
         '$mdToast',
         'PatientService',
         'PrescriptionRepository'
     ];
     
     constructor(
+        private $location: angular.ILocationService,
         private $mdToast: angular.material.IToastService,
         private patientService: PatientService,
         private prescriptionRepository: PrescriptionRepository) {
@@ -31,5 +33,13 @@ export default class UserOverviewController {
 
     showToast(message: string) {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
+    }
+
+    addPrescription() {
+        this.$location.url('prescription/create');
+    }
+
+    editUser() {
+        this.$location.url('user/edit');
     }
 }

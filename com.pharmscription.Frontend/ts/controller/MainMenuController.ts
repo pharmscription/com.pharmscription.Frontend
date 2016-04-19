@@ -2,7 +2,7 @@
     $mdMedia: angular.material.IMedia;
     toggleLeft: Function;
 }
-export class MainMenuController {
+export default class MainMenuController {
 
     static $inject = [
         '$scope',

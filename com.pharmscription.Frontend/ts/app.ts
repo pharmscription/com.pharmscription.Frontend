@@ -8,12 +8,12 @@ import 'ng-slide-down'
 
 moment.locale('de');
 
-import {MainMenuController} from './controller/MainMenuController'
-import {MainSideMenuController} from './controller/MainSideMenuController'
-import {UserRegisterController} from './controller/UserRegisterController'
-import {UserSearchController} from './controller/UserSearchController'
+import MainMenuController from './controller/MainMenuController'
+import MainSideMenuController from './controller/MainSideMenuController'
+import UserRegisterController from './controller/UserRegisterController'
+import UserSearchController from './controller/UserSearchController'
 import UserOverviewController from 'ts/controller/UserOverviewController'
-import {DrugSearchController} from './controller/DrugSearchController'
+import DrugSearchController from './controller/DrugSearchController'
 import PrescriptionCreatorController from 'ts/controller/PrescriptionCreatorController'
 
 import PatientRepository from './service/PatientRepository'
@@ -53,6 +53,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
             controller: 'UserSearchController',
             controllerAs: 'UserSearch'
         }).when('/user/register', {
+            templateUrl: 'views/user-register.html',
+            controller: 'UserRegisterController',
+            controllerAs: 'UserRegister'
+        }).when('/user/edit', {
             templateUrl: 'views/user-register.html',
             controller: 'UserRegisterController',
             controllerAs: 'UserRegister'

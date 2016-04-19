@@ -3,7 +3,7 @@ import PatientRepository from '../service/PatientRepository'
 import PatientService from 'ts/service/PatientService';
 import Patient from '../model/patient'
 
-export class UserSearchController {
+export default class UserSearchController {
     social: string;
 
     static $inject = [

@@ -14,7 +14,7 @@
       "clean-css": "npm:clean-css@^3.4.10",
       "karma-junit-reporter": "npm:karma-junit-reporter@^0.4.2",
       "papaparse": "npm:papaparse@^4.1.2",
-      "typescript": "npm:typescript@^1.6.2"
+      "typescript": "npm:typescript@^1.8.10"
     }
   },
   "devDependencies": {
