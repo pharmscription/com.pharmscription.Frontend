@@ -4,7 +4,7 @@ import DrugSearchItems from 'ts/model/drugSearchItems'
 import DrugService from 'ts/service/DrugService'
 
 export interface IDrugSearchScope extends angular.IScope {
-    searchForm: any;
+    searchForm: angular.IFormController;
 }
 
 export default class DrugSearchController {

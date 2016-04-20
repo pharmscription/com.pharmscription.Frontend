@@ -102,7 +102,7 @@
                 <span>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</span>
                 <span>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</span>
             </div>
-            <md-button>Anzeigen</md-button>
+            <md-button ng-click="UserOverview.showPrescription(prescription.Id)" class="md-raised">Anzeigen</md-button>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>

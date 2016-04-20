@@ -2,6 +2,7 @@
 import Prescription from 'ts/model/prescription'
 import PatientService from 'ts/service/PatientService'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
+import PrescriptionService from 'ts/service/PrescriptionService'
 
 export default class UserOverviewController {
     patient: Patient;
@@ -9,16 +10,20 @@ export default class UserOverviewController {
 
     public static $inject = [
         '$location',
+        '$log',
         '$mdToast',
         'PatientService',
-        'PrescriptionRepository'
+        'PrescriptionRepository',
+        'PrescriptionService'
     ];
     
     constructor(
         private $location: angular.ILocationService,
+        private $log: angular.ILogService,
         private $mdToast: angular.material.IToastService,
         private patientService: PatientService,
-        private prescriptionRepository: PrescriptionRepository) {
+        private prescriptionRepository: PrescriptionRepository,
+        private prescriptionService: PrescriptionService) {
         this.patient = this.patientService.getPatient();
         if (this.patient === null) {
             this.showToast('Patient konnte nicht geladen werden!');
@@ -41,5 +46,13 @@ export default class UserOverviewController {
 
     editUser() {
         this.$location.url('user/edit');
+    }
+
+    showPrescription(prescriptionId: string) {
+        this.$log.debug(prescriptionId);
+        this.$log.debug(this.patient.Id);
+        this.prescriptionService.setPatientId(this.patient.Id);
+        this.prescriptionService.setPrescriptionId(prescriptionId);
+        this.$location.url('prescription/view');
     }
 }

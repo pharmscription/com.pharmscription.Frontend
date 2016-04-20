@@ -8,21 +8,23 @@ import 'ng-slide-down'
 
 moment.locale('de');
 
-import MainMenuController from './controller/MainMenuController'
-import MainSideMenuController from './controller/MainSideMenuController'
-import UserRegisterController from './controller/UserRegisterController'
-import UserSearchController from './controller/UserSearchController'
+import MainMenuController from 'ts/controller/MainMenuController'
+import MainSideMenuController from 'ts/controller/MainSideMenuController'
+import UserRegisterController from 'ts/controller/UserRegisterController'
+import UserSearchController from 'ts/controller/UserSearchController'
 import UserOverviewController from 'ts/controller/UserOverviewController'
-import DrugSearchController from './controller/DrugSearchController'
+import DrugSearchController from 'ts/controller/DrugSearchController'
 import PrescriptionCreatorController from 'ts/controller/PrescriptionCreatorController'
+import PrescriptionViewController from 'ts/controller/PrescriptionViewController'
 
-import PatientRepository from './service/PatientRepository'
-import DrugRepository from './service/DrugRepository'
+import PatientRepository from 'ts/service/PatientRepository'
+import DrugRepository from 'ts/service/DrugRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
-import DrugService from './service/DrugService'
-import AHVNumberService from './service/AHVNumberService'
+import PrescriptionService from 'ts/service/PrescriptionService'
+import DrugService from 'ts/service/DrugService'
+import AHVNumberService from 'ts/service/AHVNumberService'
 import PatientService from 'ts/service/PatientService'
-import SocialNumber from './directives/socialnumber'
+import SocialNumber from 'ts/directives/socialnumber'
 
 export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng-slide-down'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
@@ -76,6 +78,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
             templateUrl: 'views/drug-search.html',
             controller: 'DrugSearchController',
             controllerAs: 'DrugSearch'
+        }).when('/prescription/view', {
+            templateUrl: 'views/prescription-view.html',
+            controller: 'PrescriptionViewController',
+            controllerAs: 'PrescriptionView'
         }).otherwise({
             redirectTo: '/'
         });
@@ -87,10 +93,12 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     .controller('UserOverviewController', UserOverviewController)
     .controller('DrugSearchController', DrugSearchController)
     .controller('PrescriptionCreatorController', PrescriptionCreatorController)
+    .controller('PrescriptionViewController', PrescriptionViewController)
     .service('PatientRepository', PatientRepository)
     .service('DrugRepository', DrugRepository)
     .service('PrescriptionRepository', PrescriptionRepository)
     .service('DrugService', DrugService)
     .service('AHVNumberService', AHVNumberService)
     .service('PatientService', PatientService)
+    .service('PrescriptionService', PrescriptionService)
     .directive('ngSocialnumber', SocialNumber.factory());

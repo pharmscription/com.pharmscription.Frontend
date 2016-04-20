@@ -8,35 +8,35 @@
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <md-icon md-font-set="material-icons"></md-icon>
-                    <input ng-model="UserRegister.patient.AhvNumber" type="text" placeholder="AHV-Nummer" disabled ng-required>
+                    <input ng-model="UserRegister.patient.AhvNumber" type="text" placeholder="AHV-Nummer" disabled required>
                 </md-input-container>
                 <div layout="row">
                     <md-input-container flex class="md-block">
                         <!-- Use floating placeholder instead of label -->
                         <md-icon md-font-set="material-icons" class="person">person</md-icon>
-                        <input ng-model="UserRegister.patient.FirstName" type="text" placeholder="Name" ng-required>
+                        <input ng-model="UserRegister.patient.FirstName" type="text" placeholder="Name" required>
                     </md-input-container>
                     <md-input-container flex class="md-block">
                         <!-- Use floating placeholder instead of label -->
-                        <input ng-model="UserRegister.patient.LastName" type="text" placeholder="Nachname" ng-required>
+                        <input ng-model="UserRegister.patient.LastName" type="text" placeholder="Nachname" required>
                         <md-icon></md-icon>
                     </md-input-container>
                 </div>
 
                 <div class="date-picker">
-                    <md-datepicker flex ng-model="UserRegister.patient.BirthDateStr" md-placeholder="Geburtsdatum"></md-datepicker>
+                    <md-datepicker flex ng-model="UserRegister.patient.BirthDateStr" md-placeholder="Geburtsdatum" required></md-datepicker>
                 </div>
 
                 <div class="address" layout="column" flex>
                     <div layout="row">
                         <md-input-container flex="70" class="md-block">
                             <!-- Use floating placeholder instead of label -->
-                            <input ng-model="UserRegister.patient.Address.Street" type="text" placeholder="Strasse" ng-required>
+                            <input ng-model="UserRegister.patient.Address.Street" type="text" placeholder="Strasse" required>
                             <md-icon md-font-set="material-icons" class="location_city">location_city</md-icon>
                         </md-input-container>
                         <md-input-container flex class="md-block">
                             <!-- Use floating placeholder instead of label -->
-                            <input ng-model="UserRegister.patient.Address.Number" type="number" placeholder="Hausnr." ng-required>
+                            <input ng-model="UserRegister.patient.Address.Number" type="number" placeholder="Hausnr." required>
                             <md-icon></md-icon>
                         </md-input-container>
                     </div>
@@ -48,12 +48,12 @@
                     <div layout="row">
                         <md-input-container flex="30" class="md-block">
                             <!-- Use floating placeholder instead of label -->
-                            <input ng-model="UserRegister.patient.Address.CityCode" type="number" placeholder="PLZ" ng-pattern="/[0-9]{4}$/" ng-required>
+                            <input ng-model="UserRegister.patient.Address.CityCode" type="number" placeholder="PLZ" ng-pattern="/[0-9]{4}$/" required>
                             <md-icon></md-icon>
                         </md-input-container>
                         <md-input-container flex class="md-block">
                             <!-- Use floating placeholder instead of label -->
-                            <input ng-model="UserRegister.patient.Address.City" type="text" placeholder="Stadt" ng-required>
+                            <input ng-model="UserRegister.patient.Address.City" type="text" placeholder="Stadt" required>
                             <md-icon></md-icon>
                         </md-input-container>
                     </div>
@@ -71,25 +71,25 @@
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <md-icon md-font-set="material-icons" class="phone">phone</md-icon>
-                    <input ng-model="UserRegister.patient.PhoneNumber" type="tel" placeholder="Telefon" ng-pattern="/^(\(?([0-9]{3})\)?)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/" ng-required>
+                    <input ng-model="UserRegister.patient.PhoneNumber" type="tel" placeholder="Telefon" ng-pattern="/^(\(?([0-9]{3})\)?)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/" required>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <md-icon md-font-set="material-icons" class="email">email</md-icon>
-                    <input ng-model="UserRegister.patient.EMailAddress" type="email" placeholder="Email" ng-required>
+                    <input ng-model="UserRegister.patient.EMailAddress" type="email" placeholder="Email" required>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <md-icon md-font-set="material-icons" class="local_hospital">local_hospital</md-icon>
-                    <input ng-model="UserRegister.patient.InsuranceNumber" type="text" placeholder="Versicherungs-Nummer" ng-required>
+                    <input ng-model="UserRegister.patient.InsuranceNumber" type="text" placeholder="Versicherungs-Nummer" required>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <md-icon></md-icon>
-                    <input ng-model="UserRegister.patient.Insurance" type="text" placeholder="Versicherung" ng-required>
+                    <input ng-model="UserRegister.patient.Insurance" type="text" placeholder="Versicherung" required>
                 </md-input-container>
             </div>
         </form>
