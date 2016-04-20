@@ -1,0 +1,30 @@
+﻿<md-toolbar class="md-primary md-hue-1">
+    <div class="md-toolbar-tools">Patienten Übersicht</div>
+</md-toolbar>
+<md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
+    <div>History</div>
+    <div>Rezept Title</div>
+    <md-list>
+        <md-list-item class="md-3-line" ng-repeat="Drug in PrescriptionView.Drugs">
+            <md-icon></md-icon>
+            <span>{{Drug.DrugDescription}}</span>
+        </md-list-item>
+    </md-list>
+    <div>Doctor</div>
+</md-whiteframe>
+<md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
+    <div>Rezeptabgabe</div>
+    <md-list flex>
+        <md-list-item class="md-3-line" ng-show="!UserOverview.prescriptions.length" flex>
+            <md-icon class="material-icons md-48">insert_drive_file</md-icon>
+            <span>keine Rezepte</span>
+            <md-button>Anzeigen</md-button>
+        </md-list-item>
+        <md-list-item class="md-3-line" ng-repeat="prescription in UserOverview.prescriptions">
+            <md-icon class="md-36" md-font-set="material-icons">insert_drive_file</md-icon>
+            <p>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</p>
+            <p>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</p>
+            <md-button>Anzeigen</md-button>
+        </md-list-item>
+    </md-list>
+</md-whiteframe>
