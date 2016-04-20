@@ -98,15 +98,14 @@
                 <span>keine erfassten Rezepte</span>
             </div>
         </md-list-item>
-        <md-list-item ng-repeat="prescription in UserOverview.prescriptions">
-            <div>
-                <md-icon class="md-48" md-font-set="material-icons">insert_drive_file</md-icon>
-            </div>
+        <md-list-item ng-repeat="prescription in UserOverview.prescriptions" ng-click="UserOverview.showPrescription(prescription.Id)">
+            <md-icon class="md-48" md-font-set="material-icons">insert_drive_file</md-icon>
             <div layout="column" layout-align="center start">
+                <md-tooltip>Rezept anzeigen</md-tooltip>
                 <span>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</span>
                 <span>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</span>
             </div>
-            <md-button ng-click="UserOverview.showPrescription(prescription.Id)" class="md-secondary">Anzeigen</md-button>
+            <div flex></div>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>

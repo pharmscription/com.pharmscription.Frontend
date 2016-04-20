@@ -21,19 +21,27 @@
     </md-list>
     <div layout="row" layout-align="space-between center">
         <span class="md-headline">Rezept #{{PrescriptionView.prescription.Id}}</span>
-        <span>Gültig bis: {{PrescriptionView.prescription.ValidUntil}}</span>
+        <span>Gültig bis: {{PrescriptionView.prescription.ValidUntil | date:"dd.MM.yyyy"}}</span>
     </div>
     <md-divider></md-divider>
     <md-list>
-        <md-list-item ng-repeat="drugItem in PrescriptionView.prescription.Drugs">
-            <md-icon class="md-avatar-icon">healing</md-icon>
+        <md-list-item ng-repeat="drugItem in PrescriptionView.prescription.Drugs" layout="row">
+            <md-icon>healing</md-icon>
             <div class="md-list-item-text" layout="column">
                 <span>Beschreibung: {{drugItem.Drug.DrugDescription}}</span>
                 <span>Dosierung: {{drugItem.DosageDescription}}</span>
                 <span>Menge: {{drugItem.Quantity}}</span>
             </div>
+            <md-button class="md-secondary" ng-click="PrescriptionView.addToDispense(drugItem)">
+                <md-icon>add_circle</md-icon>
+                <md-tooltip>Medikament zur Abgabe hinzufügen</md-tooltip>
+            </md-button>
         </md-list-item>
     </md-list>
+    <md-button class="md-raised md-accent">
+        <md-icon>mode_edit</md-icon>
+        Rezept bearbeiten
+    </md-button>
 </md-whiteframe>
 <md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin>
     <div ng-click="widgetExpanded = !widgetExpanded">
@@ -51,18 +59,24 @@
     </div>
 </md-whiteframe>
 <md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
-    <div>Rezeptabgabe</div>
-    <md-list flex>
-        <md-list-item class="md-3-line" ng-show="!UserOverview.prescriptions.length" flex>
-            <md-icon class="material-icons md-48">insert_drive_file</md-icon>
-            <span>keine Rezepte</span>
-            <md-button>Anzeigen</md-button>
+    <span class="md-headline">Rezeptabgabe</span>
+    <md-list >
+        <md-list-item ng-show="!PrescriptionView.prescription.Dispenses.length">
+            <md-icon class="md-48 md-avatar-icon">insert_drive_file</md-icon>
+            <span class="md-list-item-text">keine Medikamentenabgaben</span>
+            <span flex></span>
         </md-list-item>
-        <md-list-item class="md-3-line" ng-repeat="prescription in UserOverview.prescriptions">
-            <md-icon class="md-36" md-font-set="material-icons">insert_drive_file</md-icon>
-            <p>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</p>
-            <p>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</p>
-            <md-button>Anzeigen</md-button>
+        <md-list-item ng-repeat="dispense in PrescriptionView.prescription.Dispenses">
+            <md-icon class="md-36 md-avatar-icon">insert_drive_file</md-icon>
+            <md-list>
+                <md-list-item ng-repeat="drugItem in dispense.DrugItems">
+                    <md-icon>healing</md-icon>
+                    <span>{{ drugItem.drugDescription}}</span>
+                </md-list-item>
+            </md-list>
+            <span>Medikamentenabgabe von {{dispense.HandedBy.FirstName}} {{dispense.HandedBy.LastName}}</span>
+            <span>Ausgestellt am {{dispense.Date | date:"dd.MM.yyyy"}}</span>
+            <md-button class="md-secondary md-raised">Anzeigen</md-button>
         </md-list-item>
     </md-list>
 </md-whiteframe>

@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <meta charset="utf-8"/>
-    <link href="jspm_packages/github/angular/bower-material@1.0.6/angular-material.min.css" rel="stylesheet"/>
+    <link href="jspm_packages/github/angular/bower-material@1.1.0-rc4/angular-material.min.css" rel="stylesheet" />
     <link href="img/icons/material-icons.css" rel="stylesheet"/>
     <link href="style/style.css" rel="stylesheet" />
 </head>
@@ -40,11 +40,11 @@
                 <md-content ng-controller="MainSideMenuController as SideMenu">
                     <md-list>
                         <md-list-item ng-click="SideMenu.goTo('#')">
-                            <md-icon class="md-avatar-icon">search</md-icon>
+                            <md-icon>search</md-icon>
                             <p class="md-exclude">Patient suchen</p>
                         </md-list-item>
                         <md-list-item ng-click="SideMenu.goTo('/drug/search')">
-                            <md-icon class="md-avatar-icon">healing</md-icon>
+                            <md-icon>healing</md-icon>
                             <p class="md-exclude">Medikament suchen</p>
                         </md-list-item>
                     </md-list>
@@ -71,6 +71,4 @@ System.import('./ts/bootstrap.ts')
 
 <!--<script src="js/main.js"></script>-->
 </body>
-
-
 </html>

@@ -4,12 +4,12 @@ import DrugstoreEmployee from 'ts/model/drugstoreemployee'
 
 export default class Dispense {
 
-    Attribut: string;
-    Date: Date;
-    Remark: string;
-    DrugItems: Array<DrugItem>;
-    SignedBy: Drugist;
-    HandedBy: DrugstoreEmployee;
+    Attribut: string = null;
+    Date: Date = null;
+    Remark: string = null;
+    DrugItems: Array<DrugItem> = [];
+    SignedBy: Drugist = null;
+    HandedBy: DrugstoreEmployee = null;
 
     constructor() {}
 
