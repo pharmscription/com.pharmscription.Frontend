@@ -15,7 +15,8 @@ export default class UserOverviewController {
         '$mdToast',
         'PatientService',
         'PrescriptionRepository',
-        'DrugService'
+        'DrugService',
+        'PrescriptionService'
     ];
     
     constructor(
@@ -24,7 +25,8 @@ export default class UserOverviewController {
         private $mdToast: angular.material.IToastService,
         private patientService: PatientService,
         private prescriptionRepository: PrescriptionRepository,
-        private drugService: DrugService) {
+        private drugService: DrugService,
+        private prescriptionService: PrescriptionService) {
         this.patient = this.patientService.getPatient();
         if (this.patient === null) {
             this.showToast('Patient konnte nicht geladen werden!');

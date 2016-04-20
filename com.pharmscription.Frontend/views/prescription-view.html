@@ -30,7 +30,7 @@
             <div layout="column" layout-align="center start">
                 <span>Beschreibung: {{drugItem.Drug.DrugDescription}}</span>
                 <span>Dosierung: {{drugItem.DosageDescription}}</span>
-                <span>Menge: {{drugItem.Amount}}</span>
+                <span>Menge: {{drugItem.Quantity}}</span>
             </div>
         </md-list-item>
     </md-list>
@@ -42,11 +42,13 @@
         <div>Aussteller Informationen</div>
         <md-divider></md-divider>
     </div>
-    <div layout="column" layout-align="center start" ng-show="widgetExpanded">
-        <span>{{ PrescriptionView.prescription.Doctor.FirstName }} {{PrescriptionView.prescription.Doctor.LastName}}</span>
-        <span>{{ PrescriptionView.prescription.Doctor.Address.Street}} {{PrescriptionView.prescription.Doctor.Address.Number}}</span>
-        <span>{{ PrescriptionView.prescription.Doctor.Address.CityCode}} {{PrescriptionView.prescription.Doctor.Address.City}}</span>
-        <span>Tel. {{ PrescriptionView.prescription.Doctor.PhoneNumber}}</span>
+    <div ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
+        <div layout="column" layout-align="center start" >
+            <span>{{ PrescriptionView.prescription.Doctor.FirstName }} {{PrescriptionView.prescription.Doctor.LastName}}</span>
+            <span>{{ PrescriptionView.prescription.Doctor.Address.Street}} {{PrescriptionView.prescription.Doctor.Address.Number}}</span>
+            <span>{{ PrescriptionView.prescription.Doctor.Address.CityCode}} {{PrescriptionView.prescription.Doctor.Address.City}}</span>
+            <span>Tel. {{ PrescriptionView.prescription.Doctor.PhoneNumber}}</span>
+        </div>
     </div>
 </md-whiteframe>
 <md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
