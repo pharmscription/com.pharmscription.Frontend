@@ -2,6 +2,7 @@
 import Prescription from 'ts/model/prescription'
 import PatientService from 'ts/service/PatientService'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
+import DrugService from 'ts/service/DrugService'
 import PrescriptionService from 'ts/service/PrescriptionService'
 
 export default class UserOverviewController {
@@ -14,7 +15,7 @@ export default class UserOverviewController {
         '$mdToast',
         'PatientService',
         'PrescriptionRepository',
-        'PrescriptionService'
+        'DrugService'
     ];
     
     constructor(
@@ -23,7 +24,7 @@ export default class UserOverviewController {
         private $mdToast: angular.material.IToastService,
         private patientService: PatientService,
         private prescriptionRepository: PrescriptionRepository,
-        private prescriptionService: PrescriptionService) {
+        private drugService: DrugService) {
         this.patient = this.patientService.getPatient();
         if (this.patient === null) {
             this.showToast('Patient konnte nicht geladen werden!');
@@ -41,6 +42,7 @@ export default class UserOverviewController {
     }
 
     addPrescription() {
+        this.drugService.removeDrugs();
         this.$location.url('prescription/create');
     }
 

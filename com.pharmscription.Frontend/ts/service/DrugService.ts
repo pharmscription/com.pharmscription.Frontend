@@ -19,4 +19,8 @@ export default class DrugService {
         this.drugs.splice(index, 1);
     }
 
+    removeDrugs(): void {
+        this.drugs = [];
+    }
+
 }
