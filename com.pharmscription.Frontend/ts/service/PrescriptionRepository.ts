@@ -48,7 +48,8 @@ export default class PrescriptionRepository {
     }
 
     newPrescription(prescription: Prescription): IPromise<Prescription> {
-        return this.$http.put(this.urls.newPrescription.replace('{patientId}', prescription.Patient.Id),prescription).then((response) => {
+        let data = JSON.stringify(prescription);
+        return this.$http.put(this.urls.newPrescription.replace('{patientId}', prescription.Patient.Id), data).then((response) => {
             if (response.status === 200) {
                 return response.data;
             } else {

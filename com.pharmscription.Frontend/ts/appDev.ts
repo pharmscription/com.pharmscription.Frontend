@@ -154,6 +154,16 @@ export class AppDev {
         });
 
         /*
+            PUT     /patients/{id}/prescriptions
+        */
+        $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions/).respond((method: string, url: string, data: string) => {
+            let newPrescription: Prescription = angular.fromJson(data);
+            newPrescription.Id = Math.floor((Math.random() * 10000) + 1).toString();
+            prescriptions.push(newPrescription);
+            return [200, newPrescription, {}];
+        });
+
+        /*
             PUT     /patients
         */
         $httpBackend.whenPUT(/\/patients/).respond((method:string, url:string, data: string) => {
@@ -174,16 +184,6 @@ export class AppDev {
             return [200, data, {}];
         });
 
-        /*
-            PUT     /patients/{id}/prescriptions
-        */
-        $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions/).respond((method: string, url: string, data: string) => {
-            let newPrescription: Prescription = angular.fromJson(data);
-            newPrescription.Id = Math.floor((Math.random() * 10000) + 1).toString();
-            prescriptions.push(newPrescription);
-            
-            return [200, newPrescription, {}];
-        });
 
         /*
             GET     /patients/{id}/prescriptions/{id}

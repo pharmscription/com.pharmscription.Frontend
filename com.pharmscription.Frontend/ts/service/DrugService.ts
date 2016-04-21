@@ -1,26 +1,31 @@
-﻿import Drug from 'ts/model/drug'
+﻿import DrugItem from 'ts/model/drugItem'
 
 export default class DrugService {
-    private drugs: Array<Drug>;
+    private drugItems: Array<DrugItem>;
 
     constructor() {
-        this.drugs = [];
+        this.drugItems = [];
     }
 
-    setDrug(drug: Drug) {
-        this.drugs.push(drug);
+    setDrugItem(drug: DrugItem) {
+        this.drugItems.push(drug);
     }
 
-    getDrugs(): Array<Drug> {
-        return this.drugs;
+    getDrugItems(): Array<DrugItem> {
+        return this.drugItems;
     }
 
-    removeDrug(index: number): void {
-        this.drugs.splice(index, 1);
+    removeDrugItem(index: number): void {
+        this.drugItems.splice(index, 1);
     }
 
-    removeDrugs(): void {
-        this.drugs = [];
+    removeDrugItems(): void {
+        this.drugItems = [];
     }
+
+    saveDrugItems(drugItems: Array<DrugItem>): void {
+        this.drugItems = drugItems;
+    }
+
 
 }
