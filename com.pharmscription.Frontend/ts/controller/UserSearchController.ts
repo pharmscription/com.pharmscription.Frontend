@@ -57,12 +57,12 @@ export default class UserSearchController {
     }
 
     search(event: MouseEvent): void {
-        this.patientRepository.getPatient(this.social).then((foundPatient: Patient) => {
+        this.patientRepository.getPatientByAhv(this.social).then((foundPatient: Patient) => {
             if (foundPatient.FirstName === null || foundPatient.FirstName === undefined) {
                 this.showPatientNotFoundDialog(event);
             } else {
                 //this.showPatientFoundDialog(foundPatient.FirstName, foundPatient.LastName, event);
-                this.patientService.setPatient(foundPatient);
+                this.patientService.setPatientId(foundPatient.Id);
                 this.$location.url('user/overview');
             }
         }, (errorReason) => {

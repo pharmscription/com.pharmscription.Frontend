@@ -20,7 +20,7 @@ export default class DrugRepository {
 
     getDrugs(searchTerm: string): IPromise<Array<Drug>> {
         return this.$http.get(this.urls.get.replace("{keyword}", searchTerm)).then((response) => {
-            if (typeof response.data === 'object') {
+            if (response.data === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -34,7 +34,7 @@ export default class DrugRepository {
 
     getNumItems(searchTerm: string): IPromise<number> {
         return this.$http.get(this.urls.getNumItems.replace("{keyword}", searchTerm)).then((response) => {
-            if (typeof response.data === 'number') {
+            if (response.data === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -47,7 +47,7 @@ export default class DrugRepository {
 
     fetchPage(searchTerm: string, numItems: number, page: number): IPromise<Array<Drug>> {
         return this.$http.get(this.urls.getPage.replace("{keyword}", searchTerm).replace("{amount}", numItems).replace("{page}", page)).then((response) => {
-            if (typeof response.data === 'object') {
+            if (response.data === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
