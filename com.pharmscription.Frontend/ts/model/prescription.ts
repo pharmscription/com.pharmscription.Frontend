@@ -17,8 +17,8 @@ export default class Prescription {
         public PrescriptionHistory: Array<Prescription> = [],
         public Drugs: Array<DrugItem> = [],
         public Dispenses: Array<Dispense> = [],
-        public Id?: string,
-        public SignDate?: Date
+        public Id: string = null,
+        public SignDate: Date = null
     ) { }
 
 }

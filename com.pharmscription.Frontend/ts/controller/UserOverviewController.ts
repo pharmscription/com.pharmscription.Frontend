@@ -62,8 +62,6 @@ export default class UserOverviewController {
     }
 
     showPrescription(prescriptionId: string) {
-        this.$log.debug(prescriptionId);
-        this.$log.debug(this.patient.Id);
         this.prescriptionService.setPatientId(this.patient.Id);
         this.prescriptionService.setPrescriptionId(prescriptionId);
         this.$location.url('prescription/view');
