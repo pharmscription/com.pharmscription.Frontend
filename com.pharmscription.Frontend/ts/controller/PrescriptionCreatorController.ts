@@ -7,6 +7,7 @@ import Doctor from 'ts/model/doctor'
 import Address from 'ts/model/address'
 import DrugItem from 'ts/model/drugitem'
 
+
 export default class PrescriptionCreatorController {
     patient: Patient;
     prescription: Prescription;
@@ -62,5 +63,13 @@ export default class PrescriptionCreatorController {
     savePrescription(prescription: Prescription): void {
         this.prescription.Drugs = this.drugItems;
         console.log(this.prescription);
+    }
+
+    togglePrescriptionType(): void {
+        if (this.prescription.Type === 'N') {
+            this.prescription.Type = 'S';
+        } else {
+            this.prescription.Type = 'N';
+        }
     }
 }
