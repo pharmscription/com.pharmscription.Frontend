@@ -19,12 +19,16 @@ module.exports = function(config) {
         jspm: {
             config: 'config.js',
             loadFiles: [
-                'ts/app.ts',
-                'tests/**/*.js'
+                'build.js',
+                'tests/**/*.ts'
             ],
             serveFiles: [
-                'ts/**/*.ts'
-            ]
+                'views/**/*.html'
+            ],
+            useBundles: true
+            //serveFiles: [
+            //    'ts/**/*.js'
+            //]
             //paths: {
             //    'github:*': 'client/jspm_packages/github/*',
             //    'npm:*': 'client/jspm_packages/npm/*'

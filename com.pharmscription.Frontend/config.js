@@ -12,6 +12,9 @@ System.config({
     "ts": {
       "main": "ts/bootstrap",
       "defaultExtension": "ts"
+    },
+    "tests": {
+        "defaultExtension": "ts"
     }
   },
 

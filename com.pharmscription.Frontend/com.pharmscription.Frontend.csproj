@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="tests\controller\UserSearchController.ts" />
+    <TypeScriptCompile Include="tests\service\PatientRepositoryTest.ts" />
     <TypeScriptCompile Include="tests\service\PatientService.ts" />
     <TypeScriptCompile Include="tests\service\AHVNumberService.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
