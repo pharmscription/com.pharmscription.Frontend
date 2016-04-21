@@ -53,7 +53,7 @@ export default class UserOverviewController {
     }
 
     addPrescription() {
-        this.drugService.removeDrugs();
+        this.drugService.removeDrugItems();
         this.$location.url('prescription/create');
     }
 

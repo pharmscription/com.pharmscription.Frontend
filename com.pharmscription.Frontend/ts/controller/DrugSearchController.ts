@@ -2,6 +2,7 @@
 import DrugRepository from 'ts/service/DrugRepository'
 import DrugSearchItems from 'ts/model/drugSearchItems'
 import DrugService from 'ts/service/DrugService'
+import DrugItem from 'ts/model/DrugItem'
 
 export interface IDrugSearchScope extends angular.IScope {
     searchForm: angular.IFormController;
@@ -63,7 +64,7 @@ export default class DrugSearchController {
 
     addDrug(drug: Drug): void {
         this.$log.debug(drug);
-        this.drugService.setDrug(drug);
+        this.drugService.setDrugItem(new DrugItem(drug));
         this.$location.url('prescription/create');
     };
 }
