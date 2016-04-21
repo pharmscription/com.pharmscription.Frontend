@@ -42,6 +42,8 @@ export default class PatientRepository {
         return this.$http.get(this.urls.getByAhv.replace('{ahv}', ahvNumber)).then((response) => {
                 if (response.status === 200) {
                     return response.data;
+                } else if (response.status === 204) {
+                    return null;
                 } else {
                     return this.$q.reject(response.data);
                 }

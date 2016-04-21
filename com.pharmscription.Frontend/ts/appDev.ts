@@ -77,8 +77,32 @@ export class AppDev {
 
         let backendUrl = 'http://localhost:7642/RestService.svc';
 
+        /* TODO:
+            Patients:
+            GET     /patients/lookup/{ahv}
+            DELETE  /patients/{id}
 
+            Prescriptions:
+            GET     /patients/{id}/prescriptions/{id}/counterproposals
+            PUT     /patients/{id}/prescriptions/{id}/counterproposals
+            GET     /patients/{id}/prescriptions/{id}/counterproposals/{id}
+            GET     /patients/{id}/prescriptions/{id}/dispenses
+            PUT     /patients/{id}/prescriptions/{id}/dispenses
+            GET     /patiens/{id}/prescriptions/{id}/drugs
+            GET     /patiens/{id}/prescriptions/{id}/drugs/{id}
 
+            Drugs:
+            GET     /drugs/{id}
+
+            Login:
+            POST    /login
+            POST    /password/change
+            POST    /password/reset/{shared-secret}
+        */
+
+        /*
+            GET     /drugs/search/count/{keyword}
+        */
         $httpBackend.whenGET(/\/drugs\/search\/count\/(.+)/, undefined, ['searchTerm']).respond((method: string, url: string, data: any, headers: any, params: any) => {
             let found = drugs.filter((drug: Drug) => {
                 if (drug.DrugDescription === undefined || drug.DrugDescription === null)
@@ -93,6 +117,9 @@ export class AppDev {
             }
         });
 
+        /*
+            GET     /drugs/search/{keyword}/{page}/{amount}
+        */
         $httpBackend.whenGET(/\/drugs\/search\/(.+)\/(.+)\/(.+)/, undefined, ['searchTerm', 'page', 'pageSize']).respond((method: string, url: string, data: any, headers: any, params: any) => {
             let found = drugs.filter((drug: Drug) => {
                 if (drug.DrugDescription === undefined || drug.DrugDescription === null)
@@ -110,6 +137,9 @@ export class AppDev {
             }
         });
 
+        /*
+            GET     /drugs/search/{keyword}
+        */
         $httpBackend.whenGET(/\/drugs\/search\/(.+)/, undefined, ['searchTerm']).respond((method: string, url: string, data: any, headers: any, params: any) => {
            let found = drugs.filter((drug: Drug) => {
                 if (drug.DrugDescription === undefined || drug.DrugDescription === null)
@@ -123,12 +153,19 @@ export class AppDev {
             }
         });
 
+        /*
+            PUT     /patients
+        */
         $httpBackend.whenPUT(/\/patients/).respond((method:string, url:string, data: string) => {
             let patient: Patient = angular.fromJson(data);
             patient.Id = Math.floor((Math.random() * 10000) + 1).toString();
             patients.push(patient);
             return [200, data, {}];
         });
+
+        /*
+            POST    /patients/{id}
+        */
 
         $httpBackend.whenPOST(/\/patients\/(.+)/, undefined, undefined, ['patientId'] ).respond((method: string, url: string, data: string) => {
             let patient: Patient = angular.fromJson(data);
@@ -137,6 +174,9 @@ export class AppDev {
             return [200, data, {}];
         });
 
+        /*
+            PUT     /patients/{id}/prescriptions
+        */
         $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions/).respond((method: string, url: string, data: string) => {
             let newPrescription: Prescription = angular.fromJson(data);
             newPrescription.Id = Math.floor((Math.random() * 10000) + 1).toString();
@@ -145,6 +185,9 @@ export class AppDev {
             return [200, newPrescription, {}];
         });
 
+        /*
+            GET     /patients/{id}/prescriptions/{id}
+        */
         $httpBackend.whenGET(/\/patients\/(.+)\/prescriptions\/(.+)/, undefined, ['patientId', 'prescriptionId']).respond((method: string, url: string, data: any, headers: any, params: any) => {
             let patientPrescriptions = prescriptions.filter((prescription: Prescription) => {
                 return prescription.Patient.Id === params.patientId;
@@ -158,6 +201,9 @@ export class AppDev {
             return [200, specificPrescription, {}];
         });
 
+        /*
+            GET     /patients/{id}/prescriptions
+        */
         $httpBackend.whenGET(/\/patients\/(.+)\/prescriptions/, undefined, ['patientId']).respond((method: string, url: string, data: any, headers: any, params: any) => {
             let foundPrescriptions = prescriptions.filter((prescription: Prescription) => {
                 return prescription.Patient.Id === params.patientId;
@@ -168,6 +214,9 @@ export class AppDev {
             return [200, foundPrescriptions, {}];
         });
 
+        /*
+            GET     /patients/ahv-number/{ahv}
+        */
         $httpBackend.whenGET(/\/patients\/ahv-number\/(.+)/, undefined, ['ahvNumber']).respond((method: string, url: string, data: any, headers: any, params: any) => {
            let found = patients.filter((patient: Patient) => { return patient.AhvNumber === params.ahvNumber })[0];
             if (found === undefined) {
@@ -177,6 +226,9 @@ export class AppDev {
             }
         });
 
+        /*
+            GET     /patients/{id}
+        */
         $httpBackend.whenGET(/\/patients\/(.+)/, undefined, ['id']).respond((method: string, url: string, data: any, headers: any, params: any) => {
             let found = patients.filter((patient: Patient) => { return patient.Id === params.id })[0];
             if (found === undefined) {

@@ -37,7 +37,12 @@ export default class UserRegisterController {
         if (this.controllerMode === Mode.Register) {
             this.patient = new Patient(this.ahvNumberService.getAHVNumber());
         } else {
-            this.patient = this.PatientService.getPatient();
+            this.patientRepository.getPatientById(this.PatientService.getPatientId()).then((foundPatient) => {
+                this.patient = foundPatient;
+            }, (error) => {
+                this.showToast('Patient konnte nicht geladen werden');
+                this.$log.error(error);
+            });
         }
 
     }
@@ -49,7 +54,7 @@ export default class UserRegisterController {
     savePatient(patient: Patient): void {
         if (this.controllerMode === Mode.Register) {
             this.patientRepository.addPatient(patient).then((addedPatient) => {
-                this.PatientService.setPatient(addedPatient);
+                this.PatientService.setPatientId(addedPatient.Id);
                 this.showToast(addedPatient.FirstName + " " + addedPatient.LastName + " gespeichert!");
             }, (error) => {
                 this.$log.error(error);
@@ -57,7 +62,7 @@ export default class UserRegisterController {
             });
         } else {
             this.patientRepository.editPatient(patient).then((editedPatient) => {
-                this.PatientService.setPatient(editedPatient);
+                this.PatientService.setPatientId(editedPatient.Id);
                 this.showToast("Änderungen an " + editedPatient.FirstName + " " + editedPatient.LastName + " gespeichert!");
             }, (error) => {
                 this.$log.error(error);
