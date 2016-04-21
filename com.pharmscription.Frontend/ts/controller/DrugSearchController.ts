@@ -7,14 +7,19 @@ export interface IDrugSearchScope extends angular.IScope {
     searchForm: angular.IFormController;
 }
 
+enum Mode {
+    addMode = 1,
+    standardMode = 2
+}
+
+
 export default class DrugSearchController {
     searchedDrug: string;
     lastSearchTerm: string;
     searchResultAmount: Number;
     progressFlag: boolean;
     drugSearchResults: DrugSearchItems;
-    originUrl: string;
-    addMode: boolean;
+    controllerMode: Mode;
 
 
     static $inject = [
@@ -33,11 +38,10 @@ export default class DrugSearchController {
     }
 
     chooseViewMode(): void {
-        this.originUrl = this.$location.url();
-        if (this.originUrl == "/prescription/drug/search") {
-            this.addMode = true;
+        if (this.$location.url() === "/prescription/drug/search") {
+            this.controllerMode = Mode.addMode
         } else {
-            this.addMode = false;
+            this.controllerMode = Mode.standardMode;
         }
     }
 

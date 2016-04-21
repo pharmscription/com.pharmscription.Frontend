@@ -39,7 +39,7 @@
                     <p>Komposition: <b>{{drug.Composition}}</b></p>
                     <p>Betäubungsmittel-Kategorie: <b>{{drug.NarcoticCategory}}</b></p>
                 </div>
-                <md-button class="md-secondary" ng-click="DrugSearch.addDrug(drug)" ng-show="DrugSearch.addMode">HINZUFÜGEN</md-button>
+                <md-button class="md-secondary" ng-click="DrugSearch.addDrug(drug)" ng-show="DrugSearch.controllerMode == '1'">HINZUFÜGEN</md-button>
             </div>
             <md-divider></md-divider>
         </md-list-item>

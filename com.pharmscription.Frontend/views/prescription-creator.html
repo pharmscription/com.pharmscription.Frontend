@@ -29,8 +29,13 @@
             <div class="date-picker">
                 <md-datepicker ng-model="PrescriptionCreator.prescription.ValidUntil" md-placeholder="Gültig bis"></md-datepicker>
             </div>
-            <md-switch ng-model="PrescriptionCreator.prescription.Type">
-                Dauerrezept: {{ PrescriptionCreator.prescripton.Type }}
+            <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default>
+                <span ng-if="PrescriptionCreator.prescription.Type === 'N'" class="animate-if">
+                    Einzelrezept
+                </span>
+                <span ng-if="PrescriptionCreator.prescription.Type === 'S'" class="animate-if">
+                    Dauerrezept
+                </span>
             </md-switch>
             <md-button id="prescription-add-button" class="md-fab" ng-click="PrescriptionCreator.addDrug()">
                 <md-tooltip>
