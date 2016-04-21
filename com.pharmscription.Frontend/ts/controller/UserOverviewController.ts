@@ -1,6 +1,7 @@
 ﻿import Patient from 'ts/model/patient'
 import Prescription from 'ts/model/prescription'
 import PatientService from 'ts/service/PatientService'
+import PatientRepository from 'ts/service/PatientRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
 import DrugService from 'ts/service/DrugService'
 import PrescriptionService from 'ts/service/PrescriptionService'
@@ -14,6 +15,7 @@ export default class UserOverviewController {
         '$log',
         '$mdToast',
         'PatientService',
+        'PatientRepository',
         'PrescriptionRepository',
         'DrugService',
         'PrescriptionService'
@@ -24,19 +26,26 @@ export default class UserOverviewController {
         private $log: angular.ILogService,
         private $mdToast: angular.material.IToastService,
         private patientService: PatientService,
+        private patientRepository: PatientRepository,
         private prescriptionRepository: PrescriptionRepository,
         private drugService: DrugService,
         private prescriptionService: PrescriptionService) {
-        this.patient = this.patientService.getPatient();
-        if (this.patient === null) {
+        this.patientRepository.getPatientById(this.patientService.getPatientId()).then((foundPatient) => {
+            this.patient = foundPatient;
+            this.getPrescriptions();
+        }, (error) => {
             this.showToast('Patient konnte nicht geladen werden!');
-        } else {
-            this.prescriptionRepository.getPrescriptions(this.patient.Id).then((foundPrescriptions) => {
-                this.prescriptions = foundPrescriptions;
-            }, (error) => {
-                this.showToast('Rezepte konnten nicht geladen werden!');
-            });
-        }
+            this.$log.error(error);
+        });
+    }
+
+    getPrescriptions() {
+        this.prescriptionRepository.getPrescriptions(this.patient.Id).then((foundPrescriptions) => {
+            this.prescriptions = foundPrescriptions;
+        }, (error) => {
+            this.showToast('Rezepte konnten nicht geladen werden!');
+            this.$log.error(error);
+        });
     }
 
     showToast(message: string) {

@@ -6,8 +6,9 @@ export default class PatientRepository {
 
     private urls: any = {
         add: 'http://localhost:7642/RestService.svc/patients',
-        insuranceLookup: 'http://localhost:7642/RestService.svc/patients/lookup/:ahvNumber',
-        get: 'http://localhost:7642/RestService.svc/patients/ahv-number/:ahvNumber',
+        insuranceLookup: 'http://localhost:7642/RestService.svc/patients/lookup/{ahv}',
+        getByAhv: 'http://localhost:7642/RestService.svc/patients/ahv-number/{ahv}',
+        getById: 'http://localhost:7642/RestService.svc/patients/{id}',
         edit: 'http://localhost:7642/RestService.svc/patients/{id}'
     }
 
@@ -24,7 +25,7 @@ export default class PatientRepository {
         let data = JSON.stringify(patient);
         this.$log.debug(data);
         return this.$http.put(this.urls.add, data).then((response) => {
-            if (typeof response.data === 'object') {
+            if (response.status === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -36,10 +37,10 @@ export default class PatientRepository {
 
     }
 
-    getPatient(ahvNumber: string): IPromise<Patient> {
+    getPatientByAhv(ahvNumber: string): IPromise<Patient> {
         this.$log.debug(ahvNumber);
-        return this.$http.get(this.urls.get.replace(':ahvNumber', ahvNumber)).then((response) => {
-                if (typeof response.data === 'object') {
+        return this.$http.get(this.urls.getByAhv.replace('{ahv}', ahvNumber)).then((response) => {
+                if (response.status === 200) {
                     return response.data;
                 } else {
                     return this.$q.reject(response.data);
@@ -51,6 +52,22 @@ export default class PatientRepository {
         );
     }
 
+    getPatientById(id: string): IPromise<Patient> {
+        this.$log.debug(id);
+        return this.$http.get(this.urls.getById.replace('{id}', id)).then((response) => {
+                this.$log.debug(id);
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                return this.$q.reject(response.data);
+            }
+        }, (error) => {
+            this.$log.error(error);
+            return this.$q.reject(error);
+        }
+        );
+    }
+
     editPatient(patient: Patient): IPromise<Patient> {
         this.$log.debug(patient.Id);
         if (patient.Id === null || patient.Id === undefined) {
@@ -58,7 +75,7 @@ export default class PatientRepository {
         }
         let data = JSON.stringify(patient);
         return this.$http.post(this.urls.edit.replace('{id}', patient.Id), data).then((response) => {
-            if (typeof response.data === 'object') {
+            if (response.status === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);

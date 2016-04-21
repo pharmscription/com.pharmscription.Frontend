@@ -16,9 +16,9 @@ System.config({
   },
 
   map: {
-    "angular": "github:angular/bower-angular@1.5.3",
-    "angular-material": "github:angular/bower-material@1.0.6",
-    "angular-messages": "github:angular/bower-angular-messages@1.5.3",
+    "angular": "github:angular/bower-angular@1.5.5",
+    "angular-material": "github:angular/bower-material@1.1.0-rc4",
+    "angular-messages": "github:angular/bower-angular-messages@1.5.5",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.3",
     "angular-route": "github:angular/bower-angular-route@1.5.3",
     "clean-css": "npm:clean-css@3.4.10",
@@ -28,26 +28,27 @@ System.config({
     "ng-slide-down": "npm:ng-slide-down@0.4.2",
     "papaparse": "npm:papaparse@4.1.2",
     "typescript": "npm:typescript@1.8.10",
-    "github:angular/bower-angular-animate@1.5.3": {
-      "angular": "github:angular/bower-angular@1.5.3"
+    "github:angular/bower-angular-animate@1.5.5": {
+      "angular": "github:angular/bower-angular@1.5.5"
     },
-    "github:angular/bower-angular-aria@1.5.3": {
-      "angular": "github:angular/bower-angular@1.5.3"
+    "github:angular/bower-angular-aria@1.5.5": {
+      "angular": "github:angular/bower-angular@1.5.5"
     },
-    "github:angular/bower-angular-messages@1.5.3": {
-      "angular": "github:angular/bower-angular@1.5.3"
+    "github:angular/bower-angular-messages@1.5.5": {
+      "angular": "github:angular/bower-angular@1.5.5"
     },
     "github:angular/bower-angular-mocks@1.5.3": {
-      "angular": "github:angular/bower-angular@1.5.3"
+      "angular": "github:angular/bower-angular@1.5.5"
     },
     "github:angular/bower-angular-route@1.5.3": {
-      "angular": "github:angular/bower-angular@1.5.3"
+      "angular": "github:angular/bower-angular@1.5.5"
     },
-    "github:angular/bower-material@1.0.6": {
-      "angular": "github:angular/bower-angular@1.5.3",
-      "angular-animate": "github:angular/bower-angular-animate@1.5.3",
-      "angular-aria": "github:angular/bower-angular-aria@1.5.3",
-      "css": "github:systemjs/plugin-css@0.1.20"
+    "github:angular/bower-material@1.1.0-rc4": {
+      "angular": "github:angular/bower-angular@1.5.5",
+      "angular-animate": "github:angular/bower-angular-animate@1.5.5",
+      "angular-aria": "github:angular/bower-angular-aria@1.5.5",
+      "angular-messages": "github:angular/bower-angular-messages@1.5.5",
+      "css": "github:systemjs/plugin-css@0.1.21"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -1185,7 +1186,8 @@ System.config({
       "pinkie": "npm:pinkie@2.0.4"
     },
     "npm:process-nextick-args@1.0.6": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"

@@ -1,17 +1,17 @@
 ﻿import Patient from "ts/model/patient"
 
 export default class PatientService {
-    private patient: Patient;
+    private patientId: string;
 
-    setPatient(patient: Patient) {
-        this.patient = patient;
+    setPatientId(id: string) {
+        this.patientId = id;
     }
 
-    getPatient(): Patient {
-        if (this.patient === undefined) {
+    getPatientId(): string {
+        if (this.patientId === undefined) {
             return null;
         }
-        return this.patient;
+        return this.patientId;
     }
 
 }

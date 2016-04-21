@@ -1,7 +1,7 @@
 ﻿<md-toolbar class="md-primary md-hue-1">
     <div class="md-toolbar-tools">Patienten Übersicht</div>
 </md-toolbar>
-<md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
     <div class="form-container" layout="column" layout-align="center" layout-margin>
         <md-input-container flex class="md-block">
             <!-- Use floating placeholder instead of label -->
@@ -89,20 +89,23 @@
         </md-button>
     </div>
 </md-whiteframe>
-<md-whiteframe class="whiteframe md-whiteframe-2dp" layout="column" layout-align="center" layout-margin>
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
     <div>Rezepte</div>
-    <md-list flex>
-        <md-list-item class="md-3-line" ng-show="!UserOverview.prescriptions.length" flex>
-            <md-icon class="material-icons md-48">insert_drive_file</md-icon>
-            <span>keine erfassten Rezepte</span>
+    <md-list>
+        <md-list-item ng-show="!UserOverview.prescriptions.length">
+            <div>
+                <md-icon class="material-icons md-48">insert_drive_file</md-icon>
+                <span>keine erfassten Rezepte</span>
+            </div>
         </md-list-item>
-        <md-list-item class="md-3-line" ng-repeat="prescription in UserOverview.prescriptions">
-            <md-icon class="md-36" md-font-set="material-icons">insert_drive_file</md-icon>
+        <md-list-item ng-repeat="prescription in UserOverview.prescriptions" ng-click="UserOverview.showPrescription(prescription.Id)">
+            <md-icon class="md-48" md-font-set="material-icons">insert_drive_file</md-icon>
             <div layout="column" layout-align="center start">
+                <md-tooltip>Rezept anzeigen</md-tooltip>
                 <span>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</span>
                 <span>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</span>
             </div>
-            <md-button ng-click="UserOverview.showPrescription(prescription.Id)" class="md-raised">Anzeigen</md-button>
+            <div flex></div>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>

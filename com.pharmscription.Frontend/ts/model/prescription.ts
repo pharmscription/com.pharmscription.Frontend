@@ -8,7 +8,7 @@ export default class Prescription {
     constructor(
         public Patient: Patient,
         public Doctor: Doctor,
-        public Type: string = 'N', //S=Standing, N=Normal
+        public Type: string = "N", //S=Standing, N=Normal
         public IssueDate: Date = null,
         public EditDate: Date = null,
         public IsValid: boolean = null,
@@ -16,8 +16,8 @@ export default class Prescription {
         public ValidUntil: Date = null,
         public PrescriptionHistory: Array<Prescription> = [],
         public Drugs: Array<DrugItem> = [],
+        public Dispenses: Array<Dispense> = [],
         public Id?: string,
-        public Dispenses?: Array<Dispense>,
         public SignDate?: Date
     ) { }
 
