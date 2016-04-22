@@ -4,9 +4,9 @@ import IPromise = angular.IPromise;
 
 export default class PrescriptionRepository {
     private urls: any = {
-        getPrescriptions: 'http://localhost:7642/RestService.svc/patients/{id}/prescriptions',
-        getPrescription: 'http://localhost:7642/RestService.svc/patients/{patientId}/prescriptions/{prescriptionId}',
-        newPrescription: 'http://localhost:7642/RestService.svc/patients/{id}/prescriptions'
+        getPrescriptions: 'http://localhost:7642/patients/{id}/prescriptions',
+        getPrescription: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}',
+        newPrescription: 'http://localhost:7642/patients/{id}/prescriptions'
     }
 
     static $inject = [

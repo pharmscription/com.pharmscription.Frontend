@@ -25,6 +25,7 @@ export default class DrugSearchController {
 
     static $inject = [
         '$scope',
+        '$q',
         'DrugRepository',
         '$mdDialog',
         '$log',
@@ -33,14 +34,22 @@ export default class DrugSearchController {
         'DrugService'
     ];
 
-    constructor(private $scope: IDrugSearchScope, private drugRepository: DrugRepository, private $mdDialog: angular.material.IDialogService, private $log: angular.ILogService, private $mdToast: angular.material.IToastService, private $location: angular.ILocationService, private drugService: DrugService) {
-        this.setProgressCircle(false);
-        this.chooseViewMode();
+    constructor(
+        private $scope: IDrugSearchScope,
+        private $q: angular.IQService,
+        private drugRepository: DrugRepository,
+        private $mdDialog: angular.material.IDialogService,
+        private $log: angular.ILogService,
+        private $mdToast: angular.material.IToastService,
+        private $location: angular.ILocationService,
+        private drugService: DrugService) {
+            this.setProgressCircle(false);
+            this.chooseViewMode();
     }
 
     chooseViewMode(): void {
         if (this.$location.url() === "/prescription/drug/search") {
-            this.controllerMode = Mode.addMode
+            this.controllerMode = Mode.addMode;
         } else {
             this.controllerMode = Mode.standardMode;
         }
@@ -55,7 +64,7 @@ export default class DrugSearchController {
         this.lastSearchTerm = searchTerm;
         this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';
-        this.drugSearchResults = new DrugSearchItems(this.$scope, this.drugRepository, searchTerm);
+        this.drugSearchResults = new DrugSearchItems(this.$mdToast, this.$q, this.$scope, this.drugRepository, searchTerm);
     }
 
     showToast(message: string) {

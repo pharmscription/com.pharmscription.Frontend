@@ -75,7 +75,7 @@ export class AppDev {
             }
         });
 
-        let backendUrl = 'http://localhost:7642/RestService.svc';
+        let backendUrl = 'http://localhost:7642';
 
         /* TODO:
             Patients:

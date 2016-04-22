@@ -5,11 +5,11 @@ import IPromise = angular.IPromise;
 export default class PatientRepository {
 
     private urls: any = {
-        add: 'http://localhost:7642/RestService.svc/patients',
-        insuranceLookup: 'http://localhost:7642/RestService.svc/patients/lookup/{ahv}',
-        getByAhv: 'http://localhost:7642/RestService.svc/patients/ahv-number/{ahv}',
-        getById: 'http://localhost:7642/RestService.svc/patients/{id}',
-        edit: 'http://localhost:7642/RestService.svc/patients/{id}'
+        add: 'http://localhost:7642/patients',
+        insuranceLookup: 'http://localhost:7642/patients/lookup/{ahv}',
+        getByAhv: 'http://localhost:7642/patients/ahv-number/{ahv}',
+        getById: 'http://localhost:7642/patients/{id}',
+        edit: 'http://localhost:7642/patients/{id}'
     }
 
     static $inject = [
