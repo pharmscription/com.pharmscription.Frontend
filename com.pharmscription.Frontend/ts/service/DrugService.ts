@@ -22,8 +22,9 @@ export default class DrugService {
         this.drugItems.splice(index, 1);
     }
 
-    removeDrugItems(): void {
+    removeAll(): void {
         this.drugItems = [];
+        this.prescription = new Prescription();
     }
 
     savePrescriptionState(prescription: Prescription): void {

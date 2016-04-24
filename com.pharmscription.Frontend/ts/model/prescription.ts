@@ -3,6 +3,7 @@ import Doctor from "ts/model/doctor"
 import Dispense from 'ts/model/dispense'
 import DrugItem from 'ts/model/drugitem'
 
+
 export default class Prescription {
 
     constructor(
@@ -19,6 +20,6 @@ export default class Prescription {
         public Dispenses: Array<Dispense> = [],
         public Id: string = null,
         public SignDate: Date = null
-    ) { }
+    ) {}
 
 }

@@ -15,6 +15,8 @@ export default class PrescriptionCreatorController {
     prescription: Prescription;
     doctor: Doctor;
     drugItems: Array<DrugItem>;
+    isRepeatPrescription: boolean;
+
 
     static $inject = [
         '$location',
@@ -55,6 +57,7 @@ export default class PrescriptionCreatorController {
                         '1231231231'
                     );
                     this.prescription = this.drugService.getPrescriptionState();
+                    this.isRepeatPrescription = this.isRepeatPrescriptionType();
                 }
             }, (error) => {
                 this.$log.error(error);
@@ -96,5 +99,9 @@ export default class PrescriptionCreatorController {
         } else {
             this.prescription.Type = 'N';
         }
+    }
+
+    isRepeatPrescriptionType(): boolean {
+        return this.prescription.Type === 'S';
     }
 }

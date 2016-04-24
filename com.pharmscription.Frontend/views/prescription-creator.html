@@ -1,5 +1,5 @@
 ﻿<md-toolbar class="md-primary md-hue-1">
-    <div class="md-toolbar-tools">Rezept für {{ PrescriptionCreator.patient.FirstName }} {{ PrescriptionCreator.patient.LastName }} erstellen</div>
+    <div class="md-toolbar-tools">Rezept erstellen für {{ PrescriptionCreator.patient.FirstName }} {{ PrescriptionCreator.patient.LastName }}</div>
 </md-toolbar>
 
 <md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
@@ -8,7 +8,7 @@
             <div class="date-picker">
                 <md-datepicker ng-model="PrescriptionCreator.prescription.ValidUntil" md-placeholder="Gültig bis" required></md-datepicker>
             </div>
-            <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default ng-model="PrescriptionCreator.prescription.Type === 'S'">
+            <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default ng-model="PrescriptionCreator.isRepeatPrescription">
                 <span ng-if="PrescriptionCreator.prescription.Type === 'N'" class="animate-if">
                     Einzelrezept
                 </span>
