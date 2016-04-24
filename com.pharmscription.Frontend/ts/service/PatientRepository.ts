@@ -18,7 +18,10 @@ export default class PatientRepository {
         '$log'
     ];
 
-    constructor(private $http: angular.IHttpService, private $q: angular.IQService, private $log: angular.ILogService) {
+    constructor(
+        private $http: angular.IHttpService,
+        private $q: angular.IQService,
+        private $log: angular.ILogService) {
     }
 
     addPatient(patient: Patient): IPromise<Patient> {
