@@ -42,6 +42,7 @@ export default class UserOverviewController {
     getPrescriptions() {
         this.prescriptionRepository.getPrescriptions(this.patient.Id).then((foundPrescriptions) => {
             this.prescriptions = foundPrescriptions;
+            console.log(this.prescriptions);
         }, (error) => {
             this.showToast('Rezepte konnten nicht geladen werden!');
             this.$log.error(error);

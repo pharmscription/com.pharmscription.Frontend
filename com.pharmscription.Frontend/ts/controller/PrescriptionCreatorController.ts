@@ -13,7 +13,6 @@ import PrescriptionRepository from 'ts/service/PrescriptionRepository'
 export default class PrescriptionCreatorController {
     patient: Patient;
     prescription: Prescription;
-    prescriptionValidity: Date;
     doctor: Doctor;
     drugItems: Array<DrugItem>;
 
@@ -55,7 +54,7 @@ export default class PrescriptionCreatorController {
                         '0980980980',
                         '1231231231'
                     );
-                    this.prescription = new Prescription(this.patient, this.doctor);
+                    this.prescription = this.drugService.getPrescriptionState();
                 }
             }, (error) => {
                 this.$log.error(error);
@@ -68,7 +67,7 @@ export default class PrescriptionCreatorController {
     }
 
     addDrug(): void {
-        this.drugService.saveDrugItems(this.drugItems);
+        this.drugService.savePrescriptionState(this.prescription);
         this.$location.url('prescription/drug/search');
     }
 
@@ -78,6 +77,9 @@ export default class PrescriptionCreatorController {
     }
 
     savePrescription(): void {
+        this.prescription.IssueDate = new Date();
+        this.prescription.Patient = this.patient;
+        this.prescription.Doctor = this.doctor;
         this.prescription.Drugs = this.drugItems;
         this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
             this.showToast("Rezept wurde gespeichert");

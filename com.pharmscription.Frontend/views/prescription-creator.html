@@ -8,7 +8,7 @@
             <div class="date-picker">
                 <md-datepicker ng-model="PrescriptionCreator.prescription.ValidUntil" md-placeholder="Gültig bis" required></md-datepicker>
             </div>
-            <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default>
+            <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default ng-model="PrescriptionCreator.prescription.Type === 'S'">
                 <span ng-if="PrescriptionCreator.prescription.Type === 'N'" class="animate-if">
                     Einzelrezept
                 </span>

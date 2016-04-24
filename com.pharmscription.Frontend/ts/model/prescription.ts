@@ -6,8 +6,9 @@ import DrugItem from 'ts/model/drugitem'
 export default class Prescription {
 
     constructor(
-        public Patient: Patient,
-        public Doctor: Doctor,
+        public Patient: Patient = null,
+        public Doctor: Doctor = null,
+        public Drugs: Array<DrugItem> = [],
         public Type: string = "N", //S=Standing, N=Normal
         public IssueDate: Date = null,
         public EditDate: Date = null,
@@ -15,7 +16,6 @@ export default class Prescription {
         public CounterProposals: Array<any> = [], //Array<CounterProposal>;
         public ValidUntil: Date = null,
         public PrescriptionHistory: Array<Prescription> = [],
-        public Drugs: Array<DrugItem> = [],
         public Dispenses: Array<Dispense> = [],
         public Id: string = null,
         public SignDate: Date = null
