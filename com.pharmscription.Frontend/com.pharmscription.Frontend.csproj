@@ -77,7 +77,7 @@
     <Content Include="package.json" />
     <Content Include="style\style.css" />
     <Content Include="karma.conf.js" />
-    <Content Include="tests\model\patient.ts" />
+    <Content Include="tests\model\patient.spec.ts" />
     <Content Include="tools\typings.json" />
     <Content Include="img\icons\MaterialIcons-Regular.eot" />
     <Content Include="img\icons\MaterialIcons-Regular.ijmap" />
@@ -107,10 +107,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="tests\controller\UserSearchController.ts" />
-    <TypeScriptCompile Include="tests\service\PatientRepositoryTest.ts" />
-    <TypeScriptCompile Include="tests\service\PatientService.ts" />
-    <TypeScriptCompile Include="tests\service\AHVNumberService.ts" />
+    <TypeScriptCompile Include="tests\controller\UserSearchController.spec.ts" />
+    <TypeScriptCompile Include="tests\service\PatientRepository.spec.ts" />
+    <TypeScriptCompile Include="tests\service\PatientService.spec.ts" />
+    <TypeScriptCompile Include="tests\service\AHVNumberService.spec.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\appDev.ts" />
     <TypeScriptCompile Include="ts\bootstrapDev.ts" />

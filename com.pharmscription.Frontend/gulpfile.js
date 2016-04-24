@@ -24,10 +24,9 @@ gulp.task('jasmine-tests', ['compile-tests', 'compile-ts'], function () {
 });
 
 gulp.task('karma-driven-tests', function(done) {
-    new karma({
-        configFile: './karma.conf.js',
-        singleRun: true
-    }, done).start();
+    karma.start({
+        configFile: __dirname + '/karma.conf.js'
+    }, done);
 });
 
 gulp.task('compile-tests', function() {
