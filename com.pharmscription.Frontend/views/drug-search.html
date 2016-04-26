@@ -32,7 +32,7 @@
                     <md-icon ng-hide="widgetExpanded" md-font-set="material-icons">keyboard_arrow_down</md-icon>
                     <md-icon ng-show="widgetExpanded" md-font-set="material-icons">keyboard_arrow_up</md-icon>
                     <md-icon id="drug-icon" md-font-set="material-icons">healing</md-icon>
-                    {{ drug.DrugDescription }}
+                    <span><span ng-if="!drug.DrugDescription">loading...</span>{{drug.DrugDescription}}</span>
                 </div>
                 <div flex layout="column" ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
                     <p>Einheiten: <b>{{drug.Unit}}</b></p>
