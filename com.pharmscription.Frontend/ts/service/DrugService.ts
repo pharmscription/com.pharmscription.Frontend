@@ -1,10 +1,13 @@
 ﻿import DrugItem from 'ts/model/drugItem'
+import Prescription from 'ts/model/prescription'
 
 export default class DrugService {
     private drugItems: Array<DrugItem>;
+    private prescription: Prescription;
 
     constructor() {
         this.drugItems = [];
+        this.prescription = new Prescription();
     }
 
     setDrugItem(drug: DrugItem) {
@@ -19,12 +22,17 @@ export default class DrugService {
         this.drugItems.splice(index, 1);
     }
 
-    removeDrugItems(): void {
+    removeAll(): void {
         this.drugItems = [];
+        this.prescription = new Prescription();
     }
 
-    saveDrugItems(drugItems: Array<DrugItem>): void {
-        this.drugItems = drugItems;
+    savePrescriptionState(prescription: Prescription): void {
+        this.prescription = prescription;
+    }
+
+    getPrescriptionState(): Prescription {
+        return this.prescription;
     }
 
 

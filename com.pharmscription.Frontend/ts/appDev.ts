@@ -52,6 +52,7 @@ export class AppDev {
             prescriptions.push(new Prescription(
                 patients[0],
                 doctors[0],
+                [new DrugItem(drugs[5], "0/1/0/1", 2), new DrugItem(drugs[5], "0/1/0/1", 2)],
                 "N",
                 new Date(),
                 new Date(),
@@ -59,7 +60,6 @@ export class AppDev {
                 [],
                 new Date(2016, 7, 15),
                 [],
-                [new DrugItem(drugs[5], "0/1/0/1", 2), new DrugItem(drugs[5], "0/1/0/1", 2)],
                 [],
                 "00123"
             ));
