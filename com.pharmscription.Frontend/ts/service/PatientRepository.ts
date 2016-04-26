@@ -6,8 +6,8 @@ export default class PatientRepository {
 
     private urls: any = {
         add: 'http://localhost:7642/patients',
-        insuranceLookup: 'http://localhost:7642/patients/lookup/{ahv}',
-        getByAhv: 'http://localhost:7642/patients/ahv-number/{ahv}',
+        insuranceLookup: 'http://localhost:7642/patients/lookup/{ahv}/',
+        getByAhv: 'http://localhost:7642/patients/ahv-number/{ahv}/',
         getById: 'http://localhost:7642/patients/{id}',
         edit: 'http://localhost:7642/patients/{id}'
     }
