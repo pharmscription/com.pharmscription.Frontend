@@ -8,6 +8,7 @@ import PrescriptionRepository from 'ts/service/PrescriptionRepository'
 export default class PrescriptionViewController {
 
     public prescription: Prescription;
+    public freshDispense: Dispense = new Dispense();
 
     static $inject = [
         '$log',
@@ -23,16 +24,15 @@ export default class PrescriptionViewController {
             let prescriptionId = this.prescriptionService.getPrescriptionId();
             this.prescriptionRepository.getPrescription(patientId, prescriptionId).then((foundPrescription) => {
                 this.prescription = foundPrescription;
-                this.prescription.Dispenses.push(new Dispense());
-            }, (error) => {
+                }, (error) => {
                 this.$log.error(error);
                 });
        
-    }
+        }
 
     addToDispense(drugItem: DrugItem) {
         this.$log.debug(drugItem + " hinzugefügt");
-        this.$log.debug(this.prescription.Dispenses);
-        this.prescription.Dispenses[this.prescription.Dispenses.length - 1].DrugItems.push(drugItem);
+        this.$log.debug(this.freshDispense);
+        this.freshDispense.DrugItems.push(drugItem);
     }
 }

@@ -60,25 +60,39 @@
         </div>
     </div>
 </md-whiteframe>
-<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
+<md-whiteframe ng-if="PrescriptionView.freshDispense.DrugItems.length" class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
     <span class="md-headline">Rezeptabgabe</span>
-    <md-list >
-        <md-list-item ng-show="!PrescriptionView.prescription.Dispenses.length">
+        <!--<md-list-item ng-show="!PrescriptionView.prescription.Dispenses.length">
             <md-icon class="md-48 md-avatar-icon">insert_drive_file</md-icon>
             <span class="md-list-item-text">keine Medikamentenabgaben</span>
             <span flex></span>
-        </md-list-item>
-        <md-list-item ng-repeat="dispense in PrescriptionView.prescription.Dispenses">
-            <md-icon class="md-36 md-avatar-icon">insert_drive_file</md-icon>
-            <md-list>
-                <md-list-item ng-repeat="drugItem in dispense.DrugItems">
-                    <md-icon>healing</md-icon>
-                    <span>{{ drugItem.drugDescription}}</span>
-                </md-list-item>
-            </md-list>
-            <span>Medikamentenabgabe von {{dispense.HandedBy.FirstName}} {{dispense.HandedBy.LastName}}</span>
-            <span>Ausgestellt am {{dispense.Date | date:"dd.MM.yyyy"}}</span>
-            <md-button class="md-secondary md-raised">Anzeigen</md-button>
+        </md-list-item>-->
+    <md-list>
+        <md-list-item ng-repeat="drugItem in PrescriptionView.freshDispense.DrugItems">
+            <md-icon>healing</md-icon>
+            <div class="md-list-item-text">
+                <span>{{ drugItem.Drug.DrugDescription}}</span>
+                <span>Preis: </span>
+            </div>
+            <md-button class="md-secondary" ng-click="null">
+                <md-icon>remove_circle</md-icon>
+                <md-tooltip>Medikament aus Abgabe entfernen</md-tooltip>
+            </md-button>
         </md-list-item>
     </md-list>
+    <!--<span>Medikamentenabgabe von {{dispense.HandedBy.FirstName}} {{dispense.HandedBy.LastName}}</span>
+    <span>Ausgestellt am {{dispense.Date | date:"dd.MM.yyyy"}}</span>-->
+    <!--<md-button class="md-secondary md-raised">Anzeigen</md-button>-->
+    <div layout="row">
+        <span>Total:</span>
+        <div flex></div>
+        <md-button class="md-raised md-primary" ng-click="null">
+            <md-icon>check</md-icon>
+            <span>Visieren</span>
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="null">
+            <md-icon>save</md-icon>
+            <span>Speichern</span>
+        </md-button>
+    </div>
 </md-whiteframe>

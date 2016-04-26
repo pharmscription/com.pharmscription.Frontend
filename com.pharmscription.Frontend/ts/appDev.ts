@@ -217,7 +217,7 @@ export class AppDev {
         /*
             GET     /patients/ahv-number/{ahv}
         */
-        $httpBackend.whenGET(/\/patients\/ahv-number\/(.+)/, undefined, ['ahvNumber']).respond((method: string, url: string, data: any, headers: any, params: any) => {
+        $httpBackend.whenGET(/\/patients\/ahv-number\/(.+)\//, undefined, ['ahvNumber']).respond((method: string, url: string, data: any, headers: any, params: any) => {
            let found = patients.filter((patient: Patient) => { return patient.AhvNumber === params.ahvNumber })[0];
             if (found === undefined) {
                 return [204, {}];
