@@ -45,10 +45,6 @@ export default class PrescriptionViewController {
                 let indexInAllDispense = this.allDispenses.map((dispensedDrug: DrugItem) => {
                     return dispensedDrug.Id;
                 }).indexOf(drug.Id);
-
-                //this.$log.debug("indexInAllDispense:");
-                //this.$log.debug(indexInAllDispense);
-
                 if (indexInAllDispense !== -1) {
                     this.allDispenses[indexInAllDispense].Quantity += drug.Quantity;
                 } else {
@@ -90,8 +86,6 @@ export default class PrescriptionViewController {
             this.freshDispense.DrugItems.push(angular.copy(openDrug));
             this.freshDispense.DrugItems[this.freshDispense.DrugItems.length - 1].Quantity = 0;
         });
-        this.$log.debug("FreshDispense");
-        this.$log.debug(this.freshDispense);
     }
 
     changeQuantityInFreshDispense(id: string, quantity: number) {

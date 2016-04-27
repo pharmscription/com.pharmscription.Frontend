@@ -63,6 +63,21 @@ export class AppDev {
                 [],
                 "00123"
             ));
+            prescriptions.push(new Prescription(
+                patients[0],
+                doctors[0],
+                [new DrugItem(drugs[5], "0/1/0/1", 2, "12443535342"), new DrugItem(drugs[6], "0/1/0/1", 5, "8732783478")],
+                "N",
+                new Date(),
+                new Date(),
+                true,
+                [],
+                new Date(2016, 7, 15),
+                [],
+                [new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 2, "8732783478")], null, null),
+                    new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 1, "8732783478")], null, null)],
+                "001234"
+            ));
         }
 
         Papa.parse('http://localhost:3474/mock/Drugs.csv', {
