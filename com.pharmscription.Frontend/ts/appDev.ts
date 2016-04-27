@@ -52,7 +52,7 @@ export class AppDev {
             prescriptions.push(new Prescription(
                 patients[0],
                 doctors[0],
-                [new DrugItem(drugs[5], "0/1/0/1", 2), new DrugItem(drugs[5], "0/1/0/1", 2)],
+                [new DrugItem(drugs[5], "0/1/0/1", 2, "12443535342"), new DrugItem(drugs[6], "0/1/0/1", 5, "8732783478")],
                 "N",
                 new Date(),
                 new Date(),
@@ -159,6 +159,9 @@ export class AppDev {
         $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions/).respond((method: string, url: string, data: string) => {
             let newPrescription: Prescription = angular.fromJson(data);
             newPrescription.Id = Math.floor((Math.random() * 10000) + 1).toString();
+            newPrescription.Drugs.forEach((drug: DrugItem) => {
+                drug.Id = Math.floor((Math.random() * 1000000) + 1).toString();
+            });
             prescriptions.push(newPrescription);
             return [200, newPrescription, {}];
         });

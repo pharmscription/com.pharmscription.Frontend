@@ -7,7 +7,7 @@ export default class Patient {
         public FirstName: string = null,
         public LastName: string = null,
         public Address: Address = null,
-        public BirthDateStr: Date = null,
+        public BirthDate: Date = null,
         public PhoneNumber: string = null,
         public EMailAddress: string = null,
         public InsuranceNumber: string = null,
@@ -18,7 +18,7 @@ export default class Patient {
     }
     
     birth() {
-        this.BirthDateStr = new Date();
+        this.BirthDate = new Date();
     }
 
 }

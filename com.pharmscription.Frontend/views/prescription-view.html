@@ -25,7 +25,7 @@
     </div>
     <md-divider></md-divider>
     <md-list>
-        <md-list-item class="md-3-line" ng-repeat="drugItem in PrescriptionView.prescription.Drugs">
+        <md-list-item class="md-3-line" ng-repeat="drugItem in PrescriptionView.openDrugs">
             <md-icon>healing</md-icon>
             <div class="md-list-item-text" layout="column">
                 <span>Beschreibung: {{drugItem.Drug.DrugDescription}}</span>
@@ -70,11 +70,12 @@
     <md-list>
         <md-list-item ng-repeat="drugItem in PrescriptionView.freshDispense.DrugItems">
             <md-icon>healing</md-icon>
-            <div class="md-list-item-text">
+            <div class="md-list-item-text" layout="column">
                 <span>{{ drugItem.Drug.DrugDescription}}</span>
+                <span>Menge: {{drugItem.Quantity}}</span>
                 <span>Preis: </span>
             </div>
-            <md-button class="md-secondary" ng-click="null">
+            <md-button class="md-secondary" ng-click="PrescriptionView.removeFromDispense(drugItem)">
                 <md-icon>remove_circle</md-icon>
                 <md-tooltip>Medikament aus Abgabe entfernen</md-tooltip>
             </md-button>

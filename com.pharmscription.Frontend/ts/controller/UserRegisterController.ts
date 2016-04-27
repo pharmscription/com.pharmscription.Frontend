@@ -17,6 +17,9 @@ export default class UserRegisterController {
     });
     patient: Patient;
 
+    /*default values*/
+    
+
     static $inject = [
         'PatientRepository',
         'AHVNumberService',
@@ -36,6 +39,12 @@ export default class UserRegisterController {
         this.setControllerMode();
         if (this.controllerMode === Mode.Register) {
             this.patient = new Patient(this.ahvNumberService.getAHVNumber());
+            this.patient.BirthDate = new Date();
+            this.patient.EMailAddress = "max@muster.com";
+            this.patient.FirstName = "Max";
+            this.patient.LastName = "Muster";
+
+
         } else {
             this.patientRepository.getPatientById(this.PatientService.getPatientId()).then((foundPatient) => {
                 this.patient = foundPatient;

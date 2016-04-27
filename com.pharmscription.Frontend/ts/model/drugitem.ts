@@ -6,7 +6,8 @@ export default class DrugItem {
     constructor(
         private Drug: Drug,
         private DosageDescription: string = null,
-        private Quantity: number = null
+        public Quantity: number = null,
+        public Id: string = null
     ) { }
 
 }
