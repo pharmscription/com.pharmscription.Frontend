@@ -39,35 +39,27 @@ export default class PrescriptionViewController {
         }
 
     fillAllDispenses() {
-        this.allDispenses = new Array<DrugItem>();
+        this.allDispenses = [];
         this.prescription.Dispenses.forEach((dispense: Dispense) => {
             dispense.DrugItems.forEach((drug: DrugItem) => {
                 let indexInAllDispense = this.allDispenses.map((dispensedDrug: DrugItem) => {
                     return dispensedDrug.Id;
                 }).indexOf(drug.Id);
 
-                this.$log.debug("indexInAllDispense:");
-                this.$log.debug(indexInAllDispense);
+                //this.$log.debug("indexInAllDispense:");
+                //this.$log.debug(indexInAllDispense);
 
                 if (indexInAllDispense !== -1) {
                     this.allDispenses[indexInAllDispense].Quantity += drug.Quantity;
                 } else {
                     this.allDispenses.push(drug);
                 }
-                });
+            });
         });
-        this.$log.debug("AllDispenses:");
-        this.$log.debug(this.allDispenses);
     }
 
     fillOpenDrugs() {
-        this.openDrugs = new Array<DrugItem>();
-        this.prescription.Drugs.forEach((drugItem: DrugItem) => {
-            this.$log.debug(drugItem);
-            this.openDrugs.push(drugItem);
-        });
-        this.$log.debug("openDrugs before Fill:");
-        this.$log.debug(this.openDrugs);
+        this.openDrugs = angular.copy(this.prescription.Drugs);
         this.allDispenses.forEach((dispensedDrug: DrugItem) => {
             let indexInOpenDrugs = this.openDrugs.map((prescribedDrug: DrugItem) => {
                 return prescribedDrug.Id;
@@ -82,30 +74,20 @@ export default class PrescriptionViewController {
         this.openDrugs.filter((openDrugs: DrugItem) => {
             return openDrugs.Quantity > 0;
         });
-        this.$log.debug("OpenDrugs");
-        this.$log.debug(this.openDrugs);
     }
 
     addToDispense(drugItem: DrugItem) {
-        this.$log.debug(drugItem + " hinzugefügt");
-        this.$log.debug(this.freshDispense);
-        this.$log.debug("openDrugs:");
-        this.$log.debug(this.openDrugs);
         this.changeQuantityInFreshDispense(drugItem.Id, drugItem.Quantity);
     }
 
     removeFromDispense(drugItem: DrugItem) {
-        this.$log.debug(drugItem + " entfernt");
-        this.$log.debug(this.freshDispense);
-        this.$log.debug("openDrugs:");
-        this.$log.debug(this.openDrugs);
         this.changeQuantityInFreshDispense(drugItem.Id, -drugItem.Quantity);
     }
 
     fillFreshDispense() {
         this.freshDispense = new Dispense();
         this.openDrugs.forEach((openDrug: DrugItem) => {
-            this.freshDispense.DrugItems.push(openDrug);
+            this.freshDispense.DrugItems.push(angular.copy(openDrug));
             this.freshDispense.DrugItems[this.freshDispense.DrugItems.length - 1].Quantity = 0;
         });
         this.$log.debug("FreshDispense");

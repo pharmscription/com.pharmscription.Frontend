@@ -25,7 +25,7 @@
     </div>
     <md-divider></md-divider>
     <md-list>
-        <md-list-item class="md-3-line" ng-repeat="drugItem in PrescriptionView.openDrugs">
+        <md-list-item class="md-3-line" ng-repeat="drugItem in PrescriptionView.openDrugs" ng-hide="drugItem.Quantity == 0">
             <md-icon>healing</md-icon>
             <div class="md-list-item-text" layout="column">
                 <span>Beschreibung: {{drugItem.Drug.DrugDescription}}</span>
@@ -60,7 +60,7 @@
         </div>
     </div>
 </md-whiteframe>
-<md-whiteframe ng-if="PrescriptionView.freshDispense.DrugItems.length" class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
     <span class="md-headline">Rezeptabgabe</span>
         <!--<md-list-item ng-show="!PrescriptionView.prescription.Dispenses.length">
             <md-icon class="md-48 md-avatar-icon">insert_drive_file</md-icon>
@@ -68,7 +68,7 @@
             <span flex></span>
         </md-list-item>-->
     <md-list>
-        <md-list-item ng-repeat="drugItem in PrescriptionView.freshDispense.DrugItems">
+        <md-list-item ng-repeat="drugItem in PrescriptionView.freshDispense.DrugItems" ng-hide="drugItem.Quantity == 0">
             <md-icon>healing</md-icon>
             <div class="md-list-item-text" layout="column">
                 <span>{{ drugItem.Drug.DrugDescription}}</span>
