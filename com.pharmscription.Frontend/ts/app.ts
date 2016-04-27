@@ -13,6 +13,7 @@ import MainSideMenuController from 'ts/controller/MainSideMenuController'
 import UserRegisterController from 'ts/controller/UserRegisterController'
 import UserSearchController from 'ts/controller/UserSearchController'
 import UserOverviewController from 'ts/controller/UserOverviewController'
+import UserLoginController from 'ts/controller/UserLoginController'
 import DrugSearchController from 'ts/controller/DrugSearchController'
 import PrescriptionCreatorController from 'ts/controller/PrescriptionCreatorController'
 import PrescriptionViewController from 'ts/controller/PrescriptionViewController'
@@ -66,6 +67,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
             templateUrl: 'views/user-overview.html',
             controller: 'UserOverviewController',
             controllerAs: 'UserOverview'
+        }).when('/user/login', {
+            templateUrl: 'views/user-login.html',
+            controller: 'UserLoginController',
+            controllerAs: 'UserLogin'
         }).when('/drug/search', {
             templateUrl: 'views/drug-search.html',
             controller: 'DrugSearchController',
@@ -91,6 +96,7 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     .controller('UserRegisterController', UserRegisterController)
     .controller('UserSearchController', UserSearchController)
     .controller('UserOverviewController', UserOverviewController)
+    .controller('UserLoginController', UserLoginController)
     .controller('DrugSearchController', DrugSearchController)
     .controller('PrescriptionCreatorController', PrescriptionCreatorController)
     .controller('PrescriptionViewController', PrescriptionViewController)

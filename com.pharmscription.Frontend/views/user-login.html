@@ -1,0 +1,20 @@
+﻿<md-toolbar class="md-primary md-hue-1">
+    <div class="md-toolbar-tools">Login</div>
+</md-toolbar>
+<md-whiteframe class="whiteframe md-whiteframe-1dp form-standard" layout="column" layout-margin layout-align="center">
+    <form name="loginForm">
+        <div layout="column">
+            <md-input-container class="md-block">
+                <md-icon>person</md-icon>
+                <input ng-model="UserLogin.username" type="text" placeholder="Username" required>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <md-icon>lock</md-icon>
+                <input ng-model="UserLogin.password" type="password" placeholder="Password" required>
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="null">
+                <span>LOGIN</span>
+            </md-button>
+        </div>
+    </form>
+</md-whiteframe>
