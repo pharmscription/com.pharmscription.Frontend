@@ -242,6 +242,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
-/com.pharmscription.Frontend/img
 /com.pharmscription.Frontend/ts/controller/PrescriptionViewController.ts
 /com.pharmscription.Frontend/views/prescription-view.html
