@@ -85,6 +85,7 @@ export default class PrescriptionCreatorController {
         this.prescription.Doctor = this.doctor;
         this.prescription.Drugs = this.drugItems;
         this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
+            this.$log.debug(prescription.Id);
             this.showToast("Rezept wurde gespeichert");
             this.$location.url('user/overview');
         }, (error) => {

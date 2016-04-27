@@ -175,9 +175,23 @@ export class AppDev {
         /*
             PUT     /patients/{id}/prescriptions/{id}/dispenses
         */
-        $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions\/(.+)\/dispense/).respond((method: string, url: string, data: string) => {
+        $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions\/(.+)\/dispense/, undefined, undefined, ['patientId', 'prescriptionId']).respond((method: string, url: string, data: string, headers: any, params: any) => {
             let newDispense: Dispense = angular.fromJson(data);
-            newDispense.Id = uuid();
+            let prescriptionPos = prescriptions.map((prescription: Prescription) => {
+                return prescription.Id;
+            }).indexOf(params.prescriptionId);
+            
+            if (newDispense.Id === null) {
+                newDispense.Id = uuid();
+                prescriptions[prescriptionPos].Dispenses.push(newDispense);
+            } else {
+                let dispensePos = prescriptions[prescriptionPos].Dispenses.map((dispense: Dispense) => {
+                    return dispense.Id;
+                }).indexOf(newDispense.Id);
+                prescriptions[prescriptionPos].Dispenses[dispensePos] = newDispense;
+            }
+            return[200, newDispense, {}];
+
         });
 
         /*
