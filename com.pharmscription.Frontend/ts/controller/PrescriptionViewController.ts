@@ -34,8 +34,8 @@ export default class PrescriptionViewController {
                 }
             }, (error) => {
                 this.$log.error(error);
-                });
-       
+            });
+
         }
 
     fillAllDispenses() {
@@ -77,11 +77,11 @@ export default class PrescriptionViewController {
     }
 
     addToDispense(drugItem: DrugItem) {
-        this.changeQuantityInFreshDispense(drugItem.Id, drugItem.Quantity);
+        this.changeQuantityInFreshDispense(drugItem.Id, drugItem.Quantity, false);
     }
 
     removeFromDispense(drugItem: DrugItem) {
-        this.changeQuantityInFreshDispense(drugItem.Id, -drugItem.Quantity);
+        this.changeQuantityInFreshDispense(drugItem.Id, -drugItem.Quantity, false);
     }
 
     fillFreshDispense() {
@@ -94,7 +94,7 @@ export default class PrescriptionViewController {
         this.$log.debug(this.freshDispense);
     }
 
-    changeQuantityInFreshDispense(id: string, quantity: number) {
+    changeQuantityInFreshDispense(id: string, quantity: number, byButton: boolean) {
         let indexInOpenDrugs = this.openDrugs.map((openDrug: DrugItem) => {
             return openDrug.Id;
         }).indexOf(id);
@@ -105,6 +105,19 @@ export default class PrescriptionViewController {
             return dispensedDrugs.Id;
         }).indexOf(id);
 
-        this.freshDispense.DrugItems[indexInFreshDispense].Quantity += quantity;
+        if (!byButton) {
+            this.freshDispense.DrugItems[indexInFreshDispense].Quantity += quantity;
+        }
+    }
+
+    changeQuantityAction(id: string, newValue: number, oldValue: number) {
+        let quantityDiff: number;
+        if (typeof newValue !== 'number') {
+            quantityDiff = 0 - oldValue;
+        } else {
+            quantityDiff = newValue - oldValue;
+        }
+        this.$log.debug('QuantityDiff: ' + quantityDiff);
+        this.changeQuantityInFreshDispense(id, quantityDiff, true);
     }
 }
