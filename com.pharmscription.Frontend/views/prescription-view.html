@@ -72,7 +72,9 @@
             <md-icon>healing</md-icon>
             <div class="md-list-item-text" layout="column">
                 <span>{{ drugItem.Drug.DrugDescription}}</span>
-                <span>Menge: {{drugItem.Quantity}}</span>
+                <md-input-container>
+                    <input ng-model="drugItem.Quantity" ng-change="PrescriptionView.changeQuantityAction(drugItem.Id, drugItem.Quantity, '{{drugItem.Quantity}}')" type="number" placeholder="Menge" required>
+                </md-input-container>
                 <span>Preis: </span>
             </div>
             <md-button class="md-secondary" ng-click="PrescriptionView.removeFromDispense(drugItem)">
