@@ -74,8 +74,8 @@ export class AppDev {
                 [],
                 new Date(2016, 7, 15),
                 [],
-                [new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 2, "8732783478")], null, null),
-                    new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 1, "8732783478")], null, null)],
+                [new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 2, "8732783478")], null, null, "2343243432432432"),
+                    new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 1, "8732783478")], null, null, "12412321321324")],
                 "001234"
             ));
         }
