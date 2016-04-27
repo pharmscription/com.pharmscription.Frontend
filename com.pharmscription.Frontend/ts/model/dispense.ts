@@ -9,7 +9,8 @@ export default class Dispense {
         public Remark: string = null,
         public DrugItems: Array<DrugItem> = [],
         public SignedBy: Drugist = null,
-        public HandedBy: DrugstoreEmployee = null
+        public HandedBy: DrugstoreEmployee = null,
+        public Id: string = null
     ) { }
 
 }

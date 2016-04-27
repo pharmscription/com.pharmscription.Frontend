@@ -9,6 +9,8 @@ export default class PrescriptionViewController {
 
     public prescription: Prescription;
 
+    public dispenseHistory: Array<Dispense>;
+
     public allDispenses: Array<DrugItem>;
     public openDrugs: Array<DrugItem>;
     public freshDispense: Dispense;
@@ -27,6 +29,7 @@ export default class PrescriptionViewController {
             let prescriptionId = this.prescriptionService.getPrescriptionId();
             this.prescriptionRepository.getPrescription(patientId, prescriptionId).then((foundPrescription) => {
                 this.prescription = foundPrescription;
+                this.dispenseHistory = angular.copy(this.prescription.Dispenses);
                 this.fillAllDispenses();
                 this.fillOpenDrugs();
                 if (this.openDrugs.length > 0) {
