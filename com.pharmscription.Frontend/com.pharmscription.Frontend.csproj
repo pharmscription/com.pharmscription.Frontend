@@ -70,6 +70,8 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="gulpfile.js" />
+    <Content Include="img\fontawesome\css\font-awesome.min.css" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.svg" />
     <Content Include="img\icons\arrow-back.svg" />
     <Content Include="img\icons\material-icons.css" />
     <Content Include="img\icons\MaterialIcons-Regular.svg" />
@@ -87,6 +89,11 @@
     <Content Include="img\icons\MaterialIcons-Regular.woff" />
     <Content Include="img\icons\MaterialIcons-Regular.woff2" />
     <Content Include="mock\Drugs.csv" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="img\fontawesome\fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

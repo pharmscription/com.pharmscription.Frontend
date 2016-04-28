@@ -29,7 +29,7 @@ export class AppDev {
             'Max',
             'Muster',
             new Address('Bahnhostrasse', 666, 'ZH', 'Zürich', 8888),
-            new Date(),
+            "15.04.1990",
             '0980980980', 'max@muster.com',
             'xx-xx-xx',
             'Sanitas',

@@ -19,6 +19,7 @@ export default class PrescriptionCreatorController {
 
 
     static $inject = [
+        '$scope',
         '$location',
         'DrugService',
         'PatientService',
@@ -29,6 +30,7 @@ export default class PrescriptionCreatorController {
     ];
 
     constructor(
+        private $scope: angular.IScope,
         private $location: angular.ILocationService,
         private drugService: DrugService,
         private patientService: PatientService,

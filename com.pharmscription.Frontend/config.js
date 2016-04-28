@@ -14,7 +14,7 @@ System.config({
       "defaultExtension": "ts"
     },
     "tests": {
-        "defaultExtension": "ts"
+      "defaultExtension": "ts"
     }
   },
 
@@ -25,6 +25,7 @@ System.config({
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.3",
     "angular-route": "github:angular/bower-angular-route@1.5.3",
     "clean-css": "npm:clean-css@3.4.10",
+    "fontawesome": "npm:fontawesome@4.5.0",
     "jquery": "npm:jquery@2.2.2",
     "karma-junit-reporter": "npm:karma-junit-reporter@0.4.2",
     "moment": "npm:moment@2.12.0",
@@ -633,6 +634,11 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "unpipe": "npm:unpipe@1.0.0"
     },
+    "npm:fontawesome@4.5.0": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "http": "github:jspm/nodelibs-http@1.7.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:for-own@0.1.4": {
       "for-in": "npm:for-in@0.1.5"
     },
@@ -848,7 +854,7 @@ System.config({
       "kind-of": "npm:kind-of@3.0.2"
     },
     "npm:isarray@1.0.0": {
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
     "npm:isbinaryfile@3.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -1420,7 +1426,7 @@ System.config({
     "npm:stream-browserify@1.0.0": {
       "events": "github:jspm/nodelibs-events@0.1.1",
       "inherits": "npm:inherits@2.0.1",
-      "readable-stream": "npm:readable-stream@1.0.34"
+      "readable-stream": "npm:readable-stream@1.1.14"
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"

@@ -5,6 +5,7 @@
       "angular-material": "github:angular/bower-material@1.1.0-rc4",
       "angular-messages": "github:angular/bower-angular-messages@^1.5.3",
       "angular-route": "github:angular/bower-angular-route@^1.5.3",
+      "fontawesome": "npm:fontawesome@^4.5.0",
       "jquery": "npm:jquery@^2.2.2",
       "moment": "npm:moment@^2.12.0",
       "ng-slide-down": "npm:ng-slide-down@^0.4.2"
