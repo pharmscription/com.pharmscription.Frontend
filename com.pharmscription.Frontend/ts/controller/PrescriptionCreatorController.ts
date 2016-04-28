@@ -42,6 +42,7 @@ export default class PrescriptionCreatorController {
                     this.showToast("Patient wurde nicht gefunden");
                 } else {
                     this.patient = patient;
+                    // Mock
                     this.doctor = new Doctor(
                         '1234.123.123.12',
                         'Hippo',

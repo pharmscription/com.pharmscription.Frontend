@@ -46,7 +46,7 @@
             </md-button>
         </div>
     </form>
-        <md-button class="md-raised" ng-disabled="prescriptionForm.$invalid" ng-click="PrescriptionCreator.savePrescription()">SPEICHERN</md-button>
+        <md-button class="md-raised" ng-disabled="prescriptionForm.$invalid || PrescriptionCreator.drugItems.length === 0" ng-click="PrescriptionCreator.savePrescription()">SPEICHERN</md-button>
 </md-whiteframe>
 
 
