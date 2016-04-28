@@ -39,6 +39,8 @@ export default class PrescriptionCreatorController {
         private $log: angular.ILogService,
         private prescriptionRepository: PrescriptionRepository) {
             this.drugItems = this.drugService.getDrugItems();
+            this.prescription = this.drugService.getPrescriptionState();
+            this.isRepeatPrescription = this.isRepeatPrescriptionType();
             this.patientRepository.getPatientById(this.patientService.getPatientId()).then((patient) => {
                 if (patient == null) {
                     this.showToast("Patient wurde nicht gefunden");
@@ -59,8 +61,6 @@ export default class PrescriptionCreatorController {
                         '0980980980',
                         '1231231231'
                     );
-                    this.prescription = this.drugService.getPrescriptionState();
-                    this.isRepeatPrescription = this.isRepeatPrescriptionType();
                 }
             }, (error) => {
                 this.$log.error(error);
