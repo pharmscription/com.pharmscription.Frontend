@@ -1,7 +1,7 @@
 ﻿<md-toolbar class="md-primary md-hue-1">
     <div class="md-toolbar-tools">Login</div>
 </md-toolbar>
-<h2 class="md-display-1">WELCOME TO</h2>
+<h2 class="md-display-1" translate="WELCOME"></h2>
 <i class="fa fa-medkit medkit-svg" aria-hidden="true"></i>
 <h1 class="md-display-3">Pharmscription</h1>
 <md-whiteframe class="form-standard" layout="column" layout-margin layout-align="center">
@@ -9,11 +9,13 @@
         <div layout="column">
             <md-input-container class="md-block">
                 <md-icon>person</md-icon>
-                <input ng-model="UserLogin.username" type="text" placeholder="Username" required>
+                <label translate="USERNAME"></label>
+                <input ng-model="UserLogin.username" type="text"required>
             </md-input-container>
             <md-input-container class="md-block">
                 <md-icon>lock</md-icon>
-                <input ng-model="UserLogin.password" type="password" placeholder="Password" required>
+                <label translate="PASSWORD"></label>
+                <input ng-model="UserLogin.password" type="password"required>
             </md-input-container>
             <md-button class="md-raised md-primary" ng-click="null">
                 <span>LOGIN</span>

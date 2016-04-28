@@ -6,10 +6,15 @@ enum Mode {
 
 export default class MainMenuController {
     mode: Mode;
+    language: string = 'de';
+    languages = ('de en').split(' ').map(language => {
+        return { lang: language };
+    });
 
     static $inject = [
         '$timeout',
         '$mdSidenav',
+        '$translate',
         '$log',
         '$location'
     ];
@@ -17,6 +22,7 @@ export default class MainMenuController {
     constructor(
         private $timeout: ng.ITimeoutService,
         private $mdSidenav: angular.material.ISidenavService,
+        private $translate: angular.translate.ITranslateService,
         private $log: ng.ILogService,
         private $location: angular.ILocationService) {
         this.setMode();
@@ -32,5 +38,9 @@ export default class MainMenuController {
         } else {
             this.mode = Mode.SideMenu;
         }
+    }
+
+    changeLanguage() {
+        this.$translate.use(this.language);
     }
 }
