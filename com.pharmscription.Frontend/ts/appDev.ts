@@ -283,6 +283,7 @@ export class AppDev {
         });
 
         $httpBackend.whenGET(/.html/).passThrough();
+        $httpBackend.whenGET(/.json/).passThrough();
     };
 }
 

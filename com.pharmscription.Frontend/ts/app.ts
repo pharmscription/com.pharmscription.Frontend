@@ -1,6 +1,9 @@
 ﻿import 'angular-material'
 import 'angular-route'
 import 'angular-messages'
+import 'angular-translate'
+import 'angular-translate-loader-static-files'
+import 'angular-sanitize'
 import moment from 'moment'
 import 'moment/locale/de'
 
@@ -28,7 +31,7 @@ import AHVNumberService from 'ts/service/AHVNumberService'
 import PatientService from 'ts/service/PatientService'
 import SocialNumber from 'ts/directives/socialnumber'
 
-export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng-slide-down'])
+export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 'ngRoute', 'ng-slide-down', 'pascalprecht.translate'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
         $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
     })
@@ -93,6 +96,23 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
             redirectTo: '/'
         });
     })
+    .config(['$translateProvider', ($translateProvider: angular.translate.ITranslateProvider) =>{
+        //$translateProvider.translations('en', enLang);
+
+        //$translateProvider.translations('de', {
+        //    "WELCOME": "Willkommen",
+        //    "TITLE": "Hallo",
+        //    "FOO": "Dies ist ein Absatz"
+        //});
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'lang/locale-',
+            suffix: '.json'
+        });
+
+        $translateProvider.preferredLanguage('de');
+        $translateProvider.useSanitizeValueStrategy('sanitize');
+    }])
     .controller('MainMenuController', MainMenuController)
     .controller('MainSideMenuController', MainSideMenuController)
     .controller('UserRegisterController', UserRegisterController)

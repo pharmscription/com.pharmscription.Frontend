@@ -24,6 +24,9 @@ System.config({
     "angular-messages": "github:angular/bower-angular-messages@1.5.5",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.3",
     "angular-route": "github:angular/bower-angular-route@1.5.3",
+    "angular-sanitize": "github:angular/bower-angular-sanitize@1.5.5",
+    "angular-translate": "github:angular-translate/bower-angular-translate@2.11.0",
+    "angular-translate-loader-static-files": "github:angular-translate/bower-angular-translate-loader-static-files@2.11.0",
     "clean-css": "npm:clean-css@3.4.10",
     "fontawesome": "npm:fontawesome@4.5.0",
     "jquery": "npm:jquery@2.2.2",
@@ -32,6 +35,12 @@ System.config({
     "ng-slide-down": "npm:ng-slide-down@0.4.2",
     "papaparse": "npm:papaparse@4.1.2",
     "typescript": "npm:typescript@1.8.10",
+    "github:angular-translate/bower-angular-translate-loader-static-files@2.11.0": {
+      "angular-translate": "github:angular-translate/bower-angular-translate@2.11.0"
+    },
+    "github:angular-translate/bower-angular-translate@2.11.0": {
+      "angular": "github:angular/bower-angular@1.5.5"
+    },
     "github:angular/bower-angular-animate@1.5.5": {
       "angular": "github:angular/bower-angular@1.5.5"
     },
@@ -45,6 +54,9 @@ System.config({
       "angular": "github:angular/bower-angular@1.5.5"
     },
     "github:angular/bower-angular-route@1.5.3": {
+      "angular": "github:angular/bower-angular@1.5.5"
+    },
+    "github:angular/bower-angular-sanitize@1.5.5": {
       "angular": "github:angular/bower-angular@1.5.5"
     },
     "github:angular/bower-material@1.1.0-rc4": {

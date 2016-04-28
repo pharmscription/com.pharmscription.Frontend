@@ -18,6 +18,7 @@ export default class UserRegisterController {
         return { abbrev: canton };
     });
     patient: Patient;
+    today: Date = new Date();
 
     /*default values*/
     

@@ -9,14 +9,20 @@
     <link href="style/style.css" rel="stylesheet" />
 </head>
 <body>
-<div ng-controller="MainMenuController" layout="column" layout-fill ng-cloak>
+<div ng-controller="MainMenuController as Main" layout="column" layout-fill ng-cloak>
     <md-toolbar class="md-primary">
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
+            <md-button class="md-icon-button" aria-label="Menu" ng-click="Main.toggleLeft()" hide-gt-md>
                 <md-icon md-font-set="material-icons">menu</md-icon>
             </md-button>
             <h2 class="md-display-3">Pharmscription</h2>
             <span flex></span>
+            <md-input-container>
+                <md-select ng-model="Main.language" ng-change="Main.changeLanguage()" placeholder="language" translate translate-attr-placeholder="LANGUAGE">
+                    <md-option ng-repeat="lang in Main.languages" value="{{lang.lang}}">{{ lang.lang }}</md-option>
+                </md-select>
+            </md-input-container>
+            
             <md-menu>
                 <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="More">
                     <md-icon md-font-set="material-icons">more_vert</md-icon>

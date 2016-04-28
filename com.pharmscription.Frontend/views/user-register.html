@@ -21,7 +21,12 @@
                 </div>
 
                 <div class="date-picker">
-                    <md-datepicker flex ng-model="UserRegister.patient.BirthDate" md-placeholder="Geburtsdatum" required></md-datepicker>
+                    <md-datepicker flex name="birthdate" ng-model="UserRegister.patient.BirthDate" md-max-date="UserRegister.today" md-placeholder="Geburtsdatum" required></md-datepicker>
+                    <div ng-messages="registerForm.birthdate.$error" class="validation-messages">
+                        <!--<div ng-message="pattern">Bitte gültige AHV-Nummer eingeben.</div>-->
+                        <div ng-message="maxdate">Geburtsdatum kann nicht in der Zukunft liegen</div>
+                        <div ng-message="required">Muss einen Wert haben</div>
+                    </div>
                 </div>
 
                 <div class="address" layout="column">
@@ -81,7 +86,8 @@
                 </md-input-container>
             </div>
         </form>
-            <md-button class="md-raised" ng-click="UserRegister.savePatient(UserRegister.patient)" ng-disabled="registerForm.$invalid">SPEICHERN</md-button>
+        <md-button class="md-raised" ng-click="UserRegister.savePatient(UserRegister.patient)" ng-disabled="registerForm.$invalid">SPEICHERN</md-button>
+        
 </div>
 </md-whiteframe>
 
