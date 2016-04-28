@@ -48,11 +48,11 @@
                 <md-list>
                     <md-list-item ng-click="SideMenu.goTo('#')">
                         <md-icon>search</md-icon>
-                        <p class="md-exclude">Patient suchen</p>
+                        <p class="md-exclude" translate="TOOLBAR-TITLE.PATIENTSEARCH">Patient suchen</p>
                     </md-list-item>
                     <md-list-item ng-click="SideMenu.goTo('/drug/search')">
                         <md-icon>healing</md-icon>
-                        <p class="md-exclude">Medikament suchen</p>
+                        <p class="md-exclude" translate="TOOLBAR-TITLE.DRUGSEARCH"></p>
                     </md-list-item>
                 </md-list>
             </md-content>
@@ -67,14 +67,14 @@
 <script src="/jspm_packages/system.js"></script>
 <script src="config.js"></script>
 <script src="build.js"></script>
-<script>
+<!--<script>
     System.import('./ts/bootstrapDev.ts')
         .catch(console.error.bind(console));
-</script>
-<!--<script>
+</script>-->
+<script>
     System.import('./ts/bootstrap.ts')
         .catch(console.error.bind(console));
-</script>-->
+</script>
 
 <!--<script src="js/main.js"></script>-->
 </body>

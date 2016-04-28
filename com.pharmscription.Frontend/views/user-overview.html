@@ -1,99 +1,110 @@
 ﻿<md-toolbar class="md-primary md-hue-1">
-    <div class="md-toolbar-tools">Patienten Übersicht</div>
+    <div class="md-toolbar-tools" translate="TOOLBAR-TITLE.OVERVIEW-PATIENT"></div>
 </md-toolbar>
 <md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
     <div class="form-container" layout="column" layout-align="center" layout-margin>
         <md-input-container flex class="md-block">
+            <label translate="SOCIALNUMBER"></label>
             <md-icon md-font-set="material-icons"></md-icon>
-            <input ng-model="UserOverview.patient.AhvNumber" type="text" placeholder="AHV-Nummer" disabled>
+            <input ng-model="UserOverview.patient.AhvNumber" type="text" disabled>
         </md-input-container>
         <div layout="row">
             <md-input-container flex class="md-block">
+                <label translate="NAME"></label>
                 <md-icon md-font-set="material-icons" class="person">person</md-icon>
-                <input ng-model="UserOverview.patient.FirstName" flex="90" type="text" placeholder="Name" disabled>
+                <input ng-model="UserOverview.patient.FirstName" flex="90" type="text" disabled>
             </md-input-container>
             <md-input-container flex class="md-block">
+                <label translate="LASTNAME"></label>
                 <md-icon></md-icon>
-                <input ng-model="UserOverview.patient.LastName" flex="90" type="text" placeholder="Nachname" disabled>
+                <input ng-model="UserOverview.patient.LastName" flex="90" type="text" disabled>
             </md-input-container>
         </div>
         <div layout="row">
             <md-input-container flex class="md-block">
+                <label translate="BIRTHDATE"></label>
                 <md-icon>today</md-icon>
-                <input ng-model="UserOverview.patient.BirthDate" flex="90" type="text" placeholder="Geburtsdatum" disabled>
+                <input ng-model="UserOverview.patient.BirthDate" flex="90" type="text" disabled>
             </md-input-container>
             
         </div>
         <div class="address" layout="column" flex>
             <div layout="row">
                 <md-input-container flex="70" class="md-block">
+                    <label translate="STREET"></label>
                     <md-icon md-font-set="material-icons" class="location_city">location_city</md-icon>
-                    <input ng-model="UserOverview.patient.Address.Street" type="text" placeholder="Strasse" disabled>
+                    <input ng-model="UserOverview.patient.Address.Street" type="text" disabled>
                 </md-input-container>
                 <md-input-container flex class="md-block">
+                    <label translate="NUMBER"></label>
                     <md-icon></md-icon>
-                    <input ng-model="UserOverview.patient.Address.Number" type="number" placeholder="Hausnr." disabled>
+                    <input ng-model="UserOverview.patient.Address.Number" type="text" disabled>
                 </md-input-container>
             </div>
             <md-input-container flex class="md-block">
+                <label translate="STREETEXTENSION"></label>
                 <md-icon></md-icon>
-                <input ng-model="UserOverview.patient.Address.StreetExtension" type="text" placeholder="Addresszusatz" disabled>
+                <input ng-model="UserOverview.patient.Address.StreetExtension" type="text" disabled>
             </md-input-container>
             <div layout="row">
                 <md-input-container flex="30" class="md-block">
+                    <label translate="CITYCODE"></label>
                     <md-icon></md-icon>
-                    <input ng-model="UserOverview.patient.Address.CityCode" type="number" placeholder="PLZ" disabled>
+                    <input ng-model="UserOverview.patient.Address.CityCode" type="text" disabled>
                 </md-input-container>
                 <md-input-container flex class="md-block">
+                    <label translate="LOCATION"></label>
                     <md-icon></md-icon>
-                    <input ng-model="UserOverview.patient.Address.City" type="text" placeholder="Stadt" disabled>
+                    <input ng-model="UserOverview.patient.Address.Location" type="text" disabled>
                 </md-input-container>
             </div>
             <md-input-container flex class="md-block" flex-gt-sm>
                 <md-icon></md-icon>
-                <label>Kanton</label>
-                <input ng-model="UserOverview.patient.Address.State" type="text" placeholder="Stadt" disabled>
+                <label translate="STATE"></label>
+                <input ng-model="UserOverview.patient.Address.State" type="text" disabled>
             </md-input-container>
         </div>
         <md-input-container flex class="md-block">
+            <label translate="PHONENUMBER"></label>
             <md-icon md-font-set="material-icons" class="phone">phone</md-icon>
-            <input ng-model="UserOverview.patient.PhoneNumber" type="tel" placeholder="Telefon" disabled>
+            <input ng-model="UserOverview.patient.PhoneNumber" type="tel" disabled>
         </md-input-container>
         <md-input-container flex class="md-block">
+            <label translate="EMAIL"></label>
             <md-icon md-font-set="material-icons" class="email">email</md-icon>
-            <input ng-model="UserOverview.patient.EMailAddress" type="email" placeholder="Email" disabled>
+            <input ng-model="UserOverview.patient.EMailAddress" type="email" disabled>
         </md-input-container>
         <md-input-container flex class="md-block">
+            <label translate="INSURANCE-NUMBER"></label>
             <md-icon md-font-set="material-icons" class="local_hospital">local_hospital</md-icon>
-            <input ng-model="UserOverview.patient.InsuranceNumber" type="text" placeholder="Versicherungs-Nummer" disabled>
+            <input ng-model="UserOverview.patient.InsuranceNumber" type="text" disabled>
         </md-input-container>
         <md-input-container flex class="md-block">
+            <label translate="INSURANCE"></label>
             <md-icon></md-icon>
-            <input ng-model="UserOverview.patient.Insurance" type="text" placeholder="Versicherung" disabled>
+            <input ng-model="UserOverview.patient.Insurance" type="text" disabled>
         </md-input-container>
     </div>
     <div layout="row" layout-align="end center">
         <md-button id="user-edit-button" class="md-fab" ng-click="UserOverview.editUser()">
-            <md-tooltip>
-                Benutzerdaten bearbeiten
-            </md-tooltip>
+            <md-tooltip>{{ 'TOOLTIP.EDIT-USER' | translate }}</md-tooltip>
             <md-icon>mode_edit</md-icon>
         </md-button>
     </div>
 </md-whiteframe>
 <md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
-    <div>Rezepte</div>
+    <div translate="PRESCRIPTIONS"></div>
     <md-list>
         <md-list-item ng-show="!UserOverview.prescriptions.length">
             <div>
                 <md-icon class="material-icons md-48">insert_drive_file</md-icon>
-                <span>keine erfassten Rezepte</span>
+                <span translate="NO-SAVED-PRESCRIPTIONS"></span>
             </div>
         </md-list-item>
         <md-list-item ng-repeat="prescription in UserOverview.prescriptions" ng-click="UserOverview.showPrescription(prescription.Id)">
             <md-icon class="md-48" md-font-set="material-icons">insert_drive_file</md-icon>
             <div layout="column" layout-align="center start">
-                <md-tooltip>Rezept anzeigen</md-tooltip>
+                <md-tooltip>{{ 'TOOLTIP.SHOW-PRESCRIPTION' | translate }}</md-tooltip>
                 <span>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</span>
                 <span>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</span>
             </div>
@@ -103,9 +114,7 @@
     </md-list>
     <div layout="row" layout-align="end center">
         <md-button id="prescription-add-button" class="md-fab" ng-click="UserOverview.addPrescription()">
-            <md-tooltip>
-                Neues Rezept erfassen
-            </md-tooltip>
+            <md-tooltip>{{ 'TOOLTIP.ADD-PRESCRIPTION' | translate }}</md-tooltip>
             <md-icon>add</md-icon>
         </md-button>
     </div>

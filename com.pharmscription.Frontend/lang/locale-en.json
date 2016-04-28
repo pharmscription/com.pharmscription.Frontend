@@ -1,8 +1,40 @@
 ﻿{
   "WELCOME": "Welcome",
-  "TITLE": "Hello",
-  "FOO": "This is a paragraph",
   "LANGUAGE": "Language",
   "USERNAME": "Username",
-  "PASSWORD":  "Password"
+  "PASSWORD": "Password",
+  "SOCIALNUMBER": "Social-Number",
+  "ERROR": {
+    "REQUIRED": "Is required",
+    "SOCIALNUMBER": "Social-Number is invalid",
+    "BIRTHDATE-FUTURE": "Birthdate can't be in future"
+  },
+  "SEARCH": "Search",
+  "TOOLBAR-TITLE": {
+    "PATIENTSEARCH": "Patient Search",
+    "DRUGSEARCH": "Drug Search",
+    "REGISTER-PATIENT": "Register Patient",
+    "OVERVIEW-PATIENT": "Patient Overview"
+  },
+  "TOOLTIP": {
+    "EDIT-USER": "Edit Userdata",
+    "SHOW-PRESCRIPTION": "Show Prescription",
+    "ADD-PRESCRIPTION": "Add new Prescription"
+  },
+  "FIRSTNAME": "Firstname",
+  "LASTNAME": "Lastname",
+  "BIRTHDATE": "Birthdate",
+  "STREET": "Street",
+  "HOUSENUMBER": "Housenumber",
+  "STREETEXTENSION": "Additional Address",
+  "CITYCODE": "City Code",
+  "LOCATION": "City",
+  "STATE": "State",
+  "PHONENUMBER": "Phone number",
+  "EMAIL": "E-Mail",
+  "INSURANCENUMBER": "Insurance Number",
+  "INSURANCE": "Insurance",
+  "SAVE": "Save",
+  "PRESCRIPTIONS": "Prescriptions",
+  "NO-SAVED-PRESCRIPTIONS": "No saved prescriptions"
 }

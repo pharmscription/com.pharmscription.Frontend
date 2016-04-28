@@ -48,7 +48,7 @@ export default class UserRegisterController {
             this.patient.EMailAddress = "max@muster.com";
             this.patient.FirstName = "Max";
             this.patient.LastName = "Muster";
-            this.patient.Address = new Address("Bahnhofstrasse", 666, "ZH", "Zürich", 8888);
+            this.patient.Address = new Address("Bahnhofstrasse", "666", "ZH", "Zürich", "8888");
             this.patient.Insurance = "Sanitas";
             this.patient.InsuranceNumber = "xx.xx.xx";
             this.patient.PhoneNumber = "0980980980";

@@ -1,8 +1,40 @@
 ﻿{
   "WELCOME": "Willkommen",
-  "TITLE": "Hallo",
-  "FOO": "Dies ist ein Absatz",
   "LANGUAGE": "Sprache",
   "USERNAME": "Benutzername",
-  "PASSWORD": "Passwort"
+  "PASSWORD": "Passwort",
+  "SOCIALNUMBER": "AHV-Nummer",
+  "ERROR": {
+    "REQUIRED": "Muss ausgefüllt sein",
+    "SOCIALNUMBER": "AHV-Nummer ist ungültig",
+    "BIRTHDATE-FUTURE": "Geburtsdatum kann nicht in der Zukunft liegen"
+  },
+  "SEARCH": "Suchen",
+  "TOOLBAR-TITLE": {
+    "PATIENTSEARCH": "Patienten Suche",
+    "DRUGSEARCH": "Medikamenten Suche",
+    "REGISTER-PATIENT": "Patient Registrieren",
+    "OVERVIEW-PATIENT": "Patienten Übersicht"
+  },
+  "TOOLTIP": {
+    "EDIT-USER": "Benutzerdaten bearbeiten",
+    "SHOW-PRESCRIPTION": "Rezept anzeigen",
+    "ADD-PRESCRIPTION": "Neues Rezept erfassen"
+  },
+  "FIRSTNAME": "Vorname",
+  "LASTNAME": "Nachname",
+  "BIRTHDATE": "Geburtsdatum",
+  "STREET": "Strasse",
+  "HOUSENUMBER": "Hausnummer",
+  "STREETEXTENSION": "Addresszusatz",
+  "CITYCODE": "PLZ",
+  "LOCATION": "Ort",
+  "STATE": "Kanton",
+  "PHONENUMBER": "Telefonnummer",
+  "EMAIL": "E-Mail",
+  "INSURANCENUMBER": "Versicherungs-Nummer",
+  "INSURANCE": "Versicherung",
+  "SAVE": "Speichern",
+  "PRESCRIPTIONS": "Rezepte",
+  "NO-SAVED-PRESCRIPTIONS": "keine erfassten Rezepte"
 }

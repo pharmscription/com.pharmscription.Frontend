@@ -97,14 +97,6 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 
         });
     })
     .config(['$translateProvider', ($translateProvider: angular.translate.ITranslateProvider) =>{
-        //$translateProvider.translations('en', enLang);
-
-        //$translateProvider.translations('de', {
-        //    "WELCOME": "Willkommen",
-        //    "TITLE": "Hallo",
-        //    "FOO": "Dies ist ein Absatz"
-        //});
-
         $translateProvider.useStaticFilesLoader({
             prefix: 'lang/locale-',
             suffix: '.json'

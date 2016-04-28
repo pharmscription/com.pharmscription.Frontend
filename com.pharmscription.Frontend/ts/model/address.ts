@@ -1,10 +1,10 @@
 ﻿export default class Address {
     constructor(
         public Street: string,
-        public Number: number,
+        public Number: string,
         public State: string,
         public Location: string,
-        public CityCode: number,
+        public CityCode: string,
         public StreetExtension?: string
     ) { }
 
