@@ -18,7 +18,12 @@ export class AppDev {
     }
 
     init($httpBackend: angular.IHttpBackendService) {
-        let patients: Array<Patient> = [];
+        let uuid = (): string => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+                var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+        });
+
+       let patients: Array<Patient> = [];
         patients.push(new Patient(
             '756.1390.2077.81',
             'Max',
@@ -28,7 +33,7 @@ export class AppDev {
             '0980980980', 'max@muster.com',
             'xx-xx-xx',
             'Sanitas',
-            '666'));
+            uuid()));
 
         let doctors: Array<Doctor> = [];
         doctors.push(new Doctor(
@@ -52,7 +57,7 @@ export class AppDev {
             prescriptions.push(new Prescription(
                 patients[0],
                 doctors[0],
-                [new DrugItem(drugs[5], "0/1/0/1", 2, "12443535342"), new DrugItem(drugs[6], "0/1/0/1", 5, "8732783478")],
+                [new DrugItem(drugs[5], "0/1/0/1", 2, uuid()), new DrugItem(drugs[6], "0/1/0/1", 5, uuid())],
                 "N",
                 new Date(),
                 new Date(),
@@ -61,12 +66,12 @@ export class AppDev {
                 new Date(2016, 7, 15),
                 [],
                 [],
-                "00123"
+                uuid()
             ));
             prescriptions.push(new Prescription(
                 patients[0],
                 doctors[0],
-                [new DrugItem(drugs[5], "0/1/0/1", 2, "12443535342"), new DrugItem(drugs[6], "0/1/0/1", 5, "8732783478")],
+                [new DrugItem(drugs[5], "0/1/0/1", 2, uuid()), new DrugItem(drugs[6], "0/1/0/1", 5, "65656565")],
                 "N",
                 new Date(),
                 new Date(),
@@ -74,9 +79,9 @@ export class AppDev {
                 [],
                 new Date(2016, 7, 15),
                 [],
-                [new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 2, "8732783478")], null, null, "2343243432432432"),
-                    new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 1, "8732783478")], null, null, "12412321321324")],
-                "001234"
+                [new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 2, "65656565")], null, null, uuid()),
+                    new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 1, "65656565")], null, null, uuid())],
+                uuid()
             ));
         }
 
@@ -84,7 +89,7 @@ export class AppDev {
             download: true,
             header: true,
             encoding: "UTF-8",
-            complete: function(result) {
+            complete: (result) => {
                 drugs = result.data;
                 createPrescription();
             }
@@ -102,7 +107,6 @@ export class AppDev {
             PUT     /patients/{id}/prescriptions/{id}/counterproposals
             GET     /patients/{id}/prescriptions/{id}/counterproposals/{id}
             GET     /patients/{id}/prescriptions/{id}/dispenses
-            PUT     /patients/{id}/prescriptions/{id}/dispenses
             GET     /patiens/{id}/prescriptions/{id}/drugs
             GET     /patiens/{id}/prescriptions/{id}/drugs/{id}
 
@@ -169,13 +173,35 @@ export class AppDev {
         });
 
         /*
+            PUT     /patients/{id}/prescriptions/{id}/dispenses
+        */
+        $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions\/(.+)\/dispense/, undefined, undefined, ['patientId', 'prescriptionId']).respond((method: string, url: string, data: string, headers: any, params: any) => {
+            let newDispense: Dispense = angular.fromJson(data);
+            let prescriptionPos = prescriptions.map((prescription: Prescription) => {
+                return prescription.Id;
+            }).indexOf(params.prescriptionId);
+
+            if (newDispense.Id === null) {
+                newDispense.Id = uuid();
+                prescriptions[prescriptionPos].Dispenses.push(newDispense);
+            } else {
+                let dispensePos = prescriptions[prescriptionPos].Dispenses.map((dispense: Dispense) => {
+                    return dispense.Id;
+                }).indexOf(newDispense.Id);
+                prescriptions[prescriptionPos].Dispenses[dispensePos] = newDispense;
+            }
+            return[200, newDispense, {}];
+
+        });
+
+        /*
             PUT     /patients/{id}/prescriptions
         */
         $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions/).respond((method: string, url: string, data: string) => {
             let newPrescription: Prescription = angular.fromJson(data);
-            newPrescription.Id = Math.floor((Math.random() * 10000) + 1).toString();
+            newPrescription.Id = uuid();
             newPrescription.Drugs.forEach((drug: DrugItem) => {
-                drug.Id = Math.floor((Math.random() * 1000000) + 1).toString();
+                drug.Id = uuid();
             });
             prescriptions.push(newPrescription);
             return [200, newPrescription, {}];
@@ -186,7 +212,7 @@ export class AppDev {
         */
         $httpBackend.whenPUT(/\/patients/).respond((method:string, url:string, data: string) => {
             let patient: Patient = angular.fromJson(data);
-            patient.Id = Math.floor((Math.random() * 10000) + 1).toString();
+            patient.Id = uuid();
             patients.push(patient);
             return [200, data, {}];
         });

@@ -21,6 +21,7 @@ import PrescriptionViewController from 'ts/controller/PrescriptionViewController
 import PatientRepository from 'ts/service/PatientRepository'
 import DrugRepository from 'ts/service/DrugRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
+import DispenseRepository from 'ts/service/DispenseRepository'
 import PrescriptionService from 'ts/service/PrescriptionService'
 import DrugService from 'ts/service/DrugService'
 import AHVNumberService from 'ts/service/AHVNumberService'
@@ -36,6 +37,7 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     })
     .config(($mdDateLocaleProvider: angular.material.IDateLocaleProvider) => {
         $mdDateLocaleProvider.parseDate = (dateString: string) => {
+            console.log(dateString);
             let m = moment(dateString, 'DD.MM.YYYY', true);
             return m.isValid() ? m.utc().toDate() : new Date(NaN);
         };
@@ -103,6 +105,7 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     .service('PatientRepository', PatientRepository)
     .service('DrugRepository', DrugRepository)
     .service('PrescriptionRepository', PrescriptionRepository)
+    .service('DispenseRepository', DispenseRepository)
     .service('DrugService', DrugService)
     .service('AHVNumberService', AHVNumberService)
     .service('PatientService', PatientService)

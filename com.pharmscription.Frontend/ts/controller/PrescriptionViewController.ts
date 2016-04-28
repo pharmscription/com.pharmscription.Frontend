@@ -1,9 +1,11 @@
 ﻿import Prescription from 'ts/model/prescription'
 import Dispense from 'ts/model/dispense'
 import DrugItem from 'ts/model/drugitem'
+import Drugist from 'ts/model/drugist'
 
 import PrescriptionService from 'ts/service/PrescriptionService'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
+import DispenseRepository from 'ts/service/DispenseRepository'
 
 export default class PrescriptionViewController {
 
@@ -17,14 +19,18 @@ export default class PrescriptionViewController {
 
     static $inject = [
         '$log',
+        '$mdToast',
         'PrescriptionService',
-        'PrescriptionRepository'
+        'PrescriptionRepository',
+        'DispenseRepository'
     ];
 
     constructor(
         private $log: angular.ILogService,
+        private $mdToast: angular.material.IToastService,
         private prescriptionService: PrescriptionService,
-        private prescriptionRepository: PrescriptionRepository) {
+        private prescriptionRepository: PrescriptionRepository,
+        private dispenseRepository: DispenseRepository) {
             let patientId = this.prescriptionService.getPatientId();
             let prescriptionId = this.prescriptionService.getPrescriptionId();
             this.prescriptionRepository.getPrescription(patientId, prescriptionId).then((foundPrescription) => {
@@ -84,11 +90,23 @@ export default class PrescriptionViewController {
     }
 
     fillFreshDispense() {
-        this.freshDispense = new Dispense();
-        this.openDrugs.forEach((openDrug: DrugItem) => {
-            this.freshDispense.DrugItems.push(angular.copy(openDrug));
-            this.freshDispense.DrugItems[this.freshDispense.DrugItems.length - 1].Quantity = 0;
-        });
+        
+        if (this.prescription.Dispenses.length === 0 || this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy !== null) {
+            this.freshDispense = new Dispense();
+            this.openDrugs.forEach((openDrug: DrugItem) => {
+                this.freshDispense.DrugItems.push(angular.copy(openDrug));
+                this.freshDispense.DrugItems[this.freshDispense.DrugItems.length - 1].Quantity = 0;
+            });
+        } else {
+            this.freshDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
+            this.freshDispense.DrugItems.forEach((drugItem: DrugItem) => {
+                let openDrugPos = this.openDrugs.map((openDrug: DrugItem) => {
+                    return openDrug.Id;
+                }).indexOf(drugItem.Id);
+
+                this.openDrugs[openDrugPos].Quantity -= drugItem.Quantity;
+            });
+        }
     }
 
     changeQuantityInFreshDispense(id: string, quantity: number, byButton: boolean) {
@@ -116,5 +134,28 @@ export default class PrescriptionViewController {
         }
         this.$log.debug('QuantityDiff: ' + quantityDiff);
         this.changeQuantityInFreshDispense(id, quantityDiff, true);
+    }
+
+    saveDispense() {
+        this.$log.debug(this.prescription.Patient.Id);
+        this.$log.debug(this.prescription.Id);
+        this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
+            this.showToast('Rezeptabgabe erfolgreich gespeichert');
+        }, (error) => {
+            this.showToast('Rezept konnte nicht gespeichert werden');
+        });
+    }
+
+    signDispense() {
+        let signor = new Drugist();
+        signor.FirstName = "Señor";
+        signor.LastName = "Signor";
+        this.freshDispense.SignedBy = signor;
+        this.freshDispense.Date = new Date();
+        this.saveDispense();
+    }
+
+    showToast(message: string) {
+        this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 }

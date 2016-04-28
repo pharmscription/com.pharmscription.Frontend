@@ -140,6 +140,7 @@
     <TypeScriptCompile Include="ts\model\patient.ts" />
     <TypeScriptCompile Include="ts\model\prescription.ts" />
     <TypeScriptCompile Include="ts\service\AHVNumberService.ts" />
+    <TypeScriptCompile Include="ts\service\DispenseRepository.ts" />
     <TypeScriptCompile Include="ts\service\DrugRepository.ts" />
     <TypeScriptCompile Include="ts\service\DrugService.ts" />
     <TypeScriptCompile Include="ts\service\PatientRepository.ts" />

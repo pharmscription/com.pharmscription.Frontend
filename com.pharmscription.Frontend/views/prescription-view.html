@@ -67,7 +67,7 @@
         <span>Abgabe History</span>
     </div>
     <md-list ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
-        <md-list-item ng-repeat="dispense in PrescriptionView.dispenseHistory" md-item-size="20">
+        <md-list-item ng-repeat="dispense in PrescriptionView.dispenseHistory" ng-show="dispense.SignedBy !== null" md-item-size="20">
             <div class="md-offset" layout-fill layout-margin>
                 <div layout="row" layout-align="space-between center">
                     <span class="md-title">Abgabe vom</span>
@@ -78,6 +78,7 @@
                     <span>{{ drugItem.Drug.DrugDescription }}</span>
                     <span>Menge: {{ drugItem.Quantity }}</span>
                 </div>
+                <span>Ausgestellt von: {{ dispense.SignedBy.FirstName }} {{ dispense.SignedBy.LastName }}</span>
             </div>
             <md-divider></md-divider>
         </md-list-item>
@@ -110,11 +111,11 @@
     <div layout="row">
         <span>Total:</span>
         <div flex></div>
-        <md-button class="md-raised md-primary" ng-click="null">
+        <md-button class="md-raised md-primary" ng-click="PrescriptionView.signDispense()">
             <md-icon>check</md-icon>
             <span>Visieren</span>
         </md-button>
-        <md-button class="md-raised md-primary" ng-click="null">
+        <md-button class="md-raised md-primary" ng-click="PrescriptionView.saveDispense()">
             <md-icon>save</md-icon>
             <span>Speichern</span>
         </md-button>

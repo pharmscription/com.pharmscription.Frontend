@@ -23,7 +23,7 @@ export default class PrescriptionRepository {
 
     getPrescriptions(patientId: string): IPromise<Array<Prescription>> {
         return this.$http.get(this.urls.getPrescriptions.replace('{id}', patientId)).then((response) => {
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 204) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -36,7 +36,7 @@ export default class PrescriptionRepository {
 
     getPrescription(patientId: string, prescriptionId: string): IPromise<Prescription> {
        return this.$http.get(this.urls.getPrescription.replace('{patientId}', patientId).replace('{prescriptionId}', prescriptionId)).then((response) => {
-           if (response.status === 200) {
+           if (response.status === 200 || response.status === 204) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -49,7 +49,7 @@ export default class PrescriptionRepository {
 
     newPrescription(prescription: Prescription): IPromise<Prescription> {
         let data = JSON.stringify(prescription);
-        return this.$http.put(this.urls.newPrescription.replace('{patientId}', prescription.Patient.Id), data).then((response) => {
+        return this.$http.put(this.urls.newPrescription.replace('{id}', prescription.Patient.Id), data).then((response) => {
             if (response.status === 200) {
                 return response.data;
             } else {

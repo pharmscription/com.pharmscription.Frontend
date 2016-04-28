@@ -3,7 +3,7 @@
         public Street: string,
         public Number: number,
         public State: string,
-        public City: string,
+        public Location: string,
         public CityCode: number,
         public StreetExtension?: string
     ) { }
