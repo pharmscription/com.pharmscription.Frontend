@@ -9,10 +9,10 @@
     <link href="style/style.css" rel="stylesheet" />
 </head>
 <body>
-<div ng-controller="MainMenuController" layout="column" layout-fill ng-cloak>
+<div ng-controller="MainMenuController as Main" layout="column" layout-fill ng-cloak>
     <md-toolbar class="md-primary">
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
+            <md-button class="md-icon-button" aria-label="Menu" ng-click="Main.toggleLeft()" hide-gt-md>
                 <md-icon md-font-set="material-icons">menu</md-icon>
             </md-button>
             <h2 class="md-display-3">Pharmscription</h2>
@@ -22,7 +22,7 @@
                     <md-icon md-font-set="material-icons">more_vert</md-icon>
                 </md-button>
                 <md-menu-content>
-                    <md-menu-item><md-button ng-click="doSomething()"><md-icon>lock</md-icon>Login</md-button></md-menu-item>
+                    <md-menu-item><md-button ng-click="null"><md-icon>lock</md-icon>Login</md-button></md-menu-item>
                     <md-menu-item><md-button href="#/"><md-icon>home</md-icon>home</md-button></md-menu-item>
                 </md-menu-content>
             </md-menu>
@@ -32,7 +32,7 @@
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
             <md-toolbar class="md-accent">
                 <div class="md-toolbar-tools">
-                    <md-button class="md-icon-button" ng-click="toggleLeft()" hide-gt-md>
+                    <md-button class="md-icon-button" ng-click="Main.toggleLeft()" hide-gt-md>
                         <md-icon md-font-set="material-icons">arrow_back</md-icon>
                     </md-button>
                     <span>Menu</span>
