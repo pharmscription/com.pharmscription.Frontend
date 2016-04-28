@@ -36,6 +36,7 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngRoute', 'ng
     })
     .config(($mdDateLocaleProvider: angular.material.IDateLocaleProvider) => {
         $mdDateLocaleProvider.parseDate = (dateString: string) => {
+            console.log(dateString);
             let m = moment(dateString, 'DD.MM.YYYY', true);
             return m.isValid() ? m.utc().toDate() : new Date(NaN);
         };

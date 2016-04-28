@@ -3,6 +3,8 @@ import AHVNumberService from "../service/AHVNumberService"
 import PatientService from 'ts/service/PatientService'
 import Patient from '../model/patient'
 
+import Address from 'ts/model/address'
+
 enum Mode {
     Register,
     Edit
@@ -39,15 +41,21 @@ export default class UserRegisterController {
         this.setControllerMode();
         if (this.controllerMode === Mode.Register) {
             this.patient = new Patient(this.ahvNumberService.getAHVNumber());
+
+            //Mock
             this.patient.BirthDate = new Date();
             this.patient.EMailAddress = "max@muster.com";
             this.patient.FirstName = "Max";
             this.patient.LastName = "Muster";
-
+            this.patient.Address = new Address("Bahnhofstrasse", 666, "ZH", "Zürich", 8888);
+            this.patient.Insurance = "Sanitas";
+            this.patient.InsuranceNumber = "xx.xx.xx";
+            this.patient.PhoneNumber = "0980980980";
 
         } else {
             this.patientRepository.getPatientById(this.PatientService.getPatientId()).then((foundPatient) => {
                 this.patient = foundPatient;
+                this.$log.debug(this.patient);
             }, (error) => {
                 this.showToast('Patient konnte nicht geladen werden');
                 this.$log.error(error);

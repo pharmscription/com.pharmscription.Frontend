@@ -66,7 +66,7 @@ export class AppDev {
                 new Date(2016, 7, 15),
                 [],
                 [],
-                "00123"
+                uuid()
             ));
             prescriptions.push(new Prescription(
                 patients[0],
@@ -81,7 +81,7 @@ export class AppDev {
                 [],
                 [new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 2, "65656565")], null, null, uuid()),
                     new Dispense(new Date(), "kein Kommentar", [new DrugItem(drugs[6], "0/1/0/1", 1, "65656565")], null, null, uuid())],
-                "001234"
+                uuid()
             ));
         }
 
@@ -180,7 +180,7 @@ export class AppDev {
             let prescriptionPos = prescriptions.map((prescription: Prescription) => {
                 return prescription.Id;
             }).indexOf(params.prescriptionId);
-            
+
             if (newDispense.Id === null) {
                 newDispense.Id = uuid();
                 prescriptions[prescriptionPos].Dispenses.push(newDispense);

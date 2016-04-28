@@ -17,8 +17,12 @@
                 <input ng-model="UserOverview.patient.LastName" flex="90" type="text" placeholder="Nachname" disabled>
             </md-input-container>
         </div>
-        <div class="date-picker">
-            <md-datepicker flex ng-model="UserOverview.patient.BirthDateStr" md-placeholder="Geburtsdatum" disabled></md-datepicker>
+        <div layout="row">
+            <md-input-container flex class="md-block">
+                <md-icon>today</md-icon>
+                <input ng-model="UserOverview.patient.BirthDate" flex="90" type="text" placeholder="Geburtsdatum" disabled>
+            </md-input-container>
+            
         </div>
         <div class="address" layout="column" flex>
             <div layout="row">

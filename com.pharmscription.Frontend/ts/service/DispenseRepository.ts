@@ -19,7 +19,7 @@ export default class DispenseRepository {
 
     addDispense(patientId: string, prescriptionId: string, dispense: Dispense): IPromise<Dispense> {
         let data = JSON.stringify(dispense);
-        return this.$http.put(this.urls.put.replace('{patientsId}', patientId).replace('{prescriptionId', prescriptionId), data).then((response) => {
+        return this.$http.put(this.urls.put.replace('{patientId}', patientId).replace('{prescriptionId}', prescriptionId), data).then((response) => {
             if (response.status === 200) {
                 return response.data;
             } else {
