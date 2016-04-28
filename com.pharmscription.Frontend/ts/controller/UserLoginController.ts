@@ -1,7 +1,7 @@
 ﻿
-
 export default class UserLoginController {
-
+    password: string;
+    username: string;
 
     public static $inject = [
         '$location',
@@ -9,5 +9,8 @@ export default class UserLoginController {
         '$mdToast'
     ];
 
-    constructor() { }
+    constructor(
+        private $location: angular.ILocationService,
+        private $log: angular.ILogService,
+        private $mdToast: angular.material.IToastService) { }
 }
