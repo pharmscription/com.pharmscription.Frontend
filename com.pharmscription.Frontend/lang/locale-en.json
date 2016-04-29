@@ -25,7 +25,7 @@
   "LASTNAME": "Lastname",
   "BIRTHDATE": "Birthdate",
   "STREET": "Street",
-  "HOUSENUMBER": "Housenumber",
+  "HOUSENUMBER": "House number",
   "STREETEXTENSION": "Additional Address",
   "CITYCODE": "City Code",
   "LOCATION": "City",

@@ -28,8 +28,8 @@ export class AppDev {
             '756.1390.2077.81',
             'Max',
             'Muster',
-            new Address('Bahnhostrasse', 666, 'ZH', 'Zürich', 8888),
-            "15.04.1990",
+            new Address('Bahnhostrasse', '666', 'ZH', 'Zürich', '8888'),
+            new Date(1990, 4, 15),
             '0980980980', 'max@muster.com',
             'xx-xx-xx',
             'Sanitas',
@@ -42,10 +42,10 @@ export class AppDev {
             'Krates',
             new Address(
                 'Greekstr.',
-                99,
+                '99',
                 'AT',
                 'Athen',
-                4253
+                '4253'
             ), '643.234.534',
             '0980980980',
             '1231231231'
@@ -214,7 +214,7 @@ export class AppDev {
             let patient: Patient = angular.fromJson(data);
             patient.Id = uuid();
             patients.push(patient);
-            return [200, data, {}];
+            return [200, patient, {}];
         });
 
         /*

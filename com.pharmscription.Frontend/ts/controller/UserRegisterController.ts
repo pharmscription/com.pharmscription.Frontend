@@ -74,6 +74,7 @@ export default class UserRegisterController {
             this.patientRepository.addPatient(patient).then((addedPatient) => {
                 this.PatientService.setPatientId(addedPatient.Id);
                 this.showToast(addedPatient.FirstName + " " + addedPatient.LastName + " gespeichert!");
+                this.$location.url('/user/overview');
             }, (error) => {
                 this.$log.error(error);
                 this.showToast("Patient konnte nicht registriert werden!");

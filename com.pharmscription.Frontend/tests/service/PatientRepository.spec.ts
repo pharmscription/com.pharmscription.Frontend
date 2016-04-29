@@ -19,7 +19,7 @@ describe('PatientRepositoryTest', () => {
         '756.1390.2077.81',
         'Max',
         'Muster',
-        new Address('Bahnhostrasse', 666, 'ZH', 'Zürich', 8888),
+        new Address('Bahnhostrasse', '666', 'ZH', 'Zürich', '8888'),
         new Date(),
         '0980980980', 'max@muster.com',
         'xx-xx-xx',

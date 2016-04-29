@@ -53,10 +53,10 @@ export default class PrescriptionCreatorController {
                         'Krates',
                         new Address(
                             'Greekstr.',
-                            99,
+                            '99',
                             'AT',
                             'Athen',
-                            4253
+                            '4253'
                         ), '643.234.534',
                         '0980980980',
                         '1231231231'
