@@ -99,13 +99,6 @@ export default class PrescriptionViewController {
             });
         } else {
             this.freshDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
-            this.freshDispense.DrugItems.forEach((drugItem: DrugItem) => {
-                let openDrugPos = this.openDrugs.map((openDrug: DrugItem) => {
-                    return openDrug.Id;
-                }).indexOf(drugItem.Id);
-
-                this.openDrugs[openDrugPos].Quantity -= drugItem.Quantity;
-            });
         }
     }
 
@@ -140,8 +133,10 @@ export default class PrescriptionViewController {
         this.$log.debug(this.prescription.Patient.Id);
         this.$log.debug(this.prescription.Id);
         this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
+            this.$log.debug(newDispense);
             this.showToast('Rezeptabgabe erfolgreich gespeichert');
         }, (error) => {
+            this.$log.error(error);
             this.showToast('Rezept konnte nicht gespeichert werden');
         });
     }

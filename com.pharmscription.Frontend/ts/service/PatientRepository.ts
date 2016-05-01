@@ -59,6 +59,8 @@ export default class PatientRepository {
 
     getPatientById(id: string): IPromise<Patient> {
         this.$log.debug(id);
+        if (id === null)
+            return this.$q.reject("No ID Submitted");
         return this.$http.get(this.urls.getById.replace('{id}', id)).then((response) => {
                 this.$log.debug(id);
             if (response.status === 200) {
