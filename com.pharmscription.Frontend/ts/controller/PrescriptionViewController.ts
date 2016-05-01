@@ -49,18 +49,20 @@ export default class PrescriptionViewController {
 
     fillAllDispenses() {
         this.allDispenses = [];
-        this.prescription.Dispenses.forEach((dispense: Dispense) => {
-            dispense.DrugItems.forEach((drug: DrugItem) => {
-                let indexInAllDispense = this.allDispenses.map((dispensedDrug: DrugItem) => {
-                    return dispensedDrug.Id;
-                }).indexOf(drug.Id);
-                if (indexInAllDispense !== -1) {
-                    this.allDispenses[indexInAllDispense].Quantity += drug.Quantity;
-                } else {
-                    this.allDispenses.push(drug);
-                }
+        if (this.hasDispenses()) {
+            this.prescription.Dispenses.forEach((dispense: Dispense) => {
+                dispense.DrugItems.forEach((drug: DrugItem) => {
+                    let indexInAllDispense = this.allDispenses.map((dispensedDrug: DrugItem) => {
+                        return dispensedDrug.Id;
+                    }).indexOf(drug.Id);
+                    if (indexInAllDispense !== -1) {
+                        this.allDispenses[indexInAllDispense].Quantity += drug.Quantity;
+                    } else {
+                        this.allDispenses.push(drug);
+                    }
+                });
             });
-        });
+        }
     }
 
     fillOpenDrugs() {
@@ -90,15 +92,14 @@ export default class PrescriptionViewController {
     }
 
     fillFreshDispense() {
-        
-        if (this.prescription.Dispenses.length === 0 || this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy !== null) {
+        if (this.hasDispenses() && this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy === null) {
+            this.freshDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
+        } else {
             this.freshDispense = new Dispense();
             this.openDrugs.forEach((openDrug: DrugItem) => {
                 this.freshDispense.DrugItems.push(angular.copy(openDrug));
                 this.freshDispense.DrugItems[this.freshDispense.DrugItems.length - 1].Quantity = 0;
             });
-        } else {
-            this.freshDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
         }
     }
 
@@ -152,5 +153,9 @@ export default class PrescriptionViewController {
 
     showToast(message: string) {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
+    }
+
+    hasDispenses(): boolean {
+        return this.prescription.Dispenses !== null && this.prescription.Dispenses !== undefined && this.prescription.Dispenses.length > 0;
     }
 }

@@ -55,6 +55,7 @@ export default class UserRegisterController {
 
         } else {
             this.patientRepository.getPatientById(this.PatientService.getPatientId()).then((foundPatient) => {
+                foundPatient.BirthDate = new Date(foundPatient.BirthDate.toString());
                 this.patient = foundPatient;
                 this.$log.debug(this.patient);
             }, (error) => {

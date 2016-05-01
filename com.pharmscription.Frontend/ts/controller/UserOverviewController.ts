@@ -31,6 +31,7 @@ export default class UserOverviewController {
         private drugService: DrugService,
         private prescriptionService: PrescriptionService) {
         this.patientRepository.getPatientById(this.patientService.getPatientId()).then((foundPatient) => {
+            foundPatient.BirthDate = new Date(foundPatient.BirthDate.toString());
             this.patient = foundPatient;
             this.getPrescriptions();
         }, (error) => {
