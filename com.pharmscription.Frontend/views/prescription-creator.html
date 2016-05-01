@@ -1,5 +1,5 @@
 ﻿<md-toolbar class="md-primary md-hue-1">
-    <div class="md-toolbar-tools">Rezept erstellen für {{ PrescriptionCreator.patient.FirstName }} {{ PrescriptionCreator.patient.LastName }}</div>
+    <div class="md-toolbar-tools" translate="TOOLBAR-TITLE.PRESCRIPTION-CREATOR" translate-values="{ firstName: PrescriptionCreator.patient.FirstName, lastName: PrescriptionCreator.patient.LastName }"></div>
 </md-toolbar>
 
 <md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
@@ -10,10 +10,10 @@
             </div>
             <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default ng-model="PrescriptionCreator.isRepeatPrescription">
                 <span ng-if="PrescriptionCreator.prescription.Type === 'N'" class="animate-if">
-                    Einzelrezept
+                    <span translate="SINGLE-PRESCRIPTION"></span>
                 </span>
                 <span ng-if="PrescriptionCreator.prescription.Type === 'S'" class="animate-if">
-                    Dauerrezept
+                    <span translate="REPEAT-PRESCRIPTION"></span>
                 </span>
             </md-switch>
         </div>
@@ -24,11 +24,13 @@
                 <div layout="row" flex>
                     <md-input-container flex="30" class="md-block">
                         <md-icon>exposure</md-icon>
-                        <input type="number" min="1" placeholder="Menge" ng-model="drugItem.Quantity" required>
+                        <label translate="QUANTITY"></label>
+                        <input type="number" min="1" ng-model="drugItem.Quantity" required>
                     </md-input-container>
                     <md-input-container flex="60" class="md-block">
                         <md-icon>access_time</md-icon>
-                        <input type="text" placeholder="Dosierung" ng-model="drugItem.DosageDescription" required>
+                        <label translate="DOSAGE"></label>
+                        <input type="text" ng-model="drugItem.DosageDescription" required>
                     </md-input-container>
                     <md-button class="md-icon-button" ng-click="PrescriptionCreator.removeDrug($index)">
                         <md-icon>remove_circle</md-icon>
@@ -39,14 +41,12 @@
         </md-list>
         <div layout="row" layout-align="end center">
             <md-button id="prescription-add-button" class="md-fab" ng-click="PrescriptionCreator.addDrug()">
-                <md-tooltip>
-                    Medikament hinzufügen
-                </md-tooltip>
+                <md-tooltip>{{ 'TOOLTIP.ADD-DRUG' | translate }}</md-tooltip>
                 <md-icon>add</md-icon>
             </md-button>
         </div>
     </form>
-        <md-button class="md-raised" ng-disabled="prescriptionForm.$invalid || PrescriptionCreator.drugItems.length === 0" ng-click="PrescriptionCreator.savePrescription()">SPEICHERN</md-button>
+        <md-button class="md-raised" ng-disabled="prescriptionForm.$invalid || PrescriptionCreator.drugItems.length === 0" ng-click="PrescriptionCreator.savePrescription()" translate="SAVE"></md-button>
 </md-whiteframe>
 
 

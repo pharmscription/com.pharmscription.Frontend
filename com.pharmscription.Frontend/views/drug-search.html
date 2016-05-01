@@ -1,19 +1,19 @@
 ﻿<md-toolbar class="md-primary md-hue-1">
-    <div class="md-toolbar-tools">Medikament suchen</div>
+    <div class="md-toolbar-tools" translate="TOOLBAR-TITLE.DRUGSEARCH"></div>
 </md-toolbar>
 <div layout="row" layout-align="center center">
     <form name="searchForm">
         <md-input-container class="md-block" flex-gt-sm>
-            <label>Medikament</label>
+            <label translate="DRUG"></label>
             <input name="drug" ng-model="DrugSearch.searchedDrug" required/>
             <div ng-messages="searchForm.$error">
-                <div ng-message="required">Kein Suchbegriff</div>
+                <div ng-message="required" translate="ERROR.NO-SEARCH-TERM"></div>
             </div>
         </md-input-container>
     </form>
     <md-button ng-click="DrugSearch.getDrugs(DrugSearch.searchedDrug)" ng-disabled="searchForm.$invalid">
         <md-icon md-font-set="material-icons">search</md-icon>
-        Suchen
+        <span translate="SEARCH"></span>
     </md-button>
 </div>
 
@@ -23,8 +23,8 @@
 
 
 <md-list layout-fill >
-    <md-subheader ng-hide="DrugSearch.drugSearchResults.numItems">Keine Suchtreffer gefunden</md-subheader>
-    <md-subheader class="md-no-sticky" ng-show="DrugSearch.drugSearchResults.numItems">{{DrugSearch.drugSearchResults.numItems}} Suchresultate für <b>{{DrugSearch.drugSearchResults.searchTerm}}</b> gefunden</md-subheader>
+    <md-subheader ng-hide="DrugSearch.drugSearchResults.numItems" translate="DRUG-SEARCH.NO-RESULTS"></md-subheader>
+    <md-subheader class="md-no-sticky" ng-show="DrugSearch.drugSearchResults.numItems" translate="DRUG-SEARCH.SEARCH-RESULTS" translate-values="{ results: DrugSearch.drugSearchResults.numItems, drug: DrugSearch.drugSearchResults.searchTerm }"></md-subheader>
     <md-virtual-repeat-container id="vertical-container">
         <md-list-item ng-click="widgetExpanded = !widgetExpanded" md-virtual-repeat="drug in DrugSearch.drugSearchResults" md-item-size="20" md-on-demand>
             <div layout="column">
@@ -32,14 +32,14 @@
                     <md-icon ng-hide="widgetExpanded" md-font-set="material-icons">keyboard_arrow_down</md-icon>
                     <md-icon ng-show="widgetExpanded" md-font-set="material-icons">keyboard_arrow_up</md-icon>
                     <md-icon id="drug-icon" md-font-set="material-icons">healing</md-icon>
-                    <span><span ng-if="!drug.DrugDescription">loading...</span>{{drug.DrugDescription}}</span>
+                    <span><span ng-if="!drug.DrugDescription" translate="DRUG-SEARCH.LOADING"></span>{{drug.DrugDescription}}</span>
                 </div>
                 <div flex layout="column" ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
-                    <p>Einheiten: <b>{{drug.Unit}}</b></p>
-                    <p>Komposition: <b>{{drug.Composition}}</b></p>
-                    <p>Betäubungsmittel-Kategorie: <b>{{drug.NarcoticCategory}}</b></p>
+                    <p translate="UNITS" translate-values="{ units: drug.Unit }"></p>
+                    <p translate="COMPOSITION" translate-values="{ composition: drug.Composition }"></p>
+                    <p translate="NARCOTIC-CATEGORY" translate-values="{ narcoticCategory: drug.NarcoticCategory }"></p>
                 </div>
-                <md-button class="md-secondary" ng-click="DrugSearch.addDrug(drug)" ng-show="DrugSearch.controllerMode == '1'">HINZUFÜGEN</md-button>
+                <md-button class="md-secondary" ng-click="DrugSearch.addDrug(drug)" ng-show="DrugSearch.controllerMode == '1'" translate="ADD"></md-button>
             </div>
             <md-divider></md-divider>
         </md-list-item>

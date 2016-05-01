@@ -7,19 +7,22 @@
   "ERROR": {
     "REQUIRED": "Muss ausgefüllt sein",
     "SOCIALNUMBER": "AHV-Nummer ist ungültig",
-    "BIRTHDATE-FUTURE": "Geburtsdatum kann nicht in der Zukunft liegen"
+    "BIRTHDATE-FUTURE": "Geburtsdatum kann nicht in der Zukunft liegen",
+    "NO-SEARCH-TERM": "Kein Suchbegriff eingegeben"
   },
   "SEARCH": "Suchen",
   "TOOLBAR-TITLE": {
     "PATIENTSEARCH": "Patienten Suche",
     "DRUGSEARCH": "Medikamenten Suche",
     "REGISTER-PATIENT": "Patient Registrieren",
-    "OVERVIEW-PATIENT": "Patienten Übersicht"
+    "OVERVIEW-PATIENT": "Patienten Übersicht",
+    "PRESCRIPTION-CREATOR": "Rezept erstellen für {{ firstName }} {{ lastName }}"
   },
   "TOOLTIP": {
     "EDIT-USER": "Benutzerdaten bearbeiten",
     "SHOW-PRESCRIPTION": "Rezept anzeigen",
-    "ADD-PRESCRIPTION": "Neues Rezept erfassen"
+    "ADD-PRESCRIPTION": "Neues Rezept erfassen",
+    "ADD-DRUG": "Medikament hinzufügen"
   },
   "FIRSTNAME": "Vorname",
   "LASTNAME": "Nachname",
@@ -36,5 +39,22 @@
   "INSURANCE": "Versicherung",
   "SAVE": "Speichern",
   "PRESCRIPTIONS": "Rezepte",
-  "NO-SAVED-PRESCRIPTIONS": "keine erfassten Rezepte"
+  "NO-SAVED-PRESCRIPTIONS": "keine erfassten Rezepte",
+  "DRUG": "Medikament",
+  "UNITS": "Einheiten: <b>{{ units }}</b>",
+  "COMPOSITION": "Komposition: <b>{{ composition }}</b>",
+  "NARCOTIC-CATEGORY": "Betäubungsmittel-Kategorie: <b>{{ narcoticCategory }}</b>",
+  "ADD": "Hinzufügen",
+  "SINGLE-PRESCRIPTION": "Einzelrezept",
+  "REPEAT-PRESCRIPTION": "Dauerrezept",
+  "QUANTITY": "Menge",
+  "DOSAGE": "Dosierung",
+  "DRUG-SEARCH": {
+    "NO-RESULTS": "Keine Suchtreffer gefunden",
+    "LOADING": "wird geladen...",
+    "SEARCH-RESULTS": "{{ results }} Suchresultate für <b>{{ drug }}</b> gefunden"
+  },
+  "PRESCRIPTION-CREATOR": {
+    "VALIDITY": "Gültig bis"
+  }
 }

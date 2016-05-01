@@ -7,19 +7,22 @@
   "ERROR": {
     "REQUIRED": "Is required",
     "SOCIALNUMBER": "Social-Number is invalid",
-    "BIRTHDATE-FUTURE": "Birthdate can't be in future"
+    "BIRTHDATE-FUTURE": "Birthdate can't be in future",
+    "NO-SEARCH-TERM": "No search term entered"
   },
   "SEARCH": "Search",
   "TOOLBAR-TITLE": {
     "PATIENTSEARCH": "Patient Search",
     "DRUGSEARCH": "Drug Search",
     "REGISTER-PATIENT": "Register Patient",
-    "OVERVIEW-PATIENT": "Patient Overview"
+    "OVERVIEW-PATIENT": "Patient Overview",
+    "PRESCRIPTION-CREATOR": "Create Prescription For {{ firstName }} {{ lastName }}"
   },
   "TOOLTIP": {
     "EDIT-USER": "Edit Userdata",
     "SHOW-PRESCRIPTION": "Show Prescription",
-    "ADD-PRESCRIPTION": "Add new Prescription"
+    "ADD-PRESCRIPTION": "Add new Prescription",
+    "ADD-DRUG": "Add drug"
   },
   "FIRSTNAME": "Firstname",
   "LASTNAME": "Lastname",
@@ -36,5 +39,22 @@
   "INSURANCE": "Insurance",
   "SAVE": "Save",
   "PRESCRIPTIONS": "Prescriptions",
-  "NO-SAVED-PRESCRIPTIONS": "No saved prescriptions"
+  "NO-SAVED-PRESCRIPTIONS": "No saved prescriptions",
+  "DRUG": "Drug",
+  "UNITS": "Units: <b>{{ units }}</b>",
+  "COMPOSITION": "Composition: <b>{{ composition }}</b>",
+  "NARCOTIC-CATEGORY": "Narcotic Category: <b>{{ narcoticCategory }}</b>",
+  "ADD": "Add",
+  "SINGLE-PRESCRIPTION": "Single prescription",
+  "REPEAT-PRESCRIPTION": "Repeat prescription",
+  "QUANTITY": "Quantity",
+  "DOSAGE": "Dosage",
+  "DRUG-SEARCH": {
+    "NO-RESULTS": "No results found",
+    "LOADING": "loading...",
+    "SEARCH-RESULTS": "{{ results }} search results found for <b>{{ drug }}</b>"
+  },
+  "PRESCRIPTION-CREATOR": {
+    "VALIDITY": "Valid until"
+  }
 }
