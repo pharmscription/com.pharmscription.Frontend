@@ -48,13 +48,9 @@
 }
 
 .login-content {
-    height: 200px;
     background: url(./../img/mb-bg-fb-22.png) no-repeat center;
     background-size: cover;
     -webkit-background-size: cover;
-}
-
-.account-icon {
-    margin: 0;
-    font-size: 50px;
+    filter: brightness(110%);
+    -webkit-filter: brightness(110%);
 }
