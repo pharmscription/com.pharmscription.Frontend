@@ -103,7 +103,7 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 
         });
 
         $translateProvider.preferredLanguage('de');
-        $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
     }])
     .controller('MainMenuController', MainMenuController)
     .controller('MainSideMenuController', MainSideMenuController)
