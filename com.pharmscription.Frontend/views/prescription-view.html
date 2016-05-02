@@ -19,9 +19,15 @@
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
-    <div layout="row" layout-align="space-between center">
-        <span class="md-headline">Rezept #{{PrescriptionView.prescription.Id}}</span>
-        <span>Gültig bis: {{ PrescriptionView.prescription.ValidUntil  | date:'dd.MM.yyyy' }}</span>
+    <div layout="column">
+        <div layout="row" layout-align="space-between center">
+            <span class="md-headline">Rezept ID</span>
+            <span class="md-headline">Gültig bis</span>
+        </div>
+        <div layout="row" layout-align="space-between center">
+            <span>{{PrescriptionView.prescription.Id}}</span>
+            <span>{{PrescriptionView.prescription.ValidUntil | date:"dd.MM.yyyy"}}</span>
+        </div>
     </div>
     <md-divider></md-divider>
     <md-list>
