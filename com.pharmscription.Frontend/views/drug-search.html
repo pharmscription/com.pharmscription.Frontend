@@ -22,9 +22,9 @@
 </div>
 
 
-<md-list layout-fill >
-    <md-subheader ng-hide="DrugSearch.drugSearchResults.numItems" translate="DRUG-SEARCH.NO-RESULTS"></md-subheader>
-    <md-subheader class="md-no-sticky" ng-show="DrugSearch.drugSearchResults.numItems" translate="DRUG-SEARCH.SEARCH-RESULTS" translate-values="{ results: DrugSearch.drugSearchResults.numItems, drug: DrugSearch.drugSearchResults.searchTerm }"></md-subheader>
+<md-list layout-fill>
+    <md-subheader ng-hide="DrugSearch.drugSearchResults.numItems" translate="DRUG-SEARCH.NO-RESULTS" layout-padding></md-subheader>
+    <md-subheader class="md-no-sticky" ng-show="DrugSearch.drugSearchResults.numItems" translate="DRUG-SEARCH.SEARCH-RESULTS" translate-values="{ results: DrugSearch.drugSearchResults.numItems, drug: DrugSearch.drugSearchResults.searchTerm }" layout-padding></md-subheader>
     <md-virtual-repeat-container id="vertical-container">
         <md-list-item ng-click="widgetExpanded = !widgetExpanded" md-virtual-repeat="drug in DrugSearch.drugSearchResults" md-item-size="20" md-on-demand>
             <div layout="column">
