@@ -25,7 +25,7 @@
             
             <md-menu>
                 <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="More">
-                    <md-icon md-font-set="material-icons">more_vert</md-icon>
+                    <md-icon>more_vert</md-icon>
                 </md-button>
                 <md-menu-content>
                     <md-menu-item><md-button ng-click="null"><md-icon>lock</md-icon>Login</md-button></md-menu-item>
@@ -44,7 +44,23 @@
                     <span>Menu</span>
                 </div>
             </md-toolbar>
-            <md-content ng-controller="MainSideMenuController as SideMenu">
+            <md-content ng-controller="MainSideMenuController as SideMenu" layout="column">
+                <md-content class="login-content" layout="column" layout-align="end start" layout-padding>
+                    <div layout="column" layout-align="space-between start" layout-fill>
+                        <md-icon class="account-icon md-avatar-icon">account_circle</md-icon>
+                        <md-menu>
+                            <span ng-click="$mdOpenMenu($event)" aria-label="Login Actions">
+                                <span>User ID</span>
+                                <md-icon>keyboard_arrow_down</md-icon>
+                            </span>
+                            <md-menu-content>
+                                <md-menu-item><md-button ng-click="null"><md-icon>lock</md-icon>Login</md-button></md-menu-item>
+                                <md-menu-item><md-button href="#/"><md-icon>home</md-icon>home</md-button></md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        
+                    </div>
+                </md-content>
                 <md-list>
                     <md-list-item ng-click="SideMenu.goTo('#')">
                         <md-icon>search</md-icon>

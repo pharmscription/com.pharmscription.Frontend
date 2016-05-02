@@ -79,6 +79,7 @@
     <Content Include="img\icons\menu.svg" />
     <None Include="lang\locale-en.json" />
     <None Include="lang\locale-de.json" />
+    <Content Include="img\mb-bg-fb-22.png" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="style\style.css" />
