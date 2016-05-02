@@ -22,16 +22,6 @@
                     <md-option ng-repeat="lang in Main.languages" value="{{lang.lang}}">{{ lang.lang }}</md-option>
                 </md-select>
             </md-input-container>
-            
-            <md-menu>
-                <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="More">
-                    <md-icon>more_vert</md-icon>
-                </md-button>
-                <md-menu-content>
-                    <md-menu-item><md-button ng-click="null"><md-icon>lock</md-icon>Login</md-button></md-menu-item>
-                    <md-menu-item><md-button href="#/"><md-icon>home</md-icon>home</md-button></md-menu-item>
-                </md-menu-content>
-            </md-menu>
         </div>
     </md-toolbar>
     <section layout="row" flex>
@@ -75,14 +65,14 @@
 <script src="/jspm_packages/system.js"></script>
 <script src="config.js"></script>
 <script src="build.js"></script>
-<script>
+<!--<script>
     System.import('./ts/bootstrapDev.ts')
         .catch(console.error.bind(console));
-</script>
-<!--<script>
+</script>-->
+<script>
     System.import('./ts/bootstrap.ts')
         .catch(console.error.bind(console));
-</script>-->
+</script>
 
 <!--<script src="js/main.js"></script>-->
 </body>

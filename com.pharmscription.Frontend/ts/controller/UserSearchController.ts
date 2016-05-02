@@ -10,6 +10,7 @@ export default class UserSearchController {
         '$mdDialog',
         '$mdToast',
         '$location',
+        '$translate',
         'AHVNumberService',
         'PatientRepository',
         'PatientService',
@@ -20,6 +21,7 @@ export default class UserSearchController {
         private $mdDialog: angular.material.IDialogService,
         private $mdToast: angular.material.IToastService,
         private $location: angular.ILocationService,
+        private $translate: angular.translate.ITranslateService,
         private ahvNumberService: AHVNumberService,
         private patientRepository: PatientRepository,
         private patientService: PatientService,
@@ -29,27 +31,19 @@ export default class UserSearchController {
     }
 
     showPatientNotFoundDialog(event: MouseEvent) {
-        let confirm: angular.material.IConfirmDialog = this.$mdDialog.confirm()
-            .title('Patient nicht gefunden')
-            .textContent('Möchten Sie den Patienten mit der AHV-Nummer ' + this.social + ' Registrieren?')
-            .ariaLabel('Patient Registrieren')
-            .targetEvent(event)
-            .ok('Registrieren')
-            .cancel('Abbrechen');
-        this.$mdDialog.show(confirm).then(() => {
-            this.ahvNumberService.setAHVNumber(this.social);
-            this.$location.url('user/register');
-        });
-    }
-
-    showPatientFoundDialog(firstName: string, lastName: string, event: MouseEvent) {
-        this.$mdDialog.show(
-            this.$mdDialog.alert()
-                .title('Patient gefunden!')
-                .textContent('Patient: ' + firstName + " " + lastName)
+        this.$translate(['DIALOG.PATIENT-NOT-FOUND.TITLE', 'DIALOG.PATIENT-NOT-FOUND.CONTENT', 'DIALOG.PATIENT-NOT-FOUND.OK', 'DIALOG.PATIENT-NOT-FOUND.CANCEL']).then((translations) => {
+            let confirm: angular.material.IConfirmDialog = this.$mdDialog.confirm()
+                .title(translations['DIALOG.PATIENT-NOT-FOUND.TITLE'])
+                .textContent(translations['DIALOG.PATIENT-NOT-FOUND.CONTENT'])
+                .ariaLabel(translations['DIALOG.PATIENT-NOT-FOUND.TITLE'])
                 .targetEvent(event)
-                .ok('Danke')
-        );
+                .ok(translations['DIALOG.PATIENT-NOT-FOUND.OK'])
+                .cancel(translations['DIALOG.PATIENT-NOT-FOUND.CANCEL']);
+            this.$mdDialog.show(confirm).then(() => {
+                this.ahvNumberService.setAHVNumber(this.social);
+                this.$location.url('user/register');
+            });
+        });
     }
 
     showToast(message: string) {
@@ -62,13 +56,14 @@ export default class UserSearchController {
             if (foundPatient === null) {
                 this.showPatientNotFoundDialog(event);
             } else {
-                //this.showPatientFoundDialog(foundPatient.FirstName, foundPatient.LastName, event);
                 this.patientService.setPatientId(foundPatient.Id);
                 this.$location.url('user/overview');
             }
         }, (errorReason) => {
             this.$log.error(errorReason);
-            this.showToast('Fehler bei der Suche!');
+            this.$translate('TOAST.SEARCH-ERROR').then((message) => {
+                this.showToast(message);
+            });
         });
 
     };
