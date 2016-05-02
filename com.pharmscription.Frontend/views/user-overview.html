@@ -105,8 +105,8 @@
             <md-icon class="md-48" md-font-set="material-icons">insert_drive_file</md-icon>
             <div layout="column" layout-align="center start">
                 <md-tooltip>{{ 'TOOLTIP.SHOW-PRESCRIPTION' | translate }}</md-tooltip>
-                <span>Rezept von {{prescription.Doctor.FirstName}} {{prescription.Doctor.LastName}}</span>
-                <span>Ausgestellt am {{prescription.IssueDate | date:"dd.MM.yyyy"}}</span>
+                <span translate="PRESCRIPTION.ISSUER" translate-values="{ firstName: prescription.Doctor.FirstName, lastName: prescription.Doctor.LastName }"></span>
+                <span translate="PRESCRIPTION.ISSUE-DATE" translate-values="{ issueDate: prescription.IssueDate | date:'dd.MM.yyyy'}"></span>
             </div>
             <div flex></div>
             <md-divider></md-divider>

@@ -88,6 +88,7 @@
     "EDIT": "Edit prescription",
     "ISSUER-INFO": "Issuer information",
     "ISSUER": "Issued by: {{ firstName }} {{ lastName }}",
+    "ISSUE-DATE": "Issued on {{ issueDate }}",
     "DISPENSE-HISTORY": "Dispense History",
     "DISPENSE": "Dispense",
     "SIGN": "Sign off",
