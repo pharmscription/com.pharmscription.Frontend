@@ -81,6 +81,7 @@
     "SEARCH-RESULTS": "{{ results }} search results found for <b>{{ drug }}</b>"
   },
   "PRESCRIPTION": {
+    "ID": "Prescription ID",
     "VALIDITY": "Valid until",
     "VALIDITY-PARAM": "Valid until {{ validUntil }}",
     "EDIT-DATE": "Edited on {{ editDate }}",
