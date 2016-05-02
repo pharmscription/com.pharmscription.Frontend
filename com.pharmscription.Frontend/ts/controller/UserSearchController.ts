@@ -31,10 +31,14 @@ export default class UserSearchController {
     }
 
     showPatientNotFoundDialog(event: MouseEvent) {
-        this.$translate(['DIALOG.PATIENT-NOT-FOUND.TITLE', 'DIALOG.PATIENT-NOT-FOUND.CONTENT', 'DIALOG.PATIENT-NOT-FOUND.OK', 'DIALOG.PATIENT-NOT-FOUND.CANCEL']).then((translations) => {
+        let contentString: string;
+        this.$translate('DIALOG.PATIENT-NOT-FOUND.CONTENT', { social: this.social }).then((message) => {
+            contentString = message;
+        });
+        this.$translate(['DIALOG.PATIENT-NOT-FOUND.TITLE', 'DIALOG.PATIENT-NOT-FOUND.OK', 'DIALOG.PATIENT-NOT-FOUND.CANCEL']).then((translations) => {
             let confirm: angular.material.IConfirmDialog = this.$mdDialog.confirm()
                 .title(translations['DIALOG.PATIENT-NOT-FOUND.TITLE'])
-                .textContent(translations['DIALOG.PATIENT-NOT-FOUND.CONTENT'])
+                .textContent(contentString)
                 .ariaLabel(translations['DIALOG.PATIENT-NOT-FOUND.TITLE'])
                 .targetEvent(event)
                 .ok(translations['DIALOG.PATIENT-NOT-FOUND.OK'])
