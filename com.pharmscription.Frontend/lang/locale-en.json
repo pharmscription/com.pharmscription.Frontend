@@ -22,7 +22,9 @@
     "EDIT-USER": "Edit Userdata",
     "SHOW-PRESCRIPTION": "Show Prescription",
     "ADD-PRESCRIPTION": "Add new Prescription",
-    "ADD-DRUG": "Add drug"
+    "ADD-DRUG": "Add drug",
+    "ADD-DRUG-DISPENSE": "Add drug to dispense",
+    "REMOVE-DRUG-DISPENSE": "Remove drug from dispense"
   },
   "TOAST": {
     "SEARCH-PATIENT": "Please search Patient first",
@@ -61,6 +63,7 @@
   "PRESCRIPTIONS": "Prescriptions",
   "NO-SAVED-PRESCRIPTIONS": "No saved prescriptions",
   "DRUG": "Drug",
+  "DESCRIPTION": "Description {{ description }}",
   "UNITS": "Units: <b>{{ units }}</b>",
   "COMPOSITION": "Composition: <b>{{ composition }}</b>",
   "NARCOTIC-CATEGORY": "Narcotic Category: <b>{{ narcoticCategory }}</b>",
@@ -68,13 +71,25 @@
   "SINGLE-PRESCRIPTION": "Single prescription",
   "REPEAT-PRESCRIPTION": "Repeat prescription",
   "QUANTITY": "Quantity",
+  "QUANTITY-PARAM": "Quantity {{ quantity }}",
   "DOSAGE": "Dosage",
+  "DOSAGE-PARAM": "Dosage {{ dosage }}",
+  "PRICE": "Price",
   "DRUG-SEARCH": {
     "NO-RESULTS": "No results found",
     "LOADING": "loading...",
     "SEARCH-RESULTS": "{{ results }} search results found for <b>{{ drug }}</b>"
   },
-  "PRESCRIPTION-CREATOR": {
-    "VALIDITY": "Valid until"
+  "PRESCRIPTION": {
+    "VALIDITY": "Valid until",
+    "VALIDITY-PARAM": "Valid until {{ validUntil }}",
+    "EDIT-DATE": "Edited on {{ editDate }}",
+    "EDIT": "Edit prescription",
+    "ISSUER-INFO": "Issuer information",
+    "ISSUER": "Issued by: {{ firstName }} {{ lastName }}",
+    "DISPENSE-HISTORY": "Dispense History",
+    "DISPENSE": "Dispense",
+    "SIGN": "Sign off",
+    "DISPENSE-DATE": "Dispense from"
   }
 }
