@@ -20,6 +20,8 @@ export default class PrescriptionViewController {
     static $inject = [
         '$log',
         '$mdToast',
+        '$location',
+        '$translate',
         'PrescriptionService',
         'PrescriptionRepository',
         'DispenseRepository'
@@ -28,11 +30,14 @@ export default class PrescriptionViewController {
     constructor(
         private $log: angular.ILogService,
         private $mdToast: angular.material.IToastService,
+        private $location: angular.ILocationService,
+        private $translate: angular.translate.ITranslateService,
         private prescriptionService: PrescriptionService,
         private prescriptionRepository: PrescriptionRepository,
         private dispenseRepository: DispenseRepository) {
-            let patientId = this.prescriptionService.getPatientId();
-            let prescriptionId = this.prescriptionService.getPrescriptionId();
+        let patientId = this.prescriptionService.getPatientId();
+        let prescriptionId = this.prescriptionService.getPrescriptionId();
+        if (prescriptionId !== undefined || patientId !== undefined) {
             this.prescriptionRepository.getPrescription(patientId, prescriptionId).then((foundPrescription) => {
                 this.prescription = foundPrescription;
                 this.dispenseHistory = angular.copy(this.prescription.Dispenses);
@@ -44,8 +49,14 @@ export default class PrescriptionViewController {
             }, (error) => {
                 this.$log.error(error);
             });
-
+        } else {
+                this.$translate("TOAST.SEARCH-PATIENT").then((message) => {
+                    this.$log.debug(message);
+                    this.showToast(message);
+                    this.$location.url('/');
+            });
         }
+    }
 
     fillAllDispenses() {
         this.allDispenses = [];
@@ -92,7 +103,7 @@ export default class PrescriptionViewController {
     }
 
     fillFreshDispense() {
-        if (this.hasDispenses() && this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy === null) {
+        if (this.hasDispenses() && this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy === null || this.hasDispenses() && this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy === undefined) {
             this.freshDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
         } else {
             this.freshDispense = new Dispense();
@@ -135,10 +146,16 @@ export default class PrescriptionViewController {
         this.$log.debug(this.prescription.Id);
         this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
             this.$log.debug(newDispense);
-            this.showToast('Rezeptabgabe erfolgreich gespeichert');
+            this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
+                this.showToast(message);
+            });
+            this.$location.url('/patient/overview');
         }, (error) => {
             this.$log.error(error);
-            this.showToast('Rezept konnte nicht gespeichert werden');
+            this.$translate('TOAST.DISPENSE-SAVED-ERROR').then((message) => {
+                this.$log.debug(message);
+                this.showToast(message);
+            });
         });
     }
 

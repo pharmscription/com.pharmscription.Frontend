@@ -14,6 +14,7 @@ export default class UserOverviewController {
         '$location',
         '$log',
         '$mdToast',
+        '$translate',
         'PatientService',
         'PatientRepository',
         'PrescriptionRepository',
@@ -25,6 +26,7 @@ export default class UserOverviewController {
         private $location: angular.ILocationService,
         private $log: angular.ILogService,
         private $mdToast: angular.material.IToastService,
+        private $translate: angular.translate.ITranslateService,
         private patientService: PatientService,
         private patientRepository: PatientRepository,
         private prescriptionRepository: PrescriptionRepository,
@@ -35,7 +37,9 @@ export default class UserOverviewController {
             this.patient = foundPatient;
             this.getPrescriptions();
         }, (error) => {
-            this.showToast('Patient konnte nicht geladen werden!');
+            this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
+                this.showToast(message);
+            });
             this.$log.error(error);
         });
     }
@@ -45,7 +49,9 @@ export default class UserOverviewController {
             this.prescriptions = foundPrescriptions;
             console.log(this.prescriptions);
         }, (error) => {
-            this.showToast('Rezepte konnten nicht geladen werden!');
+            this.$translate('TOAST.PRESCRIPTION-LOAD-ERROR').then((message) => {
+                this.showToast(message);
+            });
             this.$log.error(error);
         });
     }

@@ -26,6 +26,26 @@
     "ADD-DRUG-DISPENSE": "Add drug to dispense",
     "REMOVE-DRUG-DISPENSE": "Remove drug from dispense"
   },
+  "TOAST": {
+    "SEARCH-PATIENT": "Please search Patient first",
+    "DISPENSE-SAVED": "Dispense successfully saved!",
+    "DISPENSE-SAVED-ERROR": "Error in Dispense saving!",
+    "PRESCRIPTION-LOAD-ERROR": "Prescriptions could not be loaded!",
+    "PATIENT-LOAD-ERROR": "Patient could not be loaded!",
+    "PATIENT-LOAD-SUCCESS": "{{ addedPatient.FirstName }} {{ addedPatient.LastName }} saved!",
+    "PATIENT-REGISTER-ERROR": "Patient could not be registered!",
+    "PATIENT-CHANGED-SUCCESS": "Changes on {{ editedPatient.FirstName }} {{ editedPatient.LastName }} saved!",
+    "PATIENT-CHANGED-ERROR": "Changes could not be saved!",
+    "SEARCH-ERROR": "Error on search!"
+  },
+  "DIALOG": {
+    "PATIENT-NOT-FOUND": {
+      "TITLE": "Patient not found",
+      "CONTENT": "Would you like to register the Patient with the social-number {{ this.social }}?",
+      "OK": "Register",
+      "CANCEL": "Cancel"
+    }
+  },
   "FIRSTNAME": "Firstname",
   "LASTNAME": "Lastname",
   "BIRTHDATE": "Birthdate",

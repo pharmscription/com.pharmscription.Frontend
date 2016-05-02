@@ -29,6 +29,7 @@ export default class UserRegisterController {
         'PatientService',
         '$location',
         '$mdToast',
+        '$translate',
         '$log'
     ];
 
@@ -38,6 +39,7 @@ export default class UserRegisterController {
         private PatientService: PatientService,
         private $location: angular.ILocationService,
         private $mdToast: angular.material.IToastService,
+        private $translate: angular.translate.ITranslateService,
         private $log: angular.ILogService) {
         this.setControllerMode();
         if (this.controllerMode === Mode.Register) {
@@ -59,7 +61,9 @@ export default class UserRegisterController {
                 this.patient = foundPatient;
                 this.$log.debug(this.patient);
             }, (error) => {
-                this.showToast('Patient konnte nicht geladen werden');
+                this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
+                    this.showToast(message);
+                });
                 this.$log.error(error);
             });
         }
@@ -74,19 +78,27 @@ export default class UserRegisterController {
         if (this.controllerMode === Mode.Register) {
             this.patientRepository.addPatient(patient).then((addedPatient) => {
                 this.PatientService.setPatientId(addedPatient.Id);
-                this.showToast(addedPatient.FirstName + " " + addedPatient.LastName + " gespeichert!");
-                this.$location.url('/user/overview');
+                this.$translate('TOAST.PATIENT-LOAD-SUCCESS').then((message) => {
+                    this.showToast(message);
+                    this.$location.url('/user/overview');
+                });
             }, (error) => {
                 this.$log.error(error);
-                this.showToast("Patient konnte nicht registriert werden!");
+                this.$translate('TOAST.PATIENT-REGISTER-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             });
         } else {
             this.patientRepository.editPatient(patient).then((editedPatient) => {
                 this.PatientService.setPatientId(editedPatient.Id);
-                this.showToast("Änderungen an " + editedPatient.FirstName + " " + editedPatient.LastName + " gespeichert!");
+                this.$translate('TOAST.PATIENT-CHANGED-SUCCESS').then((message) => {
+                    this.showToast(message);
+                });
             }, (error) => {
                 this.$log.error(error);
-                this.showToast("Änderungen konnten nicht gepseichert werden!");
+                this.$translate('TOAST.PATIENT-CHANGED-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             });
         }
 
