@@ -22,7 +22,9 @@
     "EDIT-USER": "Benutzerdaten bearbeiten",
     "SHOW-PRESCRIPTION": "Rezept anzeigen",
     "ADD-PRESCRIPTION": "Neues Rezept erfassen",
-    "ADD-DRUG": "Medikament hinzufügen"
+    "ADD-DRUG": "Medikament hinzufügen",
+    "ADD-DRUG-DISPENSE": "Medikament zur Abgabe hinzufügen",
+    "REMOVE-DRUG-DISPENSE": "Medikament aus Abgabe entfernen"
   },
   "FIRSTNAME": "Vorname",
   "LASTNAME": "Nachname",
@@ -41,6 +43,7 @@
   "PRESCRIPTIONS": "Rezepte",
   "NO-SAVED-PRESCRIPTIONS": "keine erfassten Rezepte",
   "DRUG": "Medikament",
+  "DESCRIPTION": "Beschreibung {{ description }}",
   "UNITS": "Einheiten: <b>{{ units }}</b>",
   "COMPOSITION": "Komposition: <b>{{ composition }}</b>",
   "NARCOTIC-CATEGORY": "Betäubungsmittel-Kategorie: <b>{{ narcoticCategory }}</b>",
@@ -48,13 +51,25 @@
   "SINGLE-PRESCRIPTION": "Einzelrezept",
   "REPEAT-PRESCRIPTION": "Dauerrezept",
   "QUANTITY": "Menge",
+  "QUANTITY-PARAM": "Menge {{ quantity }}",
   "DOSAGE": "Dosierung",
+  "DOSAGE-PARAM": "Dosierung {{ dosage }}",
+  "PRICE": "Preis",
   "DRUG-SEARCH": {
     "NO-RESULTS": "Keine Suchtreffer gefunden",
     "LOADING": "wird geladen...",
     "SEARCH-RESULTS": "{{ results }} Suchresultate für <b>{{ drug }}</b> gefunden"
   },
-  "PRESCRIPTION-CREATOR": {
-    "VALIDITY": "Gültig bis"
+  "PRESCRIPTION": {
+    "VALIDITY": "Gültig bis",
+    "VALIDITY-PARAM": "Gültig bis {{ validUntil }}",
+    "EDIT-DATE": "Geändert am {{ editDate }}",
+    "EDIT": "Rezept bearbeiten",
+    "ISSUER-INFO": "Aussteller Informationen",
+    "ISSUER": "Ausgestellt von: {{ firstName }} {{ lastName }}",
+    "DISPENSE-HISTORY": "Abgabe History",
+    "DISPENSE": "Rezeptabgabe",
+    "SIGN": "Visieren",
+    "DISPENSE-DATE": "Abgabe vom"
   }
 }
