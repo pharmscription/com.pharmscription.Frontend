@@ -113,7 +113,7 @@
         </md-list-item>
     </md-list>
     <div layout="row" layout-align="end center">
-        <md-button id="prescription-add-button" class="md-fab" ng-click="UserOverview.addPrescription()">
+        <md-button id="prescription-add-button" class="md-fab" ng-click="UserOverview.addPrescription()" ng-show="Main.userRole === 'Doctor'">
             <md-tooltip>{{ 'TOOLTIP.ADD-PRESCRIPTION' | translate }}</md-tooltip>
             <md-icon>add</md-icon>
         </md-button>

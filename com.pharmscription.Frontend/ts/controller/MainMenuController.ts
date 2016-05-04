@@ -6,9 +6,13 @@ enum Mode {
 
 export default class MainMenuController {
     mode: Mode;
+    userRole: string = 'Doctor';
     language: string = 'de';
     languages = ('de en').split(' ').map(language => {
         return { lang: language };
+    });
+    roles = ('Doctor Drugist DrugStoreEmployee Patient').split(' ').map(userRole => {
+        return { role: userRole };
     });
 
     static $inject = [
