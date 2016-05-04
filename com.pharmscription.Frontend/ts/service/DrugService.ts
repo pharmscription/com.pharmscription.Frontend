@@ -14,6 +14,10 @@ export default class DrugService {
         this.drugItems.push(drug);
     }
 
+    setDrugItems(drugs: Array<DrugItem>) {
+        this.drugItems = drugs;
+    }
+
     getDrugItems(): Array<DrugItem> {
         return this.drugItems;
     }

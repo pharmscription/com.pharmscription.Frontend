@@ -46,7 +46,7 @@
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
-    <md-button class="md-raised md-accent" ng-show="Main.userRole === 'Drugist' || Main.userRole === 'DrugStoreEmployee'">
+    <md-button class="md-raised md-accent" ng-show="Main.userRole === 'Drugist' || Main.userRole === 'DrugStoreEmployee'" ng-click="PrescriptionView.editPrescription()">
         <md-icon>mode_edit</md-icon>
         <span translate="PRESCRIPTION.EDIT"></span>
     </md-button>

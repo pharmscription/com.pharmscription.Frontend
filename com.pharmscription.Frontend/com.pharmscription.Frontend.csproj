@@ -139,6 +139,7 @@
     <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />
     <TypeScriptCompile Include="ts\directives\socialnumber.ts" />
     <TypeScriptCompile Include="ts\model\address.ts" />
+    <TypeScriptCompile Include="ts\model\counterproposal.ts" />
     <TypeScriptCompile Include="ts\model\dispense.ts" />
     <TypeScriptCompile Include="ts\model\doctor.ts" />
     <TypeScriptCompile Include="ts\model\drug.ts" />
@@ -191,7 +192,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3474</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -48,7 +48,7 @@ export default class DrugSearchController {
     }
 
     chooseViewMode(): void {
-        if (this.$location.url() === "/prescription/drug/search") {
+        if (this.$location.url() === "/prescription/drug/search" || this.$location.url() === "/prescription/edit/drug/search") {
             this.controllerMode = Mode.addMode;
         } else {
             this.controllerMode = Mode.standardMode;
@@ -74,6 +74,10 @@ export default class DrugSearchController {
     addDrug(drug: Drug): void {
         this.$log.debug(drug);
         this.drugService.setDrugItem(new DrugItem(drug));
-        this.$location.url('prescription/create');
+        if (this.$location.url() === "/prescription/drug/search") {
+            this.$location.url('prescription/create');
+        } else {
+            this.$location.url('prescription/edit');
+        }
     };
 }

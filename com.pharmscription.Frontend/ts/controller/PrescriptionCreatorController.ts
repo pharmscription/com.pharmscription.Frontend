@@ -6,9 +6,15 @@ import PatientService from 'ts/service/PatientService'
 import Doctor from 'ts/model/doctor'
 import Address from 'ts/model/address'
 import DrugItem from 'ts/model/drugitem'
+import CounterProposal from 'ts/model/counterproposal'
 import PatientRepository from 'ts/service/PatientRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
+import PrescriptionService from 'ts/service/PrescriptionService'
 
+enum Mode {
+    create,
+    edit
+}
 
 export default class PrescriptionCreatorController {
     patient: Patient;
@@ -16,6 +22,8 @@ export default class PrescriptionCreatorController {
     doctor: Doctor;
     drugItems: Array<DrugItem>;
     isRepeatPrescription: boolean;
+    mode: Mode;
+    counterProposal: CounterProposal;
 
 
     static $inject = [
@@ -38,8 +46,11 @@ export default class PrescriptionCreatorController {
         private $mdToast: angular.material.IToastService,
         private $log: angular.ILogService,
         private prescriptionRepository: PrescriptionRepository) {
+            this.setMode();
             this.drugItems = this.drugService.getDrugItems();
             this.prescription = this.drugService.getPrescriptionState();
+            $log.debug("Prescription State");
+            $log.debug(this.prescription);
             this.isRepeatPrescription = this.isRepeatPrescriptionType();
             this.patientRepository.getPatientById(this.patientService.getPatientId()).then((patient) => {
                 if (patient == null) {
@@ -66,6 +77,14 @@ export default class PrescriptionCreatorController {
                 this.$log.error(error);
                 this.showToast("Error beim holen des Patienten");
             });
+    }
+
+    setMode() {
+        if (this.$location.url() === '/prescription/create') {
+            this.mode = Mode.create;
+        } else {
+            this.mode = Mode.edit;
+        }
     }
 
     showToast(message: string) {

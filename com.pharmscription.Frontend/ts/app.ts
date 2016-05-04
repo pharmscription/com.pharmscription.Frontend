@@ -92,6 +92,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 
             templateUrl: 'views/prescription-view.html',
             controller: 'PrescriptionViewController',
             controllerAs: 'PrescriptionView'
+        }).when('/prescription/edit', {
+            templateUrl: 'views/prescription-creator.html',
+            controller: 'PrescriptionCreatorController',
+            controllerAs: 'PrescriptionCreator'
         }).otherwise({
             redirectTo: '/'
         });
