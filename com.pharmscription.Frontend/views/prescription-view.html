@@ -80,7 +80,7 @@
                     <span class="md-title">{{ dispense.Date | date:"dd.MM.yyyy" }}</span>
                 </div>
 
-                <div ng-repeat="drugItem in dispense.DrugItems" layout="column">
+                <div ng-repeat="drugItem in dispense.DrugItems" layout="column" ng-show="drugItem.Quantity > 0">
                     <span>{{ drugItem.Drug.DrugDescription }}</span>
                     <span translate="QUANTITY-PARAM" translate-values="{ quantity: drugItem.Quantity }"></span>
                 </div>
