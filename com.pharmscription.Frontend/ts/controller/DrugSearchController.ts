@@ -1,7 +1,7 @@
 ﻿import Drug from 'ts/model/drug'
 import DrugRepository from 'ts/service/DrugRepository'
 import DrugSearchItems from 'ts/model/drugSearchItems'
-import DrugService from 'ts/service/DrugService'
+import PrescriptionService from 'ts/service/PrescriptionService'
 import DrugItem from 'ts/model/DrugItem'
 
 export interface IDrugSearchScope extends angular.IScope {
@@ -31,7 +31,7 @@ export default class DrugSearchController {
         '$log',
         '$mdToast',
         '$location',
-        'DrugService'
+        'PrescriptionService'
     ];
 
     constructor(
@@ -42,7 +42,7 @@ export default class DrugSearchController {
         private $log: angular.ILogService,
         private $mdToast: angular.material.IToastService,
         private $location: angular.ILocationService,
-        private drugService: DrugService) {
+        private prescriptionService: PrescriptionService) {
             this.setProgressCircle(false);
             this.chooseViewMode();
     }
@@ -73,7 +73,7 @@ export default class DrugSearchController {
 
     addDrug(drug: Drug): void {
         this.$log.debug(drug);
-        this.drugService.setDrugItem(new DrugItem(drug));
+        this.prescriptionService.setDrugItem(new DrugItem(drug));
         if (this.$location.url() === "/prescription/drug/search") {
             this.$location.url('prescription/create');
         } else {

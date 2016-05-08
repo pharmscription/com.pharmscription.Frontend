@@ -3,7 +3,6 @@ import Dispense from 'ts/model/dispense'
 import DrugItem from 'ts/model/drugitem'
 import Drugist from 'ts/model/drugist'
 
-import DrugService from 'ts/service/DrugService'
 import PrescriptionService from 'ts/service/PrescriptionService'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
 import DispenseRepository from 'ts/service/DispenseRepository'
@@ -26,7 +25,6 @@ export default class PrescriptionViewController {
         'PrescriptionService',
         'PrescriptionRepository',
         'DispenseRepository',
-        'DrugService'
     ];
 
     constructor(
@@ -36,8 +34,7 @@ export default class PrescriptionViewController {
         private $translate: angular.translate.ITranslateService,
         private prescriptionService: PrescriptionService,
         private prescriptionRepository: PrescriptionRepository,
-        private dispenseRepository: DispenseRepository,
-        private drugService: DrugService) {
+        private dispenseRepository: DispenseRepository) {
         let patientId = this.prescriptionService.getPatientId();
         let prescriptionId = this.prescriptionService.getPrescriptionId();
         if (prescriptionId !== undefined || patientId !== undefined) {
@@ -180,9 +177,9 @@ export default class PrescriptionViewController {
     }
 
     editPrescription() {
-        this.drugService.removeAll();
-        this.drugService.setDrugItems(this.prescription.Drugs);
-        this.drugService.savePrescriptionState(this.prescription);
+        this.prescriptionService.removeAll();
+        this.prescriptionService.setDrugItems(this.prescription.Drugs);
+        this.prescriptionService.savePrescriptionState(this.prescription);
         this.prescriptionService.setPatientId(this.prescription.Patient.Id);
         this.prescriptionService.setPrescriptionId(this.prescription.Id);
         this.$location.url('/prescription/edit');

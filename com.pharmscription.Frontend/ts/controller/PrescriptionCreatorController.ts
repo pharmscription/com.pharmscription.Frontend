@@ -1,7 +1,6 @@
 ﻿import Patient from 'ts/model/patient'
 import Drug from 'ts/model/drug'
 import Prescription from 'ts/model/prescription'
-import DrugService from 'ts/service/DrugService'
 import PatientService from 'ts/service/PatientService'
 import Doctor from 'ts/model/doctor'
 import Address from 'ts/model/address'
@@ -29,26 +28,26 @@ export default class PrescriptionCreatorController {
     static $inject = [
         '$scope',
         '$location',
-        'DrugService',
         'PatientService',
         'PatientRepository',
         '$mdToast',
         '$log',
-        'PrescriptionRepository'
+        'PrescriptionRepository',
+        'PrescriptionService'
     ];
 
     constructor(
         private $scope: angular.IScope,
         private $location: angular.ILocationService,
-        private drugService: DrugService,
         private patientService: PatientService,
         private patientRepository: PatientRepository,
         private $mdToast: angular.material.IToastService,
         private $log: angular.ILogService,
-        private prescriptionRepository: PrescriptionRepository) {
+        private prescriptionRepository: PrescriptionRepository,
+        private prescriptionService: PrescriptionService) {
             this.setMode();
-            this.drugItems = this.drugService.getDrugItems();
-            this.prescription = this.drugService.getPrescriptionState();
+            this.drugItems = this.prescriptionService.getDrugItems();
+            this.prescription = this.prescriptionService.getPrescriptionState();
             $log.debug("Prescription State");
             $log.debug(this.prescription);
             this.isRepeatPrescription = this.isRepeatPrescriptionType();
@@ -92,13 +91,13 @@ export default class PrescriptionCreatorController {
     }
 
     addDrug(): void {
-        this.drugService.savePrescriptionState(this.prescription);
+        this.prescriptionService.savePrescriptionState(this.prescription);
         this.$location.url('prescription/drug/search');
     }
 
     removeDrug(index: number): void {
-        this.drugService.removeDrugItem(index);
-        this.drugItems = this.drugService.getDrugItems();
+        this.prescriptionService.removeDrugItem(index);
+        this.drugItems = this.prescriptionService.getDrugItems();
     }
 
     savePrescription(): void {
