@@ -78,6 +78,7 @@
   "DOSAGE-PARAM": "Dosage {{ dosage }}",
   "PRICE": "Price",
   "COMMENT": "Reason for prescription adjustment",
+  "REMARK": "Remark for dispense",
   "DRUG-SEARCH": {
     "NO-RESULTS": "No results found",
     "LOADING": "loading...",

@@ -84,7 +84,11 @@
                     <span>{{ drugItem.Drug.DrugDescription }}</span>
                     <span translate="QUANTITY-PARAM" translate-values="{ quantity: drugItem.Quantity }"></span>
                 </div>
-                <span translate="PRESCRIPTION.ISSUER" translate-values="{ firstName: dispense.SignedBy.FirstName, lastName: dispense.SignedBy.LastName}"></span>
+                <div>
+                    <p translate="REMARK" class="md-body-2"></p>
+                    <p>{{ dispense.Remark }}</p>
+                    <p translate="PRESCRIPTION.ISSUER" translate-values="{ firstName: dispense.SignedBy.FirstName, lastName: dispense.SignedBy.LastName}"></p>
+                </div>
             </div>
             <md-divider></md-divider>
         </md-list-item>
@@ -106,8 +110,8 @@
                     <label translate="QUANTITY"></label>
                     <input ng-model="drugItem.Quantity" ng-change="PrescriptionView.changeQuantityAction(drugItem.Id, drugItem.Quantity, '{{drugItem.Quantity}}')" type="number" required>
                 </md-input-container>
-                <span translate="PRICE"></span>
             </div>
+            <span translate="PRICE"></span>
             <md-button class="md-secondary" ng-click="PrescriptionView.removeFromDispense(drugItem)">
                 <md-icon>remove_circle</md-icon>
                 <md-tooltip>{{ 'TOOLTIP.REMOVE-DRUG-DISPENSE' | translate }}</md-tooltip>
@@ -117,16 +121,24 @@
     <!--<span>Medikamentenabgabe von {{dispense.HandedBy.FirstName}} {{dispense.HandedBy.LastName}}</span>
     <span>Ausgestellt am {{dispense.Date | date:"dd.MM.yyyy"}}</span>-->
     <!--<md-button class="md-secondary md-raised">Anzeigen</md-button>-->
-    <div layout="row">
-        <span>Total:</span>
-        <div flex></div>
-        <md-button class="md-raised md-primary" ng-click="PrescriptionView.signDispense()" ng-show="Main.userRole === 'Drugist'">
-            <md-icon>check</md-icon>
-            <span translate="PRESCRIPTION.SIGN"></span>
-        </md-button>
-        <md-button class="md-raised md-primary" ng-click="PrescriptionView.saveDispense()">
-            <md-icon>save</md-icon>
-            <span translate="SAVE"></span>
-        </md-button>
+    <div layout="column">
+        <div layout="row">
+            <md-input-container class="md-block" flex>
+                <label translate="REMARK"></label>
+                <textarea ng-model="PrescriptionView.freshDispense.Remark" md-maxlength="150" md-select-on-focus></textarea>
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <span>Total:</span>
+            <div flex></div>
+            <md-button class="md-raised md-primary" ng-click="PrescriptionView.signDispense()" ng-show="Main.userRole === 'Drugist'">
+                <md-icon>check</md-icon>
+                <span translate="PRESCRIPTION.SIGN"></span>
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="PrescriptionView.saveDispense()">
+                <md-icon>save</md-icon>
+                <span translate="SAVE"></span>
+            </md-button>
+        </div>
     </div>
 </md-whiteframe>

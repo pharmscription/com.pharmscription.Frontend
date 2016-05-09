@@ -78,6 +78,7 @@
   "DOSAGE-PARAM": "Dosierung {{ dosage }}",
   "PRICE": "Preis",
   "COMMENT": "Begründung der Rezeptänderung",
+  "REMARK": "Bemerkung zur Abgabe",
   "DRUG-SEARCH": {
     "NO-RESULTS": "Keine Suchtreffer gefunden",
     "LOADING": "wird geladen...",
