@@ -38,7 +38,7 @@
                 <span translate="DOSAGE-PARAM" translate-values="{ dosage: drugItem.DosageDescription }"></span>
                 <span translate="QUANTITY-PARAM" translate-values="{ quantity: drugItem.Quantity }"></span>
             </div>
-            <md-button class="md-secondary" ng-click="PrescriptionView.addToDispense(drugItem)">
+            <md-button class="md-secondary" ng-click="PrescriptionView.addToDispense(drugItem)" ng-show="Main.userRole === 'Drugist' || Main.userRole === 'DrugStoreEmployee'">
                 <md-icon>add_circle</md-icon>
                 <md-tooltip>{{ 'TOOLTIP.ADD-DRUG-DISPENSE' | translate }}</md-tooltip>
             </md-button>
@@ -46,7 +46,7 @@
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
-    <md-button class="md-raised md-accent">
+    <md-button class="md-raised md-accent" ng-show="Main.userRole === 'Drugist' || Main.userRole === 'DrugStoreEmployee'" ng-click="PrescriptionView.editPrescription()">
         <md-icon>mode_edit</md-icon>
         <span translate="PRESCRIPTION.EDIT"></span>
     </md-button>
@@ -66,8 +66,8 @@
         </div>
     </div>
 </md-whiteframe>
-<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin>
-    <div ng-click="widgetExpanded = !widgetExpanded" ng-show="PrescriptionView.prescription.Dispenses.length > 0">
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin ng-show="PrescriptionView.prescription.Dispenses.length > 0">
+    <div ng-click="widgetExpanded = !widgetExpanded">
         <md-icon ng-hide="widgetExpanded">keyboard_arrow_down</md-icon>
         <md-icon ng-show="widgetExpanded">keyboard_arrow_up</md-icon>
         <span translate="PRESCRIPTION.DISPENSE-HISTORY"></span>
@@ -80,7 +80,7 @@
                     <span class="md-title">{{ dispense.Date | date:"dd.MM.yyyy" }}</span>
                 </div>
 
-                <div ng-repeat="drugItem in dispense.DrugItems" layout="column">
+                <div ng-repeat="drugItem in dispense.DrugItems" layout="column" ng-show="drugItem.Quantity > 0">
                     <span>{{ drugItem.Drug.DrugDescription }}</span>
                     <span translate="QUANTITY-PARAM" translate-values="{ quantity: drugItem.Quantity }"></span>
                 </div>
@@ -89,6 +89,8 @@
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
+</md-whiteframe>
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin ng-show="Main.userRole === 'Drugist' || Main.userRole === 'DrugStoreEmployee'">
     <span class="md-headline" translate="PRESCRIPTION.DISPENSE"></span>
     <!--<md-list-item ng-show="!PrescriptionView.prescription.Dispenses.length">
         <md-icon class="md-48 md-avatar-icon">insert_drive_file</md-icon>
@@ -118,7 +120,7 @@
     <div layout="row">
         <span>Total:</span>
         <div flex></div>
-        <md-button class="md-raised md-primary" ng-click="PrescriptionView.signDispense()">
+        <md-button class="md-raised md-primary" ng-click="PrescriptionView.signDispense()" ng-show="Main.userRole === 'Drugist'">
             <md-icon>check</md-icon>
             <span translate="PRESCRIPTION.SIGN"></span>
         </md-button>

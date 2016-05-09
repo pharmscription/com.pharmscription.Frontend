@@ -3,7 +3,6 @@ import Prescription from 'ts/model/prescription'
 import PatientService from 'ts/service/PatientService'
 import PatientRepository from 'ts/service/PatientRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
-import DrugService from 'ts/service/DrugService'
 import PrescriptionService from 'ts/service/PrescriptionService'
 
 export default class UserOverviewController {
@@ -18,7 +17,6 @@ export default class UserOverviewController {
         'PatientService',
         'PatientRepository',
         'PrescriptionRepository',
-        'DrugService',
         'PrescriptionService'
     ];
     
@@ -30,7 +28,6 @@ export default class UserOverviewController {
         private patientService: PatientService,
         private patientRepository: PatientRepository,
         private prescriptionRepository: PrescriptionRepository,
-        private drugService: DrugService,
         private prescriptionService: PrescriptionService) {
         this.patientRepository.getPatientById(this.patientService.getPatientId()).then((foundPatient) => {
             foundPatient.BirthDate = new Date(foundPatient.BirthDate.toString());
@@ -61,7 +58,7 @@ export default class UserOverviewController {
     }
 
     addPrescription() {
-        this.drugService.removeAll();
+        this.prescriptionService.removeAll();
         this.$location.url('prescription/create');
     }
 

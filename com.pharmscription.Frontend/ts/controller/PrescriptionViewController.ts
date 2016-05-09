@@ -24,7 +24,7 @@ export default class PrescriptionViewController {
         '$translate',
         'PrescriptionService',
         'PrescriptionRepository',
-        'DispenseRepository'
+        'DispenseRepository',
     ];
 
     constructor(
@@ -174,5 +174,14 @@ export default class PrescriptionViewController {
 
     hasDispenses(): boolean {
         return this.prescription.Dispenses !== null && this.prescription.Dispenses !== undefined && this.prescription.Dispenses.length > 0;
+    }
+
+    editPrescription() {
+        this.prescriptionService.removeAll();
+        this.prescriptionService.setDrugItems(this.prescription.Drugs);
+        this.prescriptionService.savePrescriptionState(this.prescription);
+        this.prescriptionService.setPatientId(this.prescription.Patient.Id);
+        this.prescriptionService.setPrescriptionId(this.prescription.Id);
+        this.$location.url('/prescription/edit');
     }
 }

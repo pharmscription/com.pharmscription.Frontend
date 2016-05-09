@@ -26,7 +26,6 @@ import DrugRepository from 'ts/service/DrugRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
 import DispenseRepository from 'ts/service/DispenseRepository'
 import PrescriptionService from 'ts/service/PrescriptionService'
-import DrugService from 'ts/service/DrugService'
 import AHVNumberService from 'ts/service/AHVNumberService'
 import PatientService from 'ts/service/PatientService'
 import SocialNumber from 'ts/directives/socialnumber'
@@ -92,6 +91,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 
             templateUrl: 'views/prescription-view.html',
             controller: 'PrescriptionViewController',
             controllerAs: 'PrescriptionView'
+        }).when('/prescription/edit', {
+            templateUrl: 'views/prescription-creator.html',
+            controller: 'PrescriptionCreatorController',
+            controllerAs: 'PrescriptionCreator'
         }).otherwise({
             redirectTo: '/'
         });
@@ -118,7 +121,6 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 
     .service('DrugRepository', DrugRepository)
     .service('PrescriptionRepository', PrescriptionRepository)
     .service('DispenseRepository', DispenseRepository)
-    .service('DrugService', DrugService)
     .service('AHVNumberService', AHVNumberService)
     .service('PatientService', PatientService)
     .service('PrescriptionService', PrescriptionService)

@@ -106,14 +106,14 @@
             <div layout="column" layout-align="center start">
                 <md-tooltip>{{ 'TOOLTIP.SHOW-PRESCRIPTION' | translate }}</md-tooltip>
                 <span translate="PRESCRIPTION.ISSUER" translate-values="{ firstName: prescription.Doctor.FirstName, lastName: prescription.Doctor.LastName }"></span>
-                <span translate="PRESCRIPTION.ISSUE-DATE" translate-values="{ issueDate: prescription.IssueDate | date:'dd.MM.yyyy'}"></span>
+                <span translate="PRESCRIPTION.ISSUE-DATE" translate-values="{ issueDate: prescription.IssueDate}"></span>
             </div>
             <div flex></div>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
     <div layout="row" layout-align="end center">
-        <md-button id="prescription-add-button" class="md-fab" ng-click="UserOverview.addPrescription()">
+        <md-button id="prescription-add-button" class="md-fab" ng-click="UserOverview.addPrescription()" ng-show="Main.userRole === 'Doctor'">
             <md-tooltip>{{ 'TOOLTIP.ADD-PRESCRIPTION' | translate }}</md-tooltip>
             <md-icon>add</md-icon>
         </md-button>

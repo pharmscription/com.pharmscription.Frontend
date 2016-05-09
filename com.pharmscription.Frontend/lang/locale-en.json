@@ -16,7 +16,8 @@
     "DRUGSEARCH": "Drug Search",
     "REGISTER-PATIENT": "Register Patient",
     "OVERVIEW-PATIENT": "Patient Overview",
-    "PRESCRIPTION-CREATOR": "Create Prescription For {{ firstName }} {{ lastName }}"
+    "PRESCRIPTION-CREATOR": "Create Prescription For {{ firstName }} {{ lastName }}",
+    "PRESCRIPTION-EDIT": "Prescription Editor For {{ firstName }} {{ lastName }}"
   },
   "TOOLTIP": {
     "EDIT-USER": "Edit Userdata",
@@ -24,7 +25,8 @@
     "ADD-PRESCRIPTION": "Add new Prescription",
     "ADD-DRUG": "Add drug",
     "ADD-DRUG-DISPENSE": "Add drug to dispense",
-    "REMOVE-DRUG-DISPENSE": "Remove drug from dispense"
+    "REMOVE-DRUG-DISPENSE": "Remove drug from dispense",
+    "REMOVE-DRUG-PRESCRIPTION": "Remove drug from prescription"
   },
   "TOAST": {
     "SEARCH-PATIENT": "Please search Patient first",
@@ -75,6 +77,7 @@
   "DOSAGE": "Dosage",
   "DOSAGE-PARAM": "Dosage {{ dosage }}",
   "PRICE": "Price",
+  "COMMENT": "Reason for prescription adjustment",
   "DRUG-SEARCH": {
     "NO-RESULTS": "No results found",
     "LOADING": "loading...",

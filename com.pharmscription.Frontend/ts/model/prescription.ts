@@ -2,6 +2,7 @@
 import Doctor from "ts/model/doctor"
 import Dispense from 'ts/model/dispense'
 import DrugItem from 'ts/model/drugitem'
+import CounterProposal from 'ts/model/counterproposal'
 
 
 export default class Prescription {
@@ -14,12 +15,11 @@ export default class Prescription {
         public IssueDate: Date = null,
         public EditDate: Date = null,
         public IsValid: boolean = null,
-        public CounterProposals: Array<any> = [], //Array<CounterProposal>;
+        public CounterProposals: Array<CounterProposal> = [], 
         public ValidUntil: Date = null,
         public PrescriptionHistory: Array<Prescription> = [],
         public Dispenses: Array<Dispense> = [],
-        public Id: string = null,
-        public SignDate: Date = null
+        public Id: string = null
     ) {}
 
 }
