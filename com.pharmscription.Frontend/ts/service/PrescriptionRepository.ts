@@ -60,4 +60,18 @@ export default class PrescriptionRepository {
             return this.$q.reject(error);
         });
     }
+
+    editPrescription(prescription: Prescription): IPromise<Prescription> {
+        let data = JSON.stringify(prescription);
+        return this.$http.post(this.urls.newPrescription.replace('{id}', prescription.Patient.Id), data).then((response) => {
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                return this.$q.reject(response.data);
+            }
+        }, (error) => {
+            this.$log.error(error);
+            return this.$q.reject(error);
+        });
+    }
 }

@@ -105,14 +105,25 @@ export default class PrescriptionCreatorController {
         this.prescription.Patient = this.patient;
         this.prescription.Doctor = this.doctor;
         this.prescription.Drugs = this.drugItems;
-        this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
-            this.$log.debug(prescription.Id);
-            this.showToast("Rezept wurde gespeichert");
-            this.$location.url('user/overview');
-        }, (error) => {
-            this.$log.error(error);
-            this.showToast("Error beim Speichern des Rezepts");
-        });
+        if (this.mode === Mode.create) {
+            this.prescriptionRepository.editPrescription(this.prescription).then((prescription) => {
+                this.$log.debug(prescription.Id);
+                this.showToast("Rezeptänderung gespeichert");
+                this.$location.url('user/overview');
+            }, (error) => {
+                this.$log.error(error);
+                this.showToast("Error beim andern des Rezepts");
+            });
+        } else {
+            this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
+                this.$log.debug(prescription.Id);
+                this.showToast("Rezept wurde gespeichert");
+                this.$location.url('user/overview');
+            }, (error) => {
+                this.$log.error(error);
+                this.showToast("Error beim Speichern des Rezepts");
+            });
+        }
     }
 
     togglePrescriptionType(): void {
