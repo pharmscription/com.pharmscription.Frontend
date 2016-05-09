@@ -16,6 +16,7 @@ describe("UserSearchController", () => {
     let $http: angular.IHttpService;
     let $q: angular.IQService;
     let $log: angular.ILogService;
+    let $translate: angular.translate.ITranslateService;
 
     let controller: UserSearchController;
     let AHVNumberSer: AHVNumberService;
@@ -27,13 +28,14 @@ describe("UserSearchController", () => {
         $mdDialog = <angular.material.IDialogService>$injector.get('$mdDialog');
         $mdToast = <angular.material.IToastService>$injector.get('$mdToast');
         $location = <angular.ILocationService>$injector.get('$location');
+        $translate = <angular.translate.ITranslateService>$injector.get('$translate');
 
 
         AHVNumberSer = new AHVNumberService();
         PatientRepo = new PatientRepository($http, $q, $log);
         PatientSer = new PatientService();
 
-        controller = new UserSearchController($mdDialog, $mdToast, $location, AHVNumberSer, PatientRepo, PatientSer, $log);
+        controller = new UserSearchController($mdDialog, $mdToast, $location, $translate, AHVNumberSer, PatientRepo, PatientSer, $log);
     });
 
     it('should be initialized', () => {

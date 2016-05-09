@@ -57,7 +57,7 @@ export default class UserSearchController {
     search(event: MouseEvent): void {
         this.patientRepository.getPatientByAhv(this.social).then((foundPatient: Patient) => {
             this.$log.debug(foundPatient);
-            if (foundPatient === null) {
+            if (foundPatient === null || foundPatient === undefined) {
                 this.showPatientNotFoundDialog(event);
             } else {
                 this.patientService.setPatientId(foundPatient.Id);

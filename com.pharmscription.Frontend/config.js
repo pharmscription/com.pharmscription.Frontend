@@ -31,7 +31,7 @@ System.config({
     "fontawesome": "npm:fontawesome@4.5.0",
     "jquery": "npm:jquery@2.2.2",
     "karma-junit-reporter": "npm:karma-junit-reporter@0.4.2",
-    "moment": "npm:moment@2.12.0",
+    "moment": "npm:moment@2.13.0",
     "ng-slide-down": "npm:ng-slide-down@0.4.2",
     "papaparse": "npm:papaparse@4.1.2",
     "typescript": "npm:typescript@1.8.10",
@@ -1042,9 +1042,6 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "minimist": "npm:minimist@0.0.8",
       "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:moment@2.12.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:nan@2.2.1": {

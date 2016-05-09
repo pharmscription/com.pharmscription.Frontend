@@ -10,7 +10,7 @@
       "angular-translate-loader-static-files": "github:angular-translate/bower-angular-translate-loader-static-files@^2.11.0",
       "fontawesome": "npm:fontawesome@^4.5.0",
       "jquery": "npm:jquery@^2.2.2",
-      "moment": "npm:moment@^2.12.0",
+      "moment": "npm:moment@^2.13.0",
       "ng-slide-down": "npm:ng-slide-down@^0.4.2"
     },
     "devDependencies": {
