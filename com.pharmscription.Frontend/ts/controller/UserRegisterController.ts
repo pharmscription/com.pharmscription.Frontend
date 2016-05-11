@@ -78,7 +78,7 @@ export default class UserRegisterController {
         if (this.controllerMode === Mode.Register) {
             this.patientRepository.addPatient(patient).then((addedPatient) => {
                 this.PatientService.setPatientId(addedPatient.Id);
-                this.$translate('TOAST.PATIENT-LOAD-SUCCESS').then((message) => {
+                this.$translate('TOAST.PATIENT-SAVE-SUCCESS', { firstName: addedPatient.FirstName, lastName: addedPatient.LastName }).then((message) => {
                     this.showToast(message);
                     this.$location.url('/user/overview');
                 });
@@ -91,7 +91,7 @@ export default class UserRegisterController {
         } else {
             this.patientRepository.editPatient(patient).then((editedPatient) => {
                 this.PatientService.setPatientId(editedPatient.Id);
-                this.$translate('TOAST.PATIENT-CHANGED-SUCCESS').then((message) => {
+                this.$translate('TOAST.PATIENT-CHANGED-SUCCESS', { firstName: editedPatient.FirstName, lastName: editedPatient.LastName }).then((message) => {
                     this.showToast(message);
                 });
             }, (error) => {
