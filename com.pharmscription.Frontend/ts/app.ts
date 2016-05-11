@@ -32,7 +32,13 @@ import SocialNumber from 'ts/directives/socialnumber'
 
 export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 'ngRoute', 'ng-slide-down', 'pascalprecht.translate'])
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
-        $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
+        $mdThemingProvider.theme('Doctor').primaryPalette('green').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
+        $mdThemingProvider.theme('Drugist').primaryPalette('blue').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
+        $mdThemingProvider.theme('DrugStoreEmployee').primaryPalette('teal').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
+        $mdThemingProvider.theme('Patient').primaryPalette('deep-purple').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
+        $mdThemingProvider.setDefaultTheme('Doctor');
+        $mdThemingProvider.alwaysWatchTheme(true);
+        
     })
     .config(($httpProvider: angular.IHttpProvider) => {
         $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';

@@ -9,7 +9,7 @@
     <link href="style/style.css" rel="stylesheet" />
 </head>
 <body>
-<div ng-controller="MainMenuController as Main" layout="column" layout-fill ng-cloak>
+<div ng-controller="MainMenuController as Main" layout="column" layout-fill ng-cloak md-theme-watch="true" md-theme="{{Main.userRole}}">
     <md-toolbar class="md-primary">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Menu" ng-click="Main.toggleLeft()" hide-gt-md>
@@ -18,7 +18,7 @@
             <h2 class="md-display-3">Pharmscription</h2>
             <span flex></span>
             <md-input-container>
-                <md-select ng-model="Main.userRole" placeholder="User">
+                <md-select ng-model="Main.userRole">
                     <md-option ng-repeat="role in Main.roles" value="{{role.role}}">{{ role.role }}</md-option>
                 </md-select>
             </md-input-container>
@@ -97,14 +97,14 @@
 <script src="/jspm_packages/system.js"></script>
 <script src="config.js"></script>
 <script src="build.js"></script>
-<!--<script>
+<script>
     System.import('./ts/bootstrapDev.ts')
         .catch(console.error.bind(console));
-</script>-->
-<script>
+</script>
+<!--<script>
     System.import('./ts/bootstrap.ts')
         .catch(console.error.bind(console));
-</script>
+</script>-->
 
 <!--<script src="js/main.js"></script>-->
 </body>
