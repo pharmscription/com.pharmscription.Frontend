@@ -105,14 +105,14 @@ export default class PrescriptionCreatorController {
         this.prescription.Patient = this.patient;
         this.prescription.Doctor = this.doctor;
         this.prescription.Drugs = this.drugItems;
-        if (this.mode === Mode.create) {
+        if (this.mode === Mode.edit) {
             this.prescriptionRepository.editPrescription(this.prescription).then((prescription) => {
                 this.$log.debug(prescription.Id);
                 this.showToast("Rezeptänderung gespeichert");
                 this.$location.url('user/overview');
             }, (error) => {
                 this.$log.error(error);
-                this.showToast("Error beim andern des Rezepts");
+                this.showToast("Error beim ändern des Rezepts");
             });
         } else {
             this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
