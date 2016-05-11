@@ -15,6 +15,7 @@ export default class PrescriptionViewController {
 
     public allDispenses: Array<DrugItem>;
     public openDrugs: Array<DrugItem>;
+    public openDrugsMax: Array<DrugItem>;
     public freshDispense: Dispense;
 
     static $inject = [
@@ -89,9 +90,12 @@ export default class PrescriptionViewController {
                 this.$log.error("DrugItem Dispended, that was not Prescribed!");
             }
         });
-        this.openDrugs.filter((openDrugs: DrugItem) => {
+        
+        this.openDrugs = this.openDrugs.filter((openDrugs: DrugItem) => {
             return openDrugs.Quantity > 0;
         });
+        this.openDrugsMax = angular.copy(this.openDrugs);
+        this.$log.debug(this.openDrugsMax);
     }
 
     addToDispense(drugItem: DrugItem) {
@@ -149,7 +153,7 @@ export default class PrescriptionViewController {
             this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
                 this.showToast(message);
             });
-            this.$location.url('/patient/overview');
+            this.$location.url('patient/overview');
         }, (error) => {
             this.$log.error(error);
             this.$translate('TOAST.DISPENSE-SAVED-ERROR').then((message) => {
@@ -182,6 +186,6 @@ export default class PrescriptionViewController {
         this.prescriptionService.savePrescriptionState(this.prescription);
         this.prescriptionService.setPatientId(this.prescription.Patient.Id);
         this.prescriptionService.setPrescriptionId(this.prescription.Id);
-        this.$location.url('/prescription/edit');
+        this.$location.url('prescription/edit');
     }
 }

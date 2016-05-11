@@ -16,6 +16,7 @@
     "DRUGSEARCH": "Drug Search",
     "REGISTER-PATIENT": "Register Patient",
     "OVERVIEW-PATIENT": "Patient Overview",
+    "OVERVIEW-PRESCRIPTION": "Prescription Overview",
     "PRESCRIPTION-CREATOR": "Create Prescription For {{ firstName }} {{ lastName }}",
     "PRESCRIPTION-EDIT": "Prescription Editor For {{ firstName }} {{ lastName }}"
   },
@@ -33,6 +34,8 @@
     "DISPENSE-SAVED": "Dispense successfully saved!",
     "DISPENSE-SAVED-ERROR": "Error in Dispense saving!",
     "PRESCRIPTION-LOAD-ERROR": "Prescriptions could not be loaded!",
+    "PRESCRIPTION-CHANGE-SUCCESS": "Prescription successfully changed!",
+    "PRESCRIPTION-CHANGE-ERROR": "Error on prescription change!",
     "PATIENT-LOAD-ERROR": "Patient could not be loaded!",
     "PATIENT-LOAD-SUCCESS": "{{ addedPatient.FirstName }} {{ addedPatient.LastName }} saved!",
     "PATIENT-REGISTER-ERROR": "Patient could not be registered!",

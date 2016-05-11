@@ -39,7 +39,9 @@
                     <p translate="COMPOSITION" translate-values="{ composition: drug.Composition }"></p>
                     <p translate="NARCOTIC-CATEGORY" translate-values="{ narcoticCategory: drug.NarcoticCategory }"></p>
                 </div>
-                <md-button class="md-secondary" ng-click="DrugSearch.addDrug(drug)" ng-show="DrugSearch.controllerMode == '1'" translate="ADD"></md-button>
+                <md-button class="md-secondary" ng-click="DrugSearch.addDrug(drug)" ng-show="DrugSearch.controllerMode == '1'" aria-label="Add Drug">
+                    <span translate="ADD"></span>
+                </md-button>
             </div>
             <md-divider></md-divider>
         </md-list-item>

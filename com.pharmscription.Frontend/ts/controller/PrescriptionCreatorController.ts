@@ -33,7 +33,8 @@ export default class PrescriptionCreatorController {
         '$mdToast',
         '$log',
         'PrescriptionRepository',
-        'PrescriptionService'
+        'PrescriptionService',
+        '$translate'
     ];
 
     constructor(
@@ -44,7 +45,8 @@ export default class PrescriptionCreatorController {
         private $mdToast: angular.material.IToastService,
         private $log: angular.ILogService,
         private prescriptionRepository: PrescriptionRepository,
-        private prescriptionService: PrescriptionService) {
+        private prescriptionService: PrescriptionService,
+        private $translate: angular.translate.ITranslateService) {
             this.setMode();
             this.drugItems = this.prescriptionService.getDrugItems();
             this.prescription = this.prescriptionService.getPrescriptionState();
@@ -53,7 +55,9 @@ export default class PrescriptionCreatorController {
             this.isRepeatPrescription = this.isRepeatPrescriptionType();
             this.patientRepository.getPatientById(this.patientService.getPatientId()).then((patient) => {
                 if (patient == null) {
-                    this.showToast("Patient wurde nicht gefunden");
+                    this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
+                        this.showToast(message);
+                    });
                 } else {
                     this.patient = patient;
                     // Mock
@@ -74,7 +78,9 @@ export default class PrescriptionCreatorController {
                 }
             }, (error) => {
                 this.$log.error(error);
-                this.showToast("Error beim holen des Patienten");
+                this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             });
     }
 
@@ -108,20 +114,28 @@ export default class PrescriptionCreatorController {
         if (this.mode === Mode.edit) {
             this.prescriptionRepository.editPrescription(this.prescription).then((prescription) => {
                 this.$log.debug(prescription.Id);
-                this.showToast("Rezeptänderung gespeichert");
+                this.$translate('TOAST.PRESCRIPTION-CHANGE-SUCCESS').then((message) => {
+                    this.showToast(message);
+                });
                 this.$location.url('user/overview');
             }, (error) => {
                 this.$log.error(error);
-                this.showToast("Error beim ändern des Rezepts");
+                this.$translate('TOAST.PRESCRIPTION-CHANGE-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             });
         } else {
             this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
                 this.$log.debug(prescription.Id);
-                this.showToast("Rezept wurde gespeichert");
+                this.$translate('TOAST.PRESCRIPTION-CHANGE-SUCCESS').then((message) => {
+                    this.showToast(message);
+                });
                 this.$location.url('user/overview');
             }, (error) => {
                 this.$log.error(error);
-                this.showToast("Error beim Speichern des Rezepts");
+                this.$translate('TOAST.PRESCRIPTION-CHANGE-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             });
         }
     }

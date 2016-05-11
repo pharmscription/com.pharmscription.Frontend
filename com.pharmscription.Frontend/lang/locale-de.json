@@ -16,6 +16,7 @@
     "DRUGSEARCH": "Medikamenten Suche",
     "REGISTER-PATIENT": "Patient Registrieren",
     "OVERVIEW-PATIENT": "Patienten Übersicht",
+    "OVERVIEW-PRESCRIPTION": "Rezept Übersicht",
     "PRESCRIPTION-CREATOR": "Rezept erstellen für {{ firstName }} {{ lastName }}",
     "PRESCRIPTION-EDIT": "Rezept bearbeiten für {{ firstName }} {{ lastName }}"
   },
@@ -33,12 +34,14 @@
     "DISPENSE-SAVED": "Rezeptabgabe erfolgreich gespeichert!",
     "DISPENSE-SAVED-ERROR": "Rezept konnte nicht gespeichert werden!",
     "PRESCRIPTION-LOAD-ERROR": "Rezepte konnten nicht geladen werden!",
+    "PRESCRIPTION-CHANGE-SUCCESS": "Rezept erfolgreich geändert!",
+    "PRESCRIPTION-CHANGE-ERROR": "Fehler bei Rezeptänderung!",
     "PATIENT-LOAD-ERROR": "Patient konnte nicht geladen werden!",
     "PATIENT-LOAD-SUCCESS": "{{ addedPatient.FirstName }} {{ addedPatient.LastName }} gespeichert!",
     "PATIENT-REGISTER-ERROR": "Patient konnte nicht registriert werden!",
     "PATIENT-CHANGED-SUCCESS": "Änderungen an {{ editedPatient.FirstName }} {{ editedPatient.LastName }} gespeichert!",
     "PATIENT-CHANGED-ERROR": "Änderungen konnten nicht gespeichert werden!",
-    "SEARCH-ERROR":  "Fehler bei der Suche!"
+    "SEARCH-ERROR": "Fehler bei der Suche!"
   },
   "DIALOG": {
     "PATIENT-NOT-FOUND": {
