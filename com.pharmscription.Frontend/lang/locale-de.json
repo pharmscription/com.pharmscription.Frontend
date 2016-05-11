@@ -52,7 +52,7 @@
   "LASTNAME": "Nachname",
   "BIRTHDATE": "Geburtsdatum",
   "STREET": "Strasse",
-  "HOUSENUMBER": "Hausnummer",
+  "HOUSENUMBER": "Hausnr.",
   "STREETEXTENSION": "Addresszusatz",
   "CITYCODE": "PLZ",
   "LOCATION": "Ort",
