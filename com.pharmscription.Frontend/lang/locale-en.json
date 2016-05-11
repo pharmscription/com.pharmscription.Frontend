@@ -16,7 +16,6 @@
     "DRUGSEARCH": "Drug Search",
     "REGISTER-PATIENT": "Register Patient",
     "OVERVIEW-PATIENT": "Patient Overview",
-    "OVERVIEW-PRESCRIPTION": "Prescription Overview",
     "PRESCRIPTION-CREATOR": "Create Prescription For {{ firstName }} {{ lastName }}",
     "PRESCRIPTION-EDIT": "Prescription Editor For {{ firstName }} {{ lastName }}"
   },
@@ -34,14 +33,17 @@
     "DISPENSE-SAVED": "Dispense successfully saved!",
     "DISPENSE-SAVED-ERROR": "Error in Dispense saving!",
     "PRESCRIPTION-LOAD-ERROR": "Prescriptions could not be loaded!",
-    "PRESCRIPTION-CHANGE-SUCCESS": "Prescription successfully changed!",
-    "PRESCRIPTION-CHANGE-ERROR": "Error on prescription change!",
+    "PRESCRIPTION-CHANGES-SAVED": "Saved changes in Dispense",
+    "PRESCRIPTION-CHANGE-ERROR": "Error in changing Prescription",
+    "PRESCRIPTION-SAVED": "Prescription saved",
+    "PRESCRIPTION-SAVE-ERROR": "Error in saving Prescription",
     "PATIENT-LOAD-ERROR": "Patient could not be loaded!",
-    "PATIENT-LOAD-SUCCESS": "{{ addedPatient.FirstName }} {{ addedPatient.LastName }} saved!",
+    "PATIENT-SAVE-SUCCESS": "{{ firstName }} {{ lastName }} saved!",
     "PATIENT-REGISTER-ERROR": "Patient could not be registered!",
-    "PATIENT-CHANGED-SUCCESS": "Changes on {{ editedPatient.FirstName }} {{ editedPatient.LastName }} saved!",
+    "PATIENT-CHANGED-SUCCESS": "Changes on {{ firstName }} {{ lastName }} saved!",
     "PATIENT-CHANGED-ERROR": "Changes could not be saved!",
-    "SEARCH-ERROR": "Error on search!"
+    "SEARCH-ERROR": "Error on search!",
+    "PATIENT-NOT-FOUND": "Patient not found"
   },
   "DIALOG": {
     "PATIENT-NOT-FOUND": {

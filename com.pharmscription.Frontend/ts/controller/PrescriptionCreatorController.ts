@@ -55,7 +55,7 @@ export default class PrescriptionCreatorController {
             this.isRepeatPrescription = this.isRepeatPrescriptionType();
             this.patientRepository.getPatientById(this.patientService.getPatientId()).then((patient) => {
                 if (patient == null) {
-                    this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
+                    this.$translate('TOAST.PATIENT-NOT-FOUND').then((message) => {
                         this.showToast(message);
                     });
                 } else {
@@ -114,7 +114,7 @@ export default class PrescriptionCreatorController {
         if (this.mode === Mode.edit) {
             this.prescriptionRepository.editPrescription(this.prescription).then((prescription) => {
                 this.$log.debug(prescription.Id);
-                this.$translate('TOAST.PRESCRIPTION-CHANGE-SUCCESS').then((message) => {
+                this.$translate('TOAST.PRESCRIPTION-CHANGES-SAVED').then((message) => {
                     this.showToast(message);
                 });
                 this.$location.url('user/overview');
@@ -127,13 +127,13 @@ export default class PrescriptionCreatorController {
         } else {
             this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
                 this.$log.debug(prescription.Id);
-                this.$translate('TOAST.PRESCRIPTION-CHANGE-SUCCESS').then((message) => {
+                this.$translate('TOAST.PRESCRIPTION-SAVED').then((message) => {
                     this.showToast(message);
                 });
                 this.$location.url('user/overview');
             }, (error) => {
                 this.$log.error(error);
-                this.$translate('TOAST.PRESCRIPTION-CHANGE-ERROR').then((message) => {
+                this.$translate('TOAST.PRESCRIPTION-SAVE-ERROR').then((message) => {
                     this.showToast(message);
                 });
             });
