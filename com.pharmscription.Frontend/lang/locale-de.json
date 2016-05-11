@@ -43,7 +43,8 @@
     "PATIENT-CHANGED-SUCCESS": "Änderungen an {{ firstName }} {{ lastName }} gespeichert!",
     "PATIENT-CHANGED-ERROR": "Änderungen konnten nicht gespeichert werden!",
     "SEARCH-ERROR": "Fehler bei der Suche!",
-    "PATIENT-NOT-FOUND": "Patient wurde nicht gefunden"
+    "PATIENT-NOT-FOUND": "Patient wurde nicht gefunden",
+    "DRUGS-LOAD-ERROR": "Medikamente konnten nicht geladen werden"
   },
   "DIALOG": {
     "PATIENT-NOT-FOUND": {

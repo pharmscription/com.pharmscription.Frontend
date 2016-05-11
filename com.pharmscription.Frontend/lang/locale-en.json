@@ -43,7 +43,8 @@
     "PATIENT-CHANGED-SUCCESS": "Changes on {{ firstName }} {{ lastName }} saved!",
     "PATIENT-CHANGED-ERROR": "Changes could not be saved!",
     "SEARCH-ERROR": "Error on search!",
-    "PATIENT-NOT-FOUND": "Patient not found"
+    "PATIENT-NOT-FOUND": "Patient not found",
+    "DRUGS-LOAD-ERROR": "Error on loading drugs!"
   },
   "DIALOG": {
     "PATIENT-NOT-FOUND": {

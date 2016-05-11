@@ -5,13 +5,13 @@ export default class DrugSearchItems {
     PAGE_SIZE: number;
     loadedPages: any;
     numItems: number;
-
     
     constructor(
         private $mdToast: angular.material.IToastService,
         private $q: angular.IQService,
         private $scope: ng.IScope,
         private drugRepository: DrugRepository,
+        private $translate: angular.translate.ITranslateService,
         private searchTerm: string) {
             this.PAGE_SIZE = 50;
             this.loadedPages = {};
@@ -41,7 +41,9 @@ export default class DrugSearchItems {
             this.loadedPages[pageNumber] = [];
             this.loadedPages[pageNumber] = drugPageResult;
         }, (error) => {
-                this.showToast('Medikamente konnten nicht geladen werden');
+                this.$translate('TOAST.DRUGS-LOAD-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             }
         );
     }
