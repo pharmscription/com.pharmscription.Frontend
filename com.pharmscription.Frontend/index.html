@@ -41,11 +41,38 @@
             </md-toolbar>
             <md-content ng-controller="MainSideMenuController as SideMenu" layout="column">
                 <md-list>
-                    <md-list-item class="login-content md-2-line" ng-click="null">
+                    <md-list-item ng-show="Main.userRole === 'Doctor'" class="login-content md-2-line" ng-click="null">
+                        <md-icon class="md-avatar-icon">local_hospital</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>Doctor Who</h3>
+                            <p>#7362839</p>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
+                    </md-list-item>
+                    <md-list-item ng-show="Main.userRole === 'Drugist'" class="login-content md-2-line" ng-click="null">
+                        <md-icon class="md-avatar-icon"><i class="fa fa-medkit"></i></md-icon>
+                        <div class="md-list-item-text">
+                            <h3>Segnor Drugista</h3>
+                            <p>#12034023</p>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
+                    </md-list-item>
+                    <md-list-item ng-show="Main.userRole === 'DrugStoreEmployee'" class="login-content md-2-line" ng-click="null">
+                        <md-icon class="md-avatar-icon">assistant</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>Pharmenia Assistenza</h3>
+                            <p>#2342353</p>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
+                    </md-list-item>
+                    <md-list-item ng-show="Main.userRole === 'Patient'" class="login-content md-2-line" ng-click="null">
                         <md-icon class="md-avatar-icon">account_circle</md-icon>
                         <div class="md-list-item-text">
-                            <h3>User Name</h3>
-                            <p>User ID</p>
+                            <h3>Max Muster</h3>
+                            <p>#666</p>
                         </div>
                         <div flex></div>
                         <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
@@ -70,14 +97,14 @@
 <script src="/jspm_packages/system.js"></script>
 <script src="config.js"></script>
 <script src="build.js"></script>
-<script>
+<!--<script>
     System.import('./ts/bootstrapDev.ts')
         .catch(console.error.bind(console));
-</script>
-<!--<script>
+</script>-->
+<script>
     System.import('./ts/bootstrap.ts')
         .catch(console.error.bind(console));
-</script>-->
+</script>
 
 <!--<script src="js/main.js"></script>-->
 </body>
