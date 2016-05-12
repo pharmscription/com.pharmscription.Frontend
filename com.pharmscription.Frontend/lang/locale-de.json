@@ -16,6 +16,7 @@
     "DRUGSEARCH": "Medikamenten Suche",
     "REGISTER-PATIENT": "Patient Registrieren",
     "OVERVIEW-PATIENT": "Patienten Übersicht",
+    "OVERVIEW-PRESCRIPTION": "Rezept Übersicht",
     "PRESCRIPTION-CREATOR": "Rezept erstellen für {{ firstName }} {{ lastName }}",
     "PRESCRIPTION-EDIT": "Rezept bearbeiten für {{ firstName }} {{ lastName }}"
   },

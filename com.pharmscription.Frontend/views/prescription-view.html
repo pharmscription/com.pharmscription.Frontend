@@ -66,7 +66,7 @@
         </div>
     </div>
 </md-whiteframe>
-<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin ng-show="PrescriptionView.prescription.Dispenses.length > 0">
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin ng-show="PrescriptionView.prescription.Dispenses.length >= 1 || PrescriptionView.prescription.Dispenses">
     <div ng-click="widgetExpanded = !widgetExpanded">
         <md-icon ng-hide="widgetExpanded">keyboard_arrow_down</md-icon>
         <md-icon ng-show="widgetExpanded">keyboard_arrow_up</md-icon>

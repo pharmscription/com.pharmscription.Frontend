@@ -1,4 +1,4 @@
-﻿import DrugRepository from '../service/DrugRepository'
+﻿import DrugRepository from 'ts/service/DrugRepository'
 
 export default class DrugSearchItems {
     pageNumber: number;
@@ -11,8 +11,8 @@ export default class DrugSearchItems {
         private $q: angular.IQService,
         private $scope: ng.IScope,
         private drugRepository: DrugRepository,
-        private $translate: angular.translate.ITranslateService,
-        private searchTerm: string) {
+        private searchTerm: string,
+        private $translate?: angular.translate.ITranslateService) {
             this.PAGE_SIZE = 50;
             this.loadedPages = {};
             this.numItems = 0;
