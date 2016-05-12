@@ -116,6 +116,7 @@ export default class PrescriptionCreatorController {
         this.prescription.Doctor = this.doctor;
         this.prescription.Drugs = this.drugItems;
         if (this.mode === Mode.edit) {
+            this.prescription.CounterProposals.push(this.counterProposal);
             this.prescriptionRepository.editPrescription(this.prescription).then((prescription) => {
                 this.$log.debug(prescription.Id);
                 this.$translate('TOAST.PRESCRIPTION-CHANGES-SAVED').then((message) => {
