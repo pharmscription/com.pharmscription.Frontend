@@ -22,7 +22,7 @@ export default class PrescriptionCreatorController {
     drugItems: Array<DrugItem>;
     isRepeatPrescription: boolean;
     mode: Mode;
-    counterProposal: CounterProposal;
+    counterProposal: CounterProposal = new CounterProposal();
 
 
     static $inject = [
@@ -116,7 +116,9 @@ export default class PrescriptionCreatorController {
         this.prescription.Doctor = this.doctor;
         this.prescription.Drugs = this.drugItems;
         if (this.mode === Mode.edit) {
+            this.$log.debug(this.counterProposal);
             this.prescription.CounterProposals.push(this.counterProposal);
+            this.$log.debug(this.prescription);
             this.prescriptionRepository.editPrescription(this.prescription).then((prescription) => {
                 this.$log.debug(prescription.Id);
                 this.$translate('TOAST.PRESCRIPTION-CHANGES-SAVED').then((message) => {
