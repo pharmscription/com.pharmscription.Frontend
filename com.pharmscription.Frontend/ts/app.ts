@@ -93,6 +93,10 @@ export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 
             templateUrl: 'views/drug-search.html',
             controller: 'DrugSearchController',
             controllerAs: 'DrugSearch'
+        }).when('/prescription/edit/drug/search', {
+            templateUrl: 'views/drug-search.html',
+            controller: 'DrugSearchController',
+            controllerAs: 'DrugSearch'
         }).when('/prescription/view', {
             templateUrl: 'views/prescription-view.html',
             controller: 'PrescriptionViewController',

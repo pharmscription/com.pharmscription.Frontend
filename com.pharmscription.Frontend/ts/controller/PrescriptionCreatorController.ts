@@ -98,7 +98,11 @@ export default class PrescriptionCreatorController {
 
     addDrug(): void {
         this.prescriptionService.savePrescriptionState(this.prescription);
-        this.$location.url('prescription/drug/search');
+        if (this.mode === Mode.create) {
+            this.$location.url('prescription/drug/search');
+        } else {
+            this.$location.url('prescription/edit/drug/search');
+        }
     }
 
     removeDrug(index: number): void {
