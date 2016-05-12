@@ -9,7 +9,7 @@ import DispenseRepository from 'ts/service/DispenseRepository'
 
 export default class PrescriptionViewController {
 
-    public prescription: Prescription;
+    public prescription: Prescription = new Prescription();
 
     public dispenseHistory: Array<Dispense>;
 
@@ -25,7 +25,7 @@ export default class PrescriptionViewController {
         '$translate',
         'PrescriptionService',
         'PrescriptionRepository',
-        'DispenseRepository',
+        'DispenseRepository'
     ];
 
     constructor(
@@ -44,9 +44,8 @@ export default class PrescriptionViewController {
                 this.dispenseHistory = angular.copy(this.prescription.Dispenses);
                 this.fillAllDispenses();
                 this.fillOpenDrugs();
-                if (this.openDrugs.length > 0) {
-                    this.fillFreshDispense();
-                }
+                this.fillFreshDispense();
+                
             }, (error) => {
                 this.$log.error(error);
             });
@@ -61,7 +60,7 @@ export default class PrescriptionViewController {
 
     fillAllDispenses() {
         this.allDispenses = [];
-        if (this.hasDispenses()) {
+        if (this.prescriptionHasDispenses()) {
             this.prescription.Dispenses.forEach((dispense: Dispense) => {
                 dispense.DrugItems.forEach((drug: DrugItem) => {
                     let indexInAllDispense = this.allDispenses.map((dispensedDrug: DrugItem) => {
@@ -107,8 +106,9 @@ export default class PrescriptionViewController {
     }
 
     fillFreshDispense() {
-        if (this.hasDispenses() && this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy === null || this.hasDispenses() && this.prescription.Dispenses[this.prescription.Dispenses.length - 1].SignedBy === undefined) {
-            this.freshDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
+        let lastDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
+        if (this.prescriptionHasDispenses() && lastDispense.SignedBy === null || this.prescriptionHasDispenses() && lastDispense.SignedBy === undefined) {
+            this.freshDispense = lastDispense;
         } else {
             this.freshDispense = new Dispense();
             this.openDrugs.forEach((openDrug: DrugItem) => {
@@ -153,7 +153,7 @@ export default class PrescriptionViewController {
             this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
                 this.showToast(message);
             });
-            this.$location.url('patient/overview');
+            this.$location.url('user/overview');
         }, (error) => {
             this.$log.error(error);
             this.$translate('TOAST.DISPENSE-SAVED-ERROR').then((message) => {
@@ -176,8 +176,16 @@ export default class PrescriptionViewController {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 
-    hasDispenses(): boolean {
-        return this.prescription.Dispenses !== null && this.prescription.Dispenses !== undefined && this.prescription.Dispenses.length > 0;
+    prescriptionHasDispenses(): boolean {
+        return this.prescription.Dispenses !== undefined && this.prescription.Dispenses !== null && this.prescription.Dispenses.length > 0;
+    }
+
+    prescriptionHistoryHasEntries(): boolean {
+        return this.prescription.PrescriptionHistory !== undefined && this.prescription.PrescriptionHistory !== null && this.prescription.PrescriptionHistory.length > 0;
+    }
+
+   lastDispense(): Dispense {
+        return this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
     }
 
     editPrescription() {
