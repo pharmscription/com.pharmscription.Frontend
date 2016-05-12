@@ -6,7 +6,8 @@ export default class PrescriptionRepository {
     private urls: any = {
         getPrescriptions: 'http://localhost:7642/patients/{id}/prescriptions',
         getPrescription: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}',
-        newPrescription: 'http://localhost:7642/patients/{id}/prescriptions'
+        newPrescription: 'http://localhost:7642/patients/{id}/prescriptions',
+        editPrescription: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}'
     }
 
     static $inject = [
@@ -63,7 +64,7 @@ export default class PrescriptionRepository {
 
     editPrescription(prescription: Prescription): IPromise<Prescription> {
         let data = JSON.stringify(prescription);
-        return this.$http.post(this.urls.newPrescription.replace('{id}', prescription.Patient.Id), data).then((response) => {
+        return this.$http.post(this.urls.newPrescription.replace('{patientId}', prescription.Patient.Id).replace('{prescriptionId}',prescription.Id), data).then((response) => {
             if (response.status === 200) {
                 return response.data;
             } else {
