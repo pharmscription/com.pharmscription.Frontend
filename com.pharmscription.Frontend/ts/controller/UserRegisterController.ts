@@ -93,6 +93,7 @@ export default class UserRegisterController {
                 this.PatientService.setPatientId(editedPatient.Id);
                 this.$translate('TOAST.PATIENT-CHANGED-SUCCESS', { firstName: editedPatient.FirstName, lastName: editedPatient.LastName }).then((message) => {
                     this.showToast(message);
+                    this.$location.url('user/overview');
                 });
             }, (error) => {
                 this.$log.error(error);
