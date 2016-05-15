@@ -54,3 +54,7 @@
     filter: brightness(110%);
     -webkit-filter: brightness(110%);
 }
+
+.remark {
+   word-wrap: break-word;
+}

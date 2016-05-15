@@ -73,27 +73,35 @@
         <span translate="PRESCRIPTION.DISPENSE-HISTORY"></span>
     </div>
     <div ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
-        <md-list>
-            <md-list-item class="md-padding" layout-margin ng-repeat="dispense in PrescriptionView.dispenseHistory" ng-show="dispense.SignedBy !== null" md-item-size="20">
-                    <md-card layout-fill>
-                        <md-card-title>
-                            <md-card-title-text>
-                                <div layout="row" layout-align="space-between center">
-                                    <span class="md-headline" translate="PRESCRIPTION.DISPENSE-DATE"></span>
-                                    <span class="md-headline">{{ dispense.Date | date:"dd.MM.yyyy" }}</span>
-                                </div>
-                                <div ng-repeat="drugItem in dispense.DrugItems" layout="column" ng-show="drugItem.Quantity > 0">
-                                    <span class="md-subhead">{{ drugItem.Drug.DrugDescription }}</span>
-                                    <span class="md-subhead" translate="QUANTITY-PARAM" translate-values="{ quantity: drugItem.Quantity }"></span>
-                                </div>
-                                <div>
-                                    <p class="md-subhead" translate="REMARK"></p>
-                                    <p class="md-subhead">{{ dispense.Remark }}</p>
-                                    <p class="md-subhead" translate="PRESCRIPTION.ISSUER" translate-values="{ firstName: dispense.SignedBy.FirstName, lastName: dispense.SignedBy.LastName}"></p>
-                                </div>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </md-card>
+        <md-list layout-fill>
+            <md-list-item class="md-padding" layout-margin ng-repeat="dispense in PrescriptionView.dispenseHistory" ng-show="dispense.SignedBy !== null">
+                <md-card layout-fill>
+                    <md-card-title>
+                        <div layout="column" layout-fill>
+                            <div layout="row" layout-align="space-between" layout-margin>
+                                <div class="md-headline" flex="50" translate="PRESCRIPTION.DISPENSE-DATE"></div>
+                                <div class="md-headline" flex="50">{{ dispense.Date | date:"dd.MM.yyyy" }}</div>
+                            </div>
+                            <div layout="row" layout-align="space-between" layout-margin>
+                                <div flex="50" translate="PRESCRIPTION.ISSUER"></div>
+                                <div flex="50">{{ dispense.SignedBy.FirstName }} {{ dispense.SignedBy.LastName }}</div>
+                            </div>
+                            <div layout="row" layout-align="space-between" layout-margin>
+                                <div flex="50" translate="REMARK"></div>
+                                <div id="remark" flex="50">{{ dispense.Remark }}</div>
+                            </div>
+                            <md-list>
+                                <md-list-item ng-repeat="drugItem in dispense.DrugItems" ng-show="drugItem.Quantity > 0">
+                                    <div layout="column">
+                                        <div><b>{{ drugItem.Drug.DrugDescription }}</b></div>
+                                        <div translate="QUANTITY-PARAM" translate-values="{ quantity: drugItem.Quantity }"></div>
+                                        <md-divider></md-divider>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </md-card-title>
+                </md-card>
             </md-list-item>
         </md-list>
     </div>
