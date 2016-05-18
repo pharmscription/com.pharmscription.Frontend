@@ -144,17 +144,31 @@ export default class PrescriptionViewController {
     }
 
     saveDispense() {
-        this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
-            this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
-                this.showToast(message);
+        if (this.prescription.Id !== null && this.freshDispense.Id !== undefined) {
+            this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
+                this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
+                    this.showToast(message);
+                });
+                this.$location.url('user/overview');
+            }, (error) => {
+                this.$log.error(error);
+                this.$translate('TOAST.DISPENSE-SAVED-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             });
-            this.$location.url('user/overview');
-        }, (error) => {
-            this.$log.error(error);
-            this.$translate('TOAST.DISPENSE-SAVED-ERROR').then((message) => {
-                this.showToast(message);
+        } else {
+            this.dispenseRepository.editDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
+                this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
+                    this.showToast(message);
+                });
+                this.$location.url('user/overview');
+            }, (error) => {
+                this.$log.error(error);
+                this.$translate('TOAST.DISPENSE-SAVED-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             });
-        });
+        }
     }
 
     signDispense() {
@@ -178,7 +192,7 @@ export default class PrescriptionViewController {
         return this.prescription.PrescriptionHistory !== undefined && this.prescription.PrescriptionHistory !== null && this.prescription.PrescriptionHistory.length > 0;
     }
 
-   lastDispense(): Dispense {
+    lastDispense(): Dispense {
         return this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
     }
 

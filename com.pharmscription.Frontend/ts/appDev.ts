@@ -173,6 +173,21 @@ export class AppDev {
         });
 
         /*
+            POST    /patients/{id}/prescriptions/{id}/dispenses/{id}
+        */
+        $httpBackend.whenPOST(/\/patients\/(.+)\/prescriptions\/(.+)\/dispenses\/(.+)/, undefined, undefined, ['patientId', 'prescriptionId', 'dispenseId']).respond((method: string, url: string, data: string, headers: any, params: any) => {
+            let changedDispense: Dispense = angular.fromJson(data);
+            let prescriptionPos = prescriptions.map((prescription: Prescription) => {
+                return prescription.Id;
+            }).indexOf(params.prescriptionId);
+            let dispenseId = prescriptions[prescriptionPos].Dispenses.map((dispense: Dispense) => {
+                return dispense.Id;
+            }).indexOf(params.dispenseId);
+
+            prescriptions[prescriptionPos].Dispenses[dispenseId] = changedDispense;
+        });
+
+        /*
             PUT     /patients/{id}/prescriptions/{id}/dispenses
         */
         $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions\/(.+)\/dispenses/, undefined, undefined, ['patientId', 'prescriptionId']).respond((method: string, url: string, data: string, headers: any, params: any) => {
@@ -220,7 +235,6 @@ export class AppDev {
         /*
             POST    /patients/{id}
         */
-
         $httpBackend.whenPOST(/\/patients\/(.+)/, undefined, undefined, ['patientId'] ).respond((method: string, url: string, data: string) => {
             let patient: Patient = angular.fromJson(data);
             let patientPosition = patients.map((p: Patient) => { return p.Id }).indexOf(patient.Id);
