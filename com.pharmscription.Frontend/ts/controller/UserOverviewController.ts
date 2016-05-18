@@ -44,7 +44,6 @@ export default class UserOverviewController {
     getPrescriptions() {
         this.prescriptionRepository.getPrescriptions(this.patient.Id).then((foundPrescriptions) => {
             this.prescriptions = foundPrescriptions;
-            console.log(this.prescriptions);
         }, (error) => {
             this.$translate('TOAST.PRESCRIPTION-LOAD-ERROR').then((message) => {
                 this.showToast(message);

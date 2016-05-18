@@ -175,7 +175,7 @@ export class AppDev {
         /*
             PUT     /patients/{id}/prescriptions/{id}/dispenses
         */
-        $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions\/(.+)\/dispense/, undefined, undefined, ['patientId', 'prescriptionId']).respond((method: string, url: string, data: string, headers: any, params: any) => {
+        $httpBackend.whenPUT(/\/patients\/(.+)\/prescriptions\/(.+)\/dispenses/, undefined, undefined, ['patientId', 'prescriptionId']).respond((method: string, url: string, data: string, headers: any, params: any) => {
             let newDispense: Dispense = angular.fromJson(data);
             let prescriptionPos = prescriptions.map((prescription: Prescription) => {
                 return prescription.Id;

@@ -4,7 +4,7 @@ import IPromise = angular.IPromise
 export default class DispenseRepository {
 
     private urls: any = {
-        put: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}/dispense'
+        put: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}/dispenses'
         
     }
 

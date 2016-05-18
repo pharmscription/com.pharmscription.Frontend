@@ -26,7 +26,6 @@ export default class PatientRepository {
 
     addPatient(patient: Patient): IPromise<Patient> {
         let data = JSON.stringify(patient);
-        this.$log.debug(data);
         return this.$http.put(this.urls.add, data).then((response) => {
             if (response.status === 200) {
                 return response.data;
@@ -41,7 +40,6 @@ export default class PatientRepository {
     }
 
     getPatientByAhv(ahvNumber: string): IPromise<Patient> {
-        this.$log.debug(ahvNumber);
         return this.$http.get(this.urls.getByAhv.replace('{ahv}', ahvNumber)).then((response) => {
                 if (response.status === 200) {
                     return response.data;
@@ -58,11 +56,9 @@ export default class PatientRepository {
     }
 
     getPatientById(id: string): IPromise<Patient> {
-        this.$log.debug(id);
         if (id === null)
             return this.$q.reject("No ID Submitted");
         return this.$http.get(this.urls.getById.replace('{id}', id)).then((response) => {
-                this.$log.debug(id);
             if (response.status === 200) {
                 return response.data;
             } else {
@@ -76,7 +72,6 @@ export default class PatientRepository {
     }
 
     editPatient(patient: Patient): IPromise<Patient> {
-        this.$log.debug(patient.Id);
         if (patient.Id === null || patient.Id === undefined) {
             return this.$q.reject('Patient hat keine ID');
         }

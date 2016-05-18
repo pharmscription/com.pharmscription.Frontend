@@ -50,8 +50,6 @@ export default class PrescriptionCreatorController {
             this.setMode();
             this.drugItems = this.prescriptionService.getDrugItems();
             this.prescription = this.prescriptionService.getPrescriptionState();
-            $log.debug("Prescription State");
-            $log.debug(this.prescription);
             this.isRepeatPrescription = this.isRepeatPrescriptionType();
             this.patientRepository.getPatientById(this.patientService.getPatientId()).then((patient) => {
                 if (patient == null) {
@@ -116,11 +114,8 @@ export default class PrescriptionCreatorController {
         this.prescription.Doctor = this.doctor;
         this.prescription.Drugs = this.drugItems;
         if (this.mode === Mode.edit) {
-            this.$log.debug(this.counterProposal);
             this.prescription.CounterProposals.push(this.counterProposal);
-            this.$log.debug(this.prescription);
             this.prescriptionRepository.editPrescription(this.prescription).then((prescription) => {
-                this.$log.debug(prescription.Id);
                 this.$translate('TOAST.PRESCRIPTION-CHANGES-SAVED').then((message) => {
                     this.showToast(message);
                 });
@@ -133,7 +128,6 @@ export default class PrescriptionCreatorController {
             });
         } else {
             this.prescriptionRepository.newPrescription(this.prescription).then((prescription) => {
-                this.$log.debug(prescription.Id);
                 this.$translate('TOAST.PRESCRIPTION-SAVED').then((message) => {
                     this.showToast(message);
                 });

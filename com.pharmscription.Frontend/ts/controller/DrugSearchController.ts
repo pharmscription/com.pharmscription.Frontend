@@ -72,7 +72,6 @@ export default class DrugSearchController {
     }
 
     addDrug(drug: Drug): void {
-        this.$log.debug(drug);
         this.prescriptionService.setDrugItem(new DrugItem(drug));
         if (this.$location.url() === "/prescription/drug/search") {
             this.$location.url('prescription/create');

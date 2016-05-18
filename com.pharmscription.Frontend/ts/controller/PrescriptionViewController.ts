@@ -45,13 +45,13 @@ export default class PrescriptionViewController {
                 this.fillAllDispenses();
                 this.fillOpenDrugs();
                 this.fillFreshDispense();
-                
+                $log.debug("Prescription View:");
+                $log.debug(this.prescription);
             }, (error) => {
                 this.$log.error(error);
             });
         } else {
                 this.$translate("TOAST.SEARCH-PATIENT").then((message) => {
-                    this.$log.debug(message);
                     this.showToast(message);
                     this.$location.url('/');
             });
@@ -94,7 +94,6 @@ export default class PrescriptionViewController {
             return openDrugs.Quantity > 0;
         });
         this.openDrugsMax = angular.copy(this.openDrugs);
-        this.$log.debug(this.openDrugsMax);
     }
 
     addToDispense(drugItem: DrugItem) {
@@ -141,15 +140,11 @@ export default class PrescriptionViewController {
         } else {
             quantityDiff = newValue - oldValue;
         }
-        this.$log.debug('QuantityDiff: ' + quantityDiff);
         this.changeQuantityInFreshDispense(id, quantityDiff, true);
     }
 
     saveDispense() {
-        this.$log.debug(this.prescription.Patient.Id);
-        this.$log.debug(this.prescription.Id);
         this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
-            this.$log.debug(newDispense);
             this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
                 this.showToast(message);
             });
@@ -157,7 +152,6 @@ export default class PrescriptionViewController {
         }, (error) => {
             this.$log.error(error);
             this.$translate('TOAST.DISPENSE-SAVED-ERROR').then((message) => {
-                this.$log.debug(message);
                 this.showToast(message);
             });
         });
