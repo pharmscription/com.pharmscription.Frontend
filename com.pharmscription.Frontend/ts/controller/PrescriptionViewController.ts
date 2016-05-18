@@ -18,6 +18,8 @@ export default class PrescriptionViewController {
     public openDrugsMax: Array<DrugItem>;
     public freshDispense: Dispense;
 
+    public openDispense: Dispense = new Dispense();
+
     static $inject = [
         '$log',
         '$mdToast',
@@ -42,18 +44,23 @@ export default class PrescriptionViewController {
             this.prescriptionRepository.getPrescription(patientId, prescriptionId).then((foundPrescription) => {
                 this.prescription = foundPrescription;
                 this.dispenseHistory = angular.copy(this.prescription.Dispenses);
+                this.fillOpenDispense();
+                this.$log.debug(this.openDispense);
                 this.fillAllDispenses();
                 this.fillOpenDrugs();
                 this.fillFreshDispense();
                 $log.debug("Prescription View:");
                 $log.debug(this.prescription);
             }, (error) => {
+                this.$translate("TOAST.PRESCRIPTION-LOAD-ERROR").then((message) => {
+                    this.showToast(message);
+                });
                 this.$log.error(error);
             });
         } else {
-                this.$translate("TOAST.SEARCH-PATIENT").then((message) => {
-                    this.showToast(message);
-                    this.$location.url('/');
+            this.$translate("TOAST.SEARCH-PATIENT").then((message) => {
+                this.showToast(message);
+                this.$location.url('/');
             });
         }
     }
@@ -105,9 +112,8 @@ export default class PrescriptionViewController {
     }
 
     fillFreshDispense() {
-        let lastDispense = this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
-        if (this.prescriptionHasDispenses() && lastDispense.SignedBy === null || this.prescriptionHasDispenses() && lastDispense.SignedBy === undefined) {
-            this.freshDispense = lastDispense;
+        if (this.openDispense.Id !== null) {
+            this.freshDispense = this.openDispense;
         } else {
             this.freshDispense = new Dispense();
             this.openDrugs.forEach((openDrug: DrugItem) => {
@@ -192,8 +198,15 @@ export default class PrescriptionViewController {
         return this.prescription.PrescriptionHistory !== undefined && this.prescription.PrescriptionHistory !== null && this.prescription.PrescriptionHistory.length > 0;
     }
 
-    lastDispense(): Dispense {
-        return this.prescription.Dispenses[this.prescription.Dispenses.length - 1];
+    fillOpenDispense(): void {
+        let openDispensePos = this.prescription.Dispenses.map((dispense: Dispense) => {
+            return dispense.SignedBy;
+        }).indexOf(null);
+
+        this.$log.debug(openDispensePos);
+        if (openDispensePos !== -1) {
+            this.openDispense = this.prescription.Dispenses[openDispensePos];
+        }
     }
 
     editPrescription() {
@@ -203,5 +216,22 @@ export default class PrescriptionViewController {
         this.prescriptionService.setPatientId(this.prescription.Patient.Id);
         this.prescriptionService.setPrescriptionId(this.prescription.Id);
         this.$location.url('prescription/edit');
+    }
+
+    hasSignedDispenses(): boolean {
+        let conclusion = false;
+        this.prescription.Dispenses.forEach((dispense: Dispense) => {
+            if (this.isSigned(dispense)) {
+                conclusion = true;
+            }
+        });
+        return conclusion;
+    }
+
+    isSigned(dispense: Dispense): boolean {
+        if (dispense.SignedBy !== null) {
+            return true;
+        }
+        return false;
     }
 }
