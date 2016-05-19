@@ -19,7 +19,7 @@ export default class UserOverviewController {
         'PrescriptionRepository',
         'PrescriptionService'
     ];
-    
+
     constructor(
         private $location: angular.ILocationService,
         private $log: angular.ILogService,
@@ -30,8 +30,9 @@ export default class UserOverviewController {
         private prescriptionRepository: PrescriptionRepository,
         private prescriptionService: PrescriptionService) {
         this.patientRepository.getPatientById(this.patientService.getPatientId()).then((foundPatient) => {
-            foundPatient.BirthDate = new Date(foundPatient.BirthDate.toString());
+            foundPatient.BirthDate = this.parseDateString(foundPatient.BirthDate.toString());
             this.patient = foundPatient;
+            this.$log.debug(this.patient);
             this.getPrescriptions();
         }, (error) => {
             this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
@@ -69,5 +70,14 @@ export default class UserOverviewController {
         this.prescriptionService.setPatientId(this.patient.Id);
         this.prescriptionService.setPrescriptionId(prescriptionId);
         this.$location.url('prescription/view');
+    }
+
+    parseDateString(dateString: string): Date {
+        let dateParts = dateString.split('.');
+        let dateObject = new Date();
+        dateObject.setFullYear(parseInt(dateParts[2]));
+        dateObject.setMonth(parseInt(dateParts[1]) - 1);
+        dateObject.setDate(parseInt(dateParts[0]));
+        return dateObject;
     }
 }

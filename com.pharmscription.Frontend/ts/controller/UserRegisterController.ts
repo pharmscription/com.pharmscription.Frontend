@@ -57,12 +57,7 @@ export default class UserRegisterController {
 
         } else {
             this.patientRepository.getPatientById(this.PatientService.getPatientId()).then((foundPatient) => {
-                let birthdateString = foundPatient.BirthDate.toString();
-                let birthDateParts = birthdateString.split('.');
-                foundPatient.BirthDate = new Date();
-                foundPatient.BirthDate.setFullYear(parseInt(birthDateParts[2]));
-                foundPatient.BirthDate.setMonth(parseInt(birthDateParts[1]) - 1);
-                foundPatient.BirthDate.setDate(parseInt(birthDateParts[0]));
+                foundPatient.BirthDate = this.parseDateString(foundPatient.BirthDate.toString());
                 this.patient = foundPatient;
             }, (error) => {
                 this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
@@ -115,5 +110,14 @@ export default class UserRegisterController {
         } else {
             this.controllerMode = Mode.Edit;
         }
+    }
+
+    parseDateString(dateString: string): Date {
+        let dateParts = dateString.split('.');
+        let dateObject = new Date();
+        dateObject.setFullYear(parseInt(dateParts[2]));
+        dateObject.setMonth(parseInt(dateParts[1]) - 1);
+        dateObject.setDate(parseInt(dateParts[0]));
+        return dateObject;
     }
 }
