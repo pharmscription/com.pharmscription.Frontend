@@ -22,6 +22,7 @@ export default class DrugSearchController {
     drugSearchResults: DrugSearchItems;
     controllerMode: Mode;
     hasResultInfo: boolean;
+    isLoading: boolean = false;
 
 
     static $inject = [
@@ -61,12 +62,15 @@ export default class DrugSearchController {
     }
 
     getDrugs(searchTerm: string): void {
-        //this.setProgressCircle(true);
+        this.isLoading = true;
         this.hasResultInfo = false;
         this.lastSearchTerm = searchTerm;
         this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';
-        this.drugSearchResults = new DrugSearchItems(this.$mdToast, this.$q, this.$scope, this.drugRepository, searchTerm, () => { this.hasResultInfo = true; });
+        this.drugSearchResults = new DrugSearchItems(this.$mdToast, this.$q, this.$scope, this.drugRepository, searchTerm, () => {
+            this.hasResultInfo = true;
+            this.isLoading = false;
+        });
     }
 
     showToast(message: string) {

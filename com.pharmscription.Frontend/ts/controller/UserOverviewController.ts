@@ -8,6 +8,7 @@ import PrescriptionService from 'ts/service/PrescriptionService'
 export default class UserOverviewController {
     patient: Patient;
     prescriptions: Array<Prescription> = [];
+    loadingPrescriptions: boolean = true;
 
     public static $inject = [
         '$location',
@@ -44,8 +45,10 @@ export default class UserOverviewController {
 
     getPrescriptions() {
         this.prescriptionRepository.getPrescriptions(this.patient.Id).then((foundPrescriptions) => {
+            this.loadingPrescriptions = false;
             this.prescriptions = foundPrescriptions;
         }, (error) => {
+            this.loadingPrescriptions = false;
             this.$translate('TOAST.PRESCRIPTION-LOAD-ERROR').then((message) => {
                 this.showToast(message);
             });

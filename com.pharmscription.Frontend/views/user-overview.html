@@ -96,7 +96,10 @@
 </md-whiteframe>
 <md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
     <div translate="PRESCRIPTIONS"></div>
-    <md-list>
+    <div ng-if="UserOverview.loadingPrescriptions" layout="row" layout-align="space-around">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <md-list ng-if="!UserOverview.loadingPrescriptions">
         <md-list-item ng-show="!UserOverview.prescriptions.length">
             <div>
                 <md-icon class="material-icons md-48">insert_drive_file</md-icon>
