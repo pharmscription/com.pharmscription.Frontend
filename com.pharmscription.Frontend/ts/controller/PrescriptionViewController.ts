@@ -43,7 +43,6 @@ export default class PrescriptionViewController {
             this.prescriptionRepository.getPrescription(patientId, prescriptionId).then((foundPrescription) => {
                 this.prescription = foundPrescription;
                 this.fillOpenDispense();
-                this.$log.debug(this.openDispense);
                 this.fillAllDispensedDrugItems();
                 this.fillOpenDrugs();
                 this.fillFreshDispense();
@@ -82,6 +81,8 @@ export default class PrescriptionViewController {
                 }
             });
         }
+        this.$log.debug("all Dispensed Drug Items");
+        this.$log.debug(this.allDispensedDrugItems);
     }
 
     fillOpenDrugs() {
@@ -108,10 +109,11 @@ export default class PrescriptionViewController {
             if (indexInOpenDrugItems !== -1) {
                 this.openDrugItems[indexInOpenDrugItems].Quantity -= drugItemInOpenDispense.Quantity;
             } else {
-                this.$log.error("DrugItem in Open Dispense saved, that was not Precribed!");
+                this.$log.error("DrugItem in Open Dispense saved, that was not Prescribed!");
             }
         });
-        
+        this.$log.debug("Open Drug Items:");
+        this.$log.debug(this.openDrugItems);
     }
 
     addToDispense(drugItem: DrugItem) {
@@ -161,8 +163,8 @@ export default class PrescriptionViewController {
     }
 
     saveDispense() {
-        if (this.prescription.Id !== null && this.freshDispense.Id !== undefined) {
-            this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
+        if (this.freshDispense.Id !== null && this.freshDispense.Id !== undefined) {
+            this.dispenseRepository.editDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
                 this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
                     this.showToast(message);
                 });
@@ -174,7 +176,7 @@ export default class PrescriptionViewController {
                 });
             });
         } else {
-            this.dispenseRepository.editDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
+            this.dispenseRepository.addDispense(this.prescription.Patient.Id, this.prescription.Id, this.freshDispense).then((newDispense) => {
                 this.$translate('TOAST.DISPENSE-SAVED').then((message) => {
                     this.showToast(message);
                 });
@@ -189,10 +191,10 @@ export default class PrescriptionViewController {
     }
 
     signDispense() {
-        let signor = new Drugist();
-        signor.FirstName = "Señor";
-        signor.LastName = "Signor";
-        this.freshDispense.SignedBy = signor;
+        //let signor = new Drugist();
+        //signor.FirstName = "Señor";
+        //signor.LastName = "Signor";
+        //this.freshDispense.SignedBy = signor;
         this.freshDispense.Date = new Date();
         this.saveDispense();
     }
@@ -211,13 +213,14 @@ export default class PrescriptionViewController {
 
     fillOpenDispense(): void {
         let openDispensePos = this.prescription.Dispenses.map((dispense: Dispense) => {
-            return dispense.SignedBy;
+            return dispense.Date;
         }).indexOf(null);
 
-        this.$log.debug(openDispensePos);
         if (openDispensePos !== -1) {
-            this.openDispense = this.prescription.Dispenses[openDispensePos];
+            this.openDispense = angular.copy(this.prescription.Dispenses[openDispensePos]);
         }
+        this.$log.debug("OpenDispense:");
+        this.$log.debug(this.openDispense);
     }
 
     editPrescription() {
@@ -230,17 +233,11 @@ export default class PrescriptionViewController {
     }
 
     hasSignedDispenses(): boolean {
-        let conclusion = false;
-        this.prescription.Dispenses.forEach((dispense: Dispense) => {
-            if (this.isSigned(dispense)) {
-                conclusion = true;
-            }
-        });
-        return conclusion;
+        return (this.signedDispenses.length > 0);
     }
 
     isSigned(dispense: Dispense): boolean {
-        if (dispense.SignedBy !== null) {
+        if (dispense.Date !== null && dispense.Date !== undefined) {
             return true;
         }
         return false;
