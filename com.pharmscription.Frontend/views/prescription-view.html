@@ -31,7 +31,7 @@
     </div>
     <md-divider></md-divider>
     <md-list>
-        <md-list-item class="md-3-line" ng-repeat="drugItem in PrescriptionView.openDrugs" ng-hide="drugItem.Quantity == 0">
+        <md-list-item class="md-3-line" ng-repeat="drugItem in PrescriptionView.openDrugItems" ng-hide="drugItem.Quantity == 0">
             <md-icon>healing</md-icon>
             <div class="md-list-item-text" layout="column">
                 <span translate="DESCRIPTION" translate-values="{ description: drugItem.Drug.DrugDescription }"></span>
@@ -74,7 +74,7 @@
     </div>
     <div ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
         <md-list layout-fill>
-            <md-list-item class="md-padding" layout-margin ng-repeat="dispense in PrescriptionView.dispenseHistory" ng-show="dispense.SignedBy !== null">
+            <md-list-item class="md-padding" layout-margin ng-repeat="dispense in PrescriptionView.signedDispenses" ng-show="dispense.SignedBy !== null">
                 <md-card layout-fill>
                     <md-card-title>
                         <div layout="column" layout-fill>
@@ -106,13 +106,8 @@
         </md-list>
     </div>
 </md-whiteframe>
-<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin ng-hide="(!PrescriptionView.prescriptionHasDispenses() || PrescriptionView.lastDispense().SignedBy !== null) && PrescriptionView.openDrugsMax.length > 0 && (Main.userRole === 'Doctor' || Main.userRole === 'Patient')">
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-margin ng-show="PrescriptionView.freshDispenseHasQuantity() && (Main.userRole === 'DrugStoreEmployee' || Main.userRole === 'Drugist')">
     <span class="md-headline" translate="PRESCRIPTION.DISPENSE"></span>
-    <!--<md-list-item ng-show="!PrescriptionView.prescription.Dispenses.length">
-        <md-icon class="md-48 md-avatar-icon">insert_drive_file</md-icon>
-        <span class="md-list-item-text">keine Medikamentenabgaben</span>
-        <span flex></span>
-    </md-list-item>-->
     <md-list>
         <md-list-item ng-repeat="drugItem in PrescriptionView.freshDispense.DrugItems" ng-hide="drugItem.Quantity == 0">
             <md-icon>healing</md-icon>
@@ -120,7 +115,7 @@
                 <span>{{ drugItem.Drug.DrugDescription}}</span>
                 <md-input-container>
                     <label translate="QUANTITY"></label>
-                    <input ng-model="drugItem.Quantity" ng-change="PrescriptionView.changeQuantityAction(drugItem.Id, drugItem.Quantity, '{{drugItem.Quantity}}')" type="number" max="{{ PrescriptionView.openDrugsMax[$index].Quantity }}" required>
+                    <input ng-model="drugItem.Quantity" ng-change="PrescriptionView.changeQuantityAction(drugItem.Id, drugItem.Quantity, '{{drugItem.Quantity}}')" type="number" max="{{ PrescriptionView.openDrugsItemsMaxQuantity[$index].Quantity }}" required>
                 </md-input-container>
             </div>
             <span translate="PRICE"></span>
@@ -130,9 +125,6 @@
             </md-button>
         </md-list-item>
     </md-list>
-    <!--<span>Medikamentenabgabe von {{dispense.HandedBy.FirstName}} {{dispense.HandedBy.LastName}}</span>
-    <span>Ausgestellt am {{dispense.Date | date:"dd.MM.yyyy"}}</span>-->
-    <!--<md-button class="md-secondary md-raised">Anzeigen</md-button>-->
     <div layout="column">
         <div layout="row">
             <md-input-container class="md-block" flex>

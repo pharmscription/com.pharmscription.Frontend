@@ -11,13 +11,12 @@ export default class PrescriptionViewController {
 
     public prescription: Prescription = new Prescription();
 
-    public dispenseHistory: Array<Dispense>;
+    public signedDispenses: Array<Dispense> = [];
 
-    public allDispenses: Array<DrugItem>;
-    public openDrugs: Array<DrugItem>;
-    public openDrugsMax: Array<DrugItem>;
-    public freshDispense: Dispense;
-
+    public allDispensedDrugItems: Array<DrugItem>;
+    public openDrugItems: Array<DrugItem>;
+    public openDrugsItemsMaxQuantity: Array<DrugItem>;
+    public freshDispense: Dispense = new Dispense();
     public openDispense: Dispense = new Dispense();
 
     static $inject = [
@@ -43,10 +42,9 @@ export default class PrescriptionViewController {
         if (prescriptionId !== undefined || patientId !== undefined) {
             this.prescriptionRepository.getPrescription(patientId, prescriptionId).then((foundPrescription) => {
                 this.prescription = foundPrescription;
-                this.dispenseHistory = angular.copy(this.prescription.Dispenses);
                 this.fillOpenDispense();
                 this.$log.debug(this.openDispense);
-                this.fillAllDispenses();
+                this.fillAllDispensedDrugItems();
                 this.fillOpenDrugs();
                 this.fillFreshDispense();
                 $log.debug("Prescription View:");
@@ -65,42 +63,55 @@ export default class PrescriptionViewController {
         }
     }
 
-    fillAllDispenses() {
-        this.allDispenses = [];
+    fillAllDispensedDrugItems() {
+        this.allDispensedDrugItems = [];
         if (this.prescriptionHasDispenses()) {
             this.prescription.Dispenses.forEach((dispense: Dispense) => {
-                dispense.DrugItems.forEach((drug: DrugItem) => {
-                    let indexInAllDispense = this.allDispenses.map((dispensedDrug: DrugItem) => {
-                        return dispensedDrug.Id;
-                    }).indexOf(drug.Id);
-                    if (indexInAllDispense !== -1) {
-                        this.allDispenses[indexInAllDispense].Quantity += drug.Quantity;
-                    } else {
-                        this.allDispenses.push(drug);
-                    }
-                });
+                if (this.isSigned(dispense)) {
+                    this.signedDispenses.push(dispense);
+                    dispense.DrugItems.forEach((drug: DrugItem) => {
+                        let indexInAllDispense = this.allDispensedDrugItems.map((dispensedDrug: DrugItem) => {
+                            return dispensedDrug.Id;
+                        }).indexOf(drug.Id);
+                        if (indexInAllDispense !== -1) {
+                            this.allDispensedDrugItems[indexInAllDispense].Quantity += drug.Quantity;
+                        } else {
+                            this.allDispensedDrugItems.push(drug);
+                        }
+                    });
+                }
             });
         }
     }
 
     fillOpenDrugs() {
-        this.openDrugs = angular.copy(this.prescription.Drugs);
-        this.allDispenses.forEach((dispensedDrug: DrugItem) => {
-            let indexInOpenDrugs = this.openDrugs.map((prescribedDrug: DrugItem) => {
+        this.openDrugItems = angular.copy(this.prescription.Drugs);
+        this.allDispensedDrugItems.forEach((dispensedDrug: DrugItem) => {
+            let indexInOpenDrugs = this.openDrugItems.map((prescribedDrug: DrugItem) => {
                 return prescribedDrug.Id;
             }).indexOf(dispensedDrug.Id);
 
             if (indexInOpenDrugs !== -1) {
-                this.openDrugs[indexInOpenDrugs].Quantity -= dispensedDrug.Quantity;
+                this.openDrugItems[indexInOpenDrugs].Quantity -= dispensedDrug.Quantity;
             } else {
                 this.$log.error("DrugItem Dispended, that was not Prescribed!");
             }
         });
-        
-        this.openDrugs = this.openDrugs.filter((openDrugs: DrugItem) => {
-            return openDrugs.Quantity > 0;
+
+        this.openDrugsItemsMaxQuantity = angular.copy(this.openDrugItems);
+
+        this.openDispense.DrugItems.forEach((drugItemInOpenDispense: DrugItem) => {
+            let indexInOpenDrugItems = this.openDrugItems.map((openDrug: DrugItem) => {
+                return openDrug.Id;
+            }).indexOf(drugItemInOpenDispense.Id);
+
+            if (indexInOpenDrugItems !== -1) {
+                this.openDrugItems[indexInOpenDrugItems].Quantity -= drugItemInOpenDispense.Quantity;
+            } else {
+                this.$log.error("DrugItem in Open Dispense saved, that was not Precribed!");
+            }
         });
-        this.openDrugsMax = angular.copy(this.openDrugs);
+        
     }
 
     addToDispense(drugItem: DrugItem) {
@@ -116,7 +127,7 @@ export default class PrescriptionViewController {
             this.freshDispense = this.openDispense;
         } else {
             this.freshDispense = new Dispense();
-            this.openDrugs.forEach((openDrug: DrugItem) => {
+            this.openDrugItems.forEach((openDrug: DrugItem) => {
                 this.freshDispense.DrugItems.push(angular.copy(openDrug));
                 this.freshDispense.DrugItems[this.freshDispense.DrugItems.length - 1].Quantity = 0;
             });
@@ -124,11 +135,11 @@ export default class PrescriptionViewController {
     }
 
     changeQuantityInFreshDispense(id: string, quantity: number, byButton: boolean) {
-        let indexInOpenDrugs = this.openDrugs.map((openDrug: DrugItem) => {
+        let indexInOpenDrugs = this.openDrugItems.map((openDrug: DrugItem) => {
             return openDrug.Id;
         }).indexOf(id);
 
-        this.openDrugs[indexInOpenDrugs].Quantity -= quantity;
+        this.openDrugItems[indexInOpenDrugs].Quantity -= quantity;
 
         let indexInFreshDispense = this.freshDispense.DrugItems.map((dispensedDrugs: DrugItem) => {
             return dispensedDrugs.Id;
@@ -230,6 +241,17 @@ export default class PrescriptionViewController {
 
     isSigned(dispense: Dispense): boolean {
         if (dispense.SignedBy !== null) {
+            return true;
+        }
+        return false;
+    }
+
+    freshDispenseHasQuantity(): boolean {
+        let dispenseQuantity = 0;
+        this.freshDispense.DrugItems.forEach((drugItem: DrugItem) => {
+            dispenseQuantity += drugItem.Quantity;
+        });
+        if (dispenseQuantity > 0) {
             return true;
         }
         return false;
