@@ -33,7 +33,7 @@ export default class DispenseRepository {
 
     editDispense(patientId: string, prescriptionId: string, dispense: Dispense): IPromise<Dispense> {
         let data = JSON.stringify(dispense);
-        return this.$http.put(this.urls.post.replace('{patientId}', patientId).replace('{prescriptionId', prescriptionId).replace('{dispenseId}', dispense.Id), data).then((response) => {
+        return this.$http.post(this.urls.post.replace('{patientId}', patientId).replace('{prescriptionId}', prescriptionId).replace('{dispenseId}', dispense.Id), data).then((response) => {
             if (response.status === 200) {
                 return response.data;
             } else {
