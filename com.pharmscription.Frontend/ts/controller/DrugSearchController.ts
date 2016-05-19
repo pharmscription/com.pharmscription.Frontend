@@ -62,11 +62,11 @@ export default class DrugSearchController {
 
     getDrugs(searchTerm: string): void {
         //this.setProgressCircle(true);
-        this.hasResultInfo = true;
+        this.hasResultInfo = false;
         this.lastSearchTerm = searchTerm;
         this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';
-        this.drugSearchResults = new DrugSearchItems(this.$mdToast, this.$q, this.$scope, this.drugRepository, searchTerm);
+        this.drugSearchResults = new DrugSearchItems(this.$mdToast, this.$q, this.$scope, this.drugRepository, searchTerm, () => { this.hasResultInfo = true; });
     }
 
     showToast(message: string) {
