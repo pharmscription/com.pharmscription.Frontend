@@ -10,11 +10,11 @@
         </div>
     </div>
     <md-list layout-fill ng-slide-down="historyExpanded" duration="0.2" lazy-render>
-        <md-list-item ng-repeat="prescription in PrescriptionView.prescription.PrescriptionHistory" md-item-size="20" md-on-demand>
-            <div layout="column">
-                <div flex layout="column">
-                    <span translate="PRESCRIPTION.EDIT-DATE" translate-values="{ editDate: prescription.EditDate }"></span>
-                </div>
+        <md-list-item ng-repeat="counterProposal in PrescriptionView.prescription.CounterProposals" md-item-size="20" md-on-demand>
+            <div layout="column" layout-margin layout-fill>
+                <span translate="PRESCRIPTION.EDIT-DATE" translate-values="{ editDate: counterProposal.Date }"></span>
+                <span translate="COMMENT"></span>
+                <span id="message">{{counterProposal.Message}}</span>
             </div>
             <md-divider ng-if="!$last"></md-divider>
         </md-list-item>
@@ -120,7 +120,6 @@
                     <input ng-model="drugItem.Quantity" ng-change="PrescriptionView.changeQuantityAction(drugItem.Id, drugItem.Quantity, '{{drugItem.Quantity}}')" type="number" max="{{ PrescriptionView.openDrugsItemsMaxQuantity[$index].Quantity }}" required>
                 </md-input-container>
             </div>
-            <span translate="PRICE"></span>
             <md-button class="md-secondary" ng-click="PrescriptionView.removeFromDispense(drugItem)">
                 <md-icon>remove_circle</md-icon>
                 <md-tooltip>{{ 'TOOLTIP.REMOVE-DRUG-DISPENSE' | translate }}</md-tooltip>
@@ -135,7 +134,6 @@
             </md-input-container>
         </div>
         <div layout="row">
-            <span>Total:</span>
             <div flex></div>
             <md-button class="md-raised md-primary" ng-click="PrescriptionView.signDispense()" ng-show="Main.userRole === 'Drugist'">
                 <md-icon>check</md-icon>
