@@ -21,6 +21,7 @@ export default class DrugSearchController {
     progressFlag: boolean;
     drugSearchResults: DrugSearchItems;
     controllerMode: Mode;
+    hasResultInfo: boolean;
 
 
     static $inject = [
@@ -61,6 +62,7 @@ export default class DrugSearchController {
 
     getDrugs(searchTerm: string): void {
         //this.setProgressCircle(true);
+        this.hasResultInfo = true;
         this.lastSearchTerm = searchTerm;
         this.$scope.searchForm.$setUntouched();
         this.searchedDrug = '';

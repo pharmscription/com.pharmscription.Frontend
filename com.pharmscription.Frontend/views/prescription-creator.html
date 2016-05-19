@@ -7,26 +7,26 @@
     <div layout="column" ng-hide="PrescriptionCreator.mode === 0">
         <div layout="row" layout-align="space-between center">
             <span class="md-headline" translate="PRESCRIPTION.ID"></span>
-            <span class="md-headline" translate="PRESCRIPTION.VALIDITY"></span>
+            <span ng-show="PrescriptionCreator.isRepeatPrescriptionType()" class="md-headline" translate="PRESCRIPTION.VALIDITY"></span>
         </div>
         <div layout="row" layout-align="space-between center">
             <span>{{PrescriptionCreator.prescription.Id}}</span>
-            <span>{{PrescriptionCreator.prescription.ValidUntil | date:"dd.MM.yyyy"}}</span>
+            <span ng-show="PrescriptionCreator.isRepeatPrescriptionType()">{{PrescriptionCreator.prescription.ValidUntil | date:"dd.MM.yyyy"}}</span>
         </div>
     </div>
     <form name="prescriptionForm">
-        <div layout="row" layout-align="space-between" ng-show="PrescriptionCreator.mode === 0">
-            <div class="date-picker">
-                <md-datepicker ng-model="PrescriptionCreator.prescription.ValidUntil" md-placeholder="Gültig bis" required></md-datepicker>
-            </div>
+        <div layout="row" ng-show="PrescriptionCreator.mode === 0" layout-align="space-between center">
             <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default ng-model="PrescriptionCreator.isRepeatPrescription">
-                <span ng-if="PrescriptionCreator.prescription.Type === 'N'" class="animate-if">
+                <span ng-if="!PrescriptionCreator.isRepeatPrescriptionType()" class="animate-if">
                     <span translate="SINGLE-PRESCRIPTION"></span>
                 </span>
-                <span ng-if="PrescriptionCreator.prescription.Type === 'S'" class="animate-if">
+                <span ng-if="PrescriptionCreator.isRepeatPrescriptionType()" class="animate-if">
                     <span translate="REPEAT-PRESCRIPTION"></span>
                 </span>
             </md-switch>
+            <div class="date-picker" ng-if="PrescriptionCreator.isRepeatPrescriptionType()">
+                <md-datepicker ng-model="PrescriptionCreator.prescription.ValidUntil" md-placeholder="Gültig bis" required></md-datepicker>
+            </div>
         </div>
         <md-divider></md-divider>
         <md-list layout-fill>

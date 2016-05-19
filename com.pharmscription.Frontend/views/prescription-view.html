@@ -22,11 +22,11 @@
     <div layout="column">
         <div layout="row" layout-align="space-between center">
             <span class="md-headline" translate="PRESCRIPTION.ID"></span>
-            <span class="md-headline" translate="PRESCRIPTION.VALIDITY"></span>
+            <span ng-show="PrescriptionView.prescription.Type === 'S'" class="md-headline" translate="PRESCRIPTION.VALIDITY"></span>
         </div>
         <div layout="row" layout-align="space-between center">
             <span>{{PrescriptionView.prescription.Id}}</span>
-            <span>{{PrescriptionView.prescription.ValidUntil | date:"dd.MM.yyyy"}}</span>
+            <span ng-show="PrescriptionView.prescription.Type === 'S'">{{PrescriptionView.prescription.ValidUntil | date:"dd.MM.yyyy"}}</span>
         </div>
     </div>
     <md-divider></md-divider>
