@@ -12,6 +12,7 @@ export default class DrugSearchItems {
         private $scope: ng.IScope,
         private drugRepository: DrugRepository,
         private searchTerm: string,
+        private callback?: Function,
         private $translate?: angular.translate.ITranslateService) {
             this.PAGE_SIZE = 50;
             this.loadedPages = {};
@@ -51,6 +52,7 @@ export default class DrugSearchItems {
     fetchNumItems(): void {
         this.drugRepository.getNumItems(this.searchTerm).then((numItem) => {
             this.numItems = numItem;
+            this.callback();
         }, (error) => {
         });
     }
