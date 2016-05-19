@@ -141,6 +141,9 @@ export default class PrescriptionViewController {
             return openDrug.Id;
         }).indexOf(id);
 
+        if (typeof this.openDrugItems[indexInOpenDrugs].Quantity !== 'number') {
+            this.openDrugItems[indexInOpenDrugs].Quantity = 0;
+        }
         this.openDrugItems[indexInOpenDrugs].Quantity -= quantity;
 
         let indexInFreshDispense = this.freshDispense.DrugItems.map((dispensedDrugs: DrugItem) => {
@@ -148,8 +151,15 @@ export default class PrescriptionViewController {
         }).indexOf(id);
 
         if (!byButton) {
+            if (typeof this.freshDispense.DrugItems[indexInFreshDispense].Quantity !== 'number') {
+                this.freshDispense.DrugItems[indexInFreshDispense].Quantity = 0;
+            }
             this.freshDispense.DrugItems[indexInFreshDispense].Quantity += quantity;
         }
+        this.$log.debug("freshDispense");
+        this.$log.debug(this.freshDispense);
+        this.$log.debug("OpenDrugItems");
+        this.$log.debug(this.openDrugItems);
     }
 
     changeQuantityAction(id: string, newValue: number, oldValue: number) {
@@ -159,6 +169,8 @@ export default class PrescriptionViewController {
         } else {
             quantityDiff = newValue - oldValue;
         }
+        this.$log.debug("Quantity Diff");
+        this.$log.debug(quantityDiff);
         this.changeQuantityInFreshDispense(id, quantityDiff, true);
     }
 
