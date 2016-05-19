@@ -1,16 +1,16 @@
 ﻿<md-toolbar class="md-primary md-hue-1">
     <div class="md-toolbar-tools" translate="TOOLBAR-TITLE.OVERVIEW-PRESCRIPTION"></div>
 </md-toolbar>
-<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
-    <div layout="column" ng-click="widgetExpanded = !widgetExpanded" ng-show="PrescriptionView.prescriptionHistoryHasEntries()">
-        <div flex>
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin ng-if="PrescriptionView.prescriptionHistoryHasEntries()" ng-hide="Main.userRole === 'Patient'">
+    <div layout="column">
+        <div ng-click="widgetExpanded = !widgetExpanded">
             <md-icon ng-hide="widgetExpanded" md-font-set="material-icons">keyboard_arrow_down</md-icon>
             <md-icon ng-show="widgetExpanded" md-font-set="material-icons">keyboard_arrow_up</md-icon>
-            <div>History</div>
+            <span>History</span>
         </div>
     </div>
     <md-list layout-fill ng-slide-down="widgetExpanded" duration="0.2" lazy-render>
-        <md-list-item ng-repeat="prescription in PrescriptionView.prescription.prescriptionHistory" md-item-size="20" md-on-demand>
+        <md-list-item ng-repeat="prescription in PrescriptionView.prescription.PrescriptionHistory" md-item-size="20" md-on-demand>
             <div layout="column">
                 <div flex layout="column">
                     <span translate="PRESCRIPTION.EDIT-DATE" translate-values="{ editDate: prescription.EditDate }"></span>
@@ -19,6 +19,8 @@
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
+</md-whiteframe>
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
     <div layout="column">
         <div layout="row" layout-align="space-between center">
             <span class="md-headline" translate="PRESCRIPTION.ID"></span>
