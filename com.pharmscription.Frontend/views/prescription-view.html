@@ -10,11 +10,11 @@
         </div>
     </div>
     <md-list layout-fill ng-slide-down="historyExpanded" duration="0.2" lazy-render>
-        <md-list-item ng-repeat="prescription in PrescriptionView.prescription.PrescriptionHistory" md-item-size="20" md-on-demand>
-            <div layout="column">
-                <div flex layout="column">
-                    <span translate="PRESCRIPTION.EDIT-DATE" translate-values="{ editDate: prescription.EditDate }"></span>
-                </div>
+        <md-list-item ng-repeat="counterProposal in PrescriptionView.prescription.CounterProposals" md-item-size="20" md-on-demand>
+            <div layout="column" layout-margin layout-fill>
+                <span translate="PRESCRIPTION.EDIT-DATE" translate-values="{ editDate: counterProposal.Date }"></span>
+                <span translate="COMMENT"></span>
+                <span id="message">{{counterProposal.Message}}</span>
             </div>
             <md-divider ng-if="!$last"></md-divider>
         </md-list-item>
