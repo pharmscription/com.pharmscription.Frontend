@@ -6,7 +6,8 @@
         public Unit: string,
         public Composition: string,
         public NarcoticCategory: string,
-        public IsValid: boolean
+        public IsValid: boolean,
+        public Id: string = null
     ) {}
 
 }

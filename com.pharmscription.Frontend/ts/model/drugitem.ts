@@ -4,8 +4,8 @@ import Prescription from 'ts/model/prescription'
 
 export default class DrugItem {
     constructor(
-        private Drug: Drug,
-        private DosageDescription: string = null,
+        public Drug: Drug,
+        public DosageDescription: string = null,
         public Quantity: number = null,
         public Id: string = null
     ) { }

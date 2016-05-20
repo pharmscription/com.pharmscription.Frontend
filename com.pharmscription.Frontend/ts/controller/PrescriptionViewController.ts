@@ -70,8 +70,8 @@ export default class PrescriptionViewController {
                     this.signedDispenses.push(dispense);
                     dispense.DrugItems.forEach((drug: DrugItem) => {
                         let indexInAllDispense = this.allDispensedDrugItems.map((dispensedDrug: DrugItem) => {
-                            return dispensedDrug.Id;
-                        }).indexOf(drug.Id);
+                            return dispensedDrug.Drug.Id;
+                        }).indexOf(drug.Drug.Id);
                         if (indexInAllDispense !== -1) {
                             this.allDispensedDrugItems[indexInAllDispense].Quantity += drug.Quantity;
                         } else {
@@ -89,8 +89,8 @@ export default class PrescriptionViewController {
         this.openDrugItems = angular.copy(this.prescription.Drugs);
         this.allDispensedDrugItems.forEach((dispensedDrug: DrugItem) => {
             let indexInOpenDrugs = this.openDrugItems.map((prescribedDrug: DrugItem) => {
-                return prescribedDrug.Id;
-            }).indexOf(dispensedDrug.Id);
+                return prescribedDrug.Drug.Id;
+            }).indexOf(dispensedDrug.Drug.Id);
 
             if (indexInOpenDrugs !== -1) {
                 this.openDrugItems[indexInOpenDrugs].Quantity -= dispensedDrug.Quantity;
@@ -103,8 +103,8 @@ export default class PrescriptionViewController {
 
         this.openDispense.DrugItems.forEach((drugItemInOpenDispense: DrugItem) => {
             let indexInOpenDrugItems = this.openDrugItems.map((openDrug: DrugItem) => {
-                return openDrug.Id;
-            }).indexOf(drugItemInOpenDispense.Id);
+                return openDrug.Drug.Id;
+            }).indexOf(drugItemInOpenDispense.Drug.Id);
 
             if (indexInOpenDrugItems !== -1) {
                 this.openDrugItems[indexInOpenDrugItems].Quantity -= drugItemInOpenDispense.Quantity;
@@ -117,11 +117,11 @@ export default class PrescriptionViewController {
     }
 
     addToDispense(drugItem: DrugItem) {
-        this.changeQuantityInFreshDispense(drugItem.Id, drugItem.Quantity, false);
+        this.changeQuantityInFreshDispense(drugItem.Drug.Id, drugItem.Quantity, false);
     }
 
     removeFromDispense(drugItem: DrugItem) {
-        this.changeQuantityInFreshDispense(drugItem.Id, -drugItem.Quantity, false);
+        this.changeQuantityInFreshDispense(drugItem.Drug.Id, -drugItem.Quantity, false);
     }
 
     fillFreshDispense() {
@@ -138,7 +138,7 @@ export default class PrescriptionViewController {
 
     changeQuantityInFreshDispense(id: string, quantity: number, byButton: boolean) {
         let indexInOpenDrugs = this.openDrugItems.map((openDrug: DrugItem) => {
-            return openDrug.Id;
+            return openDrug.Drug.Id;
         }).indexOf(id);
 
         if (typeof this.openDrugItems[indexInOpenDrugs].Quantity !== 'number') {
@@ -147,7 +147,7 @@ export default class PrescriptionViewController {
         this.openDrugItems[indexInOpenDrugs].Quantity -= quantity;
 
         let indexInFreshDispense = this.freshDispense.DrugItems.map((dispensedDrugs: DrugItem) => {
-            return dispensedDrugs.Id;
+            return dispensedDrugs.Drug.Id;
         }).indexOf(id);
 
         if (!byButton) {
