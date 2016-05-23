@@ -1,8 +1,10 @@
 ﻿import Drug from 'ts/model/drug'
-import DrugRepository from 'ts/service/DrugRepository'
 import DrugSearchItems from 'ts/model/drugSearchItems'
-import PrescriptionService from 'ts/service/PrescriptionService'
 import DrugItem from 'ts/model/DrugItem'
+
+import DrugRepository from 'ts/service/DrugRepository'
+import PrescriptionService from 'ts/service/PrescriptionService'
+
 
 export interface IDrugSearchScope extends angular.IScope {
     searchForm: angular.IFormController;
@@ -13,7 +15,6 @@ enum Mode {
     standardMode = 2
 }
 
-
 export default class DrugSearchController {
     searchedDrug: string;
     lastSearchTerm: string;
@@ -23,7 +24,6 @@ export default class DrugSearchController {
     controllerMode: Mode;
     hasResultInfo: boolean;
     isLoading: boolean = false;
-
 
     static $inject = [
         '$scope',
@@ -73,7 +73,7 @@ export default class DrugSearchController {
         });
     }
 
-    showToast(message: string) {
+    showToast(message: string): void {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 

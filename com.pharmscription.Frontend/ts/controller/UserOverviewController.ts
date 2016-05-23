@@ -1,5 +1,6 @@
 ﻿import Patient from 'ts/model/patient'
 import Prescription from 'ts/model/prescription'
+
 import PatientService from 'ts/service/PatientService'
 import PatientRepository from 'ts/service/PatientRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
@@ -33,7 +34,6 @@ export default class UserOverviewController {
         this.patientRepository.getPatientById(this.patientService.getPatientId()).then((foundPatient) => {
             foundPatient.BirthDate = this.parseDateString(foundPatient.BirthDate.toString());
             this.patient = foundPatient;
-            this.$log.debug(this.patient);
             this.getPrescriptions();
         }, (error) => {
             this.$translate('TOAST.PATIENT-LOAD-ERROR').then((message) => {
@@ -43,7 +43,7 @@ export default class UserOverviewController {
         });
     }
 
-    getPrescriptions() {
+    getPrescriptions(): void {
         this.prescriptionRepository.getPrescriptions(this.patient.Id).then((foundPrescriptions) => {
             this.loadingPrescriptions = false;
             this.prescriptions = foundPrescriptions;
@@ -56,20 +56,20 @@ export default class UserOverviewController {
         });
     }
 
-    showToast(message: string) {
+    showToast(message: string): void {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 
-    addPrescription() {
+    addPrescription(): void {
         this.prescriptionService.removeAll();
         this.$location.url('prescription/create');
     }
 
-    editUser() {
+    editUser(): void {
         this.$location.url('user/edit');
     }
 
-    showPrescription(prescriptionId: string) {
+    showPrescription(prescriptionId: string): void {
         this.prescriptionService.setPatientId(this.patient.Id);
         this.prescriptionService.setPrescriptionId(prescriptionId);
         this.$location.url('prescription/view');

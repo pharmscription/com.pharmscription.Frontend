@@ -57,7 +57,7 @@ export default class DrugSearchItems {
         });
     }
 
-    showToast(message: string) {
+    showToast(message: string): void {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 

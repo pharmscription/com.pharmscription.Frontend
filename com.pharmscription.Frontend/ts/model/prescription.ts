@@ -21,9 +21,7 @@ export default class Prescription {
         public ValidUntil: Date = null,
         public PrescriptionHistory: Array<Prescription> = [],
         public Dispenses: Array<Dispense> = [],
-        public Id: string = null
-    ) {
+        public Id: string = null) {
         Date.prototype.toJSON = function () { return moment(this).format("L"); }
-}
-
+    }
 }

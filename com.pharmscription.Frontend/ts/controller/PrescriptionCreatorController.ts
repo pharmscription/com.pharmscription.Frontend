@@ -1,14 +1,15 @@
 ﻿import Patient from 'ts/model/patient'
 import Drug from 'ts/model/drug'
 import Prescription from 'ts/model/prescription'
-import PatientService from 'ts/service/PatientService'
 import Doctor from 'ts/model/doctor'
 import Address from 'ts/model/address'
 import DrugItem from 'ts/model/drugitem'
 import CounterProposal from 'ts/model/counterproposal'
+
 import PatientRepository from 'ts/service/PatientRepository'
 import PrescriptionRepository from 'ts/service/PrescriptionRepository'
 import PrescriptionService from 'ts/service/PrescriptionService'
+import PatientService from 'ts/service/PatientService'
 
 enum Mode {
     create,
@@ -23,7 +24,6 @@ export default class PrescriptionCreatorController {
     isRepeatPrescription: boolean;
     mode: Mode;
     counterProposal: CounterProposal = new CounterProposal();
-
 
     static $inject = [
         '$scope',
@@ -82,7 +82,7 @@ export default class PrescriptionCreatorController {
             });
     }
 
-    setMode() {
+    setMode(): void {
         if (this.$location.url() === '/prescription/create') {
             this.mode = Mode.create;
         } else {
@@ -90,7 +90,7 @@ export default class PrescriptionCreatorController {
         }
     }
 
-    showToast(message: string) {
+    showToast(message: string): void {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 

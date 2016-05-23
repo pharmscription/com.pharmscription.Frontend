@@ -5,7 +5,7 @@
         this.social = '';
     }
 
-    setAHVNumber(social: string) {
+    setAHVNumber(social: string): void {
         this.social = social;
     }
 

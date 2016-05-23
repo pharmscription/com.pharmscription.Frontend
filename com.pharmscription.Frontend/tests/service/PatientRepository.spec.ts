@@ -68,11 +68,4 @@ describe('PatientRepositoryTest', () => {
        $httpBackend.flush();
        expect(patient).toBeDefined();
     });
-
-    //it("should return the searched Patient", () => {
-    //    PatientRepo.getPatientByAhv('756.1390.2077.81').then((foundPatient) => {
-    //        console.log(foundPatient);
-    //    });
-    //    expect(PatientRepo.getPatientByAhv('756.1390.2077.81')).toBeDefined();
-    //});
 });

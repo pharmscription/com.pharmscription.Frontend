@@ -36,7 +36,7 @@ export default class MainMenuController {
         this.$mdSidenav('left').toggle();
     }
 
-    setMode() {
+    setMode(): void {
         if (this.$location.url() === '/') {
             this.mode = Mode.noSideMenu;
         } else {
@@ -44,7 +44,7 @@ export default class MainMenuController {
         }
     }
 
-    changeLanguage() {
+    changeLanguage(): void {
         this.$translate.use(this.language);
     }
 }

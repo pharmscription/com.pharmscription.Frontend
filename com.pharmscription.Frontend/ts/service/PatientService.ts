@@ -3,7 +3,7 @@
 export default class PatientService {
     private patientId: string;
 
-    setPatientId(id: string) {
+    setPatientId(id: string): void {
         this.patientId = id;
     }
 

@@ -10,11 +10,11 @@
 
     }
 
-    close() {
+    close(): void {
         this.$mdSidenav('left').close();
     }
 
-    goTo(relativeUrl: string) {
+    goTo(relativeUrl: string): void {
         this.$location.path(relativeUrl);
         this.close();
     }

@@ -12,27 +12,27 @@ export default class PrescriptionService {
         this.prescription = new Prescription();
     }
 
-    setPrescriptionId(id: string) {
+    setPrescriptionId(id: string): void {
         this.prescriptionId = id;
     }
 
-    getPrescriptionId() {
+    getPrescriptionId(): string {
         return this.prescriptionId;
     }
 
-    setPatientId(id: string) {
+    setPatientId(id: string): void {
         this.patientId = id;
     }
 
-    getPatientId() {
+    getPatientId(): string {
         return this.patientId;
     }
 
-    setDrugItem(drug: DrugItem) {
+    setDrugItem(drug: DrugItem): void {
         this.drugItems.push(drug);
     }
 
-    setDrugItems(drugs: Array<DrugItem>) {
+    setDrugItems(drugs: Array<DrugItem>): void {
         this.drugItems = drugs;
     }
 

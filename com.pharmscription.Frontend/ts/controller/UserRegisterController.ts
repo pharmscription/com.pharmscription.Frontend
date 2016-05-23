@@ -1,9 +1,9 @@
-﻿import PatientRepository from "../service/PatientRepository"
-import AHVNumberService from "../service/AHVNumberService"
-import PatientService from 'ts/service/PatientService'
-import Patient from '../model/patient'
-
+﻿import Patient from 'ts/model/patient'
 import Address from 'ts/model/address'
+
+import PatientRepository from "ts/service/PatientRepository"
+import AHVNumberService from "ts/service/AHVNumberService"
+import PatientService from 'ts/service/PatientService'
 
 enum Mode {
     Register,
@@ -11,17 +11,13 @@ enum Mode {
 }
 
 export default class UserRegisterController {
-    
     controllerMode: Mode;
     cantons = ('AG AR AI BL BS BE FR GE GL GR JU LU NE NW OW ' +
     'SG SH SZ SO TG TI UR VD VS ZG ZH').split(' ').map(canton => {
         return { abbrev: canton };
     });
     patient: Patient;
-    today: Date = new Date();
-
-    /*default values*/
-    
+    today: Date = new Date();    
 
     static $inject = [
         'PatientRepository',
@@ -69,7 +65,7 @@ export default class UserRegisterController {
 
     }
 
-    showToast(message: string) {
+    showToast(message: string): void {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 
@@ -104,7 +100,7 @@ export default class UserRegisterController {
 
     }
 
-    setControllerMode() {
+    setControllerMode(): void {
         if (this.$location.url() === '/user/register') {
             this.controllerMode = Mode.Register;
         } else {

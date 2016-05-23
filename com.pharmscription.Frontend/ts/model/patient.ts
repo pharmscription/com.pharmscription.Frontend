@@ -17,7 +17,7 @@ export default class Patient {
         Date.prototype.toJSON = function () { return moment(this).format("L"); }
     }
     
-    birth() {
+    birth(): void {
         this.BirthDate = new Date();
     }
 

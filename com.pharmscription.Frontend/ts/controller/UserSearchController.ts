@@ -1,7 +1,8 @@
-﻿import AHVNumberService from "../service/AHVNumberService"
-import PatientRepository from '../service/PatientRepository'
-import PatientService from 'ts/service/PatientService';
-import Patient from '../model/patient'
+﻿import Patient from 'ts/model/patient'
+
+import AHVNumberService from 'ts/service/AHVNumberService'
+import PatientRepository from 'ts/service/PatientRepository'
+import PatientService from 'ts/service/PatientService'
 
 export default class UserSearchController {
     social: string;
@@ -30,7 +31,7 @@ export default class UserSearchController {
         this.social = '';
     }
 
-    showPatientNotFoundDialog(event: MouseEvent) {
+    showPatientNotFoundDialog(event: MouseEvent): void {
         let contentString: string;
         this.$translate('DIALOG.PATIENT-NOT-FOUND.CONTENT', { social: this.social }).then((message) => {
             contentString = message;
@@ -50,7 +51,7 @@ export default class UserSearchController {
         });
     }
 
-    showToast(message: string) {
+    showToast(message: string): void {
         this.$mdToast.show(this.$mdToast.simple().textContent(message));
     }
 
