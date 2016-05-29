@@ -62,3 +62,9 @@
 .message {
     word-wrap: break-word;
 }
+
+.validation-messages {
+    font-size: 12px;
+    color: #dd2c00;
+    margin: 10px 0 0 25px; 
+}

@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="date-picker">
-                    <md-datepicker flex name="birthdate" ng-model="UserRegister.patient.BirthDate" md-max-date="UserRegister.today" md-placeholder="Geburtsdatum" required></md-datepicker>
+                    <md-datepicker flex name="birthdate" ng-model="UserRegister.patient.BirthDate" md-max-date="UserRegister.today" required></md-datepicker>
                     <div ng-messages="registerForm.birthdate.$error" class="validation-messages">
                         <div ng-message="maxdate" translate="ERROR.BIRTHDATE-FUTURE"></div>
                         <div ng-message="required" translate="ERROR.REQUIRED"></div>
@@ -75,7 +75,7 @@
                 <md-input-container flex class="md-block">
                     <label translate="PHONENUMBER"></label>
                     <md-icon md-font-set="material-icons" class="phone">phone</md-icon>
-                    <input ng-model="UserRegister.patient.PhoneNumber" type="tel" required>
+                    <input ng-model="UserRegister.patient.PhoneNumber" type="tel" ng-pattern="/^(\(?([0-9]{3})\)?)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/" required>
                 </md-input-container>
 
                 <md-input-container flex class="md-block">
@@ -93,7 +93,7 @@
                 <md-input-container flex class="md-block">
                     <label translate="INSURANCE"></label>
                     <md-icon></md-icon>
-                    <input ng-model="UserRegister.patient.Insurance" type="text" placeholder="Versicherung" required>
+                    <input ng-model="UserRegister.patient.Insurance" type="text"required>
                 </md-input-container>
             </div>
         </form>
