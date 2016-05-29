@@ -37,7 +37,6 @@ export default class DrugSearchItems {
 
     fetchPage(pageNumber: number): void {
         this.loadedPages[pageNumber] = null;
-        console.debug("SearchTerm: " + this.searchTerm + " PageSize: " + this.PAGE_SIZE + " Page: " + pageNumber);
         this.drugRepository.fetchPage(this.searchTerm, this.PAGE_SIZE, pageNumber).then((drugPageResult) => {
             this.loadedPages[pageNumber] = [];
             this.loadedPages[pageNumber] = drugPageResult;
