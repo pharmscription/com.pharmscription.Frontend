@@ -4,9 +4,9 @@ import IPromise = angular.IPromise
 export default class DrugRepository {
 
     private urls: any = {
-        get: 'http://localhost:7642/RestService.svc/drugs/search/:searchTerm',
-        getNumItems: 'http://localhost:7642/RestService.svc/drugs/numitems/:searchTerm',
-        getPage: 'http://localhost:7642/RestService.svc/drugs/fetchpage/:searchTerm/:numItems/:page'
+        get: 'http://localhost:7642/drugs/search/{keyword}',
+        getNumItems: 'http://localhost:7642/drugs/search/count/{keyword}',
+        getPage: 'http://localhost:7642/drugs/search/{keyword}/{page}/{amount}'
     }
 
     static $inject = [
@@ -19,8 +19,8 @@ export default class DrugRepository {
     }
 
     getDrugs(searchTerm: string): IPromise<Array<Drug>> {
-        return this.$http.get(this.urls.get.replace(":searchTerm", searchTerm)).then((response) => {
-            if (typeof response.data === 'object') {
+        return this.$http.get(this.urls.get.replace("{keyword}", searchTerm)).then((response) => {
+            if (response.status === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -33,8 +33,8 @@ export default class DrugRepository {
     }
 
     getNumItems(searchTerm: string): IPromise<number> {
-        return this.$http.get(this.urls.getNumItems.replace(":searchTerm", searchTerm)).then((response) => {
-            if (typeof response.data === 'number') {
+        return this.$http.get(this.urls.getNumItems.replace("{keyword}", searchTerm)).then((response) => {
+            if (response.status === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);
@@ -46,8 +46,8 @@ export default class DrugRepository {
     }
 
     fetchPage(searchTerm: string, numItems: number, page: number): IPromise<Array<Drug>> {
-        return this.$http.get(this.urls.getPage.replace(":searchTerm", searchTerm).replace(":numItems", numItems).replace(":page", page)).then((response) => {
-            if (typeof response.data === 'object') {
+        return this.$http.get(this.urls.getPage.replace("{keyword}", searchTerm).replace("{amount}", numItems).replace("{page}", page)).then((response) => {
+            if (response.status === 200) {
                 return response.data;
             } else {
                 return this.$q.reject(response.data);

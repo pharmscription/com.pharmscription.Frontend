@@ -1,18 +1,24 @@
-﻿import DrugRepository from '../service/DrugRepository'
+﻿import DrugRepository from 'ts/service/DrugRepository'
 
 export default class DrugSearchItems {
     pageNumber: number;
     PAGE_SIZE: number;
     loadedPages: any;
     numItems: number;
-
-    constructor(private $scope: ng.IScope, private drugRepository: DrugRepository, private searchTerm: string) {
-        this.PAGE_SIZE = 50;
-        this.loadedPages = {};
-        this.numItems = 0;
-        this.fetchNumItems();
-        
-    }
+    
+    constructor(
+        private $mdToast: angular.material.IToastService,
+        private $q: angular.IQService,
+        private $scope: ng.IScope,
+        private drugRepository: DrugRepository,
+        private searchTerm: string,
+        private callback?: Function,
+        private $translate?: angular.translate.ITranslateService) {
+            this.PAGE_SIZE = 50;
+            this.loadedPages = {};
+            this.numItems = 0;
+            this.fetchNumItems();
+       }
 
     getItemAtIndex(index: number): Object {
         let pageNumber = Math.floor(index / this.PAGE_SIZE);
@@ -35,8 +41,10 @@ export default class DrugSearchItems {
         this.drugRepository.fetchPage(this.searchTerm, this.PAGE_SIZE, pageNumber).then((drugPageResult) => {
             this.loadedPages[pageNumber] = [];
             this.loadedPages[pageNumber] = drugPageResult;
-                }, (error) => {
-                console.error(error);
+        }, (error) => {
+                this.$translate('TOAST.DRUGS-LOAD-ERROR').then((message) => {
+                    this.showToast(message);
+                });
             }
         );
     }
@@ -44,8 +52,13 @@ export default class DrugSearchItems {
     fetchNumItems(): void {
         this.drugRepository.getNumItems(this.searchTerm).then((numItem) => {
             this.numItems = numItem;
+            this.callback();
         }, (error) => {
-            console.error(error);
         });
     }
+
+    showToast(message: string): void {
+        this.$mdToast.show(this.$mdToast.simple().textContent(message));
+    }
+
 }

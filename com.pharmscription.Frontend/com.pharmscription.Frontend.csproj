@@ -25,7 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,16 +68,23 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <Content Include="gulpfile.js" />
+    <Content Include="img\fontawesome\css\font-awesome.min.css" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.svg" />
     <Content Include="img\icons\arrow-back.svg" />
     <Content Include="img\icons\material-icons.css" />
     <Content Include="img\icons\MaterialIcons-Regular.svg" />
+    <Content Include="img\icons\medkit.svg" />
     <Content Include="img\icons\menu.svg" />
+    <None Include="lang\locale-en.json" />
+    <None Include="lang\locale-de.json" />
+    <Content Include="img\mb-bg-fb-22.png" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="style\style.css" />
     <Content Include="karma.conf.js" />
-    <Content Include="tests\model\patient.ts" />
+    <Content Include="tests\model\patient.spec.ts" />
     <Content Include="tools\typings.json" />
     <Content Include="img\icons\MaterialIcons-Regular.eot" />
     <Content Include="img\icons\MaterialIcons-Regular.ijmap" />
@@ -85,6 +92,11 @@
     <Content Include="img\icons\MaterialIcons-Regular.woff" />
     <Content Include="img\icons\MaterialIcons-Regular.woff2" />
     <Content Include="mock\Drugs.csv" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="img\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="img\fontawesome\fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -96,6 +108,10 @@
     <Content Include="config.js" />
     <Content Include="index.html" />
     <Content Include="views\drug-search.html" />
+    <Content Include="views\prescription-creator.html" />
+    <Content Include="views\prescription-view.html" />
+    <Content Include="views\user-login.html" />
+    <Content Include="views\user-overview.html" />
     <Content Include="views\user-register.html" />
     <Content Include="views\user-search.html" />
     <Content Include="Web.config" />
@@ -104,7 +120,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="tests\service\AHVNumberService.ts" />
+    <TypeScriptCompile Include="tests\controller\UserSearchController.spec.ts" />
+    <TypeScriptCompile Include="tests\service\PatientRepository.spec.ts" />
+    <TypeScriptCompile Include="tests\service\PatientService.spec.ts" />
+    <TypeScriptCompile Include="tests\service\AHVNumberService.spec.ts" />
     <TypeScriptCompile Include="ts\app.ts" />
     <TypeScriptCompile Include="ts\appDev.ts" />
     <TypeScriptCompile Include="ts\bootstrapDev.ts" />
@@ -112,22 +131,37 @@
     <TypeScriptCompile Include="ts\controller\DrugSearchController.ts" />
     <TypeScriptCompile Include="ts\controller\MainMenuController.ts" />
     <TypeScriptCompile Include="ts\controller\MainSideMenuController.ts" />
+    <TypeScriptCompile Include="ts\controller\PrescriptionCreatorController.ts" />
+    <TypeScriptCompile Include="ts\controller\PrescriptionViewController.ts" />
+    <TypeScriptCompile Include="ts\controller\UserLoginController.ts" />
+    <TypeScriptCompile Include="ts\controller\UserOverviewController.ts" />
     <TypeScriptCompile Include="ts\controller\UserRegisterController.ts" />
     <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />
     <TypeScriptCompile Include="ts\directives\socialnumber.ts" />
     <TypeScriptCompile Include="ts\model\address.ts" />
+    <TypeScriptCompile Include="ts\model\counterproposal.ts" />
+    <TypeScriptCompile Include="ts\model\dispense.ts" />
+    <TypeScriptCompile Include="ts\model\doctor.ts" />
     <TypeScriptCompile Include="ts\model\drug.ts" />
+    <TypeScriptCompile Include="ts\model\drugitem.ts" />
     <TypeScriptCompile Include="ts\model\drugSearchItems.ts" />
+    <TypeScriptCompile Include="ts\model\drugist.ts" />
+    <TypeScriptCompile Include="ts\model\drugstore.ts" />
+    <TypeScriptCompile Include="ts\model\drugstoreemployee.ts" />
     <TypeScriptCompile Include="ts\model\patient.ts" />
+    <TypeScriptCompile Include="ts\model\prescription.ts" />
     <TypeScriptCompile Include="ts\service\AHVNumberService.ts" />
+    <TypeScriptCompile Include="ts\service\DispenseRepository.ts" />
     <TypeScriptCompile Include="ts\service\DrugRepository.ts" />
     <TypeScriptCompile Include="ts\service\PatientRepository.ts" />
+    <TypeScriptCompile Include="ts\service\PatientService.ts" />
+    <TypeScriptCompile Include="ts\service\PrescriptionRepository.ts" />
+    <TypeScriptCompile Include="ts\service\PrescriptionService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="tests\controller\" />
     <Folder Include="tools\typings\" />
   </ItemGroup>
   <PropertyGroup>
@@ -157,7 +191,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3474</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

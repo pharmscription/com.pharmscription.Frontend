@@ -1,10 +1,13 @@
 ﻿export default class Drug {
 
-    DrugDescription: string;
-    PackageSize: number;
-    Unit: string;
-    Composition: string;
-    NarcoticCategory: string;
-    IsValid: boolean;
+    constructor(
+        public DrugDescription: string,
+        public PackageSize: number,
+        public Unit: string,
+        public Composition: string,
+        public NarcoticCategory: string,
+        public IsValid: boolean,
+        public Id: string = null
+    ) {}
 
 }

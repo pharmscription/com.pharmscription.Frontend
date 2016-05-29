@@ -19,7 +19,7 @@
 }
 
 .whiteframe {
-        background: #f7f7f7;
+    background: #f7f7f7;
 }
 
 .date-picker md-datepicker {
@@ -27,9 +27,38 @@
 }
 
 .date-picker {
-        margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
 #vertical-container {
-  height: 70vh;
+    height: 70vh;
+}
+
+#drug-icon {
+    margin: 20px;
+}
+
+.form-standard {
+    width: 500px;
+}
+
+.medkit-svg {
+    font-size: 150px;
+    color: orange;
+}
+
+.login-content {
+    background: url(./../img/mb-bg-fb-22.png) no-repeat center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    filter: brightness(110%);
+    -webkit-filter: brightness(110%);
+}
+
+.remark {
+   word-wrap: break-word;
+}
+
+.message {
+    word-wrap: break-word;
 }

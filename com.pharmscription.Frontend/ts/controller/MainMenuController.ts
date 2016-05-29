@@ -1,20 +1,50 @@
-﻿export interface IScopeMainMenu extends ng.IScope {
-    $mdMedia: angular.material.IMedia;
-    toggleLeft: Function;
+﻿
+enum Mode {
+    noSideMenu = 1,
+    SideMenu = 2
 }
-export class MainMenuController {
+
+export default class MainMenuController {
+    mode: Mode;
+    userRole: string = 'Doctor';
+    language: string = 'de';
+    languages = ('de en').split(' ').map(language => {
+        return { lang: language };
+    });
+    roles = ('Doctor Drugist DrugStoreEmployee Patient').split(' ').map(userRole => {
+        return { role: userRole };
+    });
 
     static $inject = [
-        '$scope',
         '$timeout',
         '$mdSidenav',
-        '$log'
+        '$translate',
+        '$log',
+        '$location'
     ];
 
-    constructor(private $scope: IScopeMainMenu, $timeout: ng.ITimeoutService, $mdSidenav: angular.material.ISidenavService, $log: ng.ILogService) {
-        $scope.toggleLeft = () => {
-            $mdSidenav('left')
-                .toggle();
-        };
+    constructor(
+        private $timeout: ng.ITimeoutService,
+        private $mdSidenav: angular.material.ISidenavService,
+        private $translate: angular.translate.ITranslateService,
+        private $log: ng.ILogService,
+        private $location: angular.ILocationService) {
+        this.setMode();
+    }
+
+    toggleLeft(): void {
+        this.$mdSidenav('left').toggle();
+    }
+
+    setMode(): void {
+        if (this.$location.url() === '/') {
+            this.mode = Mode.noSideMenu;
+        } else {
+            this.mode = Mode.SideMenu;
+        }
+    }
+
+    changeLanguage(): void {
+        this.$translate.use(this.language);
     }
 }

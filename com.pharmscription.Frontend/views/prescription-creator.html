@@ -1,0 +1,75 @@
+﻿<md-toolbar class="md-primary md-hue-1">
+    <div class="md-toolbar-tools" ng-show="PrescriptionCreator.mode === 0" translate="TOOLBAR-TITLE.PRESCRIPTION-CREATOR" translate-values="{ firstName: PrescriptionCreator.patient.FirstName, lastName: PrescriptionCreator.patient.LastName }"></div>
+    <div class="md-toolbar-tools" ng-hide="PrescriptionCreator.mode === 0" translate="TOOLBAR-TITLE.PRESCRIPTION-EDIT" translate-values="{ firstName: PrescriptionCreator.patient.FirstName, lastName: PrescriptionCreator.patient.LastName }"></div>
+</md-toolbar>
+
+<md-whiteframe class="whiteframe md-whiteframe-2dp form-standard" layout="column" layout-align="center" layout-margin>
+    <div layout="column" ng-hide="PrescriptionCreator.mode === 0">
+        <div layout="row" layout-align="space-between center">
+            <span class="md-headline" translate="PRESCRIPTION.ID"></span>
+            <span ng-show="PrescriptionCreator.isRepeatPrescriptionType()" class="md-headline" translate="PRESCRIPTION.VALIDITY"></span>
+        </div>
+        <div layout="row" layout-align="space-between center">
+            <span>{{PrescriptionCreator.prescription.Id}}</span>
+            <span ng-show="PrescriptionCreator.isRepeatPrescriptionType()">{{PrescriptionCreator.prescription.ValidUntil | date:"dd.MM.yyyy"}}</span>
+        </div>
+    </div>
+    <form name="prescriptionForm">
+        <div layout="row" ng-show="PrescriptionCreator.mode === 0" layout-align="space-between center">
+            <md-switch ng-click="PrescriptionCreator.togglePrescriptionType()" aria-label=default ng-model="PrescriptionCreator.isRepeatPrescription">
+                <span ng-if="!PrescriptionCreator.isRepeatPrescriptionType()" class="animate-if">
+                    <span translate="SINGLE-PRESCRIPTION"></span>
+                </span>
+                <span ng-if="PrescriptionCreator.isRepeatPrescriptionType()" class="animate-if">
+                    <span translate="REPEAT-PRESCRIPTION"></span>
+                </span>
+            </md-switch>
+            <div class="date-picker" ng-if="PrescriptionCreator.isRepeatPrescriptionType()">
+                <md-datepicker ng-model="PrescriptionCreator.prescription.ValidUntil" md-placeholder="Gültig bis" required></md-datepicker>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        <md-list layout-fill>
+            <md-list-item ng-repeat="drugItem in PrescriptionCreator.drugItems" flex layout="column" layout-margin>
+                <div><b>{{ drugItem.Drug.DrugDescription }}</b></div>
+                <div layout="row" flex>
+                    <md-input-container flex="30" class="md-block">
+                        <md-icon>exposure</md-icon>
+                        <label translate="QUANTITY"></label>
+                        <input type="number" min="1" ng-model="drugItem.Quantity" required>
+                    </md-input-container>
+                    <md-input-container flex="60" class="md-block">
+                        <md-icon>access_time</md-icon>
+                        <label translate="DOSAGE"></label>
+                        <input type="text" ng-model="drugItem.DosageDescription" required>
+                    </md-input-container>
+                    <md-button class="md-icon-button" ng-click="PrescriptionCreator.removeDrug($index)">
+                        <md-icon>remove_circle</md-icon>
+                        <md-tooltip>{{ 'TOOLTIP.REMOVE-DRUG-PRESCRIPTION'  | translate }}</md-tooltip>
+                    </md-button>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+        <md-input-container class="md-block" ng-hide="PrescriptionCreator.mode === 0">
+            <label translate="COMMENT"></label>
+            <textarea ng-model="PrescriptionCreator.counterProposal.Message" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+        <div layout="row" layout-align="end center">
+            <md-button id="prescription-add-button" class="md-fab" ng-click="PrescriptionCreator.addDrug()">
+                <md-tooltip>{{ 'TOOLTIP.ADD-DRUG' | translate }}</md-tooltip>
+                <md-icon>add</md-icon>
+            </md-button>
+        </div>
+    </form>
+        <md-button class="md-raised" ng-disabled="prescriptionForm.$invalid || PrescriptionCreator.drugItems.length === 0" ng-click="PrescriptionCreator.savePrescription()" translate="SAVE" aria-label="Save Prescription"></md-button>
+</md-whiteframe>
+
+
+
+    
+
+
+
+
+

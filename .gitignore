@@ -4,6 +4,10 @@
 #Pharmscription Project Dependencies
 jspm_packages/
 tools/typings/
+*.d.ts
+test-reports/
+*.js
+
 
 # User-specific files
 *.suo

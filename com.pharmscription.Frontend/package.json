@@ -2,17 +2,23 @@
   "jspm": {
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.5.3",
-      "angular-material": "github:angular/bower-material@^1.0.6",
+      "angular-material": "github:angular/bower-material@1.1.0-rc4",
       "angular-messages": "github:angular/bower-angular-messages@^1.5.3",
       "angular-route": "github:angular/bower-angular-route@^1.5.3",
+      "angular-sanitize": "github:angular/bower-angular-sanitize@^1.5.5",
+      "angular-translate": "github:angular-translate/bower-angular-translate@^2.11.0",
+      "angular-translate-loader-static-files": "github:angular-translate/bower-angular-translate-loader-static-files@^2.11.0",
+      "fontawesome": "npm:fontawesome@^4.5.0",
       "jquery": "npm:jquery@^2.2.2",
-      "moment": "npm:moment@^2.12.0"
+      "moment": "npm:moment@^2.13.0",
+      "ng-slide-down": "npm:ng-slide-down@^0.4.2"
     },
     "devDependencies": {
       "angular-mocks": "github:angular/bower-angular-mocks@^1.5.3",
       "clean-css": "npm:clean-css@^3.4.10",
+      "karma-junit-reporter": "npm:karma-junit-reporter@^0.4.2",
       "papaparse": "npm:papaparse@^4.1.2",
-      "typescript": "npm:typescript@^1.6.2"
+      "typescript": "npm:typescript@^1.8.10"
     }
   },
   "devDependencies": {
@@ -27,6 +33,7 @@
     "karma-chrome-launcher": "^0.2.3",
     "karma-jasmine": "^0.3.8",
     "karma-jspm": "^2.1.0",
+    "karma-junit-reporter": "^0.4.2",
     "moment": "^2.12.0"
   }
 }

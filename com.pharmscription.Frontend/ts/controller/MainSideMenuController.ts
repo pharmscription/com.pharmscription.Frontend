@@ -1,4 +1,4 @@
-﻿export class MainSideMenuController {
+﻿export default class MainSideMenuController {
 
     public static $inject = [
         '$timeout',
@@ -10,11 +10,11 @@
 
     }
 
-    close() {
+    close(): void {
         this.$mdSidenav('left').close();
     }
 
-    goTo(relativeUrl: string) {
+    goTo(relativeUrl: string): void {
         this.$location.path(relativeUrl);
         this.close();
     }

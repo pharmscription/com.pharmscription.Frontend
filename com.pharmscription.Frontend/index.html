@@ -1,76 +1,111 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Pharmscription</title>
     <meta charset="utf-8"/>
-    <link href="jspm_packages/github/angular/bower-material@1.0.6/angular-material.min.css" rel="stylesheet"/>
-    <link href="img/icons/material-icons.css" rel="stylesheet"/>
+    <link href="jspm_packages/github/angular/bower-material@1.1.0-rc4/angular-material.min.css" rel="stylesheet" />
+    <link href="img/icons/material-icons.css" rel="stylesheet" />
+    <link href="img/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="style/style.css" rel="stylesheet" />
 </head>
 <body>
-    <div ng-controller="MainMenuController" layout="column" layout-fill ng-cloak>
-        <md-toolbar class="md-primary">
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
-                    <md-icon md-font-set="material-icons">menu</md-icon>
-                </md-button>
-                <h2 class="md-display-3">Pharmscription</h2>
-                <span flex></span>
-                <md-menu>
-                    <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="More">
-                        <md-icon md-font-set="material-icons">more_vert</md-icon>
+<div ng-controller="MainMenuController as Main" layout="column" layout-fill ng-cloak md-theme-watch="true" md-theme="{{Main.userRole}}">
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Menu" ng-click="Main.toggleLeft()" hide-gt-md>
+                <md-icon md-font-set="material-icons">menu</md-icon>
+            </md-button>
+            <h2 class="md-display-3">Pharmscription</h2>
+            <span flex></span>
+            <md-input-container>
+                <md-select ng-model="Main.userRole" placeholder="User Role">
+                    <md-option ng-repeat="role in Main.roles" value="{{role.role}}">{{ role.role }}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <md-select ng-model="Main.language" ng-change="Main.changeLanguage()" placeholder="language" translate translate-attr-placeholder="LANGUAGE">
+                    <md-option ng-repeat="lang in Main.languages" value="{{lang.lang}}">{{ lang.lang }}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-toolbar>
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+            <md-toolbar class="md-accent">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" ng-click="Main.toggleLeft()" hide-gt-md>
+                        <md-icon md-font-set="material-icons">arrow_back</md-icon>
                     </md-button>
-                    <md-menu-content>
-                        <md-menu-item><md-button ng-click="doSomething()">Login</md-button></md-menu-item>
-                        <md-menu-item><md-button href="#/">Home</md-button></md-menu-item>
-                    </md-menu-content>
-                </md-menu>
-            </div>
-        </md-toolbar>
-        <section layout="row" flex>
-            <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-                <md-toolbar class="md-accent">
-                    <div class="md-toolbar-tools">
-                        <md-button class="md-icon-button" ng-click="toggleLeft()" hide-gt-md>
-                            <md-icon md-font-set="material-icons">arrow_back</md-icon>
-                        </md-button>
-                        <span>Menu</span>
-                    </div>
-                </md-toolbar>
-                <md-content ng-controller="MainSideMenuController as SideMenu">
-                    <md-list>
-                        <md-list-item ng-click="SideMenu.goTo('#')">
-                            <md-icon class="md-avatar-icon">search</md-icon>
-                            <p class="md-exclude">Patient suchen</p>
-                        </md-list-item>
-                        <md-list-item ng-click="SideMenu.goTo('/drug/search')">
-                            <md-icon class="md-avatar-icon">healing</md-icon>
-                            <p class="md-exclude">Medikament suchen</p>
-                        </md-list-item>
-                    </md-list>
-                </md-content>
-            </md-sidenav>
-            <md-content flex>
-                <div ng-view layout="column" layout-fill layout-align="top center">
+                    <span>Menu</span>
                 </div>
+            </md-toolbar>
+            <md-content ng-controller="MainSideMenuController as SideMenu" layout="column">
+                <md-list>
+                    <md-list-item ng-show="Main.userRole === 'Doctor'" class="login-content md-2-line" ng-click="null">
+                        <md-icon class="md-avatar-icon">local_hospital</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>Doctor Who</h3>
+                            <p>#7362839</p>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
+                    </md-list-item>
+                    <md-list-item ng-show="Main.userRole === 'Drugist'" class="login-content md-2-line" ng-click="null">
+                        <md-icon class="md-avatar-icon"><i class="fa fa-medkit"></i></md-icon>
+                        <div class="md-list-item-text">
+                            <h3>Segnor Drugista</h3>
+                            <p>#12034023</p>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
+                    </md-list-item>
+                    <md-list-item ng-show="Main.userRole === 'DrugStoreEmployee'" class="login-content md-2-line" ng-click="null">
+                        <md-icon class="md-avatar-icon">assistant</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>Pharmenia Assistenza</h3>
+                            <p>#2342353</p>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
+                    </md-list-item>
+                    <md-list-item ng-show="Main.userRole === 'Patient'" class="login-content md-2-line" ng-click="null">
+                        <md-icon class="md-avatar-icon">account_circle</md-icon>
+                        <div class="md-list-item-text">
+                            <h3>Max Muster</h3>
+                            <p>#666</p>
+                        </div>
+                        <div flex></div>
+                        <md-icon class="md-secondary">keyboard_arrow_down</md-icon>
+                    </md-list-item>
+                    <md-list-item ng-click="SideMenu.goTo('#')">
+                        <md-icon>search</md-icon>
+                        <p class="md-exclude" translate="TOOLBAR-TITLE.PATIENTSEARCH">Patient suchen</p>
+                    </md-list-item>
+                    <md-list-item ng-click="SideMenu.goTo('/drug/search')">
+                        <md-icon>healing</md-icon>
+                        <p class="md-exclude" translate="TOOLBAR-TITLE.DRUGSEARCH"></p>
+                    </md-list-item>
+                </md-list>
             </md-content>
-        </section>
-    </div>
+        </md-sidenav>
+        <md-content flex>
+            <div ng-view layout="column" layout-align="start center"></div>
+        </md-content>
+    </section>
+</div>
 
 <script src="/jspm_packages/system.js"></script>
 <script src="config.js"></script>
 <script src="build.js"></script>
-<script>
+<!--<script>
     System.import('./ts/bootstrapDev.ts')
         .catch(console.error.bind(console));
-</script>
-<!--<script>
-System.import('./ts/bootstrap.ts')
-    .catch(console.error.bind(console));
 </script>-->
+<script>
+    System.import('./ts/bootstrap.ts')
+        .catch(console.error.bind(console));
+</script>
 
 <!--<script src="js/main.js"></script>-->
 </body>
-
-
 </html>

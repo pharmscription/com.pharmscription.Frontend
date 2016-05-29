@@ -59,7 +59,7 @@
         };
     }
 
-    public static factory() {
+    public static factory(): void {
         var directive = (/*list of dependencies*/) => {
             return new SocialNumber(/*list of dependencies*/);
         };
@@ -69,14 +69,3 @@
         return directive;
     }
 }
-
-//.directive('ngCustomdir', function () {
-//    return {
-//        restrict: 'A',
-//        require: 'ngModel',
-//        link: function ($scope, $element, $attrs, ngModel) {
-//            //do some validation
-//            return validation; //<--true or false based on validation
-//        }
-//    };
-//}
