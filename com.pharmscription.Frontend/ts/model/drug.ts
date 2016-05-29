@@ -1,4 +1,4 @@
-﻿export default class Drug {
+﻿export default class drug {
 
     constructor(
         public DrugDescription: string,
