@@ -41,16 +41,6 @@ export default class UserRegisterController {
         if (this.controllerMode === Mode.Register) {
             this.patient = new Patient(this.ahvNumberService.getAHVNumber());
 
-            //Mock
-            this.patient.BirthDate = new Date();
-            this.patient.EMailAddress = "max@muster.com";
-            this.patient.FirstName = "Max";
-            this.patient.LastName = "Muster";
-            this.patient.Address = new Address("Bahnhofstrasse", "666", "ZH", "Zürich", "8888");
-            this.patient.Insurance = "Sanitas";
-            this.patient.InsuranceNumber = "xx.xx.xx";
-            this.patient.PhoneNumber = "0980980980";
-
         } else {
             this.patientRepository.getPatientById(this.PatientService.getPatientId()).then((foundPatient) => {
                 foundPatient.BirthDate = this.parseDateString(foundPatient.BirthDate.toString());
