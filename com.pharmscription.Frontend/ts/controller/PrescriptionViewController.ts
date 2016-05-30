@@ -63,7 +63,7 @@ export default class PrescriptionViewController {
         if (this.prescriptionHasDispenses()) {
             this.prescription.Dispenses.forEach((dispense: Dispense) => {
                 if (this.isSigned(dispense)) {
-                    this.signedDispenses.push(dispense);
+                    this.signedDispenses.push(angular.copy(dispense));
                     dispense.DrugItems.forEach((drug: DrugItem) => {
                         let indexInAllDispense = this.allDispensedDrugItems.map((dispensedDrug: DrugItem) => {
                             return dispensedDrug.Drug.Id;
