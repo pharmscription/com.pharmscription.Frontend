@@ -1,21 +1,23 @@
 ﻿import Dispense from 'ts/model/Dispense'
+import Config from 'ts/model/config'
 import IPromise = angular.IPromise
 
 export default class DispenseRepository {
 
     private urls: any = {
-        put: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}/dispenses',
-        post: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}/dispenses/{dispenseId}'
+        put: this.config.backendUrl + '/patients/{patientId}/prescriptions/{prescriptionId}/dispenses',
+        post: this.config.backendUrl + '/patients/{patientId}/prescriptions/{prescriptionId}/dispenses/{dispenseId}'
         
     }
 
     static $inject = [
+        'config',
         '$http',
         '$q',
         '$log'
     ];
 
-    constructor(private $http: angular.IHttpService, private $q: angular.IQService, private $log: angular.ILogService) {
+    constructor(private config: Config, private $http: angular.IHttpService, private $q: angular.IQService, private $log: angular.ILogService) {
     }
 
     addDispense(patientId: string, prescriptionId: string, dispense: Dispense): IPromise<Dispense> {

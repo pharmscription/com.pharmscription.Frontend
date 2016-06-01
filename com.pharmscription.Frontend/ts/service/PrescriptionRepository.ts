@@ -1,22 +1,25 @@
 ﻿import Prescription from 'ts/model/prescription'
+import Config from 'ts/model/config'
 
 import IPromise = angular.IPromise;
 
 export default class PrescriptionRepository {
     private urls: any = {
-        getPrescriptions: 'http://localhost:7642/patients/{id}/prescriptions',
-        getPrescription: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}',
-        newPrescription: 'http://localhost:7642/patients/{id}/prescriptions',
-        editPrescription: 'http://localhost:7642/patients/{patientId}/prescriptions/{prescriptionId}'
+        getPrescriptions: this.config.backendUrl + '/patients/{id}/prescriptions',
+        getPrescription: this.config.backendUrl + '/patients/{patientId}/prescriptions/{prescriptionId}',
+        newPrescription: this.config.backendUrl + '/patients/{id}/prescriptions',
+        editPrescription: this.config.backendUrl + '/patients/{patientId}/prescriptions/{prescriptionId}'
     }
 
     static $inject = [
+        'config',
         '$http',
         '$q',
         '$log'
     ];
 
     constructor(
+        private config: Config,
         private $http: angular.IHttpService,
         private $q: angular.IQService,
         private $log: angular.ILogService) {

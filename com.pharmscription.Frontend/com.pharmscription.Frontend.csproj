@@ -139,6 +139,7 @@
     <TypeScriptCompile Include="ts\controller\UserSearchController.ts" />
     <TypeScriptCompile Include="ts\directives\socialnumber.ts" />
     <TypeScriptCompile Include="ts\model\address.ts" />
+    <TypeScriptCompile Include="ts\model\config.ts" />
     <TypeScriptCompile Include="ts\model\counterproposal.ts" />
     <TypeScriptCompile Include="ts\model\dispense.ts" />
     <TypeScriptCompile Include="ts\model\doctor.ts" />

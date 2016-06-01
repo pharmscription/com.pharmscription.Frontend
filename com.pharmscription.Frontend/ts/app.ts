@@ -6,6 +6,7 @@ import 'angular-translate-loader-static-files'
 import 'angular-sanitize'
 import moment from 'moment'
 import 'moment/locale/de'
+import Config from 'ts/model/config'
 
 import 'ng-slide-down'
 
@@ -31,6 +32,7 @@ import PatientService from 'ts/service/PatientService'
 import SocialNumber from 'ts/directives/socialnumber'
 
 export default angular.module('app', ['ngMaterial', 'ngMessages', 'ngSanitize', 'ngRoute', 'ng-slide-down', 'pascalprecht.translate'])
+    .constant('config', new Config())
     .config(($mdThemingProvider: angular.material.IThemingProvider) => {
         $mdThemingProvider.theme('Doctor').primaryPalette('green').accentPalette('orange').warnPalette('red').backgroundPalette('grey');
         $mdThemingProvider.theme('Drugist').primaryPalette('blue').accentPalette('orange').warnPalette('red').backgroundPalette('grey');

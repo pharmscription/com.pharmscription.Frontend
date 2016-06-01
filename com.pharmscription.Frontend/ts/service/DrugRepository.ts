@@ -1,21 +1,23 @@
-﻿import Drug from '../model/drug'
+﻿import Drug from 'ts/model/drug'
+import Config from 'ts/model/config'
 import IPromise = angular.IPromise
 
 export default class DrugRepository {
 
     private urls: any = {
-        get: 'http://localhost:7642/drugs/search/{keyword}',
-        getNumItems: 'http://localhost:7642/drugs/search/count/{keyword}',
-        getPage: 'http://localhost:7642/drugs/search/{keyword}/{page}/{amount}'
+        get: this.config.backendUrl + '/drugs/search/{keyword}',
+        getNumItems: this.config.backendUrl + '/drugs/search/count/{keyword}',
+        getPage: this.config.backendUrl + '/drugs/search/{keyword}/{page}/{amount}'
     }
 
     static $inject = [
+        'config',
         '$http',
         '$q',
         '$log'
     ];
 
-    constructor(private $http: angular.IHttpService, private $q: angular.IQService, private $log: angular.ILogService) {
+    constructor(private config: Config, private $http: angular.IHttpService, private $q: angular.IQService, private $log: angular.ILogService) {
     }
 
     getDrugs(searchTerm: string): IPromise<Array<Drug>> {
